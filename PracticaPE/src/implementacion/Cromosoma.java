@@ -7,7 +7,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 	protected float _aptitud;
 	protected float _puntuacion;
 	protected float _punt_acum;	
-	protected int _longitud;
+	protected int _longitud[];
 	
 	public static int bin_dec(Gen gen){
 		int retval = 0;
@@ -21,7 +21,8 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		return retval;
 	}
 	
-	protected abstract float getFenotipo(); // Devuelve la representacion del gen
+	protected abstract float[] getFenotipo(); // Devuelve la representacion del gen
+	//Hay que cambiarlo para que pueda devolver mas de un solo elemento (ej, X,Y)
 	
 	protected abstract float getAptitud(); // Devuelve el valor de la funcion
 	
