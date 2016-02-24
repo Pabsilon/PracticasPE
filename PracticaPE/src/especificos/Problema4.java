@@ -32,9 +32,9 @@ public class Problema4 extends Cromosoma{
 		//TODO CORRECT
 		float retval = 0;
 		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * sen²⁰((i+1)*xi²)/π);
-		for (int i = 0; i<_n; i++){
-			float x = getFenotipo()[i];
-			retval+= -Math.sin(x)*Math.pow(20, (Math.sin((i+2)*Math.pow(2, x))/Math.PI));
+		for (int i = 1; i<=_n; i++){
+			float x = getFenotipo()[i-1];
+			retval+= -Math.sin(x)*Math.pow(20,(Math.sin((i+1) * Math.pow(2, x)/Math.PI)));
 		}
 		return retval;
 	}

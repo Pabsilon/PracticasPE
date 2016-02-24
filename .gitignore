@@ -3,4 +3,7 @@ PracticaPE/.settings
 PracticaPE/.project
 PracticaPE/.classpath
 .recommenders
-PracticaPE/bin
+bin/
+.settings
+.project
+.classpath

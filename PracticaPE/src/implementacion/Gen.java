@@ -15,12 +15,16 @@ public class Gen {
 		}
 	}
 	
+	//Devuelve una copia de los alelos
+	public boolean[] getAlelosCopy(){
+		return _alelo.clone();
+	}
+	
 	public boolean[] getAlelos(){
 		return _alelo;
 	}
-	
 	public void setAlelos(boolean[] alelo){
-		_alelo = alelo;
+		_alelo = alelo.clone();
 	}
 	
 }
