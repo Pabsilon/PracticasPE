@@ -28,11 +28,12 @@ public class AlgoritmoMax extends Algoritmo {
 				mejorCromGeneracion = i;
 			}
 		}
-		
+		//Actualizamos el mejor global
 		if(mejorAptitudEnGeneracion > _mejorValor)
 		{
 			_mejorValor = mejorAptitudEnGeneracion;
-			_mejorIndividuo = _poblacion[mejorCromGeneracion];
+			
+			_mejorIndividuo.copiarCromosoma(_poblacion[mejorCromGeneracion]);
 		}
 		
 		//Calculamos las puntuaciones para la fase de seleccion

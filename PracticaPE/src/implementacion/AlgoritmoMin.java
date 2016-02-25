@@ -29,11 +29,12 @@ public class AlgoritmoMin extends Algoritmo {
 			}
 		}
 		
+		//Actualizamos el mejor global
 		if(mejorAptitudEnGeneracion < _mejorValor)
 		{
 			_mejorValor = mejorAptitudEnGeneracion;
 			
-			_mejorIndividuo.copiar(_poblacion[mejorCromGeneracion]);
+			_mejorIndividuo.copiarCromosoma(_poblacion[mejorCromGeneracion]);
 		}
 		
 		//Calculamos las puntuaciones para la fase de seleccion
