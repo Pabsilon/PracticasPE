@@ -5,6 +5,7 @@ public class Problema1 extends Cromosoma{
 	
 	private final float _xmin = -250;
 	private final float _xmax = 250;
+	private boolean _maximize = false;
 
 	public Problema1(float precision){
 		_longitud = new int[1];
@@ -24,6 +25,11 @@ public class Problema1 extends Cromosoma{
 		//f(x) = -|x*sin(sqrt(|x|)|;
 		return (float) -Math.abs(x*Math.sin(Math.sqrt(Math.abs(x))));
 	}
+
+	public boolean isMaximizing() {
+		return _maximize;
+	}
+
 	
 	
 

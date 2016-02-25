@@ -8,6 +8,7 @@ public class Problema3 extends Cromosoma{
 	private final float _xmax = 12.1f;
 	private final float _ymin = 4.1f;
 	private final float _ymax = 5.8f;
+	private boolean _maximize = true;
 	
 	public Problema3(float precision){
 		_longitud = new int[2];
@@ -30,6 +31,9 @@ public class Problema3 extends Cromosoma{
 		float y = getFenotipo()[1];
 		//f(x,y) = 21.5 + x*sen(4π*x) + y*sen(20π*y)
 		return (float) (21.5 + x * Math.sin(4*Math.PI*x) + y * Math.sin(20*Math.PI*y));
+	}
+	public boolean isMaximizing() {
+		return _maximize;
 	}
 
 }

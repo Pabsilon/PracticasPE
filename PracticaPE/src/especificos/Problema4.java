@@ -6,6 +6,7 @@ public class Problema4 extends Cromosoma{
 	private float _xmax = (float) Math.PI;
 	private float _xmin = 0;
 	private int _n;
+	private boolean _maximize = false;
 	
 	public Problema4(float precision, int n){
 		_n =n;
@@ -37,6 +38,10 @@ public class Problema4 extends Cromosoma{
 			retval+= -Math.sin(x)*Math.pow(20,(Math.sin((i+1) * Math.pow(2, x)/Math.PI)));
 		}
 		return retval;
+	}
+	
+	public boolean isMaximizing() {
+		return _maximize;
 	}
 
 }

@@ -8,6 +8,7 @@ public class Problema2 extends Cromosoma{
 	private final float _xmax = 6;
 	private final float _ymin = -6;
 	private final float _ymax = 6;
+	private boolean _maximize = true;
 	
 	public Problema2 (float precision){
 		_longitud = new int[2]; //Dos longitudes de gen - aunque sea la misma.
@@ -32,6 +33,10 @@ public class Problema2 extends Cromosoma{
 		float y = getFenotipo()[1];
 		//f(x,y) = (2186-(x²+y-11)² -(x+y²-7)²)/2186		
 		return (float) ((2186 -Math.pow(2,(Math.pow(2, x) + y -11)) -Math.pow(2,(x + Math.pow(2, y) -7))) /2186);
+	}
+	
+	public boolean isMaximizing() {
+		return _maximize;
 	}
 
 }

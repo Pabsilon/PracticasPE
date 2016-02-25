@@ -8,6 +8,7 @@ public class Problema5 extends Cromosoma{
 	private final float _xmax = 10f;
 	private final float _ymin = -10;
 	private final float _ymax = 10;
+	private boolean _maximize = false;
 	
 	public Problema5(float precision){
 		_longitud = new int[2];
@@ -37,6 +38,10 @@ public class Problema5 extends Cromosoma{
 			aux2+= i*Math.cos((i+1)*y+1);
 		}
 		return aux1*aux2;
+	}
+	
+	public boolean isMaximizing() {
+		return _maximize;
 	}
 
 }
