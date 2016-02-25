@@ -6,7 +6,7 @@ import especificos.Problema1;
 
 public abstract class Algoritmo {
 	//Parte genetica
-	protected int _poblacionTamaño, _simulaciones;
+	protected int _poblacionTamano, _simulaciones;
 	protected Cromosoma[] _poblacion;
 	protected float _precision, _cruceProb, _mutacionProb;
 
@@ -16,7 +16,7 @@ public abstract class Algoritmo {
 	
 	protected Algoritmo(int poblacion, float precision, float cruce, float mutacion, int simulaciones) 
 	{
-		_poblacionTamaño = poblacion;
+		_poblacionTamano = poblacion;
 		_precision = precision;
 		_cruceProb = cruce;
 		_mutacionProb = mutacion;
@@ -35,9 +35,9 @@ public abstract class Algoritmo {
 	
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
-		float[] aptitudes = new float[_poblacionTamaño];
-		float[] puntuaciones = new float[_poblacionTamaño];
-		float[] puntuacionesAcum = new float[_poblacionTamaño];
+		float[] aptitudes = new float[_poblacionTamano];
+		float[] puntuaciones = new float[_poblacionTamano];
+		float[] puntuacionesAcum = new float[_poblacionTamano];
 		
 		for(int i = 0; i < _simulaciones; i++)
 		{
@@ -70,12 +70,12 @@ public abstract class Algoritmo {
 		//CAMBIAR ESTO
 		//Ruleta
 		Random rand = new Random();
-		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamaño];
-		for(int i = 0; i < _poblacionTamaño; i++)
+		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
+		for(int i = 0; i < _poblacionTamano; i++)
 		{
-			//Generar número entre 0 - 1
+			//Generar nï¿½mero entre 0 - 1
 			float prob = rand.nextFloat();
-			//Buscar el elemento seleccionado (Nota: seleccionado nunca será mayor que el tamaño de la poblacion)
+			//Buscar el elemento seleccionado (Nota: seleccionado nunca serï¿½ mayor que el tamaï¿½o de la poblacion)
 			int seleccionado = 0;
 			while(prob > puntuacionesAcum[seleccionado])
 			{
@@ -93,10 +93,10 @@ public abstract class Algoritmo {
 	{
 		Random rand = new Random();
 		int numeroSeleccionados = 0;
-		int[] aCruzar = new int[_poblacionTamaño];
+		int[] aCruzar = new int[_poblacionTamano];
 		
 		//Obtener los cromosomas a cruzar
-		for(int i = 0; i < _poblacionTamaño; i++)
+		for(int i = 0; i < _poblacionTamano; i++)
 		{
 			if(rand.nextFloat() < _cruceProb)
 			{
@@ -125,7 +125,7 @@ public abstract class Algoritmo {
 	
 	private void mutar()
 	{
-		for(int i = 0; i < _poblacionTamaño; i++)
+		for(int i = 0; i < _poblacionTamano; i++)
 		{
 				_poblacion[i].mutar(_mutacionProb);
 		}

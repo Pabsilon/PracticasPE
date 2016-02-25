@@ -1,17 +1,16 @@
 package especificos;
-
 import implementacion.*;
 
-public class Problema2 extends Cromosoma{
+public class Problema5 extends Cromosoma{
+
+	//x1 y x2 son tratados como x e y
+	private final float _xmin = -10;
+	private final float _xmax = 10f;
+	private final float _ymin = -10;
+	private final float _ymax = 10;
 	
-	private final float _xmin = -6;
-	private final float _xmax = 6;
-	private final float _ymin = -6;
-	private final float _ymax = 6;
-	
-	public Problema2 (float precision){
-		_longitud = new int[2]; //Dos longitudes de gen - aunque sea la misma.
-		//Cálculo de bits necesarios
+	public Problema5(float precision){
+		_longitud = new int[2];
 		_longitud[0] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));
 		_longitud[1] = (int) Math.ceil(((Math.log(1+(_ymax-_ymin)/precision))/Math.log(2)));
 		_genes = new Gen[2];
@@ -21,17 +20,23 @@ public class Problema2 extends Cromosoma{
 	
 	protected float[] getFenotipo() {
 		float[] retval = new float[2];
-		//Conversión a fenotipo.
 		retval[0] = (float) (_xmin + (_xmax - _xmin) * bin_dec(_genes[0]) / (Math.pow(2, _longitud[0])-1));
 		retval[1] = (float) (_ymin + (_ymax - _ymin) * bin_dec(_genes[1]) / (Math.pow(2, _longitud[1])-1));
 		return retval;
 	}
-	@Override
+
 	protected float getAptitud() {
 		float x = getFenotipo()[0];
 		float y = getFenotipo()[1];
-		//f(x,y) = (2186-(x²+y-11)² -(x+y²-7)²)/2186		
-		return (float) ((2186 -Math.pow(2,(Math.pow(2, x) + y -11)) -Math.pow(2,(x + Math.pow(2, y) -7))) /2186);
+		float aux1 = 0;
+		float aux2 = 0;
+		for (int i = 1; i<=5; i++){
+			aux1 += i*Math.cos((i+1)*x+1);
+		}
+		for (int i = 1; i<=5; i++){
+			aux2+= i*Math.cos((i+1)*y+1);
+		}
+		return aux1*aux2;
 	}
 
 }

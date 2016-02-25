@@ -16,7 +16,7 @@ public class AlgoritmoMax extends Algoritmo {
 		
 		//Calculamos las aptitudes y su suma total
 		float sumaAptitudes = 0;
-		for(int i = 0; i < _poblacionTamaño; i++)
+		for(int i = 0; i < _poblacionTamano; i++)
 		{
 			aptitudes[i] = _poblacion[i].getAptitud();
 			sumaAptitudes += aptitudes[i];
@@ -39,15 +39,15 @@ public class AlgoritmoMax extends Algoritmo {
 		//Calculamos las puntuaciones para la fase de seleccion
 		puntuaciones[0] = aptitudes[0] / sumaAptitudes;
 		puntuacionesAcum[0] = puntuaciones[0];
-		for(int i = 1; i < _poblacionTamaño; i++)
+		for(int i = 1; i < _poblacionTamano; i++)
 		{
 			puntuaciones[i] = aptitudes[i] / sumaAptitudes;
 			puntuacionesAcum[i] = puntuaciones[i] + puntuacionesAcum[i - 1];
 		}
 		
-		//Informacion de la generacion (Máximo y media)
+		//Informacion de la generacion (Mï¿½ximo y media)
 		infoGeneracion[0] = mejorAptitudEnGeneracion;
-		infoGeneracion[1] = sumaAptitudes / _poblacionTamaño;
+		infoGeneracion[1] = sumaAptitudes / _poblacionTamano;
 	}
 
 }
