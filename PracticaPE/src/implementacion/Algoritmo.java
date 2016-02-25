@@ -9,18 +9,20 @@ public abstract class Algoritmo {
 	protected int _poblacionTamano, _simulaciones;
 	protected Cromosoma[] _poblacion;
 	protected float _precision, _cruceProb, _mutacionProb;
+	protected String _metodoSeleccion;
 
 	//Valores problema concreto
 	protected float _mejorValor;
 	protected Cromosoma _mejorIndividuo;
 	
-	protected Algoritmo(int poblacion, float precision, float cruce, float mutacion, int simulaciones) 
+	protected Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, int simulaciones) 
 	{
 		_poblacionTamano = poblacion;
 		_precision = precision;
 		_cruceProb = cruce;
 		_mutacionProb = mutacion;
 		_simulaciones = simulaciones;
+		_metodoSeleccion = metodoSelec;
 		
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
@@ -49,7 +51,7 @@ public abstract class Algoritmo {
 			mediaGeneracion[i] = infoGeneracion[1];
 			
 			//Seleccionar
-			seleccionar(puntuacionesAcum);
+			seleccionar(aptitudes, puntuacionesAcum);
 			
 			//Cruzar
 			cruzar();
@@ -65,24 +67,12 @@ public abstract class Algoritmo {
 	
 	protected abstract void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion);
 	
-	private void seleccionar(float[] puntuacionesAcum)
+	private void seleccionar(float[] aptitudes, float[] puntuacionesAcum)
 	{
-		//CAMBIAR ESTO
-		//Ruleta
-		Random rand = new Random();
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
-		for(int i = 0; i < _poblacionTamano; i++)
-		{
-			//Generar n�mero entre 0 - 1
-			float prob = rand.nextFloat();
-			//Buscar el elemento seleccionado (Nota: seleccionado nunca ser� mayor que el tama�o de la poblacion)
-			int seleccionado = 0;
-			while(prob > puntuacionesAcum[seleccionado])
-			{
-				seleccionado++;
-			}
-			seleccionados[i] = _poblacion[seleccionado];
-		}
+		
+		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion);
+		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, true);
 		
 		//Crear la nueva poblacion
 		_poblacion = seleccionados;

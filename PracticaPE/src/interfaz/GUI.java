@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,9 +21,11 @@ public class GUI extends JFrame{
 	
 	//Paneles
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
-	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelResultados;
+	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados;
 	//Labels
 	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado;
+	//ComboBox
+	JComboBox _comboBoxSeleccion;
 	//Text Fields
 	JTextField _textFieldPrecision, _textFieldMutacion, _textFieldCruce;
 	//Botones
@@ -55,6 +58,13 @@ public class GUI extends JFrame{
 		_panelPrecision.add(_textFieldPrecision);
 		_panelOpciones.add(_panelPrecision);
 		
+		//Metodo seleccion
+		_panelSeleccion = new JPanel();
+		String[] metodosS = {"Ruleta", "Torneo"};
+		_comboBoxSeleccion = new JComboBox<String>(metodosS);
+		_panelSeleccion.add(_comboBoxSeleccion);
+		_panelOpciones.add(_panelSeleccion);
+		
 		//Cruce
 		_panelCruce = new JPanel();
 		_labelCruce = new JLabel("Cruce:");
@@ -80,7 +90,7 @@ public class GUI extends JFrame{
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText());
+				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem());
 				
 			}
 		});

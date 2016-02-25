@@ -2,16 +2,16 @@ package implementacion;
 
 public class AlgoritmoMin extends Algoritmo {
 
-	public AlgoritmoMin(int poblacion, float precision, float cruce, float mutacion, int simulaciones) {
-		super(poblacion, precision, cruce, mutacion, simulaciones);
+	public AlgoritmoMin(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, int simulaciones) {
+		super(poblacion, precision, cruce, mutacion, metodoSelec, simulaciones);
 		
-		_mejorValor = Integer.MAX_VALUE;
+		_mejorValor = Float.MAX_VALUE;
 	}
 
 	@Override
 	protected void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion)
 	{
-		float mejorAptitudEnGeneracion = Integer.MAX_VALUE;
+		float mejorAptitudEnGeneracion = Float.MAX_VALUE;
 		int mejorCromGeneracion = 0;
 		
 		//Calculamos las aptitudes y su suma total
@@ -45,6 +45,7 @@ public class AlgoritmoMin extends Algoritmo {
 			puntuaciones[i] = aptitudes[i] / sumaAptitudes;
 			puntuacionesAcum[i] = puntuaciones[i] + puntuacionesAcum[i - 1];
 		}
+		puntuacionesAcum[_poblacionTamano - 1] = 1; //Asegurarse que el ultimo valor de las puntuaciones es 1
 		
 		//Informacion de la generacion (M�ximo y media)
 		infoGeneracion[0] = mejorAptitudEnGeneracion;

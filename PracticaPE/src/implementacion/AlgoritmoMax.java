@@ -2,16 +2,16 @@ package implementacion;
 
 public class AlgoritmoMax extends Algoritmo {
 
-	public AlgoritmoMax(int poblacion, float precision, float cruce, float mutacion, int simulaciones) {
-		super(poblacion, precision, cruce, mutacion, simulaciones);
+	public AlgoritmoMax(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, int simulaciones) {
+		super(poblacion, precision, cruce, mutacion, metodoSelec, simulaciones);
 		
-		_mejorValor = Integer.MIN_VALUE;
+		_mejorValor = Float.MIN_VALUE;
 	}
 
 	@Override
 	protected void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion)
 	{
-		float mejorAptitudEnGeneracion = Integer.MIN_VALUE;
+		float mejorAptitudEnGeneracion = Float.MIN_VALUE;
 		int mejorCromGeneracion = 0;
 		
 		//Calculamos las aptitudes y su suma total
