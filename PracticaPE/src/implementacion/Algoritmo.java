@@ -3,6 +3,7 @@ package implementacion;
 import java.util.Random;
 
 import especificos.Problema1;
+import especificos.ProblemaFabrica;
 
 public abstract class Algoritmo {
 	//Parte genetica
@@ -15,7 +16,7 @@ public abstract class Algoritmo {
 	protected float _mejorValor;
 	protected Cromosoma _mejorIndividuo;
 	
-	protected Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, int simulaciones) 
+	protected Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones) 
 	{
 		_poblacionTamano = poblacion;
 		_precision = precision;
@@ -27,8 +28,7 @@ public abstract class Algoritmo {
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
 		{
-			//Cambiar a cada problema especifo con un factory o algo asi
-			_poblacion[i] = new Problema1(precision);
+			_poblacion[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, 0);
 		}
 		
 		//CAMBIAR ESTO
@@ -72,7 +72,7 @@ public abstract class Algoritmo {
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
 		
 		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion);
-		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, true);
+		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, _mejorIndividuo.isMaximizing());
 		
 		//Crear la nueva poblacion
 		_poblacion = seleccionados;

@@ -6,7 +6,6 @@ public class Problema4 extends Cromosoma{
 	private float _xmax = (float) Math.PI;
 	private float _xmin = 0;
 	private int _n;
-	private boolean _maximize = false;
 	
 	public Problema4(float precision, int n){
 		_n =n;
@@ -19,6 +18,8 @@ public class Problema4 extends Cromosoma{
 		for (int i = 0; i<_n; i++){
 			_genes[i]=new Gen(_longitud[i]);
 		}
+		
+		_maximize = false;
 	}
 	
 	protected float[] getFenotipo() {
@@ -32,7 +33,7 @@ public class Problema4 extends Cromosoma{
 	protected float getAptitud() {
 		//TODO CORRECT
 		float retval = 0;
-		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * sen²⁰((i+1)*xi²)/π);
+		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * senÂ²â�°((i+1)*xiÂ²)/Ï€);
 		for (int i = 1; i<=_n; i++){
 			float x = getFenotipo()[i-1];
 			retval+= -Math.sin(x)*Math.pow(20,(Math.sin((i+1) * Math.pow(2, x)/Math.PI)));

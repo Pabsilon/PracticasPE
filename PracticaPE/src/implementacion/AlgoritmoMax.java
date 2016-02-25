@@ -2,8 +2,8 @@ package implementacion;
 
 public class AlgoritmoMax extends Algoritmo {
 
-	public AlgoritmoMax(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, int simulaciones) {
-		super(poblacion, precision, cruce, mutacion, metodoSelec, simulaciones);
+	public AlgoritmoMax(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones) {
+		super(poblacion, precision, cruce, mutacion, metodoSelec, problema, simulaciones);
 		
 		_mejorValor = Float.MIN_VALUE;
 	}

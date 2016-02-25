@@ -4,7 +4,7 @@ import implementacion.Cromosoma;
 
 public class ProblemaFabrica 
 {
-	static Cromosoma getAlgoritmoDeSeleccion(String algoritmo, float precision, int n)
+	public static Cromosoma getCromosomaProblema(String algoritmo, float precision, int n)
 	{
 		//Devuelve el algoritmo solicitado
 		switch(algoritmo)
@@ -20,7 +20,7 @@ public class ProblemaFabrica
 		case "Problema5":
 			return new Problema5(precision);
 		default:
-			return new Problema1(0.001f);
+			return new Problema1(precision);
 		}
 	}
 }
