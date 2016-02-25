@@ -13,7 +13,7 @@ public class Controller {
 	
 	void comenzarSimulacion(String precision, String cruce, String mutacion)
 	{
-		Algoritmo ag = new AlgoritmoMin(100, Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, 100);
+		Algoritmo ag = new AlgoritmoMin(20, Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, 100);
 		
 		double[] mejorAbsoluto = new double[100];
 		double[] mejorGeneracion = new double[100];

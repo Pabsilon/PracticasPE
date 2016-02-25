@@ -29,6 +29,7 @@ public abstract class Algoritmo {
 			_poblacion[i] = new Problema1(precision);
 		}
 		
+		//CAMBIAR ESTO
 		_mejorIndividuo = new Problema1(precision);;
 	}
 	
@@ -57,6 +58,7 @@ public abstract class Algoritmo {
 			mutar();
 		}
 		
+		//CAMBIAR ESTO
 		String resultado = "Valor mejor: " + _mejorValor + " en X: " + _mejorIndividuo.getFenotipo()[0];
 		return resultado;
 	}
@@ -65,6 +67,7 @@ public abstract class Algoritmo {
 	
 	private void seleccionar(float[] puntuacionesAcum)
 	{
+		//CAMBIAR ESTO
 		//Ruleta
 		Random rand = new Random();
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];

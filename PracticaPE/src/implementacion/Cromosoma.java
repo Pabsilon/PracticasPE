@@ -78,7 +78,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		}
 	}
 	
-	public void mutar(float mutacion)
+	public void mutar(float mutacionProb)
 	{
 		Random rand = new Random();
 		//Recorrer todos los alelos de los genes y mutar si procede
@@ -87,7 +87,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 			boolean[] alelos = _genes[i].getAlelos();
 			for(int j = 0; j < alelos.length; j++)
 			{
-				if(rand.nextFloat() < mutacion)
+				if(rand.nextFloat() < mutacionProb)
 				{
 					alelos[j] = !alelos[j];
 				}
@@ -107,7 +107,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 	}
 
 	//Copia el genotipo de un cromosoma a otro
-	public void copiar(Cromosoma cromosoma)
+	public void copiarCromosoma(Cromosoma cromosoma)
 	{
 		if(_genes.length == cromosoma._genes.length)
 		{
