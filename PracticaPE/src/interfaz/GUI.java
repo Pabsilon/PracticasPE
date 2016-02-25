@@ -21,11 +21,11 @@ public class GUI extends JFrame{
 	
 	//Paneles
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
-	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados;
+	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas;
 	//Labels
-	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado;
+	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion;
 	//ComboBox
-	JComboBox _comboBoxSeleccion;
+	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
 	//Text Fields
 	JTextField _textFieldPrecision, _textFieldMutacion, _textFieldCruce;
 	//Botones
@@ -49,6 +49,13 @@ public class GUI extends JFrame{
 		_panelPrincipal.add(_panelOpciones, BorderLayout.LINE_START);
 		_panelPrincipal.add(_panelGrafica, BorderLayout.CENTER);
 		
+		//Problema
+		_panelProblemas = new JPanel();
+		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4", "Problema5"};
+		_comboBoxProblemas = new JComboBox<String>(problemasS);
+		_panelProblemas.add(_comboBoxProblemas);
+		_panelOpciones.add(_panelProblemas);
+		
 		//Precision
 		_panelPrecision = new JPanel();
 		_labelPrecision = new JLabel("Precision:");
@@ -60,6 +67,8 @@ public class GUI extends JFrame{
 		
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
+		_labelSeleccion = new JLabel("Método Selección:");
+		_panelSeleccion.add(_labelSeleccion);
 		String[] metodosS = {"Ruleta", "Torneo"};
 		_comboBoxSeleccion = new JComboBox<String>(metodosS);
 		_panelSeleccion.add(_comboBoxSeleccion);
@@ -90,7 +99,7 @@ public class GUI extends JFrame{
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem());
+				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), (String)_comboBoxProblemas.getSelectedItem());
 				
 			}
 		});

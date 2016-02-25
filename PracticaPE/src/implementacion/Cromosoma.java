@@ -6,6 +6,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 
 	protected Gen[] _genes;
 	protected int _longitud[];
+	protected boolean _maximize;
 	
 	
 	protected static int bin_dec(Gen gen){
@@ -118,4 +119,6 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		}
 		
 	}
+	
+	public abstract boolean isMaximizing();
 }

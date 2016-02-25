@@ -5,13 +5,14 @@ public class Problema1 extends Cromosoma{
 	
 	private final float _xmin = -250;
 	private final float _xmax = 250;
-	private boolean _maximize = false;
 
 	public Problema1(float precision){
 		_longitud = new int[1];
 		_longitud[0] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));
 		_genes = new Gen[1];
 		_genes[0]=new Gen(_longitud[0]);	
+		
+		_maximize = false;
 	}
 	
 	public float[] getFenotipo(){

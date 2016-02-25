@@ -8,7 +8,6 @@ public class Problema5 extends Cromosoma{
 	private final float _xmax = 10f;
 	private final float _ymin = -10;
 	private final float _ymax = 10;
-	private boolean _maximize = false;
 	
 	public Problema5(float precision){
 		_longitud = new int[2];
@@ -17,6 +16,8 @@ public class Problema5 extends Cromosoma{
 		_genes = new Gen[2];
 		_genes[0]=new Gen(_longitud[0]);
 		_genes[1]=new Gen(_longitud[1]);
+		
+		//_maximize = false;
 	}
 	
 	protected float[] getFenotipo() {
