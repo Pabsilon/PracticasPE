@@ -16,7 +16,7 @@ public class Algoritmo {
 	protected float _mejorValor;
 	protected Cromosoma _mejorIndividuo;
 	
-	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones) 
+	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones, int n) 
 	{
 		_poblacionTamano = poblacion;
 		_precision = precision;
@@ -28,7 +28,7 @@ public class Algoritmo {
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
 		{
-			_poblacion[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, 0);
+			_poblacion[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, n);
 		}
 		
 		//CAMBIAR ESTO
