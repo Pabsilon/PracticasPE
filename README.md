@@ -1,7 +1,7 @@
 #TODO
 -Mejor GUI
 -Hacer que funcionen los otros problemas
--Ahora no se me ocurre ninguno más, modificar esto si surgen nuevos :D
+-Hacer que se pueda introducir el número de elementos a comparar en el metodo de seleccion Torneo (en la GUI también)
 
 
 # Evolutive programming assignments
