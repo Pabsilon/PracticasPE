@@ -60,7 +60,7 @@ public class GUI extends JFrame{
 		//Poblacion
 		_panelPoblacion = new JPanel();
 		_labelPoblacion = new JLabel("Poblacion:");
-		_textFieldPoblacion = new JTextField("20");
+		_textFieldPoblacion = new JTextField("100");
 		_textFieldPoblacion.setPreferredSize(new Dimension(100,25));
 		_panelPoblacion.add(_labelPoblacion);
 		_panelPoblacion.add(_textFieldPoblacion);
@@ -69,8 +69,8 @@ public class GUI extends JFrame{
 		
 		//Numero de Iteraciones
 		_panelIteraciones = new JPanel();
-		_labelIteraciones = new JLabel("Iteraciones:");
-		_textFieldIteraciones = new JTextField("1");
+		_labelIteraciones = new JLabel("Generaciones:");
+		_textFieldIteraciones = new JTextField("100");
 		_textFieldIteraciones.setPreferredSize(new Dimension(100,25));
 		_panelIteraciones.add(_labelIteraciones);
 		_panelIteraciones.add(_textFieldIteraciones);
