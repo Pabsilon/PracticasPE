@@ -1,7 +1,10 @@
 #TODO
--Mejor GUI
--Hacer que funcionen los otros problemas
--Hacer que se pueda introducir el número de elementos a comparar en el metodo de seleccion Torneo (en la GUI también)
+-Mejor GUI\n
+-Hacer que funcionen los otros problemas\n
+-Hacer que se pueda introducir el número de elementos a comparar en el metodo de seleccion Torneo (en la GUI también)\n
+-Hacer torneo probablistico\n
+
+
 
 
 # Evolutive programming assignments
