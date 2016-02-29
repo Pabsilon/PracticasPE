@@ -69,6 +69,7 @@ public class Algoritmo {
 	
 	protected void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean minMax)
 	{
+		//Maximizacion
 		if (minMax){
 			float mejorAptitudEnGeneracion = Float.MIN_VALUE;
 			int mejorCromGeneracion = 0;
