@@ -21,13 +21,13 @@ public class GUI extends JFrame{
 	
 	//Paneles
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
-	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas;
+	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas, _panelPoblacion, _panelIteraciones;
 	//Labels
-	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion;
+	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelIteraciones;
 	//ComboBox
 	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
 	//Text Fields
-	JTextField _textFieldPrecision, _textFieldMutacion, _textFieldCruce;
+	JTextField _textFieldPrecision, _textFieldMutacion, _textFieldCruce, _textFieldPoblacion, _textFieldIteraciones;
 	//Botones
 	JButton _botonComenzar;
 	//Plot
@@ -56,6 +56,26 @@ public class GUI extends JFrame{
 		_panelProblemas.add(_comboBoxProblemas);
 		_panelOpciones.add(_panelProblemas);
 		
+		
+		//Poblacion
+		_panelPoblacion = new JPanel();
+		_labelPoblacion = new JLabel("Poblacion:");
+		_textFieldPoblacion = new JTextField("20");
+		_textFieldPoblacion.setPreferredSize(new Dimension(100,25));
+		_panelPoblacion.add(_labelPoblacion);
+		_panelPoblacion.add(_textFieldPoblacion);
+		_panelOpciones.add(_panelPoblacion);
+		
+		
+		//Numero de Iteraciones
+		_panelIteraciones = new JPanel();
+		_labelIteraciones = new JLabel("Iteraciones:");
+		_textFieldIteraciones = new JTextField("1");
+		_textFieldIteraciones.setPreferredSize(new Dimension(100,25));
+		_panelIteraciones.add(_labelIteraciones);
+		_panelIteraciones.add(_textFieldIteraciones);
+		_panelOpciones.add(_panelIteraciones);
+		
 		//Precision
 		_panelPrecision = new JPanel();
 		_labelPrecision = new JLabel("Precision:");
@@ -65,14 +85,16 @@ public class GUI extends JFrame{
 		_panelPrecision.add(_textFieldPrecision);
 		_panelOpciones.add(_panelPrecision);
 		
+		
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
-		_labelSeleccion = new JLabel("Método Selección:");
+		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion);
 		String[] metodosS = {"Ruleta", "Torneo"};
 		_comboBoxSeleccion = new JComboBox<String>(metodosS);
 		_panelSeleccion.add(_comboBoxSeleccion);
 		_panelOpciones.add(_panelSeleccion);
+		
 		
 		//Cruce
 		_panelCruce = new JPanel();
@@ -99,12 +121,12 @@ public class GUI extends JFrame{
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), (String)_comboBoxProblemas.getSelectedItem());
+				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldMutacion.getText(), _textFieldIteraciones.getText());
 				
 			}
 		});
 		
-		//Gráfica
+		//Grï¿½fica
 		_plot = new Plot2DPanel();
 		_panelGrafica.add(_plot, BorderLayout.CENTER);
 		
@@ -135,10 +157,10 @@ public class GUI extends JFrame{
 		{
 			x[i] = i + 1;
 		}
-		//Añadir las lineas
+		//Aï¿½adir las lineas
 		_plot.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
-		_plot.addLinePlot("Mejor Generación", x, mejorGeneracion);
-		_plot.addLinePlot("Media Generación", x, mediaGeneracion);
+		_plot.addLinePlot("Mejor Generaciï¿½n", x, mejorGeneracion);
+		_plot.addLinePlot("Media Generaciï¿½n", x, mediaGeneracion);
 		
 		_labelMejorResultado.setText(resultado);
 	}
