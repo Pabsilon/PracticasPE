@@ -2,7 +2,6 @@ package implementacion;
 
 import java.util.Random;
 
-import especificos.Problema1;
 import especificos.ProblemaFabrica;
 
 public class Algoritmo {
@@ -11,6 +10,8 @@ public class Algoritmo {
 	protected Cromosoma[] _poblacion;
 	protected float _precision, _cruceProb, _mutacionProb;
 	protected String _metodoSeleccion;
+	protected String _problema;
+	protected int _n;
 
 	//Valores problema concreto
 	protected float _mejorValor;
@@ -24,6 +25,8 @@ public class Algoritmo {
 		_mutacionProb = mutacion;
 		_simulaciones = simulaciones;
 		_metodoSeleccion = metodoSelec;
+		_problema = problema;
+		_n = n;
 		
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
@@ -31,8 +34,7 @@ public class Algoritmo {
 			_poblacion[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, n);
 		}
 		
-		//CAMBIAR ESTO
-		_mejorIndividuo = new Problema1(precision);;
+		_mejorIndividuo = ProblemaFabrica.getCromosomaProblema(problema, precision, n);
 	}
 	
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
@@ -184,8 +186,8 @@ public class Algoritmo {
 		//Cruzarlos
 		for(int i = 0; i < (numeroSeleccionados / 2); i++)
 		{
-			Cromosoma hijo1 = new Problema1(_precision);
-			Cromosoma hijo2 = new Problema1(_precision);
+			Cromosoma hijo1 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n);
+			Cromosoma hijo2 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n);
 			Cromosoma.cruzar(_poblacion[aCruzar[i]], _poblacion[aCruzar[i + 1]], hijo1, hijo2);
 			
 			//Sustituir a los padres

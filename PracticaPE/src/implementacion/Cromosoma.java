@@ -44,7 +44,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		while(longitudAcum < puntoDeCorte)
 		{
 			primerGen++;
-			longitudAcum += hijo1._longitud[primerGen + 1];
+			longitudAcum += hijo1._longitud[primerGen];
 		}
 		
 		//Hijo1
