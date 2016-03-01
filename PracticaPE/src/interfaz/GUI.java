@@ -117,7 +117,7 @@ public class GUI extends JFrame{
 		//Semilla
 		_panelSemilla = new JPanel();
 		_labelSemilla = new JLabel("Semilla:");
-		_textFieldSemilla = new JTextField("1234");
+		_textFieldSemilla = new JTextField("0");
 		_textFieldSemilla.setPreferredSize(new Dimension(100,25));
 		_panelSemilla.add(_labelSemilla);
 		_panelSemilla.add(_textFieldSemilla);

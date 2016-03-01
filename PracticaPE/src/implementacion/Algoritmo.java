@@ -28,7 +28,11 @@ public class Algoritmo {
 		_metodoSeleccion = metodoSelec;
 		_problema = problema;
 		_rand = new Random();
-		_rand.setSeed(semilla);
+		if (semilla !=0){
+			_rand.setSeed(semilla);
+		}else{
+			_rand = new Random();
+		}
 		
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
