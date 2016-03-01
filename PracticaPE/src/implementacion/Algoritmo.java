@@ -28,6 +28,7 @@ public class Algoritmo {
 		_metodoSeleccion = metodoSelec;
 		_problema = problema;
 		_rand = new Random();
+		_n = n;
 		if (semilla !=0){
 			_rand.setSeed(semilla);
 		}else{
