@@ -3,26 +3,32 @@ package implementacion;
 import java.util.Random;
 
 public class Seleccion_Torneo implements AlgoritmoSeleccion {
+	
+	private int _participantes;
+	
+	public Seleccion_Torneo(int n){
+		_participantes = n;
+	}
 
 	@Override
 	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean minimizacion, Random rand)
 	{
 		//Coger tres elementos al hazar
-		float elegidos[] = new float[3];
+		float elegidos[] = new float[_participantes];
 		
 		
 		for(int i = 0; i < tamPoblacion; i++)
-		{
-			elegidos[0] = aptitudes[rand.nextInt(tamPoblacion)]; //Generar numero aleatorio [0, tamPoblacion) y coger ese valor
-			elegidos[1] = aptitudes[rand.nextInt(tamPoblacion)];
-			elegidos[2] = aptitudes[rand.nextInt(tamPoblacion)];
+		{			
+			for (int j = 0; j<_participantes; j++){
+				elegidos[j] = aptitudes[rand.nextInt(tamPoblacion)];
+			}
 			
 			//Si el problema es de minimizacion, coger el mas peque�o
 			if(minimizacion)
 			{
 				float minVal = Float.MAX_VALUE;
 				int min = 0;
-				for(int j = 0; j < 3; j++)
+				for(int j = 0; j < _participantes; j++)
 				{
 					if(elegidos[j] < minVal)
 					{
@@ -37,7 +43,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 			{
 				float maxVal = Float.MIN_VALUE;
 				int max = 0;
-				for(int j = 0; j < 3; j++)
+				for(int j = 0; j < _participantes; j++)
 				{
 					if(elegidos[j] < maxVal)
 					{

@@ -13,12 +13,13 @@ public class Algoritmo {
 	protected String _problema;
 	protected int _n;
 	protected Random _rand;
+	protected int _participantes;
 
 	//Valores problema concreto
 	protected float _mejorValor;
 	protected Cromosoma _mejorIndividuo;
 	
-	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones, long semilla, int n) 
+	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones, long semilla, int n, int participantes) 
 	{
 		_poblacionTamano = poblacion;
 		_precision = precision;
@@ -29,6 +30,7 @@ public class Algoritmo {
 		_problema = problema;
 		_rand = new Random();
 		_n = n;
+		_participantes = participantes;
 		if (semilla !=0){
 			_rand.setSeed(semilla);
 		}else{
@@ -162,7 +164,7 @@ public class Algoritmo {
 	{
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
 		
-		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion);
+		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion, _participantes);
 		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, _mejorIndividuo.isMaximizing(), _rand);
 		
 		//Crear la nueva poblacion

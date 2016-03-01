@@ -2,7 +2,7 @@ package implementacion;
 
 public class AlgoritmoSeleccionFabrica 
 {
-	static AlgoritmoSeleccion getAlgoritmoDeSeleccion(String algoritmo)
+	static AlgoritmoSeleccion getAlgoritmoDeSeleccion(String algoritmo, int participantes)
 	{
 		//Devuelve el algoritmo solicitado
 		switch(algoritmo)
@@ -10,7 +10,7 @@ public class AlgoritmoSeleccionFabrica
 		case "Ruleta":
 			return new Seleccion_Ruleta();
 		case "Torneo":
-			return new Seleccion_Torneo();
+			return new Seleccion_Torneo(participantes);
 		default:
 			return new Seleccion_Ruleta();
 		}
