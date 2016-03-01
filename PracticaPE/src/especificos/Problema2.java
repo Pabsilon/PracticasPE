@@ -24,7 +24,7 @@ public class Problema2 extends Cromosoma{
 	}
 	
 	protected float[] getFenotipo() {
-		float[] retval = new float[2];
+		float[] retval = new float[8];
 		//Conversión a fenotipo.
 		retval[0] = (float) (_xmin + (_xmax - _xmin) * bin_dec(_genes[0]) / (Math.pow(2, _longitud[0])-1));
 		retval[1] = (float) (_ymin + (_ymax - _ymin) * bin_dec(_genes[1]) / (Math.pow(2, _longitud[1])-1));

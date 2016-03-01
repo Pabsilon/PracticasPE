@@ -34,7 +34,7 @@ public class GUI extends JFrame{
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
 	JPanel _panelPrecision, _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	//Labels
-	JLabel _labelPrecision, _labelParticipantes, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
+	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
 	//ComboBox
 	@SuppressWarnings("rawtypes")
 	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
@@ -117,38 +117,16 @@ public class GUI extends JFrame{
 		_panelPrecision.add(_labelPrecision, "cell 0 0,alignx left,aligny center");
 		
 		//Participantes del torneo
-		_labelParticipantes = new JLabel("Participantes: ");
 		_textFieldParticipantes = new JTextField("2");
 		_textFieldParticipantes.setPreferredSize(new Dimension(72,25));
 		
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
 		_panelSeleccion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		_panelSeleccion.setLayout(new MigLayout("", "[130px][78px]", "[25px]"));
+		_panelSeleccion.setLayout(new MigLayout("", "[130px][78px]", "[25px][]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
 		String[] metodosS = {"Ruleta", "Torneo", "Torneo_Probabilistico"};
-		_comboBoxSeleccion = new JComboBox(metodosS);
-		_comboBoxSeleccion.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent arg0) {
-				String s = (String)_comboBoxSeleccion.getSelectedItem();
-				if (s=="Torneo" || s == "Torneo_Probabilistico"){
-					_panelSeleccion.add(_textFieldParticipantes, "cell 1 1,alignx left,aligny center");
-					_panelSeleccion.add(_labelParticipantes, "cell 0 1,alignx left,aligny center");
-					_panelOpciones.revalidate();
-					_panelOpciones.repaint();
-				}else{
-					_panelSeleccion.remove(_textFieldParticipantes);
-					_panelSeleccion.remove(_labelParticipantes);
-					_panelOpciones.revalidate();
-					_panelOpciones.repaint();
-				}
-				
-			}
-			
-		});
-		_panelSeleccion.add(_comboBoxSeleccion, "cell 1 0,alignx left,aligny top");
 		
 		
 		//Cruce
@@ -183,16 +161,16 @@ public class GUI extends JFrame{
 				.addGroup(gl__panelOpciones.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(_panelProblemas, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-							.addComponent(_panelPrecision, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE))
-						.addComponent(_panelSemilla, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-						.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-						.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-						.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
+						.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+						.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(_panelSemilla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(_panelMutacion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(_panelCruce, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(_panelProblemas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(_panelPoblacion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(_panelIteraciones, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+							.addComponent(_panelPrecision, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+							.addComponent(_panelSeleccion, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl__panelOpciones.setVerticalGroup(
@@ -217,6 +195,25 @@ public class GUI extends JFrame{
 					.addComponent(_botonComenzar)
 					.addGap(272))
 		);
+		_comboBoxSeleccion = new JComboBox(metodosS);
+		_comboBoxSeleccion.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				String s = (String)_comboBoxSeleccion.getSelectedItem();
+				if (s=="Torneo" || s == "Torneo_Probabilistico"){
+					_panelSeleccion.add(_textFieldParticipantes, "cell 1 1,alignx left,aligny center");
+					_panelOpciones.revalidate();
+					_panelOpciones.repaint();
+				}else{
+					_panelSeleccion.remove(_textFieldParticipantes);
+					_panelOpciones.revalidate();
+					_panelOpciones.repaint();
+				}
+				
+			}
+			
+		});
+		_panelSeleccion.add(_comboBoxSeleccion, "cell 0 1,alignx left,aligny top");
 		_textFieldSemilla = new JTextField("0");
 		_textFieldSemilla.setPreferredSize(new Dimension(100,25));
 		_panelSemilla.add(_textFieldSemilla, "cell 1 0,alignx left,aligny top");
@@ -277,8 +274,8 @@ public class GUI extends JFrame{
 		}
 		//A�adir las lineas
 		_plot.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
-		_plot.addLinePlot("Mejor Generaci�n", x, mejorGeneracion);
-		_plot.addLinePlot("Media Generaci�n", x, mediaGeneracion);
+		_plot.addLinePlot("Mejor Generacion", x, mejorGeneracion);
+		_plot.addLinePlot("Media Generacion", x, mediaGeneracion);
 		
 		_labelMejorResultado.setText(resultado);
 	}

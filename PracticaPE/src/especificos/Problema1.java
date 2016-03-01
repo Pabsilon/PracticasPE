@@ -18,8 +18,9 @@ public class Problema1 extends Cromosoma{
 	}
 	
 	public float[] getFenotipo(){
-		float[] retval = new float[1];
+		float[] retval = new float[8];
 		retval[0] = (float) (_xmin + (_xmax - _xmin) * bin_dec(_genes[0]) / (Math.pow(2, _longitud[0])-1));
+		retval[1]=new Float("0");
 		return retval;
 	}
 

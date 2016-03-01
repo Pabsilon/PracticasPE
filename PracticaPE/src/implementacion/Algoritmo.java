@@ -51,6 +51,7 @@ public class Algoritmo {
 		float[] aptitudes = new float[_poblacionTamano];
 		float[] puntuaciones = new float[_poblacionTamano];
 		float[] puntuacionesAcum = new float[_poblacionTamano];
+		String resultado="";
 		
 		for(int i = 0; i < _simulaciones; i++)
 		{
@@ -71,8 +72,18 @@ public class Algoritmo {
 			mutar();
 		}
 		
-		//CAMBIAR ESTO
-		String resultado = "Valor mejor: " + _mejorValor + " en X: " + _mejorIndividuo.getFenotipo()[0];
+		if (!_problema.equals("Problema4")){
+			 resultado = "Valor mejor: " + _mejorValor + " en X: " + _mejorIndividuo.getFenotipo()[0];
+			if (_mejorIndividuo.getFenotipo()[1]!=new Float("0")){
+				resultado = resultado + " Y: " + _mejorIndividuo.getFenotipo()[1];
+				
+			}
+		}else{
+			resultado = "Valor mejor: " + _mejorValor;
+			for (int i=0; i<_n; i++){
+				resultado = resultado + ", x" + i +" = " + _mejorIndividuo.getFenotipo()[i];
+			}
+		}
 		return resultado;
 	}
 	

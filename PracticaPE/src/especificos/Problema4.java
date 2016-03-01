@@ -10,7 +10,11 @@ public class Problema4 extends Cromosoma{
 	private int _n;
 	
 	public Problema4(float precision, int n, Random rand){
-		_n =n;
+		if (n<9){
+			_n =n;
+		}else{
+			_n=8;
+		}
 		_longitud = new int[_n];
 		
 		for (int i =0; i<_n; i++){
@@ -25,7 +29,7 @@ public class Problema4 extends Cromosoma{
 	}
 	
 	protected float[] getFenotipo() {
-		float[] retval = new float[_n];
+		float[] retval = new float[8];
 		for (int i = 0; i<_n; i++){
 			retval[i] = (float) (_xmin + (_xmax - _xmin) * bin_dec(_genes[i]) / (Math.pow(2, _longitud[i])-1));		
 		}
