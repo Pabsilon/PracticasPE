@@ -5,7 +5,6 @@
 -Hacer que se pueda introducir el número de elementos a comparar en el metodo de seleccion Torneo (en la GUI también)
 -Hacer torneo probablistico
 -Sacar todos los genes de los cromosomas (getString)
--Semilla para el random
 
 
 
