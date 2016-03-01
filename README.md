@@ -1,10 +1,10 @@
 #TODO
--Mejor GUI
--Hacer que funcionen los otros problemas
--Añadir N del problam 4 a la GUI
--Hacer que se pueda introducir el número de elementos a comparar en el metodo de seleccion Torneo (en la GUI también)
--Hacer torneo probablistico
--Sacar todos los genes de los cromosomas (getString)
+  - Mejor GUI
+  - Hacer que funcionen los otros problemas
+  - Añadir N del problam 4 a la GUI
+  - Hacer que se pueda introducir el número de elementos a comparar en el metodo de seleccion Torneo (en la GUI también)
+  - Hacer torneo probablistico
+  - Sacar todos los genes de los cromosomas (getString)
 
 
 
