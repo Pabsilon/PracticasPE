@@ -11,6 +11,8 @@ public class AlgoritmoSeleccionFabrica
 			return new Seleccion_Ruleta();
 		case "Torneo":
 			return new Seleccion_Torneo(participantes);
+		case "Torneo_Probabilistico":
+			return new Seleccion_TorneoProb(participantes);
 		default:
 			return new Seleccion_Ruleta();
 		}
