@@ -127,13 +127,13 @@ public class GUI extends JFrame{
 		_panelSeleccion.setLayout(new MigLayout("", "[130px][78px]", "[25px]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
-		String[] metodosS = {"Ruleta", "Torneo"};
+		String[] metodosS = {"Ruleta", "Torneo", "Torneo_Probabilistico"};
 		_comboBoxSeleccion = new JComboBox(metodosS);
 		_comboBoxSeleccion.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
 				String s = (String)_comboBoxSeleccion.getSelectedItem();
-				if (s=="Torneo"){
+				if (s=="Torneo" || s == "Torneo_Probabilistico"){
 					_panelSeleccion.add(_textFieldParticipantes, "cell 1 1,alignx left,aligny center");
 					_panelSeleccion.add(_labelParticipantes, "cell 0 1,alignx left,aligny center");
 					_panelOpciones.revalidate();

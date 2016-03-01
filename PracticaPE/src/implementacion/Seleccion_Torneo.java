@@ -11,7 +11,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 	}
 
 	@Override
-	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean minimizacion, Random rand)
+	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean maximizacion, Random rand)
 	{
 		//Coger tres elementos al hazar
 		float elegidos[] = new float[_participantes];
@@ -24,7 +24,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 			}
 			
 			//Si el problema es de minimizacion, coger el mas peque�o
-			if(minimizacion)
+			if(!maximizacion)
 			{
 				float minVal = Float.MAX_VALUE;
 				int min = 0;
@@ -45,7 +45,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 				int max = 0;
 				for(int j = 0; j < _participantes; j++)
 				{
-					if(elegidos[j] < maxVal)
+					if(elegidos[j] > maxVal)
 					{
 						maxVal = elegidos[j];
 						max = j;
