@@ -1,4 +1,6 @@
 package especificos;
+import java.util.Random;
+
 import implementacion.*;
 
 public class Problema4 extends Cromosoma{
@@ -7,7 +9,7 @@ public class Problema4 extends Cromosoma{
 	private float _xmin = 0;
 	private int _n;
 	
-	public Problema4(float precision, int n){
+	public Problema4(float precision, int n, Random rand){
 		_n =n;
 		_longitud = new int[_n];
 		
@@ -16,7 +18,7 @@ public class Problema4 extends Cromosoma{
 		}
 		_genes = new Gen[_n];
 		for (int i = 0; i<_n; i++){
-			_genes[i]=new Gen(_longitud[i]);
+			_genes[i]=new Gen(_longitud[i], rand);
 		}
 		
 		_maximize = false;

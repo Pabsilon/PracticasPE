@@ -12,12 +12,13 @@ public class Algoritmo {
 	protected String _metodoSeleccion;
 	protected String _problema;
 	protected int _n;
+	protected Random _rand;
 
 	//Valores problema concreto
 	protected float _mejorValor;
 	protected Cromosoma _mejorIndividuo;
 	
-	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones, int n) 
+	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones, long semilla, int n) 
 	{
 		_poblacionTamano = poblacion;
 		_precision = precision;
@@ -26,15 +27,16 @@ public class Algoritmo {
 		_simulaciones = simulaciones;
 		_metodoSeleccion = metodoSelec;
 		_problema = problema;
-		_n = n;
+		_rand = new Random();
+		_rand.setSeed(semilla);
 		
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
 		{
-			_poblacion[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, n);
+			_poblacion[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
 		}
 		
-		_mejorIndividuo = ProblemaFabrica.getCromosomaProblema(problema, precision, n);
+		_mejorIndividuo = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
 	}
 	
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
@@ -156,7 +158,7 @@ public class Algoritmo {
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
 		
 		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion);
-		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, _mejorIndividuo.isMaximizing());
+		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, _mejorIndividuo.isMaximizing(), _rand);
 		
 		//Crear la nueva poblacion
 		_poblacion = seleccionados;
@@ -165,14 +167,13 @@ public class Algoritmo {
 	
 	private void cruzar()
 	{
-		Random rand = new Random();
 		int numeroSeleccionados = 0;
 		int[] aCruzar = new int[_poblacionTamano];
 		
 		//Obtener los cromosomas a cruzar
 		for(int i = 0; i < _poblacionTamano; i++)
 		{
-			if(rand.nextFloat() < _cruceProb)
+			if(_rand.nextFloat() < _cruceProb)
 			{
 				aCruzar[numeroSeleccionados] = i;
 				numeroSeleccionados++;
@@ -187,9 +188,9 @@ public class Algoritmo {
 		//Cruzarlos
 		for(int i = 0; i < (numeroSeleccionados / 2); i++)
 		{
-			Cromosoma hijo1 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n);
-			Cromosoma hijo2 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n);
-			Cromosoma.cruzar(_poblacion[aCruzar[i]], _poblacion[aCruzar[i + 1]], hijo1, hijo2);
+			Cromosoma hijo1 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n, _rand);
+			Cromosoma hijo2 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n, _rand);
+			Cromosoma.cruzar(_poblacion[aCruzar[i]], _poblacion[aCruzar[i + 1]], hijo1, hijo2, _rand);
 			
 			//Sustituir a los padres
 			_poblacion[aCruzar[i]] = hijo1;
@@ -201,7 +202,7 @@ public class Algoritmo {
 	{
 		for(int i = 0; i < _poblacionTamano; i++)
 		{
-				_poblacion[i].mutar(_mutacionProb);
+				_poblacion[i].mutar(_mutacionProb, _rand);
 		}
 	}
 }

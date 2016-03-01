@@ -6,10 +6,9 @@ public class Gen {
 
 	private boolean[] _alelo;
 	
-	public Gen(int n){
+	public Gen(int n, Random rand){
 		
 		_alelo = new boolean[n];
-		Random rand = new Random();
 		for (int i = 0; i<n; i++){
 			_alelo[i]=rand.nextBoolean();
 		}

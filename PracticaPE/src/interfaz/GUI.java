@@ -21,13 +21,13 @@ public class GUI extends JFrame{
 	
 	//Paneles
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
-	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas, _panelPoblacion, _panelIteraciones;
+	JPanel _panelPrecision, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	//Labels
-	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelIteraciones;
+	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelIteraciones, _labelSemilla;
 	//ComboBox
 	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
 	//Text Fields
-	JTextField _textFieldPrecision, _textFieldMutacion, _textFieldCruce, _textFieldPoblacion, _textFieldIteraciones;
+	JTextField _textFieldPrecision, _textFieldMutacion, _textFieldCruce, _textFieldPoblacion, _textFieldIteraciones, _textFieldSemilla;
 	//Botones
 	JButton _botonComenzar;
 	//Plot
@@ -114,6 +114,15 @@ public class GUI extends JFrame{
 		_panelMutacion.add(_textFieldMutacion);
 		_panelOpciones.add(_panelMutacion);
 		
+		//Semilla
+		_panelSemilla = new JPanel();
+		_labelSemilla = new JLabel("Semilla:");
+		_textFieldSemilla = new JTextField("1234");
+		_textFieldSemilla.setPreferredSize(new Dimension(100,25));
+		_panelSemilla.add(_labelSemilla);
+		_panelSemilla.add(_textFieldSemilla);
+		_panelOpciones.add(_panelSemilla);
+		
 		//Boton
 		_botonComenzar = new JButton("Comenzar");
 		_panelOpciones.add(_botonComenzar);
@@ -121,7 +130,7 @@ public class GUI extends JFrame{
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldMutacion.getText(), _textFieldIteraciones.getText());
+				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldMutacion.getText(), _textFieldIteraciones.getText(), _textFieldSemilla.getText());
 				
 			}
 		});

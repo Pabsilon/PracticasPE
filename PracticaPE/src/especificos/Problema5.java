@@ -1,4 +1,6 @@
 package especificos;
+import java.util.Random;
+
 import implementacion.*;
 
 public class Problema5 extends Cromosoma{
@@ -9,13 +11,13 @@ public class Problema5 extends Cromosoma{
 	private final float _ymin = -10;
 	private final float _ymax = 10;
 	
-	public Problema5(float precision){
+	public Problema5(float precision, Random rand){
 		_longitud = new int[2];
 		_longitud[0] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));
 		_longitud[1] = (int) Math.ceil(((Math.log(1+(_ymax-_ymin)/precision))/Math.log(2)));
 		_genes = new Gen[2];
-		_genes[0]=new Gen(_longitud[0]);
-		_genes[1]=new Gen(_longitud[1]);
+		_genes[0]=new Gen(_longitud[0], rand);
+		_genes[1]=new Gen(_longitud[1], rand);
 		
 		//_maximize = false;
 	}

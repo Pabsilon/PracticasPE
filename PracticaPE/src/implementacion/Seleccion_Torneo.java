@@ -5,11 +5,10 @@ import java.util.Random;
 public class Seleccion_Torneo implements AlgoritmoSeleccion {
 
 	@Override
-	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean minimizacion)
+	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean minimizacion, Random rand)
 	{
 		//Coger tres elementos al hazar
 		float elegidos[] = new float[3];
-		Random rand = new Random();
 		
 		
 		for(int i = 0; i < tamPoblacion; i++)
@@ -18,7 +17,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 			elegidos[1] = aptitudes[rand.nextInt(tamPoblacion)];
 			elegidos[2] = aptitudes[rand.nextInt(tamPoblacion)];
 			
-			//Si el problema es de minimizacion, coger el mas pequeño
+			//Si el problema es de minimizacion, coger el mas pequeï¿½o
 			if(minimizacion)
 			{
 				float minVal = Float.MAX_VALUE;

@@ -10,11 +10,11 @@ public class Controller {
 		g = new GUI(this);
 	}
 	
-	void comenzarSimulacion(String precision, String cruce, String mutacion, String metodoSelec, String problema, String numPoblacion, String numGeneraciones)
+	void comenzarSimulacion(String precision, String cruce, String mutacion, String metodoSelec, String problema, String numPoblacion, String numGeneraciones, String semilla)
 	{
 		//TODO: El último parámetro de la función es la n para el problema 4. De momento está a 0, pero hay que parsearlo desde la interfaz.
 		//Crear un nuevo algoritmo
-		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, problema, Integer.parseInt(numGeneraciones), 1);
+		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, problema, Integer.parseInt(numGeneraciones), Long.parseLong(semilla), 1);
 		
 		double[] mejorAbsoluto = new double[100];
 		double[] mejorGeneracion = new double[100];

@@ -26,7 +26,7 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 	
 	protected abstract float getAptitud(); // Devuelve el valor de la funcion
 	
-	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2)
+	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
 	{
 		for(int i = 0; i < hijo1._genes.length; i++)
 		{
@@ -34,7 +34,6 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 			hijo2._genes[i].setAlelos(padre2._genes[i].getAlelos());
 		}
 		
-		Random rand = new Random();
 		
 		int puntoDeCorte = rand.nextInt(padre1.getLongitudTotal() - 1) + 1; //Genera un numero (0, longitudCromosoma)
 		
@@ -79,9 +78,8 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		}
 	}
 	
-	public void mutar(float mutacionProb)
+	public void mutar(float mutacionProb, Random rand)
 	{
-		Random rand = new Random();
 		//Recorrer todos los alelos de los genes y mutar si procede
 		for(int i = 0; i < _genes.length; i++)
 		{

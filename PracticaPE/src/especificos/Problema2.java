@@ -1,5 +1,7 @@
 package especificos;
 
+import java.util.Random;
+
 import implementacion.*;
 
 public class Problema2 extends Cromosoma{
@@ -9,14 +11,14 @@ public class Problema2 extends Cromosoma{
 	private final float _ymin = -6;
 	private final float _ymax = 6;
 	
-	public Problema2 (float precision){
+	public Problema2 (float precision, Random rand){
 		_longitud = new int[2]; //Dos longitudes de gen - aunque sea la misma.
 		//Cálculo de bits necesarios
 		_longitud[0] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));
 		_longitud[1] = (int) Math.ceil(((Math.log(1+(_ymax-_ymin)/precision))/Math.log(2)));
 		_genes = new Gen[2];
-		_genes[0]=new Gen(_longitud[0]);
-		_genes[1]=new Gen(_longitud[1]);
+		_genes[0]=new Gen(_longitud[0], rand);
+		_genes[1]=new Gen(_longitud[1], rand);
 		
 		_maximize = true;
 	}
