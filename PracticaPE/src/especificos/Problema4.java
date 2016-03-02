@@ -31,17 +31,23 @@ public class Problema4 extends Cromosoma{
 		}
 		return retval;
 	}
+	
+	//Similar al anterior, pero ya devuelve un fenotipo concreto (más rapido para N llamadas a la funcion)
+	private float getFenotipo(int i)
+	{
+		return (float) (_xmin + (_xmax - _xmin) * bin_dec(_genes[i]) / (Math.pow(2, _longitud[i])-1));
+	}
 
 	protected float getAptitud() {
 		//TODO CORRECT
 		float retval = 0;
 		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * senÂ²â�°((i+1)*xiÂ²)/Ï€);
 		for (int i = 1; i<=_n; i++){
-			float x = getFenotipo()[i-1];
-			retval += -Math.sin(x) * Math.pow(Math.sin((i+1)*Math.pow(x, 2)/Math.PI), 20);
+			float x = getFenotipo(i - 1);
+			retval += Math.sin(x) * Math.pow(Math.sin((i+1)*Math.pow(x, 2)/Math.PI), 20);
 			//retval+= -Math.sin(x)*Math.pow(20,(Math.sin((i+1) * Math.pow(2, x)/Math.PI)));
 		}
-		return retval;
+		return -retval;
 	}
 	
 	public boolean isMaximizing() {

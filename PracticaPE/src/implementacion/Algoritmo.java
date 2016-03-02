@@ -61,7 +61,6 @@ public class Algoritmo {
 		float[] aptitudes = new float[_poblacionTamano];
 		float[] puntuaciones = new float[_poblacionTamano];
 		float[] puntuacionesAcum = new float[_poblacionTamano];
-		String resultado="";
 		
 		for(int i = 0; i < _simulaciones; i++)
 		{
@@ -85,15 +84,16 @@ public class Algoritmo {
 		return _mejorIndividuo.toString();
 	}
 	
-	protected void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean minMax)
+	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
 	{
 		//En caso de que sea un problema de maximización.
-		if (minMax){
-			float mejorAptitudEnGeneracion = Float.MIN_VALUE;
+		float sumaAptitudes = 0;
+		float mejorAptitudEnGeneracion;
+		if (maximizacion){
+			mejorAptitudEnGeneracion = Float.MIN_VALUE;
 			int mejorCromGeneracion = 0;
 			
 			//Calculamos las aptitudes y su suma total
-			float sumaAptitudes = 0;
 			for(int i = 0; i < _poblacionTamano; i++)
 			{
 				aptitudes[i] = _poblacion[i].getAptitud();
@@ -113,26 +113,12 @@ public class Algoritmo {
 				
 				_mejorIndividuo.copiarCromosoma(_poblacion[mejorCromGeneracion]);
 			}
-			
-			//Calculamos las puntuaciones para la fase de seleccion
-			puntuaciones[0] = aptitudes[0] / sumaAptitudes;
-			puntuacionesAcum[0] = puntuaciones[0];
-			for(int i = 1; i < _poblacionTamano; i++)
-			{
-				puntuaciones[i] = aptitudes[i] / sumaAptitudes;
-				puntuacionesAcum[i] = puntuaciones[i] + puntuacionesAcum[i - 1];
-			}
-			
-			//Informacion de la generacion (Maximo y media)
-			infoGeneracion[0] = mejorAptitudEnGeneracion;
-			infoGeneracion[1] = sumaAptitudes / _poblacionTamano;
 		}else{
 			//Si es un problema de minimización
-			float mejorAptitudEnGeneracion = Float.MAX_VALUE;
+			mejorAptitudEnGeneracion = Float.MAX_VALUE;
 			int mejorCromGeneracion = 0;
 			
 			//Calculamos las aptitudes y su suma total
-			float sumaAptitudes = 0;
 			for(int i = 0; i < _poblacionTamano; i++)
 			{
 				aptitudes[i] = _poblacion[i].getAptitud();
@@ -153,21 +139,21 @@ public class Algoritmo {
 				
 				_mejorIndividuo.copiarCromosoma(_poblacion[mejorCromGeneracion]);
 			}
-			
-			//Calculamos las puntuaciones para la fase de seleccion
-			puntuaciones[0] = aptitudes[0] / sumaAptitudes;
-			puntuacionesAcum[0] = puntuaciones[0];
-			for(int i = 1; i < _poblacionTamano; i++)
-			{
-				puntuaciones[i] = aptitudes[i] / sumaAptitudes;
-				puntuacionesAcum[i] = puntuaciones[i] + puntuacionesAcum[i - 1];
-			}
-			puntuacionesAcum[_poblacionTamano - 1] = 1; //Asegurarse que el ultimo valor de las puntuaciones es 1
-			
-			//Informacion de la generacion (Minimo y media)
-			infoGeneracion[0] = mejorAptitudEnGeneracion;
-			infoGeneracion[1] = sumaAptitudes / _poblacionTamano;
 		}
+		
+		//Calculamos las puntuaciones para la fase de seleccion
+		puntuaciones[0] = aptitudes[0] / sumaAptitudes;
+		puntuacionesAcum[0] = puntuaciones[0];
+		for(int i = 1; i < _poblacionTamano; i++)
+		{
+			puntuaciones[i] = aptitudes[i] / sumaAptitudes;
+			puntuacionesAcum[i] = puntuaciones[i] + puntuacionesAcum[i - 1];
+		}
+		puntuacionesAcum[_poblacionTamano - 1] = 1; //Asegurarse que el ultimo valor de las puntuaciones es 1
+		
+		//Informacion de la generacion (Mejor y media)
+		infoGeneracion[0] = mejorAptitudEnGeneracion;
+		infoGeneracion[1] = sumaAptitudes / _poblacionTamano;
 	}
 	
 	private void seleccionar(float[] aptitudes, float[] puntuacionesAcum)
