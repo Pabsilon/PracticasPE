@@ -42,7 +42,8 @@ public class Problema4 extends Cromosoma{
 		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * senÂ²â�°((i+1)*xiÂ²)/Ï€);
 		for (int i = 1; i<=_n; i++){
 			float x = getFenotipo()[i-1];
-			retval+= -Math.sin(x)*Math.pow(20,(Math.sin((i+1) * Math.pow(2, x)/Math.PI)));
+			retval += -Math.sin(x) * Math.pow(Math.sin((i+1)*Math.pow(x, 2)/Math.PI), 20);
+			//retval+= -Math.sin(x)*Math.pow(20,(Math.sin((i+1) * Math.pow(2, x)/Math.PI)));
 		}
 		return retval;
 	}
