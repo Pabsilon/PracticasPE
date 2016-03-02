@@ -25,6 +25,8 @@ public class Controller {
 		
 		//Mostrar resultados
 		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(numGeneraciones), resultado);
+		//Mostrar la semilla utilizada
+		g.setSeed(ag.getSemilla());
 	}
 
 }

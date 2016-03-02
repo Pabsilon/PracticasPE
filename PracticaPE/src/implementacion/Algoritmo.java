@@ -14,6 +14,7 @@ public class Algoritmo {
 	protected int _n;
 	protected Random _rand;
 	protected int _participantes;
+	protected long _semilla;
 
 	//Valores problema concreto
 	protected float _mejorValor;
@@ -32,14 +33,15 @@ public class Algoritmo {
 		_rand = new Random();
 		_n = n;
 		_participantes = participantes;
+		_semilla =semilla;
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
 		if (semilla !=0){
 			_rand.setSeed(semilla);
 		}else{
-			_rand = new Random();
+			_semilla = System.currentTimeMillis();
+			_rand = new Random(_semilla);
 		}
-		
 		//Inicialización de la poblacion.
 		_poblacion = new Cromosoma[poblacion];
 		for(int i = 0; i < poblacion; i++)
@@ -235,5 +237,9 @@ public class Algoritmo {
 		{
 				_poblacion[i].mutar(_mutacionProb, _rand);
 		}
+	}
+	
+	public long getSemilla(){
+		return _semilla;
 	}
 }

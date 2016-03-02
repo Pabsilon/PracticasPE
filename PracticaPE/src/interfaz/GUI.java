@@ -39,7 +39,7 @@ public class GUI extends JFrame{
 	@SuppressWarnings("rawtypes")
 	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
 	//Text Fields
-	JTextField _textFieldPrecision, _textFieldParticipantes, _textFieldMutacion, _textFieldCruce, _textFieldPoblacion, _textFieldIteraciones, _textFieldN, _textFieldSemilla;
+	JTextField _textFieldPrecision, _lastSeed, _textFieldParticipantes, _textFieldMutacion, _textFieldCruce, _textFieldPoblacion, _textFieldIteraciones, _textFieldN, _textFieldSemilla;
 	//Botones
 	JButton _botonComenzar;
 	//Plot
@@ -70,8 +70,9 @@ public class GUI extends JFrame{
 		_panelProblemas = new JPanel();
 		_panelProblemas.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4", "Problema5"};
-		_panelProblemas.setLayout(new MigLayout("", "[103px][27px][78px]", "[24px]"));
+		_panelProblemas.setLayout(new MigLayout("", "[213px]", "[24px]"));
 		_comboBoxProblemas = new JComboBox(problemasS);
+		_comboBoxProblemas.setPreferredSize(new Dimension(213,25));
 		_comboBoxProblemas.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -123,7 +124,7 @@ public class GUI extends JFrame{
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
 		_panelSeleccion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		_panelSeleccion.setLayout(new MigLayout("", "[130px][78px]", "[25px][]"));
+		_panelSeleccion.setLayout(new MigLayout("", "[213px]", "[25px][]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
 		String[] metodosS = {"Ruleta", "Torneo", "Torneo_Probabilistico"};
@@ -154,23 +155,31 @@ public class GUI extends JFrame{
 		_botonComenzar = new JButton("Comenzar");
 		_botonComenzar.setBackground(UIManager.getColor("Button.darkShadow"));
 		
+		JPanel _panelMuestraSemilla = new JPanel();
+		_panelMuestraSemilla.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
 		//Layout
 		GroupLayout gl__panelOpciones = new GroupLayout(_panelOpciones);
 		gl__panelOpciones.setHorizontalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
-						.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-						.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(_panelSemilla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelMutacion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelCruce, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelProblemas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelPoblacion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(_panelIteraciones, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-							.addComponent(_panelPrecision, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-							.addComponent(_panelSeleccion, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE)))
+					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addContainerGap(21, Short.MAX_VALUE)
+							.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(_panelSemilla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(_panelMutacion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(_panelCruce, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(_panelProblemas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(_panelPoblacion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(_panelIteraciones, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+									.addComponent(_panelPrecision, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+									.addComponent(_panelSeleccion, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE))
+								.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addGap(24)
+							.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl__panelOpciones.setVerticalGroup(
@@ -191,11 +200,22 @@ public class GUI extends JFrame{
 					.addComponent(_panelMutacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(_panelSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(88)
-					.addComponent(_botonComenzar)
-					.addGap(272))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(_botonComenzar, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+					.addGap(226))
 		);
+		_panelMuestraSemilla.setLayout(new MigLayout("", "[213px]", "[25px][25px]"));
+		
+		JLabel lblUltimaSemilla = new JLabel("Ultima Semilla Utilizada:");
+		_panelMuestraSemilla.add(lblUltimaSemilla, "cell 0 0,alignx left,aligny top");
+		
+		_lastSeed = new JTextField("");
+		_lastSeed.setPreferredSize(new Dimension(213, 25));
+		_panelMuestraSemilla.add(_lastSeed, "cell 0 1,alignx left,aligny top");
 		_comboBoxSeleccion = new JComboBox(metodosS);
+		_comboBoxSeleccion.setPreferredSize(new Dimension(215,25));
 		_comboBoxSeleccion.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -254,12 +274,16 @@ public class GUI extends JFrame{
 		
 		//Frame
 		this.setContentPane(_panelPrincipal);
-		this.setPreferredSize(new Dimension(750, 800));
+		this.setPreferredSize(new Dimension(1200, 700));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);		
 	}
 
+	public void setSeed(long semilla){
+		_lastSeed.setText(Long.toString(semilla));
+	}
+	
 	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int numGeneraciones, String resultado)
 	{
 		_plot.removeAllPlots();
