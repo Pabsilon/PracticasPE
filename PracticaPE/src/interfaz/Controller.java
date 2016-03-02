@@ -16,9 +16,9 @@ public class Controller {
 		//Crear un nuevo algoritmo
 		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, problema, Integer.parseInt(numGeneraciones), Long.parseLong(semilla), Integer.parseInt(n), Integer.parseInt(participantes));
 		
-		double[] mejorAbsoluto = new double[100];
-		double[] mejorGeneracion = new double[100];
-		double[] mediaGeneracion = new double[100];
+		double[] mejorAbsoluto = new double[Integer.parseInt(numGeneraciones)];
+		double[] mejorGeneracion = new double[Integer.parseInt(numGeneraciones)];
+		double[] mediaGeneracion = new double[Integer.parseInt(numGeneraciones)];
 		
 		//Ejecutar el algoritmo
 		String resultado;
