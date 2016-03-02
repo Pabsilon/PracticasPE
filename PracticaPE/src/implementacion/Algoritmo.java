@@ -82,22 +82,7 @@ public class Algoritmo {
 			mutar();
 		}
 		
-		//Salida del algoritmo
-		if (!_problema.equals("Problema4")){
-			//Problemas 1-3 y 5
-			 resultado = "Valor mejor: " + _mejorValor + " en X: " + _mejorIndividuo.getFenotipo()[0];
-			if (_mejorIndividuo.getFenotipo()[1]!=new Float("0")){
-				resultado = resultado + " Y: " + _mejorIndividuo.getFenotipo()[1];
-				
-			}
-		}else{
-			//Problema 4
-			resultado = "Valor mejor: " + _mejorValor;
-			for (int i=0; i<_n; i++){
-				resultado = resultado + ", x" + i +" = " + _mejorIndividuo.getFenotipo()[i];
-			}
-		}
-		return resultado;
+		return _mejorIndividuo.toString();
 	}
 	
 	protected void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean minMax)

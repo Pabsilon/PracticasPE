@@ -10,13 +10,9 @@ public class Problema4 extends Cromosoma{
 	private int _n;
 	
 	public Problema4(float precision, int n, Random rand){
-		if (n<9){
-			_n =n;
-		}else{
-			_n=8;
-		}
-		_longitud = new int[_n];
-		
+		_n = n;
+				
+		_longitud = new int[_n];		
 		for (int i =0; i<_n; i++){
 			_longitud[i] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));
 		}
@@ -29,7 +25,7 @@ public class Problema4 extends Cromosoma{
 	}
 	
 	protected float[] getFenotipo() {
-		float[] retval = new float[8];
+		float[] retval = new float[_n];
 		for (int i = 0; i<_n; i++){
 			retval[i] = (float) (_xmin + (_xmax - _xmin) * bin_dec(_genes[i]) / (Math.pow(2, _longitud[i])-1));		
 		}
@@ -50,6 +46,17 @@ public class Problema4 extends Cromosoma{
 	
 	public boolean isMaximizing() {
 		return _maximize;
+	}
+	
+	@Override
+	public String toString() 
+	{
+		String resultado = "Valor mejor: " + getAptitud();		
+		for (int i=0; i<_n; i++){
+			resultado = resultado + ", x" + (i + 1) +" = " + getFenotipo()[i];
+		}
+		
+		return resultado;
 	}
 
 }

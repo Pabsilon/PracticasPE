@@ -38,5 +38,12 @@ public class Problema3 extends Cromosoma{
 	public boolean isMaximizing() {
 		return _maximize;
 	}
+	
+	@Override
+	public String toString() 
+	{
+		String resultado = "Valor mejor: " + getAptitud() + " en X: " + getFenotipo()[0] + " Y: " + getFenotipo()[1];
+		return resultado;
+	}
 
 }

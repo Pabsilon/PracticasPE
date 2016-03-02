@@ -35,6 +35,11 @@ public class Problema1 extends Cromosoma{
 	}
 
 	
-	
+	@Override
+	public String toString() 
+	{
+		String resultado = "Valor mejor: " + getAptitud() + " en X: " + getFenotipo()[0];
+		return resultado;
+	}
 
 }
