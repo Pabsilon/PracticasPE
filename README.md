@@ -1,6 +1,7 @@
 #### TODO
-  - Encontrar algo mas que hacer.
-  - No haya la solucion minima en el problema 4 con 7 elementos.
+  - Arreglar problema 2.
+  - No haya la solucion minima en el problema 4 con 7 elementos (Arreglar problema 4).
+  - Mirar torneo (y por lo tanto tambien torneo prob) para ver si hay algo mal.
 
 # DONE
 
