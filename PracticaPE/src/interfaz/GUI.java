@@ -63,14 +63,15 @@ public class GUI extends JFrame{
 		
 		//N
 		_labelN = new JLabel("N: ");
+		_labelN.setPreferredSize(new Dimension(10,25));
 		_textFieldN = new JTextField("1");
-		_textFieldN.setPreferredSize(new Dimension(72,25));
+		_textFieldN.setPreferredSize(new Dimension(70,25));
 		
 		//Problema
 		_panelProblemas = new JPanel();
 		_panelProblemas.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4", "Problema5"};
-		_panelProblemas.setLayout(new MigLayout("", "[213px]", "[24px]"));
+		_panelProblemas.setLayout(new MigLayout("", "[113px][][]", "[24px]"));
 		_comboBoxProblemas = new JComboBox(problemasS);
 		_comboBoxProblemas.setPreferredSize(new Dimension(213,25));
 		_comboBoxProblemas.addActionListener(new ActionListener(){
