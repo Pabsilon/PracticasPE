@@ -34,7 +34,7 @@ public class GUI extends JFrame{
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
 	JPanel _panelPrecision, _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelProblemas, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	//Labels
-	JLabel _labelPrecision, _labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
+	JLabel _labelPrecision, _realizadoEn, _time,_labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
 	//ComboBox
 	@SuppressWarnings("rawtypes")
 	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
@@ -159,13 +159,17 @@ public class GUI extends JFrame{
 		JPanel _panelMuestraSemilla = new JPanel();
 		_panelMuestraSemilla.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		
+		_realizadoEn = new JLabel("Generado en:");
+		
+		_time = new JLabel("");
+		
 		//Layout
 		GroupLayout gl__panelOpciones = new GroupLayout(_panelOpciones);
 		gl__panelOpciones.setHorizontalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl__panelOpciones.createSequentialGroup()
 							.addContainerGap(21, Short.MAX_VALUE)
 							.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING, false)
@@ -178,9 +182,14 @@ public class GUI extends JFrame{
 									.addComponent(_panelPrecision, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
 									.addComponent(_panelSeleccion, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE))
 								.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
+						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
 							.addGap(24)
-							.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
+							.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl__panelOpciones.createSequentialGroup()
+									.addComponent(_realizadoEn)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(_time))
+								.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl__panelOpciones.setVerticalGroup(
@@ -205,7 +214,11 @@ public class GUI extends JFrame{
 					.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(_botonComenzar, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addGap(226))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.BASELINE)
+						.addComponent(_realizadoEn)
+						.addComponent(_time))
+					.addGap(105))
 		);
 		_panelMuestraSemilla.setLayout(new MigLayout("", "[213px]", "[25px][25px]"));
 		
@@ -283,6 +296,10 @@ public class GUI extends JFrame{
 
 	public void setSeed(long semilla){
 		_lastSeed.setText(Long.toString(semilla));
+	}
+	
+	public void setTime(float time){
+		_time.setText(Float.toString(time) + " s");
 	}
 	
 	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int numGeneraciones, String resultado)
