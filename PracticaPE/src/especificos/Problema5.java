@@ -11,6 +11,10 @@ public class Problema5 extends Cromosoma{
 	private final float _ymin = -10;
 	private final float _ymax = 10;
 	
+	/** Constructora del problema 5: Tiene dos variabls.
+	 * @param precision La precisión del problema
+	 * @param rand La funcion random a utilizar (se pasa por uso de semillas)
+	 */
 	public Problema5(float precision, Random rand){
 		_longitud = new int[2];
 		_longitud[0] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));
@@ -47,7 +51,6 @@ public class Problema5 extends Cromosoma{
 		return _maximize;
 	}
 	
-	@Override
 	public String toString() 
 	{
 		String resultado = "Valor mejor: " + getAptitud() + " en X: " + getFenotipo()[0] + " Y: " + getFenotipo()[1];

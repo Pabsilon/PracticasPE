@@ -4,6 +4,11 @@ import java.util.Random;
 
 import implementacion.Cromosoma;
 
+/**Fábrica de problemas.
+ * Devuelve de forma estática la cosntructora pedida por la GUI
+ * @author pabs
+ *
+ */
 public class ProblemaFabrica 
 {
 	public static Cromosoma getCromosomaProblema(String algoritmo, float precision, int n, Random rand)

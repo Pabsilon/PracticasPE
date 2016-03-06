@@ -9,6 +9,10 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 	protected boolean _maximize;
 	
 	
+	/** Devuelve el valor codificado del gen
+	 * @param gen, el gen en binario
+	 * @return el valir del gen
+	 */
 	protected static int bin_dec(Gen gen){
 		int retval = 0;
 		for (int i=0; i<gen.getAlelosCopy().length; i++){
@@ -21,11 +25,24 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		return retval;
 	}
 	
-	protected abstract float[] getFenotipo(); // Devuelve la representacion del gen
-	//Hay que cambiarlo para que pueda devolver mas de un solo elemento (ej, X,Y)
+	/**Getter del fenotipo.
+	 * @return La reprensentacion del gen.
+	 */
+	protected abstract float[] getFenotipo();
 	
-	protected abstract float getAptitud(); // Devuelve el valor de la funcion
+	/**Getter de la actitud.
+	 * @return El valor de la funcion en el punto dado.
+	 */
+	protected abstract float getAptitud();
 	
+	/** Cruza dos cromosomas.
+	 * 
+	 * @param padre1 El primer padre a cruzar
+	 * @param padre2 El segundo padre a cruzar
+	 * @param hijo1 El primer hijo generado
+	 * @param hijo2 El segundo hijo generado
+	 * @param rand La función random a utilizar (se pasa por uso de semillas)
+	 */
 	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
 	{
 		for(int i = 0; i < hijo1._genes.length; i++)
@@ -78,6 +95,11 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		}
 	}
 	
+	/**Método que muta a la poblacion. Recorre todos los genes y decide si alterarlos.
+	 * 
+	 * @param mutacionProb Probabilidad de que mute un gen
+	 * @param rand Función de random a utilizar (se pasa por uso de semillas)
+	 */
 	public void mutar(float mutacionProb, Random rand)
 	{
 		//Recorrer todos los alelos de los genes y mutar si procede
@@ -94,6 +116,9 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		}
 	}
 	
+	/**Getter de la longitud del cromosoma utilizado. Esta varía en función del problema y de la precisión.
+	 * @return La longitud del cromosoma.
+	 */
 	public int getLongitudTotal()
 	{
 		int longitudTotal = 0;
@@ -105,7 +130,9 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		return longitudTotal;
 	}
 
-	//Copia el genotipo de un cromosoma a otro
+	/**Copia el genotipo de un cromosoma a otro
+	 * @param cromosoma El cromosoma a copiar.
+	 */
 	public void copiarCromosoma(Cromosoma cromosoma)
 	{
 		if(_genes.length == cromosoma._genes.length)
@@ -118,5 +145,8 @@ public abstract class Cromosoma { //Clase que implementa al individuo
 		
 	}
 	
+	/**Método para saber si el problema en el que trabajamos es de maximización o no.
+	 * @return True si es un problema de maximización, false si es un problema de minimización.
+	 */
 	public abstract boolean isMaximizing();
 }

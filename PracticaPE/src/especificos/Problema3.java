@@ -11,6 +11,10 @@ public class Problema3 extends Cromosoma{
 	private final float _ymin = 4.1f;
 	private final float _ymax = 5.8f;
 	
+	/** Constructora del problema 3: Tiene tres variables.
+	 * @param precision La precisión del problema
+	 * @param rand La funcion random a utilizar (se pasa por uso de semillas)
+	 */
 	public Problema3(float precision, Random rand){
 		_longitud = new int[2];
 		_longitud[0] = (int) Math.ceil(((Math.log(1+(_xmax-_xmin)/precision))/Math.log(2)));

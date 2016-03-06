@@ -9,6 +9,12 @@ public class Problema4 extends Cromosoma{
 	private float _xmin = 0;
 	private int _n;
 	
+	
+	/** Constructora del problema 4: Tiene n variables.
+	 * @param precision La precisión del problema
+	 * @param n El número de parametros a utlizar
+	 * @param rand La funcion random a utilizar (se pasa por uso de semillas)
+	 */
 	public Problema4(float precision, int n, Random rand){
 		_n = n;
 				
@@ -39,9 +45,8 @@ public class Problema4 extends Cromosoma{
 	}
 
 	protected float getAptitud() {
-		//TODO CORRECT
 		float retval = 0;
-		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * senÂ²â�°((i+1)*xiÂ²)/Ï€);
+		//f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * sen^20((i+1)*xi^2)/PI);
 		for (int i = 1; i<=_n; i++){
 			float x = getFenotipo(i - 1);
 			retval += Math.sin(x) * Math.pow(Math.sin((i+1)*Math.pow(x, 2)/Math.PI), 20);
@@ -54,7 +59,6 @@ public class Problema4 extends Cromosoma{
 		return _maximize;
 	}
 	
-	@Override
 	public String toString() 
 	{
 		String resultado = "Valor mejor: " + getAptitud();		
