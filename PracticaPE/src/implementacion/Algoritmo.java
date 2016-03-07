@@ -1,26 +1,33 @@
 package implementacion;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Random;
 
+import javafx.util.Pair;
 import especificos.ProblemaFabrica;
 
 public class Algoritmo {
 	//Parte genetica
-	protected int _poblacionTamano, _simulaciones;
-	protected Cromosoma[] _poblacion;
-	protected float _precision, _cruceProb, _mutacionProb;
-	protected String _metodoSeleccion;
-	protected String _problema;
-	protected int _n;
-	protected Random _rand;
-	protected int _participantes;
-	protected long _semilla;
+	private int _poblacionTamano, _simulaciones;
+	private Cromosoma[] _poblacion;
+	private float _precision, _cruceProb, _mutacionProb;
+	private String _metodoSeleccion;
+	private boolean _elitismo;
+	private String _problema;
+	private int _n;
+	private Random _rand;
+	private int _participantes;
+	private long _semilla;
+	private final int _numElites;
+	private Cromosoma[] _elites;
 
 	//Valores problema concreto
-	protected float _mejorValor;
-	protected Cromosoma _mejorIndividuo;
+	private float _mejorValor;
+	private Cromosoma _mejorIndividuo;
 	
-	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, String problema, int simulaciones, long semilla, int n, int participantes) 
+	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, boolean elitismo, String problema, int simulaciones, long semilla, int n, int participantes) 
 	{
 		//Seteo de los atributos necesarios
 		_poblacionTamano = poblacion;
@@ -34,6 +41,12 @@ public class Algoritmo {
 		_n = n;
 		_participantes = participantes;
 		_semilla =semilla;
+		_elitismo = elitismo;
+		_numElites = (int) (_poblacionTamano * 0.02); //2% de elites
+		if(_elitismo)
+		{
+			_elites = new Cromosoma[_numElites];
+		}
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
 		if (semilla !=0){
@@ -79,11 +92,21 @@ public class Algoritmo {
 			
 			//Mutamos
 			mutar();
+			
+			if(_elitismo)
+			{
+				introducirElites();
+			}
 		}
 		
 		return _mejorIndividuo.toString();
 	}
 	
+	private void introducirElites()
+	{
+				
+	}
+
 	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
 	{
 		//En caso de que sea un problema de maximización.
@@ -158,6 +181,53 @@ public class Algoritmo {
 	
 	private void seleccionar(float[] aptitudes, float[] puntuacionesAcum)
 	{
+		if(_elitismo)
+		{			
+			Comparator<javafx.util.Pair<Float, Integer>> comparador;
+			if(_mejorIndividuo.isMaximizing())
+			{
+				comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
+				{
+	
+					@Override
+					public int compare(Pair<Float, Integer> o1,
+							Pair<Float, Integer> o2) {
+						if(o1.getKey() > o2.getKey()) return -1;
+						if(o1.getKey() == o2.getKey()) return 0;
+						if(o1.getKey() < o2.getKey()) return 1;
+						return 0;
+					}
+				};
+			}
+			else
+			{
+				comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
+						{
+			
+							@Override
+							public int compare(Pair<Float, Integer> o1,
+									Pair<Float, Integer> o2) {
+								if(o1.getKey() < o2.getKey()) return -1;
+								if(o1.getKey() == o2.getKey()) return 0;
+								if(o1.getKey() > o2.getKey()) return 1;
+								return 0;
+							}
+						};	
+			}
+			
+			PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
+			for(int i = 0; i < _poblacionTamano; i++)
+			{
+				aux.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
+			}
+			
+			//Guardamos los elites
+			for(int i = 0; i < _numElites; i++)
+			{
+				_elites[i] = _poblacion[aux.poll().getValue()];
+			}
+		}
+		
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
 		//Construimos el algoritmo de selección elegido
 		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion, _participantes);
