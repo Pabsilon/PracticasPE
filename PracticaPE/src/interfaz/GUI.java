@@ -20,6 +20,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
+import javax.swing.JCheckBox;
 
 public class GUI extends JFrame{
 	
@@ -44,6 +45,8 @@ public class GUI extends JFrame{
 	JButton _botonComenzar;
 	//Plot
 	Plot2DPanel _plot;
+	//CheckBox
+	JCheckBox _elitismo;
 	
 	public GUI(Controller c) {
 		_controlador = c;
@@ -125,7 +128,7 @@ public class GUI extends JFrame{
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
 		_panelSeleccion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		_panelSeleccion.setLayout(new MigLayout("", "[213px]", "[25px][]"));
+		_panelSeleccion.setLayout(new MigLayout("", "[213px]", "[25px][][]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
 		String[] metodosS = {"Ruleta", "Torneo", "Torneo_Probabilistico"};
@@ -248,6 +251,9 @@ public class GUI extends JFrame{
 			
 		});
 		_panelSeleccion.add(_comboBoxSeleccion, "cell 0 1,alignx left,aligny top");
+		
+		_elitismo = new JCheckBox("Elitismo");
+		_panelSeleccion.add(_elitismo, "cell 0 2");
 		_textFieldSemilla = new JTextField("0");
 		_textFieldSemilla.setPreferredSize(new Dimension(100,25));
 		_panelSemilla.add(_textFieldSemilla, "cell 1 0,alignx left,aligny top");
@@ -271,7 +277,7 @@ public class GUI extends JFrame{
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldPoblacion.getText(), _textFieldIteraciones.getText(), _textFieldSemilla.getText(), _textFieldN.getText(), _textFieldParticipantes.getText());
+				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), _elitismo.isSelected(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldPoblacion.getText(), _textFieldIteraciones.getText(), _textFieldSemilla.getText(), _textFieldN.getText(), _textFieldParticipantes.getText());
 			}
 		});
 		

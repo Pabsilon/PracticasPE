@@ -10,12 +10,12 @@ public class Controller {
 		g = new GUI(this);
 	}
 	
-	void comenzarSimulacion(String precision, String cruce, String mutacion, String metodoSelec, String problema, String numPoblacion, String numGeneraciones, String semilla, String n, String participantes)
+	void comenzarSimulacion(String precision, String cruce, String mutacion, String metodoSelec, Boolean elitismo, String problema, String numPoblacion, String numGeneraciones, String semilla, String n, String participantes)
 	{
 		//Parseo y construccion del nuevo algoritmo.
 		
 		long timeAgo = System.currentTimeMillis();
-		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, problema, Integer.parseInt(numGeneraciones), Long.parseLong(semilla), Integer.parseInt(n), Integer.parseInt(participantes));
+		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, elitismo, problema, Integer.parseInt(numGeneraciones), Long.parseLong(semilla), Integer.parseInt(n), Integer.parseInt(participantes));
 		
 		double[] mejorAbsoluto = new double[Integer.parseInt(numGeneraciones)];
 		double[] mejorGeneracion = new double[Integer.parseInt(numGeneraciones)];
