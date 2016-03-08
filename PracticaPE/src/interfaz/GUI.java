@@ -22,11 +22,13 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
+/**GUI del problema. Generada con ayuda de código externo, es prácticamente ilegible.
+ * Fly, you fools!
+ * @author pabs
+ *
+ */
 public class GUI extends JFrame{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private Controller _controlador;
@@ -54,6 +56,10 @@ public class GUI extends JFrame{
 		inicializarGUI();
 	}
 	
+	/**
+	 * Inicialización de la gui.
+	 */
+	//HERE BE DRAGONS. ABANDON ALL HOPE YE WHO ENTERS THIS PLACE
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void inicializarGUI()
 	{
@@ -224,17 +230,15 @@ public class GUI extends JFrame{
 					.addGap(105))
 		);
 		_panelMuestraSemilla.setLayout(new MigLayout("", "[213px]", "[25px][25px]"));
-		
 		JLabel lblUltimaSemilla = new JLabel("Ultima Semilla Utilizada:");
 		_panelMuestraSemilla.add(lblUltimaSemilla, "cell 0 0,alignx left,aligny top");
-		
 		_lastSeed = new JTextField("");
+		_lastSeed.setEditable(false);
 		_lastSeed.setPreferredSize(new Dimension(213, 25));
 		_panelMuestraSemilla.add(_lastSeed, "cell 0 1,alignx left,aligny top");
 		_comboBoxSeleccion = new JComboBox(metodosS);
 		_comboBoxSeleccion.setPreferredSize(new Dimension(215,25));
 		_comboBoxSeleccion.addActionListener(new ActionListener(){
-
 			public void actionPerformed(ActionEvent arg0) {
 				String s = (String)_comboBoxSeleccion.getSelectedItem();
 				if (s=="Torneo" || s == "Torneo_Probabilistico"){
@@ -251,7 +255,6 @@ public class GUI extends JFrame{
 			
 		});
 		_panelSeleccion.add(_comboBoxSeleccion, "cell 0 1,alignx left,aligny top");
-		
 		_elitismo = new JCheckBox("Elitismo");
 		_panelSeleccion.add(_elitismo, "cell 0 2");
 		_textFieldSemilla = new JTextField("0");
@@ -275,13 +278,12 @@ public class GUI extends JFrame{
 		_panelOpciones.setLayout(gl__panelOpciones);
 		_botonComenzar.addActionListener(new ActionListener()
 		{
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), _elitismo.isSelected(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldPoblacion.getText(), _textFieldIteraciones.getText(), _textFieldSemilla.getText(), _textFieldN.getText(), _textFieldParticipantes.getText());
 			}
 		});
 		
-		//Gr�fica
+		//Grafica
 		_plot = new Plot2DPanel();
 		_panelGrafica.add(_plot, BorderLayout.CENTER);
 		
@@ -300,14 +302,27 @@ public class GUI extends JFrame{
 		this.setVisible(true);		
 	}
 
+	/**Setter de la semilla utilizada
+	 * @param semilla La semilla.
+	 */
 	public void setSeed(long semilla){
 		_lastSeed.setText(Long.toString(semilla));
 	}
 	
+	/**Setter del tiempo tardado
+	 * @param time Tiempo tardado.
+	 */
 	public void setTime(float time){
 		_time.setText(Float.toString(time) + " s");
 	}
 	
+	/**Método que rellena la gráfica con la información generada.
+	 * @param mejorAbsoluto El array del mejor absoluto por generación.
+	 * @param mejorGeneracion El array de los mejores de cada generación.
+	 * @param mediaGeneracion El array de medias de cada generación.
+	 * @param numGeneraciones El número de generaciones.
+	 * @param resultado El resultado obtenido.
+	 */
 	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int numGeneraciones, String resultado)
 	{
 		_plot.removeAllPlots();

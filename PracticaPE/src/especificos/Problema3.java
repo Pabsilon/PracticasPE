@@ -4,6 +4,10 @@ import java.util.Random;
 
 import implementacion.*;
 
+/**f(x,y) = 21.5 + x*sen(4π*x) + y*sen(20π*y)
+ * @author pabs
+ *
+ */
 public class Problema3 extends Cromosoma{
 
 	private final float _xmin = -3.0f;

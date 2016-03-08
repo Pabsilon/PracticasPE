@@ -4,6 +4,10 @@ import java.util.Random;
 
 import implementacion.*;
 
+/**f(x,y) = (2186-(x²+y-11)² -(x+y²-7)²)/2186	
+ * @author pabs
+ *
+ */
 public class Problema2 extends Cromosoma{
 	
 	private final float _xmin = -6;

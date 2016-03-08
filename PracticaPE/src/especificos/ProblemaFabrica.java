@@ -11,6 +11,13 @@ import implementacion.Cromosoma;
  */
 public class ProblemaFabrica 
 {
+	/** Devuelve un cromosoma del problema pedido.
+	 * @param algoritmo String que contiene el problema (Problema1..5)
+	 * @param precision Precisón con la que vamos a buscar en el problema.
+	 * @param n Un entero para el número de parámetros del problema 4.
+	 * @param rand El objeto random que estamos utilizando.
+	 * @return un Cromosoma inicializado.
+	 */
 	public static Cromosoma getCromosomaProblema(String algoritmo, float precision, int n, Random rand)
 	{
 		//Devuelve el algoritmo solicitado

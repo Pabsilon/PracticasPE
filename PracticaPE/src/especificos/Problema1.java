@@ -3,6 +3,10 @@ import java.util.Random;
 
 import implementacion.*;
 
+/**f(x) = -|x*sin(sqrt(|x|)|;
+ * @author pabs
+ *
+ */
 public class Problema1 extends Cromosoma{
 	
 	private final float _xmin = -250;

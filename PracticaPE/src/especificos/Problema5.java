@@ -3,6 +3,10 @@ import java.util.Random;
 
 import implementacion.*;
 
+/**f(xi, i=1..2) = (((Sum from i =1 to 5)i*cos((i+1)*x1+i)))*((Sum from i = 1 to 5)i*cos((i+1)*x2+i))
+ * @author pabs
+ *
+ */
 public class Problema5 extends Cromosoma{
 
 	//x1 y x2 son tratados como x e y

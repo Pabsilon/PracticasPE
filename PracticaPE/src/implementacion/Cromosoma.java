@@ -2,7 +2,11 @@ package implementacion;
 
 import java.util.Random;
 
-public abstract class Cromosoma { //Clase que implementa al individuo
+/**Clase que implementa a cada individuo.
+ * @author pabs
+ *
+ */
+public abstract class Cromosoma {
 
 	protected Gen[] _genes;
 	protected int _longitud[];

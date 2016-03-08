@@ -2,15 +2,21 @@ package implementacion;
 
 import java.util.Random;
 
+/**Algoritmo de selección del Torneo.
+ * @author pabs
+ *
+ */
 public class Seleccion_Torneo implements AlgoritmoSeleccion {
 	
 	private int _participantes;
 	
+	/**Setter del número de participantes.
+	 * @param n El número de participantes.
+	 */
 	public Seleccion_Torneo(int n){
 		_participantes = n;
 	}
 
-	@Override
 	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean maximizacion, Random rand)
 	{
 		//Coger tres elementos al hazar

@@ -1,6 +1,5 @@
 package implementacion;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -27,9 +26,23 @@ public class Algoritmo {
 	private float _mejorValor;
 	private Cromosoma _mejorIndividuo;
 	
+	/**Builder de algoritmo.
+	 * Necesita como parametros una población y precisión, un pocentaje de cruce, un porcentaje de mutacion, un método de seleción, saber si hay elitismo, el problema a resolver, cuantas generaciones, una semilla, un numero entero (ciertos problemas) y el numero de participantes del torneo. 
+	 * @param poblacion Número de individuos de la simulación.
+	 * @param precision Precisión con la que se busca el resultado.
+	 * @param cruce Porcentaje de cruce (0..100)
+	 * @param mutacion Porcentaje de mutación (0..100)
+	 * @param metodoSelec Método de selección (ruleta,torneo,torneoProbl)
+	 * @param elitismo True si guardamos la elite, false si no.
+	 * @param problema String con el nombre del problema (Problema1..5)
+	 * @param simulaciones Número de generaciones de la simulación.
+	 * @param semilla El valor al que ha de inicializarse la semilla (0 para random)
+	 * @param n El número de parametros de entrada del problema 4.
+	 * @param participantes El número de participantes en el torneo.
+	 */
 	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, boolean elitismo, String problema, int simulaciones, long semilla, int n, int participantes) 
 	{
-		//Seteo de los atributos necesarios
+		//Inicialización de atributos.
 		_poblacionTamano = poblacion;
 		_precision = precision;
 		_cruceProb = cruce;
@@ -43,8 +56,8 @@ public class Algoritmo {
 		_semilla =semilla;
 		_elitismo = elitismo;
 		_numElites = (int) (_poblacionTamano * 0.02); //2% de elites
-		if (_numElites == 0){
-			_numElites=1;
+		if (_numElites == 0){ //Si buscamos élite, que al menos haya uno.
+			_numElites=1; 
 		}
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
@@ -66,6 +79,7 @@ public class Algoritmo {
 		//Esto es solo para representar correctamente la grafica.
 		_mejorIndividuo = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
 		
+		//Si hay elitismo, tenemos que inicializar la array en la que guardaremos los élites.
 		if(_elitismo)
 		{
 			_elites = new Cromosoma[_numElites];
@@ -78,6 +92,12 @@ public class Algoritmo {
 		
 	}
 	
+	/** Esta función ejecuta el algoritmo con los parámetros del builder.
+	 * @param mejorAbsoluto Un array donde se contendrá el mejor absoluto hasta la generación.
+	 * @param mejorGeneracion Un array donde se guardará el mejor de cada generación.
+	 * @param mediaGeneracion Un array donde se acumulará la media de cada generación.
+	 * @return Un string con el mejor absoluto encontrado en el espacio de búsqueda.
+	 */
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
 		//Variables para guardar los resultados obtenidos
@@ -103,10 +123,10 @@ public class Algoritmo {
 			//Mutamos
 			mutar();
 			
+			//Si hay elitismo, evaluamos otra vez para obtener los peores y sustituirlos por la elite.
 			if(_elitismo)
 			{
 				evaluar(aptitudes, puntuaciones, puntuacionesAcum, infoGeneracion,_poblacion[0].isMaximizing());
-				//Si hay elitismo, evaluamos otra vez para obtener los peores y sustituirlos por la elite.
 				introducirElites(aptitudes);
 			}
 		}
@@ -114,11 +134,15 @@ public class Algoritmo {
 		return _mejorIndividuo.toString();
 	}
 	
+	/**Este método introduce los valores locales de élites en los valores locales de población, reemplazando la chusma.
+	 * @param aptitudes La aptitud actual de los evaluados.
+	 */
 	private void introducirElites(float[] aptitudes)
 	{
-		//generar chusma
+		//Generamos la chusma
+		////////////////////////////////////////////////////////////////////////
 		Comparator<javafx.util.Pair<Float, Integer>> comparador;
-		if(_mejorIndividuo.isMaximizing())
+		if(_mejorIndividuo.isMaximizing()) //Maximización
 		{
 			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
 			{
@@ -133,7 +157,7 @@ public class Algoritmo {
 				}
 			};
 		}
-		else
+		else //Minimización
 		{
 			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
 					{
@@ -148,25 +172,28 @@ public class Algoritmo {
 						}
 					};	
 		}
-		
 		PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
 		for(int i = 0; i < _poblacionTamano; i++)
 		{
 			aux.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
 		}
 		
+		//////////////////////////////////////////////////////////////////////////
 		
 		//Cambiamos chusma por la elite
-		/*for(int i = 0; i < _numElites; i++)
+		for(int i = 0; i < _numElites; i++)
 		{
 			_poblacion[aux.poll().getValue()].copiarCromosoma(_elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
-		}*/
-		int a1 = aux.poll().getValue();
-		int a2 = aux.poll().getValue();
-		_poblacion[a1].copiarCromosoma(_elites[0]);
-		_poblacion[a2].copiarCromosoma(_elites[1]);
+		}
 	}
 
+	/**Método que evalua la población actual.
+	 * @param aptitudes Array de aptitudes de la poblacíon en la generación actual.
+	 * @param puntuaciones Array de puntuaciones de la poblacíon en la generación actual.
+	 * @param puntuacionesAcum Array de puntuaciones acumuladas de la poblacíon en la generación actual.
+	 * @param infoGeneracion Array[2] que contiene en 0 la mejor puntuación y en 1 la media.
+	 * @param maximizacion Booleano para saber si es un problema de maximización (true) o no (false)
+	 */
 	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
 	{
 		//En caso de que sea un problema de maximización.
@@ -239,8 +266,13 @@ public class Algoritmo {
 		infoGeneracion[1] = sumaAptitudes / _poblacionTamano;
 	}
 	
+	/**Método que decide qué cromosomas se cruzan, en función del algoritmo de selección.
+	 * @param aptitudes Array de aptitudes de la poblacíon en la generación actual.
+	 * @param puntuacionesAcum Array de la puntuación acumulada de la poblacíon en la generación actual.
+	 */
 	private void seleccionar(float[] aptitudes, float[] puntuacionesAcum)
 	{
+		//Si hemos seleccionado la opción de elitismo buscamos la élite.
 		if(_elitismo)
 		{			
 			Comparator<javafx.util.Pair<Float, Integer>> comparador;
@@ -302,6 +334,9 @@ public class Algoritmo {
 		
 	}
 	
+	/** Mëtodo que cruza la población.
+	 * 
+	 */
 	private void cruzar()
 	{
 		int numeroSeleccionados = 0;
@@ -335,15 +370,20 @@ public class Algoritmo {
 		}
 	}
 	
+	/**Método que muta a la población.
+	 * 
+	 */
 	private void mutar()
 	{
-		//Probamos la mutación.
 		for(int i = 0; i < _poblacionTamano; i++)
 		{
 				_poblacion[i].mutar(_mutacionProb, _rand);
 		}
 	}
 	
+	/**Getter de la semilla random utilizada.
+	 * @return el valor de la semilla.
+	 */
 	public long getSemilla(){
 		return _semilla;
 	}

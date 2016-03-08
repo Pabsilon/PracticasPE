@@ -3,6 +3,10 @@ import java.util.Random;
 
 import implementacion.*;
 
+/**f(xi|i=1..n) = -Sum (from i=1 to n) sen(xi) * sen^20((i+1)*xi^2)/PI)
+ * @author pabs
+ *
+ */
 public class Problema4 extends Cromosoma{
 
 	private float _xmax = (float) Math.PI;

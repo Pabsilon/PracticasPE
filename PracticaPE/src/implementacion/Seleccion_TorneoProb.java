@@ -2,16 +2,22 @@ package implementacion;
 
 import java.util.Random;
 
+/**Algoritmo de selección del Torneo Probabilistico.
+ * @author pabs
+ *
+ */
 public class Seleccion_TorneoProb implements AlgoritmoSeleccion{
 
 	private int _participantes;
 	private static final float _probabilidadMejor = 0.7f; //0 - 1 Probabilidad de que el mejor sea elegido (sino, el pero sera elegido)
 	
+	/**Setter del número de participantes.
+	 * @param n el número de participantes.
+	 */
 	public Seleccion_TorneoProb(int n){
 		_participantes = n;
 	}
 
-	@Override
 	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean maximizacion, Random rand)
 	{
 		//Coger tres elementos al hazar

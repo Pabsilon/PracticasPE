@@ -2,10 +2,12 @@ package implementacion;
 
 import java.util.Random;
 
-//Algoritmo de seleccion: Ruleta
+/**Algoritmo de Selección de la Ruleta
+ * @author pabs
+ *
+ */
 public class Seleccion_Ruleta implements AlgoritmoSeleccion {
 
-	@Override
 	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean minimizacion, Random rand)
 	{
 		for(int i = 0; i < tamPoblacion; i++)
