@@ -1,5 +1,6 @@
 package implementacion;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -156,10 +157,14 @@ public class Algoritmo {
 		
 		
 		//Cambiamos chusma por la elite
-		for(int i = 0; i < _numElites; i++)
+		/*for(int i = 0; i < _numElites; i++)
 		{
 			_poblacion[aux.poll().getValue()].copiarCromosoma(_elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
-		}		
+		}*/
+		int a1 = aux.poll().getValue();
+		int a2 = aux.poll().getValue();
+		_poblacion[a1].copiarCromosoma(_elites[0]);
+		_poblacion[a2].copiarCromosoma(_elites[1]);
 	}
 
 	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
@@ -284,6 +289,10 @@ public class Algoritmo {
 		}
 		
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
+		for(int i = 0; i < _poblacionTamano; i++)
+		{
+			seleccionados[i] = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n, _rand);
+		}
 		//Construimos el algoritmo de selección elegido
 		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion, _participantes);
 		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, _mejorIndividuo.isMaximizing(), _rand);

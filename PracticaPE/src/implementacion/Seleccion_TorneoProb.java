@@ -48,11 +48,11 @@ public class Seleccion_TorneoProb implements AlgoritmoSeleccion{
 				//Elegir el correspondiente dependiendo del resultado de la probabilidad.
 				if(elegirMejor)
 				{
-					seleccionados[i] = poblacion[min];
+					seleccionados[i].copiarCromosoma(poblacion[min]);
 				}
 				else
 				{
-					seleccionados[i] = poblacion[max]; //Elegir el peor
+					seleccionados[i].copiarCromosoma(poblacion[max]); //Elegir el peor
 				}
 			}
 			else
@@ -78,11 +78,11 @@ public class Seleccion_TorneoProb implements AlgoritmoSeleccion{
 				//Elegir el correspondiente dependiendo del resultado de la probabilidad.
 				if(elegirMejor)
 				{
-					seleccionados[i] = poblacion[max];
+					seleccionados[i].copiarCromosoma(poblacion[max]);
 				}
 				else
 				{
-					seleccionados[i] = poblacion[min]; //Elegir el peor
+					seleccionados[i].copiarCromosoma(poblacion[min]); //Elegir el peor
 				}
 			}
 		}

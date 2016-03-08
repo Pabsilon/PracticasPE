@@ -37,7 +37,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 					}
 				}
 				
-				seleccionados[i] = poblacion[min];
+				seleccionados[i].copiarCromosoma(poblacion[min]);
 			}
 			else
 			{
@@ -52,7 +52,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 					}
 				}
 				
-				seleccionados[i] = poblacion[max];
+				seleccionados[i].copiarCromosoma(poblacion[max]);
 			}
 		}
 
