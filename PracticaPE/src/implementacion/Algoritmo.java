@@ -45,10 +45,6 @@ public class Algoritmo {
 		if (_numElites == 0){
 			_numElites=1;
 		}
-		if(_elitismo)
-		{
-			_elites = new Cromosoma[_numElites];
-		}
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
 		if (semilla !=0){
@@ -68,6 +64,17 @@ public class Algoritmo {
 		//El mejor individuo de la primera generación lo elegimos aleatoriamente
 		//Esto es solo para representar correctamente la grafica.
 		_mejorIndividuo = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
+		
+		if(_elitismo)
+		{
+			_elites = new Cromosoma[_numElites];
+			
+			for(int i = 0; i < _numElites; i++)
+			{
+				_elites[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
+			}
+		}
+		
 	}
 	
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
@@ -151,7 +158,7 @@ public class Algoritmo {
 		//Cambiamos chusma por la elite
 		for(int i = 0; i < _numElites; i++)
 		{
-			_poblacion[aux.poll().getValue()] = _elites[i]; //aux.poll().getValue()  <- posicion de los peores valores (chusma)
+			_poblacion[aux.poll().getValue()].copiarCromosoma(_elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
 		}		
 	}
 
@@ -272,7 +279,7 @@ public class Algoritmo {
 			//Guardamos los elites
 			for(int i = 0; i < _numElites; i++)
 			{
-				_elites[i] = _poblacion[aux.poll().getValue()];
+				_elites[i].copiarCromosoma(_poblacion[aux.poll().getValue()]);
 			}
 		}
 		
