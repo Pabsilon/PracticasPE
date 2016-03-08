@@ -1,6 +1,5 @@
 package implementacion;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -20,8 +19,9 @@ public class Algoritmo {
 	private Random _rand;
 	private int _participantes;
 	private long _semilla;
-	private final int _numElites;
+	private int _numElites;
 	private Cromosoma[] _elites;
+	private Cromosoma[] _chusma;
 
 	//Valores problema concreto
 	private float _mejorValor;
@@ -43,9 +43,13 @@ public class Algoritmo {
 		_semilla =semilla;
 		_elitismo = elitismo;
 		_numElites = (int) (_poblacionTamano * 0.02); //2% de elites
+		if (_numElites == 0){
+			_numElites=1;
+		}
 		if(_elitismo)
 		{
 			_elites = new Cromosoma[_numElites];
+			_chusma = new Cromosoma[_numElites];
 		}
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
@@ -95,16 +99,60 @@ public class Algoritmo {
 			
 			if(_elitismo)
 			{
-				introducirElites();
+				introducirElites(aptitudes);
 			}
 		}
 		
 		return _mejorIndividuo.toString();
 	}
 	
-	private void introducirElites()
+	private void introducirElites(float[] aptitudes)
 	{
-				
+		//generar chusma
+		Comparator<javafx.util.Pair<Float, Integer>> comparador;
+		if(_mejorIndividuo.isMaximizing())
+		{
+			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
+			{
+
+				@Override
+				public int compare(Pair<Float, Integer> o1,
+						Pair<Float, Integer> o2) {
+					if(o1.getKey() < o2.getKey()) return -1;
+					if(o1.getKey() == o2.getKey()) return 0;
+					if(o1.getKey() > o2.getKey()) return 1;
+					return 0;
+				}
+			};
+		}
+		else
+		{
+			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
+					{
+		
+						@Override
+						public int compare(Pair<Float, Integer> o1,
+								Pair<Float, Integer> o2) {
+							if(o1.getKey() > o2.getKey()) return -1;
+							if(o1.getKey() == o2.getKey()) return 0;
+							if(o1.getKey() < o2.getKey()) return 1;
+							return 0;
+						}
+					};	
+		}
+		
+		PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
+		for(int i = 0; i < _poblacionTamano; i++)
+		{
+			aux.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
+		}
+		
+		//Guardamos la chusma
+		for(int i = 0; i < _numElites; i++)
+		{
+			_chusma[i] = _poblacion[aux.poll().getValue()];
+		}
+				//reemplazar chusma por elite.
 	}
 
 	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
