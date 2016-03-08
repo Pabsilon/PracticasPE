@@ -1,5 +1,6 @@
 package implementacion;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -45,10 +46,6 @@ public class Algoritmo {
 		if (_numElites == 0){
 			_numElites=1;
 		}
-		if(_elitismo)
-		{
-			_elites = new Cromosoma[_numElites];
-		}
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
 		if (semilla !=0){
@@ -68,6 +65,17 @@ public class Algoritmo {
 		//El mejor individuo de la primera generación lo elegimos aleatoriamente
 		//Esto es solo para representar correctamente la grafica.
 		_mejorIndividuo = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
+		
+		if(_elitismo)
+		{
+			_elites = new Cromosoma[_numElites];
+			
+			for(int i = 0; i < _numElites; i++)
+			{
+				_elites[i] = ProblemaFabrica.getCromosomaProblema(problema, precision, n, _rand);
+			}
+		}
+		
 	}
 	
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
@@ -149,10 +157,14 @@ public class Algoritmo {
 		
 		
 		//Cambiamos chusma por la elite
-		for(int i = 0; i < _numElites; i++)
+		/*for(int i = 0; i < _numElites; i++)
 		{
-			_poblacion[aux.poll().getValue()] = _elites[i]; //aux.poll().getValue()  <- posicion de los peores valores (chusma)
-		}		
+			_poblacion[aux.poll().getValue()].copiarCromosoma(_elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
+		}*/
+		int a1 = aux.poll().getValue();
+		int a2 = aux.poll().getValue();
+		_poblacion[a1].copiarCromosoma(_elites[0]);
+		_poblacion[a2].copiarCromosoma(_elites[1]);
 	}
 
 	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
@@ -272,11 +284,15 @@ public class Algoritmo {
 			//Guardamos los elites
 			for(int i = 0; i < _numElites; i++)
 			{
-				_elites[i] = _poblacion[aux.poll().getValue()];
+				_elites[i].copiarCromosoma(_poblacion[aux.poll().getValue()]);
 			}
 		}
 		
 		Cromosoma[] seleccionados = new Cromosoma[_poblacionTamano];
+		for(int i = 0; i < _poblacionTamano; i++)
+		{
+			seleccionados[i] = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n, _rand);
+		}
 		//Construimos el algoritmo de selección elegido
 		AlgoritmoSeleccion ASeleccion = AlgoritmoSeleccionFabrica.getAlgoritmoDeSeleccion(_metodoSeleccion, _participantes);
 		ASeleccion.seleccionar(aptitudes, puntuacionesAcum, seleccionados, _poblacionTamano, _poblacion, _mejorIndividuo.isMaximizing(), _rand);

@@ -18,7 +18,8 @@ public class Seleccion_Ruleta implements AlgoritmoSeleccion {
 			{
 				seleccionado++;
 			}
-			seleccionados[i] = poblacion[seleccionado];
+			
+			seleccionados[i].copiarCromosoma(poblacion[seleccionado]);
 		}
 	}
 
