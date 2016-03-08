@@ -21,7 +21,6 @@ public class Algoritmo {
 	private long _semilla;
 	private int _numElites;
 	private Cromosoma[] _elites;
-	private Cromosoma[] _chusma;
 
 	//Valores problema concreto
 	private float _mejorValor;
@@ -49,7 +48,6 @@ public class Algoritmo {
 		if(_elitismo)
 		{
 			_elites = new Cromosoma[_numElites];
-			_chusma = new Cromosoma[_numElites];
 		}
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
@@ -99,6 +97,8 @@ public class Algoritmo {
 			
 			if(_elitismo)
 			{
+				evaluar(aptitudes, puntuaciones, puntuacionesAcum, infoGeneracion,_poblacion[0].isMaximizing());
+				//Si hay elitismo, evaluamos otra vez para obtener los peores y sustituirlos por la elite.
 				introducirElites(aptitudes);
 			}
 		}
@@ -147,12 +147,12 @@ public class Algoritmo {
 			aux.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
 		}
 		
-		//Guardamos la chusma
+		
+		//Cambiamos chusma por la elite
 		for(int i = 0; i < _numElites; i++)
 		{
-			_chusma[i] = _poblacion[aux.poll().getValue()];
-		}
-				//reemplazar chusma por elite.
+			_poblacion[aux.poll().getValue()] = _elites[i]; //aux.poll().getValue()  <- posicion de los peores valores (chusma)
+		}		
 	}
 
 	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
@@ -256,9 +256,9 @@ public class Algoritmo {
 							public int compare(Pair<Float, Integer> o1,
 									Pair<Float, Integer> o2) {
 								if(o1.getKey() < o2.getKey()) return -1;
-								if(o1.getKey() == o2.getKey()) return 0;
-								if(o1.getKey() > o2.getKey()) return 1;
-								return 0;
+								else if(o1.getKey() == o2.getKey()) return 0;
+								else if(o1.getKey() > o2.getKey()) return 1;
+								else return 0;
 							}
 						};	
 			}
