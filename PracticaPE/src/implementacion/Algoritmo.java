@@ -184,7 +184,7 @@ public class Algoritmo {
 		float sumaAptitudesDesplazadas = 0, sumaAptitudes = 0;
 		float mejorAptitudEnGeneracion;
 		if (maximizacion){
-			mejorAptitudEnGeneracion = -Float.MIN_VALUE;
+			mejorAptitudEnGeneracion = Integer.MIN_VALUE;
 			int mejorCromGeneracion = 0;
 			float menorAptitud = Integer.MAX_VALUE;
 			

@@ -32,7 +32,7 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 				elegidosIndice[j] = randIndex;
 			}
 			
-			float maxVal = Float.MIN_VALUE;
+			float maxVal = Integer.MIN_VALUE;
 			int max = 0;
 			for(int j = 0; j < _participantes; j++)
 			{

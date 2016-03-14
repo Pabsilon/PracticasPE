@@ -36,7 +36,7 @@ public class Seleccion_TorneoProb implements AlgoritmoSeleccion{
 			
 			boolean elegirMejor = rand.nextFloat() < _probabilidadMejor; //True si se elegie al mejor de la eleccion
 			//Seleccionar el mejor y el peor
-			float maxVal = Float.MIN_VALUE;
+			float maxVal = Integer.MIN_VALUE;
 			float minVal = Float.MAX_VALUE;
 			int max = 0, min = 1;
 			for(int j = 0; j < _participantes; j++)
