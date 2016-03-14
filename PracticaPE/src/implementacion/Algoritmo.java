@@ -102,6 +102,7 @@ public class Algoritmo {
 	{
 		//Variables para guardar los resultados obtenidos
 		float[] aptitudes = new float[_poblacionTamano];
+		float[] aptitudesDesplazadas = new float[_poblacionTamano];
 		float[] puntuaciones = new float[_poblacionTamano];
 		float[] puntuacionesAcum = new float[_poblacionTamano];
 		
@@ -109,13 +110,13 @@ public class Algoritmo {
 		{
 			//Se evaluan todos los valores de la poblaci贸n
 			double[] infoGeneracion = new double[2]; //0 Mejor de la generacion, 1 Media de la generacion
-			evaluar(aptitudes, puntuaciones, puntuacionesAcum, infoGeneracion,_poblacion[0].isMaximizing());
+			evaluar(aptitudes, aptitudesDesplazadas, puntuaciones, puntuacionesAcum, infoGeneracion,_poblacion[0].isMaximizing());
 			mejorAbsoluto[i] = _mejorValor;
 			mejorGeneracion[i] = infoGeneracion[0];
 			mediaGeneracion[i] = infoGeneracion[1];
 			
 			//Seleccionamos para el cruce
-			seleccionar(aptitudes, puntuacionesAcum);
+			seleccionar(aptitudesDesplazadas, puntuacionesAcum);
 			
 			//Cruzamos
 			cruzar();
@@ -126,8 +127,8 @@ public class Algoritmo {
 			//Si hay elitismo, evaluamos otra vez para obtener los peores y sustituirlos por la elite.
 			if(_elitismo)
 			{
-				evaluar(aptitudes, puntuaciones, puntuacionesAcum, infoGeneracion,_poblacion[0].isMaximizing());
-				introducirElites(aptitudes);
+				evaluar(aptitudes, aptitudesDesplazadas, puntuaciones, puntuacionesAcum, infoGeneracion,_poblacion[0].isMaximizing());
+				introducirElites(aptitudesDesplazadas);
 			}
 		}
 		
@@ -142,36 +143,19 @@ public class Algoritmo {
 		//Generamos la chusma
 		////////////////////////////////////////////////////////////////////////
 		Comparator<javafx.util.Pair<Float, Integer>> comparador;
-		if(_mejorIndividuo.isMaximizing()) //Maximizaci贸n
+		comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
 		{
-			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
-			{
 
-				@Override
-				public int compare(Pair<Float, Integer> o1,
-						Pair<Float, Integer> o2) {
-					if(o1.getKey() < o2.getKey()) return -1;
-					if(o1.getKey() == o2.getKey()) return 0;
-					if(o1.getKey() > o2.getKey()) return 1;
-					return 0;
-				}
-			};
-		}
-		else //Minimizaci贸n
-		{
-			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
-					{
+			@Override
+			public int compare(Pair<Float, Integer> o1,
+					Pair<Float, Integer> o2) {
+				if(o1.getKey() < o2.getKey()) return -1;
+				if(o1.getKey() == o2.getKey()) return 0;
+				if(o1.getKey() > o2.getKey()) return 1;
+				return 0;
+			}
+		};
 		
-						@Override
-						public int compare(Pair<Float, Integer> o1,
-								Pair<Float, Integer> o2) {
-							if(o1.getKey() > o2.getKey()) return -1;
-							if(o1.getKey() == o2.getKey()) return 0;
-							if(o1.getKey() < o2.getKey()) return 1;
-							return 0;
-						}
-					};	
-		}
 		PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
 		for(int i = 0; i < _poblacionTamano; i++)
 		{
@@ -194,14 +178,15 @@ public class Algoritmo {
 	 * @param infoGeneracion Array[2] que contiene en 0 la mejor puntuaci贸n y en 1 la media.
 	 * @param maximizacion Booleano para saber si es un problema de maximizaci贸n (true) o no (false)
 	 */
-	private void evaluar(float[] aptitudes, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
+	private void evaluar(float[] aptitudes, float[] aptitudesDesplazadas, float[] puntuaciones, float[] puntuacionesAcum, double[] infoGeneracion, boolean maximizacion)
 	{
 		//En caso de que sea un problema de maximizaci贸n.
-		float sumaAptitudes = 0;
+		float sumaAptitudesDesplazadas = 0, sumaAptitudes = 0;
 		float mejorAptitudEnGeneracion;
 		if (maximizacion){
-			mejorAptitudEnGeneracion = Float.MIN_VALUE;
+			mejorAptitudEnGeneracion = -Float.MIN_VALUE;
 			int mejorCromGeneracion = 0;
+			float menorAptitud = Integer.MAX_VALUE;
 			
 			//Calculamos las aptitudes y su suma total
 			for(int i = 0; i < _poblacionTamano; i++)
@@ -215,6 +200,12 @@ public class Algoritmo {
 					mejorAptitudEnGeneracion = aptitudes[i];
 					mejorCromGeneracion = i;
 				}
+				
+				//Guardar valor m醩 peque駉
+				if(aptitudes[i] < menorAptitud)
+				{
+					menorAptitud = aptitudes[i];
+				}
 			}
 			//Actualizamos el mejor global
 			if(mejorAptitudEnGeneracion > _mejorValor)
@@ -223,10 +214,14 @@ public class Algoritmo {
 				
 				_mejorIndividuo.copiarCromosoma(_poblacion[mejorCromGeneracion]);
 			}
+		
+			desplazarAptitudes(aptitudes, aptitudesDesplazadas, menorAptitud, maximizacion);
+			
 		}else{
 			//Si es un problema de minimizaci贸n
 			mejorAptitudEnGeneracion = Float.MAX_VALUE;
 			int mejorCromGeneracion = 0;
+			float mayorAptitud = Integer.MIN_VALUE;
 			
 			//Calculamos las aptitudes y su suma total
 			for(int i = 0; i < _poblacionTamano; i++)
@@ -240,6 +235,12 @@ public class Algoritmo {
 					mejorAptitudEnGeneracion = aptitudes[i];
 					mejorCromGeneracion = i;
 				}
+				
+				//Guardar el valor m醩 grande
+				if(aptitudes[i] > mayorAptitud)
+				{
+					mayorAptitud = aptitudes[i];
+				}
 			}
 			
 			//Actualizamos el mejor global
@@ -249,14 +250,21 @@ public class Algoritmo {
 				
 				_mejorIndividuo.copiarCromosoma(_poblacion[mejorCromGeneracion]);
 			}
+			
+			desplazarAptitudes(aptitudes, aptitudesDesplazadas, mayorAptitud, maximizacion);
+		}
+		
+		for(int i = 0; i < _poblacionTamano; i++)
+		{
+			sumaAptitudesDesplazadas += aptitudesDesplazadas[i];
 		}
 		
 		//Calculamos las puntuaciones para la fase de seleccion
-		puntuaciones[0] = aptitudes[0] / sumaAptitudes;
+		puntuaciones[0] = aptitudesDesplazadas[0] / sumaAptitudesDesplazadas;
 		puntuacionesAcum[0] = puntuaciones[0];
 		for(int i = 1; i < _poblacionTamano; i++)
 		{
-			puntuaciones[i] = aptitudes[i] / sumaAptitudes;
+			puntuaciones[i] = aptitudesDesplazadas[i] / sumaAptitudesDesplazadas;
 			puntuacionesAcum[i] = puntuaciones[i] + puntuacionesAcum[i - 1];
 		}
 		puntuacionesAcum[_poblacionTamano - 1] = 1; //Asegurarse que el ultimo valor de las puntuaciones es 1
@@ -264,6 +272,25 @@ public class Algoritmo {
 		//Informacion de la generacion (Mejor y media)
 		infoGeneracion[0] = mejorAptitudEnGeneracion;
 		infoGeneracion[1] = sumaAptitudes / _poblacionTamano;
+	}
+	
+	//Fminmax sera el valor minimo o maximo dependiendo si es de maximizacion o minimizacion
+	private void desplazarAptitudes(float[] aptitudes, float[] aptitudesDesplazadas, float fMinMax, boolean maximizacion)
+	{
+		if(maximizacion)
+		{
+			for(int i = 0; i < aptitudes.length; i++)
+			{
+				aptitudesDesplazadas[i] = aptitudes[i] + fMinMax;
+			}
+		}
+		else
+		{
+			for(int i = 0; i < aptitudes.length; i++)
+			{
+				aptitudesDesplazadas[i] = fMinMax - aptitudes[i];
+			}
+		}
 	}
 	
 	/**M茅todo que decide qu茅 cromosomas se cruzan, en funci贸n del algoritmo de selecci贸n.
@@ -276,36 +303,18 @@ public class Algoritmo {
 		if(_elitismo)
 		{			
 			Comparator<javafx.util.Pair<Float, Integer>> comparador;
-			if(_mejorIndividuo.isMaximizing())
+			comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
 			{
-				comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
-				{
-	
-					@Override
-					public int compare(Pair<Float, Integer> o1,
-							Pair<Float, Integer> o2) {
-						if(o1.getKey() > o2.getKey()) return -1;
-						if(o1.getKey() == o2.getKey()) return 0;
-						if(o1.getKey() < o2.getKey()) return 1;
-						return 0;
-					}
-				};
-			}
-			else
-			{
-				comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
-						{
-			
-							@Override
-							public int compare(Pair<Float, Integer> o1,
-									Pair<Float, Integer> o2) {
-								if(o1.getKey() < o2.getKey()) return -1;
-								else if(o1.getKey() == o2.getKey()) return 0;
-								else if(o1.getKey() > o2.getKey()) return 1;
-								else return 0;
-							}
-						};	
-			}
+
+				@Override
+				public int compare(Pair<Float, Integer> o1,
+						Pair<Float, Integer> o2) {
+					if(o1.getKey() > o2.getKey()) return -1;
+					if(o1.getKey() == o2.getKey()) return 0;
+					if(o1.getKey() < o2.getKey()) return 1;
+					return 0;
+				}
+			};
 			
 			PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
 			for(int i = 0; i < _poblacionTamano; i++)

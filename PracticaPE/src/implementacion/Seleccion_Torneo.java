@@ -20,46 +20,30 @@ public class Seleccion_Torneo implements AlgoritmoSeleccion {
 	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean maximizacion, Random rand)
 	{
 		//Coger tres elementos al hazar
-		float elegidos[] = new float[_participantes];
+		float elegidosValor[] = new float[_participantes];
+		int elegidosIndice[] = new int[_participantes];
 		
 		
 		for(int i = 0; i < tamPoblacion; i++)
 		{			
 			for (int j = 0; j<_participantes; j++){
-				elegidos[j] = aptitudes[rand.nextInt(tamPoblacion)];
+				int randIndex = rand.nextInt(tamPoblacion);
+				elegidosValor[j] = aptitudes[randIndex];
+				elegidosIndice[j] = randIndex;
 			}
 			
-			//Si el problema es de minimizacion, coger el mas peque�o
-			if(!maximizacion)
+			float maxVal = Float.MIN_VALUE;
+			int max = 0;
+			for(int j = 0; j < _participantes; j++)
 			{
-				float minVal = Float.MAX_VALUE;
-				int min = 0;
-				for(int j = 0; j < _participantes; j++)
+				if(elegidosValor[j] > maxVal)
 				{
-					if(elegidos[j] < minVal)
-					{
-						minVal = elegidos[j];
-						min = j;
-					}
+					maxVal = elegidosValor[j];
+					max = j;
 				}
-				
-				seleccionados[i].copiarCromosoma(poblacion[min]);
 			}
-			else
-			{
-				float maxVal = Float.MIN_VALUE;
-				int max = 0;
-				for(int j = 0; j < _participantes; j++)
-				{
-					if(elegidos[j] > maxVal)
-					{
-						maxVal = elegidos[j];
-						max = j;
-					}
-				}
-				
-				seleccionados[i].copiarCromosoma(poblacion[max]);
-			}
+			
+			seleccionados[i].copiarCromosoma(poblacion[elegidosIndice[max]]);
 		}
 
 	}

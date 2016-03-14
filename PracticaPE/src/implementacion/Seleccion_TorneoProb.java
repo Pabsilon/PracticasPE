@@ -21,75 +21,46 @@ public class Seleccion_TorneoProb implements AlgoritmoSeleccion{
 	public void seleccionar(float[] aptitudes, float[] puntuacionesAcumuladas, Cromosoma[] seleccionados, int tamPoblacion, Cromosoma[] poblacion, boolean maximizacion, Random rand)
 	{
 		//Coger tres elementos al hazar
-		float elegidos[] = new float[_participantes];
+		float elegidosValor[] = new float[_participantes];
+		int elegidosIndice[] = new int[_participantes];
+		
 		
 		
 		for(int i = 0; i < tamPoblacion; i++)
 		{			
 			for (int j = 0; j<_participantes; j++){
-				elegidos[j] = aptitudes[rand.nextInt(tamPoblacion)];
+				int randIndex = rand.nextInt(tamPoblacion);
+				elegidosValor[j] = aptitudes[randIndex];
+				elegidosIndice[j] = randIndex;
 			}
 			
 			boolean elegirMejor = rand.nextFloat() < _probabilidadMejor; //True si se elegie al mejor de la eleccion
-			if(!maximizacion) //Minimizacion
+			//Seleccionar el mejor y el peor
+			float maxVal = Float.MIN_VALUE;
+			float minVal = Float.MAX_VALUE;
+			int max = 0, min = 1;
+			for(int j = 0; j < _participantes; j++)
 			{
-				//Seleccionar el mejor y el peor
-				float minVal = Float.MAX_VALUE;
-				float maxVal = Float.MIN_VALUE;
-				int min = 0, max = 1;
-				for(int j = 0; j < _participantes; j++)
+				if(elegidosValor[j] > maxVal)
 				{
-					if(elegidos[j] < minVal)
-					{
-						minVal = elegidos[j];
-						min = j;
-					}
-					else if(elegidos[j] > maxVal)
-					{
-						maxVal = elegidos[j];
-						max = j;
-					}
+					maxVal = elegidosValor[j];
+					max = j;
 				}
-				
-				//Elegir el correspondiente dependiendo del resultado de la probabilidad.
-				if(elegirMejor)
+				else if(elegidosValor[j] < minVal)
 				{
-					seleccionados[i].copiarCromosoma(poblacion[min]);
+					minVal = elegidosValor[j];
+					min = j;
 				}
-				else
-				{
-					seleccionados[i].copiarCromosoma(poblacion[max]); //Elegir el peor
-				}
+			}
+			
+			//Elegir el correspondiente dependiendo del resultado de la probabilidad.
+			if(elegirMejor)
+			{
+				seleccionados[i].copiarCromosoma(poblacion[elegidosIndice[max]]);
 			}
 			else
 			{
-				//Seleccionar el mejor y el peor
-				float maxVal = Float.MIN_VALUE;
-				float minVal = Float.MAX_VALUE;
-				int max = 0, min = 1;
-				for(int j = 0; j < _participantes; j++)
-				{
-					if(elegidos[j] > maxVal)
-					{
-						maxVal = elegidos[j];
-						max = j;
-					}
-					else if(elegidos[j] < minVal)
-					{
-						minVal = elegidos[j];
-						min = j;
-					}
-				}
-				
-				//Elegir el correspondiente dependiendo del resultado de la probabilidad.
-				if(elegirMejor)
-				{
-					seleccionados[i].copiarCromosoma(poblacion[max]);
-				}
-				else
-				{
-					seleccionados[i].copiarCromosoma(poblacion[min]); //Elegir el peor
-				}
+				seleccionados[i].copiarCromosoma(poblacion[elegidosIndice[min]]); //Elegir el peor
 			}
 		}
 
