@@ -1,6 +1,8 @@
 # TODO
   - ~~Arreglar problema 4.~~
   - Añadir la parte opcional
+  - - ~~Implementar problema4Real~~
+  - - Implementar Cromosoma real
   - Mirar _torneo_ (y por lo tanto tambien _torneo prob_) para ver si hay algo mal.
   - ~~Añadir el numero de participantes en torneo.~~
   - ~~Añadir el torneo probablístico~~
