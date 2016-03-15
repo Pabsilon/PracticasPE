@@ -156,10 +156,10 @@ public class Algoritmo {
 			}
 		};
 		
-		PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
+		PriorityQueue<javafx.util.Pair<Float, Integer>> monticuloMinimos = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
 		for(int i = 0; i < _poblacionTamano; i++)
 		{
-			aux.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
+			monticuloMinimos.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
 		}
 		
 		//////////////////////////////////////////////////////////////////////////
@@ -167,7 +167,7 @@ public class Algoritmo {
 		//Cambiamos chusma por la elite
 		for(int i = 0; i < _numElites; i++)
 		{
-			_poblacion[aux.poll().getValue()].copiarCromosoma(_elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
+			_poblacion[monticuloMinimos.poll().getValue()].copiarCromosoma(_elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
 		}
 	}
 
@@ -316,16 +316,16 @@ public class Algoritmo {
 				}
 			};
 			
-			PriorityQueue<javafx.util.Pair<Float, Integer>> aux = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
+			PriorityQueue<javafx.util.Pair<Float, Integer>> monticuloMaximos = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
 			for(int i = 0; i < _poblacionTamano; i++)
 			{
-				aux.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
+				monticuloMaximos.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
 			}
 			
 			//Guardamos los elites
 			for(int i = 0; i < _numElites; i++)
 			{
-				_elites[i].copiarCromosoma(_poblacion[aux.poll().getValue()]);
+				_elites[i].copiarCromosoma(_poblacion[monticuloMaximos.poll().getValue()]);
 			}
 		}
 		
