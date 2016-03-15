@@ -35,7 +35,7 @@ public class Controller {
 		//Parseo y construccion del nuevo algoritmo.
 		
 		long timeAgo = System.currentTimeMillis();
-		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, elitismo, problema, Integer.parseInt(numGeneraciones), Long.parseLong(semilla), Integer.parseInt(n), Integer.parseInt(participantes));
+		Algoritmo ag = new Algoritmo(Integer.parseInt(numPoblacion), Float.parseFloat(precision), Float.parseFloat(cruce) / 100, Float.parseFloat(mutacion) / 100, metodoSelec, elitismo, problema, Integer.parseInt(numGeneraciones), Long.parseLong(semilla), Integer.parseInt(n), Integer.parseInt(participantes), tipoSeleccion);
 		
 		double[] mejorAbsoluto = new double[Integer.parseInt(numGeneraciones)];
 		double[] mejorGeneracion = new double[Integer.parseInt(numGeneraciones)];

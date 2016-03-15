@@ -99,13 +99,27 @@ public abstract class Cromosoma {
 	 * @param hijo2 El segundo hijo generado
 	 * @param rand La función random a utilizar (se pasa por uso de semillas)
 	 */
-	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
+	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand, String tipoCruce)
 	{
 		//Trampa muy oscura, por favor, no juzgar este metodo de programacion. No nos daba tiempo a implementarlo bien.
 		if(padre1 instanceof CromosomaReal)
 		{
 			//Esto es lo realmente chapuza.
-			CromosomaReal.cruzarReal(padre1, padre2, hijo1, hijo2, rand);
+			switch(tipoCruce)
+			{
+			case "DiscretoU":
+				CromosomaReal.cruzarReal_discretoUniforme(padre1, padre2, hijo1, hijo2, rand);
+				break;
+			case "Externo":
+				CromosomaReal.cruzarReal_externo(padre1, padre2, hijo1, hijo2, rand);
+				break;
+			case "Aritmetico":
+				CromosomaReal.cruzarReal_aritmetico(padre1, padre2, hijo1, hijo2, rand);
+				break;
+			case "SBX":
+				CromosomaReal.cruzarReal_SBX(padre1, padre2, hijo1, hijo2, rand);
+				break;
+			}
 		}
 		else
 		{

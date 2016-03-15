@@ -21,6 +21,7 @@ public class Algoritmo {
 	private long _semilla;
 	private int _numElites;
 	private Cromosoma[] _elites;
+	private String _tipoSeleccion; //Parte opcional
 
 	//Valores problema concreto
 	private float _mejorValor;
@@ -40,7 +41,7 @@ public class Algoritmo {
 	 * @param n El número de parametros de entrada del problema 4.
 	 * @param participantes El número de participantes en el torneo.
 	 */
-	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, boolean elitismo, String problema, int simulaciones, long semilla, int n, int participantes) 
+	public Algoritmo(int poblacion, float precision, float cruce, float mutacion, String metodoSelec, boolean elitismo, String problema, int simulaciones, long semilla, int n, int participantes, String tipoSeleccion) 
 	{
 		//Inicialización de atributos.
 		_poblacionTamano = poblacion;
@@ -59,6 +60,7 @@ public class Algoritmo {
 		if (_numElites == 0){ //Si buscamos élite, que al menos haya uno.
 			_numElites=1; 
 		}
+		_tipoSeleccion = tipoSeleccion;
 		
 		//Tratamiento del random. 0 es una semilla random, otros valores son semillas a pincho.
 		if (semilla !=0){
@@ -371,7 +373,7 @@ public class Algoritmo {
 		{
 			Cromosoma hijo1 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n, _rand);
 			Cromosoma hijo2 = ProblemaFabrica.getCromosomaProblema(_problema, _precision, _n, _rand);
-			Cromosoma.cruzar(_poblacion[aCruzar[i]], _poblacion[aCruzar[i + 1]], hijo1, hijo2, _rand);
+			Cromosoma.cruzar(_poblacion[aCruzar[i]], _poblacion[aCruzar[i + 1]], hijo1, hijo2, _rand, _tipoSeleccion);
 			
 			//Sustituimos a los padres
 			_poblacion[aCruzar[i]] = hijo1;

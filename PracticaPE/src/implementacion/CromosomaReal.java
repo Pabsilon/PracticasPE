@@ -38,7 +38,7 @@ public abstract class CromosomaReal extends Cromosoma{
 	}
 	
 	
-	/** Cruza dos cromosomas.
+	/** Cruza dos cromosomas. Cruce de punto
 	 * 
 	 * @param padreReal1 El primer padre a cruzar
 	 * @param padreReal2 El segundo padre a cruzar
@@ -46,7 +46,7 @@ public abstract class CromosomaReal extends Cromosoma{
 	 * @param hijoReal2 El segundo hijo generado
 	 * @param rand La función random a utilizar (se pasa por uso de semillas)
 	 */
-	public static void cruzarReal(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand){
+	public static void cruzarReal_externo(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand){
 		CromosomaReal padreReal1 = (CromosomaReal)padre1;
 		CromosomaReal padreReal2 = (CromosomaReal)padre2;
 		CromosomaReal hijoReal1 = (CromosomaReal)hijo1;
@@ -82,6 +82,79 @@ public abstract class CromosomaReal extends Cromosoma{
 			hijoReal2._genes[i] = padreReal1._genes[i];
 		}
 	}
+	
+	public static void cruzarReal_discretoUniforme(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
+	{
+		CromosomaReal padreReal1 = (CromosomaReal)padre1;
+		CromosomaReal padreReal2 = (CromosomaReal)padre2;
+		CromosomaReal hijoReal1 = (CromosomaReal)hijo1;
+		CromosomaReal hijoReal2 = (CromosomaReal)hijo2;
+		//Cruce externo
+		for(int i = 0; i < hijoReal1._genes.length; i++)
+		{
+			hijoReal1._genes[i] = padreReal1._genes[i];
+			hijoReal2._genes[i] = padreReal2._genes[i];
+		}
+		
+		//Factor de cruce por gen
+		//TODO - Preguntar si Pi se genera aleatoriamento o se deja fijo. Lo dejo aleatorio porque da mejores resultados.
+		float probCruceGen = rand.nextFloat() * 0.7f + 0.1f; //Numero entre [0.1, 0.8]
+		//float probCruceGen = 0.4f;
+		
+		//Hijo1
+		//Copiar resto de genes al completo
+		for(int i = 0; i < padreReal2._genes.length; i++)
+		{
+			//Cruzar gen si la probabilidad es menor
+			if(rand.nextFloat() < probCruceGen)
+			{
+				hijoReal1._genes[i] = padreReal2._genes[i];
+			}
+		}
+		
+		//Hijo2
+		//Copiar resto de genes al completo
+		for(int i = 0; i < padreReal1._genes.length; i++)
+		{
+			//Cruzar gen si la probabilidad es menor
+			if(rand.nextFloat() < probCruceGen)
+			{
+				hijoReal2._genes[i] = padreReal1._genes[i];
+			}
+		}
+	}
+	
+	//Cruce aritmetico
+	public static void cruzarReal_aritmetico(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
+	{
+		CromosomaReal padreReal1 = (CromosomaReal)padre1;
+		CromosomaReal padreReal2 = (CromosomaReal)padre2;
+		CromosomaReal hijoReal1 = (CromosomaReal)hijo1;
+		CromosomaReal hijoReal2 = (CromosomaReal)hijo2;
+		//Cruce externo
+		for(int i = 0; i < hijoReal1._genes.length; i++)
+		{
+			hijoReal1._genes[i] = padreReal1._genes[i];
+			hijoReal2._genes[i] = padreReal2._genes[i];
+		}
+		
+		//Factor de cruce por gen
+		float probCruceGen = rand.nextFloat() * 0.9f + 0.1f; //No es fijo (seria cruce aritmetico uniforme) porque da peores resultados. As� que generamos aleatorios entre [0.1, 1]
+		
+		//Hijo1 e Hijo 2
+		//Copiar resto de genes al completo
+		for(int i = 0; i < padreReal2._genes.length; i++)
+		{
+			hijoReal1._genes[i] = (padreReal2._genes[i] * probCruceGen + padreReal1._genes[i] * (1 - probCruceGen)) / 2.0f;
+			hijoReal2._genes[i] = (padreReal2._genes[i] * (1 - probCruceGen) + padreReal1._genes[i] * probCruceGen) / 2.0f;
+		}
+	}
+	
+	public static void cruzarReal_SBX(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
+	{
+		
+	}
+
 	
 	/**Método que muta a la poblacion. Recorre todos los genes y decide si alterarlos.
 	 * 
