@@ -2,7 +2,7 @@ package implementacion;
 
 import java.util.Random;
 
-public abstract class CromosomaReal {
+public abstract class CromosomaReal extends Cromosoma{
 	
 	//TODO EVERYTHING
 	
@@ -46,5 +46,6 @@ public abstract class CromosomaReal {
 	 * @return True si es un problema de maximización, false si es un problema de minimización.
 	 */
 	public abstract boolean isMaximizing();
+	
 
 }

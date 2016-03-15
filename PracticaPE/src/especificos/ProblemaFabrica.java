@@ -33,6 +33,8 @@ public class ProblemaFabrica
 			return new Problema4(precision,n, rand);
 		case "Problema5":
 			return new Problema5(precision, rand);
+		case "Problema4Real":
+			return new Problema4Real(precision,n ,rand);
 		default:
 			return new Problema1(precision, rand);
 		}
