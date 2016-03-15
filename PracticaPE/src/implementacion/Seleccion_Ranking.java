@@ -70,7 +70,7 @@ public class Seleccion_Ranking implements AlgoritmoSeleccion {
 				j++;
 			}
 			
-			seleccionados[i] = poblacion[indicesOrdenador[j]];
+			seleccionados[i].copiarCromosoma(poblacion[indicesOrdenador[j]]);
 		}
 		
 	}
