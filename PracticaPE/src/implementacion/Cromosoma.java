@@ -39,15 +39,7 @@ public abstract class Cromosoma {
 	 */
 	protected abstract float getAptitud();
 	
-	/** Cruza dos cromosomas.
-	 * 
-	 * @param padre1 El primer padre a cruzar
-	 * @param padre2 El segundo padre a cruzar
-	 * @param hijo1 El primer hijo generado
-	 * @param hijo2 El segundo hijo generado
-	 * @param rand La función random a utilizar (se pasa por uso de semillas)
-	 */
-	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
+	private static void cruzarPrivado(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
 	{
 		for(int i = 0; i < hijo1._genes.length; i++)
 		{
@@ -99,6 +91,28 @@ public abstract class Cromosoma {
 		}
 	}
 	
+	/** Cruza dos cromosomas.
+	 * 
+	 * @param padre1 El primer padre a cruzar
+	 * @param padre2 El segundo padre a cruzar
+	 * @param hijo1 El primer hijo generado
+	 * @param hijo2 El segundo hijo generado
+	 * @param rand La función random a utilizar (se pasa por uso de semillas)
+	 */
+	public static void cruzar(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
+	{
+		//Trampa muy oscura, por favor, no juzgar este metodo de programacion. No nos daba tiempo a implementarlo bien.
+		if(padre1 instanceof CromosomaReal)
+		{
+			//Esto es lo realmente chapuza.
+			CromosomaReal.cruzarReal(padre1, padre2, hijo1, hijo2, rand);
+		}
+		else
+		{
+			Cromosoma.cruzarPrivado(padre1, padre2, hijo1, hijo2, rand);
+		}
+	}
+	
 	/**Método que muta a la poblacion. Recorre todos los genes y decide si alterarlos.
 	 * 
 	 * @param mutacionProb Probabilidad de que mute un gen
@@ -145,8 +159,7 @@ public abstract class Cromosoma {
 			{
 				_genes[i].setAlelos(cromosoma._genes[i].getAlelos());
 			}
-		}
-		
+		}		
 	}
 	
 	/**Método para saber si el problema en el que trabajamos es de maximización o no.

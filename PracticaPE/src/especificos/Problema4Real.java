@@ -12,7 +12,8 @@ public class Problema4Real extends CromosomaReal{
 	
 	public Problema4Real(float precision, int n, Random rand){
 		_n = n;
-		for (int i = 0; i<n; i++){
+		_genes = new float[_n];
+		for (int i = 0; i<_n; i++){
 			_genes[i]=rand.nextFloat()* (_xmax - _xmin) + _xmin;
 		}
 		_maximize = false;
