@@ -79,7 +79,7 @@ public class GUI extends JFrame{
 		//Problema
 		_panelProblemas = new JPanel();
 		_panelProblemas.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4", "Problema5"};
+		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4","Problema4R", "Problema5"};
 		_panelProblemas.setLayout(new MigLayout("", "[113px][][]", "[24px]"));
 		_comboBoxProblemas = new JComboBox(problemasS);
 		_comboBoxProblemas.setPreferredSize(new Dimension(213,25));
@@ -92,7 +92,13 @@ public class GUI extends JFrame{
 					_panelProblemas.add(_labelN, "cell 1 0,alignx left,aligny center");
 					_panelProblemas.revalidate();
 					_panelProblemas.repaint();
-				}else{
+				}else if (s=="Problema4R"){
+					_panelProblemas.add(_textFieldN, "cell 2 0,alignx left,aligny center");
+					_panelProblemas.add(_labelN, "cell 1 0,alignx left,aligny center");
+					_panelProblemas.revalidate();
+					_panelProblemas.repaint();
+				}else
+				{
 					_panelProblemas.remove(_textFieldN);
 					_panelProblemas.remove(_labelN);
 					_panelProblemas.revalidate();
@@ -137,7 +143,7 @@ public class GUI extends JFrame{
 		_panelSeleccion.setLayout(new MigLayout("", "[213px]", "[25px][][]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
-		String[] metodosS = {"Ruleta", "Torneo", "Torneo_Probabilistico"};
+		String[] metodosS = {"Ruleta", "Ranking", "Torneo", "Torneo_Probabilistico"};
 		
 		
 		//Cruce
