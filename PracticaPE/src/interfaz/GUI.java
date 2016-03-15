@@ -40,7 +40,7 @@ public class GUI extends JFrame{
 	JLabel _labelPrecision, _realizadoEn, _time,_labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
 	//ComboBox
 	@SuppressWarnings("rawtypes")
-	JComboBox _comboBoxSeleccion, _comboBoxProblemas;
+	JComboBox _comboBoxSeleccion, _comboBoxProblemas, _tipoSeleccion;
 	//Text Fields
 	JTextField _textFieldPrecision, _lastSeed, _textFieldParticipantes, _textFieldMutacion, _textFieldCruce, _textFieldPoblacion, _textFieldIteraciones, _textFieldN, _textFieldSemilla;
 	//Botones
@@ -80,8 +80,11 @@ public class GUI extends JFrame{
 		_panelProblemas = new JPanel();
 		_panelProblemas.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4","Problema4R", "Problema5"};
+		String[] seleccionS = {"DiscretoU", "Externo", "Aritmetico", "SBX"};
 		_panelProblemas.setLayout(new MigLayout("", "[113px][][]", "[24px]"));
 		_comboBoxProblemas = new JComboBox(problemasS);
+		_tipoSeleccion = new JComboBox(seleccionS);
+		_tipoSeleccion.setPreferredSize(new Dimension(215,25));
 		_comboBoxProblemas.setPreferredSize(new Dimension(213,25));
 		_comboBoxProblemas.addActionListener(new ActionListener(){
 
@@ -92,17 +95,26 @@ public class GUI extends JFrame{
 					_panelProblemas.add(_labelN, "cell 1 0,alignx left,aligny center");
 					_panelProblemas.revalidate();
 					_panelProblemas.repaint();
+					_panelSeleccion.remove(_tipoSeleccion);
+					_panelSeleccion.revalidate();
+					_panelSeleccion.repaint();
 				}else if (s=="Problema4R"){
 					_panelProblemas.add(_textFieldN, "cell 2 0,alignx left,aligny center");
 					_panelProblemas.add(_labelN, "cell 1 0,alignx left,aligny center");
 					_panelProblemas.revalidate();
 					_panelProblemas.repaint();
+					_panelSeleccion.add(_tipoSeleccion, "cell 0 2,growx");
+					_panelSeleccion.revalidate();
+					_panelSeleccion.repaint();
 				}else
 				{
 					_panelProblemas.remove(_textFieldN);
 					_panelProblemas.remove(_labelN);
+					_panelSeleccion.remove(_tipoSeleccion);
 					_panelProblemas.revalidate();
+					_panelSeleccion.revalidate();
 					_panelProblemas.repaint();
+					_panelSeleccion.repaint();
 				}
 				
 			}
@@ -140,7 +152,7 @@ public class GUI extends JFrame{
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
 		_panelSeleccion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		_panelSeleccion.setLayout(new MigLayout("", "[213px]", "[25px][][]"));
+		_panelSeleccion.setLayout(new MigLayout("", "[213px,grow]", "[25px][25][25]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
 		String[] metodosS = {"Ruleta", "Ranking", "Torneo", "Torneo_Probabilistico"};
@@ -261,6 +273,7 @@ public class GUI extends JFrame{
 			
 		});
 		_panelSeleccion.add(_comboBoxSeleccion, "cell 0 1,alignx left,aligny top");
+		
 		_elitismo = new JCheckBox("Elitismo");
 		_panelSeleccion.add(_elitismo, "cell 0 2");
 		_textFieldSemilla = new JTextField("0");
@@ -285,7 +298,7 @@ public class GUI extends JFrame{
 		_botonComenzar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), _elitismo.isSelected(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldPoblacion.getText(), _textFieldIteraciones.getText(), _textFieldSemilla.getText(), _textFieldN.getText(), _textFieldParticipantes.getText());
+				_controlador.comenzarSimulacion(_textFieldPrecision.getText(), _textFieldCruce.getText(), _textFieldMutacion.getText(), (String)_comboBoxSeleccion.getSelectedItem(), _elitismo.isSelected(), (String)_comboBoxProblemas.getSelectedItem(), _textFieldPoblacion.getText(), _textFieldIteraciones.getText(), _textFieldSemilla.getText(), _textFieldN.getText(), _textFieldParticipantes.getText(), (String)_tipoSeleccion.getSelectedItem());
 			}
 		});
 		

@@ -30,7 +30,7 @@ public class Controller {
 	 * @param n El número de parámetros para el problema 4.
 	 * @param participantes El número de participantes en la selección tipo torneo.
 	 */
-	void comenzarSimulacion(String precision, String cruce, String mutacion, String metodoSelec, Boolean elitismo, String problema, String numPoblacion, String numGeneraciones, String semilla, String n, String participantes)
+	void comenzarSimulacion(String precision, String cruce, String mutacion, String metodoSelec, Boolean elitismo, String problema, String numPoblacion, String numGeneraciones, String semilla, String n, String participantes, String tipoSeleccion)
 	{
 		//Parseo y construccion del nuevo algoritmo.
 		
