@@ -7,10 +7,6 @@ import java.util.Random;
 import javafx.util.Pair;
 
 //Se basa en el ranking segun la ordenacion de los individuos por fitness decreciente.
-/**Algoritmo de selección de Ranking.
- * @author pabs
- *
- */
 public class Seleccion_Ranking implements AlgoritmoSeleccion {
 
 	private final float _beta = 1.5f;
@@ -74,7 +70,7 @@ public class Seleccion_Ranking implements AlgoritmoSeleccion {
 				j++;
 			}
 			
-			seleccionados[i].copiarCromosoma(poblacion[indicesOrdenador[j]]);
+			seleccionados[i] = poblacion[indicesOrdenador[j]];
 		}
 		
 	}
