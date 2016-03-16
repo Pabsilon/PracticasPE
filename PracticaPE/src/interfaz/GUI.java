@@ -80,7 +80,7 @@ public class GUI extends JFrame{
 		_panelProblemas = new JPanel();
 		_panelProblemas.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		String[] problemasS = {"Problema1", "Problema2", "Problema3", "Problema4","Problema4R", "Problema5"};
-		String[] seleccionS = {"DiscretoU", "Externo", "Aritmetico", "SBX"};
+		String[] seleccionS = {"Externo", "DiscretoU", "Aritmetico", "SBX"};
 		_panelProblemas.setLayout(new MigLayout("", "[113px][][]", "[24px]"));
 		_comboBoxProblemas = new JComboBox(problemasS);
 		_tipoSeleccion = new JComboBox(seleccionS);

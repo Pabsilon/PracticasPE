@@ -152,6 +152,21 @@ public abstract class CromosomaReal extends Cromosoma{
 	
 	public static void cruzarReal_SBX(Cromosoma padre1, Cromosoma padre2, Cromosoma hijo1, Cromosoma hijo2, Random rand)
 	{
+		CromosomaReal padreReal1 = (CromosomaReal)padre1;
+		CromosomaReal padreReal2 = (CromosomaReal)padre2;
+		CromosomaReal hijoReal1 = (CromosomaReal)hijo1;
+		CromosomaReal hijoReal2 = (CromosomaReal)hijo2;
+		
+		//http://es.slideshare.net/paskorn/simulated-binary-crossover-presentation
+		int n = 2; //Recomiendan valores entre 2 y 5; 2 da muy buenos resultados
+		float beta = 0.5f*(n + 1.0f)*((float)Math.pow(rand.nextFloat(), n)); //nextFloat <= 1		
+		for(int i = 0; i < padreReal1._genes.length; i++)
+		{
+			float xMedia = ((padreReal1._genes[i] + padreReal2._genes[i]) / 2.0f);
+			float sbx =  0.5f*beta*Math.abs((padreReal1._genes[i] - padreReal2._genes[i]));
+			hijoReal1._genes[i] = xMedia - sbx;
+			hijoReal2._genes[i] = xMedia + sbx;
+		}
 		
 	}
 
