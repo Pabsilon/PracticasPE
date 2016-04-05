@@ -1,12 +1,8 @@
 .metadata
-PracticaPE/.settings
-PracticaPE/.project
-PracticaPE/.classpath
+PracticaPE/*
 .recommenders
 bin/
 .settings
 .project
 .classpath
-PracticaPE/Semillas
-PracticaPE/doc
 *.css
