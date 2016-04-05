@@ -1,0 +1,12 @@
+package implementation;
+
+public class Main {
+	
+	public static void main (String args[]){
+	
+	SpainMap test = new SpainMap();
+	
+
+	}
+
+}
