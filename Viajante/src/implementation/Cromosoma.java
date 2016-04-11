@@ -41,5 +41,10 @@ public class Cromosoma {
 		
 		return toRet;
 	}
+	
+	public int[] getGenotipo()
+	{
+		return _genList.clone();
+	}
 
 }
