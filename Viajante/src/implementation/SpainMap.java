@@ -9,7 +9,7 @@ public class SpainMap {
 		
 	}
 	
-	static int[][] DIST = {
+	private final static int[][] DIST = {
 			{},
 			{171},
 			{369, 294},
@@ -40,30 +40,30 @@ public class SpainMap {
 			{150, 75, 219, 516, 675, 590, 796, 638, 654, 613, 306, 357, 444, 1010, 292, 690, 278, 459, 628, 611, 340, 734, 583, 694, 912, 407}
 			};
 	
-	static List<String> CITIES = Arrays.asList("Albacete", "Alicante","Almeria","Avila","Badajoz",
-			"Barcelona", "Bilbao","Burgos", "Caceres", "Cadiz", "Castellon", "Ciudad Real", "Cordoba",
-			"A Coruña",	"Cuenca", "Gerona", "Granada", "Guadalajara", "Huelva", "Huesca",
-			"Jaen", "Leon", "Lerida", "Logroño", "Lugo", "Madrid", "Malaga", "Murcia");
+	private final static List<String> CITIES = Arrays.asList("Albacete", "Alicante","Almeria","Avila","Badajoz",
+			"Barcelona", "Bilbao","Burgos", "Caceres", "Cadiz", "Castellon", "Ciudad_Real", "Cordoba",
+			"A_Coruna",	"Cuenca", "Gerona", "Granada", "Guadalajara", "Huelva", "Huesca",
+			"Jaen", "Leon", "Lerida", "Logrono", "Lugo", "Madrid", "Malaga", "Murcia");
 	
 	
-	public int getDistance(int city1, int city2){
+	public static int getDistance(int cityID1, int cityID2){
 		int distance = 0;
-		if (city1==city2){
+		if (cityID1==cityID2){
 			return distance;
 		}
-		if (city1>city2){
-			distance = DIST[city1][city2];
+		if (cityID1>cityID2){
+			distance = DIST[cityID1][cityID2];
 		}else
-			distance = DIST[city2][city1];
+			distance = DIST[cityID2][cityID1];
 		return distance;
 	}
 	
-	public int getCityNumber(String city){
+	public int getCityID(String city){
 		return CITIES.indexOf(city);
 	}
 	
-	public String getCityName(int n){
-		return CITIES.get(n);
+	public String getCityName(int cityID){
+		return CITIES.get(cityID);
 	}
 
 }
