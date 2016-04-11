@@ -19,11 +19,13 @@ public class Traveler
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
 			System.out.println(_poblacion[i].getFenotipo());
+			System.out.println(_poblacion[i].getAptitud());
 		}
 	}
 	
 	public void ejecutarAlgoritmo(int numGeneraciones)
 	{
+		//Coger el metodo de seleccion, cruce y mutacion a traves de las factorias
 		for(int i = 0; i < numGeneraciones; i++)
 		{
 			//Seleccionar

@@ -46,5 +46,22 @@ public class Cromosoma {
 	{
 		return _genList.clone();
 	}
+	
+	public int getAptitud()
+	{
+		int sumaDistancias = 0;
+		for(int i = 1; i < _genList.length; i++)
+		{
+			sumaDistancias += SpainMap.getDistance(_genList[i-1], _genList[i]);
+		}
+		sumaDistancias += SpainMap.getDistance(_genList[_genList.length - 1], _genList[0]); //Distancia de la ultima a Madrid
+		
+		return sumaDistancias;
+	}
+	
+	public void copiarCromosoma(final Cromosoma src)
+	{
+		Arrays.copyOf(src._genList, _genList.length);
+	}
 
 }
