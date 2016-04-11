@@ -9,7 +9,7 @@ public class SpainMap {
 		
 	}
 	
-	private final static int[][] DIST = {
+	private final static int[][] _DIST = {
 			{},
 			{171},
 			{369, 294},
@@ -40,11 +40,15 @@ public class SpainMap {
 			{150, 75, 219, 516, 675, 590, 796, 638, 654, 613, 306, 357, 444, 1010, 292, 690, 278, 459, 628, 611, 340, 734, 583, 694, 912, 407}
 			};
 	
-	private final static List<String> CITIES = Arrays.asList("Albacete", "Alicante","Almeria","Avila","Badajoz",
+	private final static List<String> _CITIES = Arrays.asList("Albacete", "Alicante","Almeria","Avila","Badajoz",
 			"Barcelona", "Bilbao","Burgos", "Caceres", "Cadiz", "Castellon", "Ciudad_Real", "Cordoba",
 			"A_Coruna",	"Cuenca", "Gerona", "Granada", "Guadalajara", "Huelva", "Huesca",
 			"Jaen", "Leon", "Lerida", "Logrono", "Lugo", "Madrid", "Malaga", "Murcia");
 	
+	public static int getNumberOfCities()
+	{
+		return _CITIES.size();
+	}
 	
 	public static int getDistance(int cityID1, int cityID2){
 		int distance = 0;
@@ -52,18 +56,18 @@ public class SpainMap {
 			return distance;
 		}
 		if (cityID1>cityID2){
-			distance = DIST[cityID1][cityID2];
+			distance = _DIST[cityID1][cityID2];
 		}else
-			distance = DIST[cityID2][cityID1];
+			distance = _DIST[cityID2][cityID1];
 		return distance;
 	}
 	
-	public int getCityID(String city){
-		return CITIES.indexOf(city);
+	public static int getCityID(String city){
+		return _CITIES.indexOf(city);
 	}
 	
-	public String getCityName(int cityID){
-		return CITIES.get(cityID);
+	public static String getCityName(int cityID){
+		return _CITIES.get(cityID);
 	}
 
 }
