@@ -12,7 +12,7 @@ public final class Map {
 			{366, 537, 633},
 			{525, 696, 604, 318},
 			{540, 515, 809, 717, 1022},
-			{646, 817, 958, 401, 694, 620},º
+			{646, 817, 958, 401, 694, 620},
 			{488, 659, 800, 243, 536, 583, 158},
 			{504, 675, 651, 229, 89, 918, 605, 447},
 			{617, 688, 484, 618, 342, 1284, 1058, 900, 369},
@@ -40,6 +40,7 @@ public final class Map {
 			"A Coruña",	"Cuenca", "Gerona", "Granada", "Guadalajara", "Huelva",
 			"Jaen", "Leon", "Lerida", "Logroño", "Lugo", "Madrid", "Malaga", "Murcia");
 	
+	@SuppressWarnings("unused")
 	public int getDistance(String city1str, String city2str){
 		int city1,city2;
 		int distance=0;
