@@ -15,7 +15,8 @@ public class ASeleccion_Ranking implements ASeleccion {
 	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados) 
 	{
 		//Ordenar los elementos de mejor a peor aptitud
-		Comparator<javafx.util.Pair<Float, Integer>> comparador;
+		Comparator<javafx.util.Pair<Float, Integer>> comparador; //Para arreglar el fallo de JavaFX:
+		//JRE System Libraries -> Click Derecho -> Propiedades, Cambiar a "Workspace Default" (3era opción)
 		comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
 		{
 

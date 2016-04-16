@@ -258,7 +258,7 @@ public class GUI extends JFrame{
 		_botonComenzar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText());
+				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), _textFieldParticipantes.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText());
 			}
 		});
 		
