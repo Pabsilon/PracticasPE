@@ -1,9 +1,10 @@
-package implementation;
+package aseleccion;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import implementation.Cromosoma;
 import javafx.util.Pair;
 
 //TODO Preguntar al profe si javafx.util.Pair la cambiamos por una creada por nosotros

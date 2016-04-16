@@ -1,4 +1,6 @@
-package implementation;
+package aseleccion;
+
+import implementation.Cromosoma;
 
 public class Aseleccion_Truncamiento implements ASeleccion {
 

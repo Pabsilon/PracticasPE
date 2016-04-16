@@ -1,9 +1,9 @@
 package gui;
 
+import acruce.ACruce;
+import amutacion.AMutacion;
+import aseleccion.ASeleccion;
 import gui.GUI;
-import implementation.ACruce;
-import implementation.AMutacion;
-import implementation.ASeleccion;
 import implementation.Fabrica_ACruce;
 import implementation.Fabrica_AMutacion;
 import implementation.Fabrica_ASeleccion;

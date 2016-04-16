@@ -1,6 +1,8 @@
-package implementation;
+package aseleccion;
 
 import java.util.Random;
+
+import implementation.Cromosoma;
 
 public class ASeleccion_Torneo implements ASeleccion {
 	

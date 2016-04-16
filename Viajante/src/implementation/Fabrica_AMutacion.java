@@ -1,5 +1,12 @@
 package implementation;
 
+import amutacion.AMutacion;
+import amutacion.AMutacion_Heuristica;
+import amutacion.AMutacion_Insercion;
+import amutacion.AMutacion_Intercambio;
+import amutacion.AMutacion_Inversion;
+import amutacion.AMutacion_Propio;
+
 public class Fabrica_AMutacion {
 	
 	public static AMutacion generarAlgoritmoMutacion(String algoritmo){

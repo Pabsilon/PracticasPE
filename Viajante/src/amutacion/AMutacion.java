@@ -1,4 +1,4 @@
-package implementation;
+package amutacion;
 
 public interface AMutacion {
 

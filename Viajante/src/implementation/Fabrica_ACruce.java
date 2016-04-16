@@ -1,5 +1,14 @@
 package implementation;
 
+import acruce.ACruce;
+import acruce.ACruce_CiclosCX;
+import acruce.ACruce_CodOrdinal;
+import acruce.ACruce_OX;
+import acruce.ACruce_PMX;
+import acruce.ACruce_Propio;
+import acruce.ACruce_RecRutasERX;
+import acruce.ACruce_VariantesOX;
+
 public class Fabrica_ACruce {
 	
 	public static ACruce generarAlgoritmoCruce(String algoritmo){
