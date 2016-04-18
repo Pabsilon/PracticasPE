@@ -23,16 +23,28 @@ public class AMutacion_Inversion implements AMutacion {
 			int fin;
 			
 			//Buscamos el primer punto de la inversión
-			while (rand.nextFloat()<mutacionProb && inicio<alelos.length){
+			while (rand.nextFloat() > mutacionProb && inicio<alelos.length){
 				inicio++;
 			}
 			
-			//Buscamos el segundo punto de la inversión.
-			fin = inicio;
-			while (rand.nextFloat()<mutacionProb && fin <alelos.length){
-				fin++;
+			//Calculamos un segundo punto para la inversión.
+			//TODO evitar overflow
+			//TODO requiere evitar copiar madrid
+			fin = (int) Math.floor((alelos.length-inicio)*rand.nextFloat());
+
+			int[] copia = new int[fin-inicio];
+			System.arraycopy(alelos, inicio, copia, 0, fin-inicio);
+			//Invertimos el array
+			for(int j = 0; j < copia.length / 2; j++)
+			{
+			    int temp = copia[j];
+			    copia[j] = copia[copia.length - j - 1];
+			    copia[copia.length - j - 1] = temp;
 			}
 			
+			//La devolvemos a su sitio.
+			System.arraycopy(copia, 0, alelos, inicio, fin-inicio);
+			poblacion[i].setGenList(alelos); //TODO utilizar otro método
 		}
 		
 	}

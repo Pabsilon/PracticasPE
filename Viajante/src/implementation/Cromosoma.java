@@ -59,6 +59,10 @@ public class Cromosoma {
 		return sumaDistancias;
 	}
 	
+	public void setGenList(int[] genes){
+		_genList = genes.clone();
+	}
+	
 	public void copiarCromosoma(final Cromosoma src)
 	{
 		Arrays.copyOf(src._genList, _genList.length);

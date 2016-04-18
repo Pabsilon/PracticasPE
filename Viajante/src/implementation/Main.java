@@ -9,7 +9,8 @@ public class Main {
 	
 	public static void main (String args[])
 	{
-		Traveler t = new Traveler(5);
+		Traveler t = new Traveler(1);
+		t.ejecutarAlgoritmo(1);
 	}
 
 }
