@@ -31,7 +31,7 @@ public class Traveler
 		for(int i = 0; i < numGeneraciones; i++)
 		{
 			AMutacion_Inversion mut = new AMutacion_Inversion();
-			mut.mutar(_poblacion, 0.05f, new Random());
+			mut.mutar(_poblacion, 1f, new Random());
 			
 			for(int j = 0; j < _poblacion.length; j++)
 			{
