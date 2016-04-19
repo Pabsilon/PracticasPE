@@ -8,16 +8,17 @@ import javafx.util.Pair;
 
 public class Aseleccion_Truncamiento implements ASeleccion {
 	
-	private final int _porcentaje = 25;
+	private final float _porcentaje = 0.25f;
 
 	//El algoritmo de selección por truncamiento elige el top % de una población y llena 
 	//la nueva población con esos individuos
 	
 	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados) {
 		
-		int aCopiar = poblacion.length*(_porcentaje/100);
+		int aCopiar = (int)(poblacion.length * _porcentaje);
 		int numCopias = poblacion.length / aCopiar;
-		Comparator<javafx.util.Pair<Float, Integer>> comparador; //Para arreglar el fallo de JavaFX:
+		Comparator<javafx.util.Pair<Float, Integer>> comparador;
+		//Para arreglar el fallo de JavaFX:
 		//JRE System Libraries -> Click Derecho -> Propiedades, Cambiar a "Workspace Default" (3era opción)
 		comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
 		{
@@ -48,11 +49,13 @@ public class Aseleccion_Truncamiento implements ASeleccion {
 				i++;
 			}
 		}
-		for (int i=0; i<seleccionados.length; i++){ //Para cada seleccionado
-			for (int j=0; j<aCopiar; j++){ //Elemento a copiar
-				for (int k=0; k<numCopias; k++){ //Numero de copias
-					seleccionados[i].copiarCromosoma(poblacion[indicesOrdenador[j]]);
-				}
+		
+		//Seleccionar elementos
+		int k = 0;
+		for (int i=0; i < aCopiar; i++){ //Para cada seleccionado
+			for (int j=0; j < numCopias; j++){ //Elemento a copiar
+					seleccionados[k].copiarCromosoma(poblacion[indicesOrdenador[i]]);
+					k++;
 			}
 		}
 
