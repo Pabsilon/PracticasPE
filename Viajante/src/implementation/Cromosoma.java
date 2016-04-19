@@ -47,6 +47,11 @@ public class Cromosoma {
 		return _genList.clone();
 	}
 	
+	//TODO Cambiar por setGenotipo
+	public void setGenList(int[] genes){
+		_genList = genes.clone();
+	}
+
 	public int getAptitud()
 	{
 		int sumaDistancias = 0;
@@ -57,10 +62,6 @@ public class Cromosoma {
 		sumaDistancias += SpainMap.getDistance(_genList[_genList.length - 1], _genList[0]); //Distancia de la ultima a Madrid
 		
 		return sumaDistancias;
-	}
-	
-	public void setGenList(int[] genes){
-		_genList = genes.clone();
 	}
 	
 	public void copiarCromosoma(final Cromosoma src)
