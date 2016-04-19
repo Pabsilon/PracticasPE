@@ -2,8 +2,6 @@ package implementation;
 
 import java.util.Random;
 
-import amutacion.AMutacion_Insercion;
-import amutacion.AMutacion_Inversion;
 
 //Distancia optima dada por el profesor: 5298
 public class Traveler 
@@ -31,8 +29,6 @@ public class Traveler
 		//Coger el metodo de seleccion, cruce y mutacion a traves de las factorias
 		for(int i = 0; i < numGeneraciones; i++)
 		{
-			AMutacion_Insercion mut = new AMutacion_Insercion();
-			mut.mutar(_poblacion, 0.05f, new Random());
 			
 			for(int j = 0; j < _poblacion.length; j++)
 			{

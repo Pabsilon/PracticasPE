@@ -4,7 +4,6 @@ import acruce.ACruce;
 import amutacion.AMutacion;
 import aseleccion.ASeleccion;
 import gui.GUI;
-import implementation.Algoritmo;
 import implementation.Fabrica_ACruce;
 import implementation.Fabrica_AMutacion;
 import implementation.Fabrica_ASeleccion;
@@ -26,7 +25,7 @@ public class Controller {
 		ASeleccion ags = Fabrica_ASeleccion.generarAlgoritmoSeleccion(metodoSeleccion, Integer.parseInt(participantes));
 		ACruce agc = Fabrica_ACruce.generarAlgoritmoCruce(metodoCruce);
 		AMutacion agm = Fabrica_AMutacion.generarAlgoritmoMutacion(metodoMutacion);
-		Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Integer.parseInt(semilla), agc,agm,ags,elitismo);
+		//Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Integer.parseInt(semilla), agc,agm,ags,elitismo);
 		
 		
 		
