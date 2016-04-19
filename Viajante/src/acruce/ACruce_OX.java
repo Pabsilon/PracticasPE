@@ -46,7 +46,7 @@ public class ACruce_OX implements ACruce {
 		}
 		//Copiar valores a la izquierda de c1
 		aCopiar = (genHijo1[genHijo1.length - 1] + 1) % SpainMap.getNumberOfCities();
-		for(int i = 0; i < c1; i++)
+		for(int i = 1; i < c1; i++)
 		{
 			while(FAuxiliares.numeroEnArray(genHijo1, aCopiar))
 			{
@@ -78,7 +78,7 @@ public class ACruce_OX implements ACruce {
 		}
 		//Copiar valores a la izquierda de c1
 		aCopiar = (genHijo2[genHijo2.length - 1] + 1) % SpainMap.getNumberOfCities();
-		for(int i = 0; i < c1; i++)
+		for(int i = 1; i < c1; i++)
 		{
 			while(FAuxiliares.numeroEnArray(genHijo2, aCopiar))
 			{
