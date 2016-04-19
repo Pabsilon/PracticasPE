@@ -24,7 +24,12 @@ public class ACruce_OX implements ACruce {
 		//Elegimos aleatoriamente dos puntos de corte c1, c2. Donde c1 < c2
 		Random rand = new Random();
 		int c1 = rand.nextInt(genPadre1.length); //Entre [0 y length-1]
-		int c2 = rand.nextInt((genPadre1.length - c1) + 1) + c1; //Entre (c1, length]
+		int c2 = rand.nextInt((genPadre1.length - c1) + 1) + c1; //Entre [c1, length]
+		
+		if(c1 == c2)
+			return;
+		if(c1 == 0 && c2 == genPadre1.length)
+			return;
 		
 		//Hijo1
 		//Copiar valores entre c1 y c2
