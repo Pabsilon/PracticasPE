@@ -19,12 +19,6 @@ public class Traveler
 		{
 			_poblacion[i] = new Cromosoma(rand);
 		}
-		
-		for(int i = 0; i < tamanoPoblacion; i++)
-		{
-			System.out.println(_poblacion[i].getFenotipo());
-			System.out.println(_poblacion[i].getAptitud());
-		}
 	}
 
 	

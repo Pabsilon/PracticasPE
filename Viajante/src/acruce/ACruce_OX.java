@@ -24,7 +24,12 @@ public class ACruce_OX implements ACruce {
 		//Elegimos aleatoriamente dos puntos de corte c1, c2. Donde c1 < c2
 		Random rand = new Random();
 		int c1 = rand.nextInt(genPadre1.length); //Entre [0 y length-1]
-		int c2 = rand.nextInt((genPadre1.length - c1) + 1) + c1; //Entre (c1, length]
+		int c2 = rand.nextInt((genPadre1.length - c1) + 1) + c1; //Entre [c1, length]
+		
+		if(c1 == c2)
+			return;
+		if(c1 == 0 && c2 == genPadre1.length)
+			return;
 		
 		//Hijo1
 		//Copiar valores entre c1 y c2
@@ -46,7 +51,7 @@ public class ACruce_OX implements ACruce {
 		}
 		//Copiar valores a la izquierda de c1
 		aCopiar = (genHijo1[genHijo1.length - 1] + 1) % SpainMap.getNumberOfCities();
-		for(int i = 0; i < c1; i++)
+		for(int i = 1; i < c1; i++)
 		{
 			while(FAuxiliares.numeroEnArray(genHijo1, aCopiar))
 			{
@@ -78,7 +83,7 @@ public class ACruce_OX implements ACruce {
 		}
 		//Copiar valores a la izquierda de c1
 		aCopiar = (genHijo2[genHijo2.length - 1] + 1) % SpainMap.getNumberOfCities();
-		for(int i = 0; i < c1; i++)
+		for(int i = 1; i < c1; i++)
 		{
 			while(FAuxiliares.numeroEnArray(genHijo2, aCopiar))
 			{
