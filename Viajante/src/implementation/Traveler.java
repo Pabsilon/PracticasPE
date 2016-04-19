@@ -2,7 +2,8 @@ package implementation;
 
 import java.util.Random;
 
-import acruce.ACruce_OX;
+import acruce.ACruce;
+import acruce.ACruce_CiclosCX;
 import amutacion.AMutacion_Inversion;
 
 //Distancia optima dada por el profesor: 5298
@@ -17,12 +18,6 @@ public class Traveler
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
 			_poblacion[i] = new Cromosoma(rand);
-		}
-		
-		for(int i = 0; i < tamanoPoblacion; i++)
-		{
-			System.out.println(_poblacion[i].getFenotipo());
-			System.out.println(_poblacion[i].getAptitud());
 		}
 	}
 	
@@ -41,7 +36,7 @@ public class Traveler
 			}
 			//Seleccionar
 			//Cruzar
-			ACruce_OX ox = new ACruce_OX();
+			ACruce ox = new ACruce_CiclosCX();
 			
 			Random rand = new Random();
 			Cromosoma h1 = new Cromosoma(rand);
