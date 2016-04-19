@@ -1,16 +1,13 @@
 package implementation;
 
-import java.util.Random;
-
-import gui.GUI;
+import gui.Controller;
 
 @SuppressWarnings("unused")
 public class Main {
 	
 	public static void main (String args[])
 	{
-		Traveler t = new Traveler(2);
-		t.ejecutarAlgoritmo(1);
+		Controller c = new Controller();
 	}
 
 }

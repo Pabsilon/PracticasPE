@@ -27,9 +27,10 @@ public class Traveler
 		float[] aptitudes = new float[_poblacion.length];
 		Cromosoma[] seleccionados = new Cromosoma[_poblacion.length];
 		for(int i = 0; i < numGeneraciones; i++)
-		{			
+		{		
 			for(int j = 0; j < _poblacion.length; j++)
 			{
+				aptitudes[i]=_poblacion[i].getAptitud();
 				System.out.println(_poblacion[j].getFenotipo());
 				System.out.println(_poblacion[j].getAptitud());
 			}
