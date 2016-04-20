@@ -4,8 +4,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-import javafx.util.Pair;
-
 //Clase auxiliar para operaciones auxiliares
 public class FAuxiliares 
 {

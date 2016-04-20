@@ -20,6 +20,7 @@ public class Traveler
 	private final float _probabilidadCruce, _probabilidadMutacion;
 	private final boolean _elitismo;
 	private final int _numeroElites;
+	private long _semilla;
 	
 	private Cromosoma _mejorCromosoma;
 	
@@ -36,13 +37,13 @@ public class Traveler
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
 		
 		
-		
+		_semilla = semilla;
 		//Generar poblacion usando la semilla de parametro
-		if(semilla == 0)
+		if(_semilla == 0)
 		{
-			semilla = System.currentTimeMillis();
+			_semilla = System.currentTimeMillis();
 		}
-		Random rand = new Random(semilla);
+		Random rand = new Random(_semilla);
 		_poblacion = new Cromosoma[tamanoPoblacion];
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
@@ -192,6 +193,10 @@ public class Traveler
 		{
 			_poblacion[monticuloMinimos.poll().getValue()].copiarCromosoma(elites[i]); //aux.poll().getValue()  <- posicion de los peores valores (chusma)
 		}
+	}
+	
+	public long getSemilla(){
+		return _semilla;
 	}
 	
 }

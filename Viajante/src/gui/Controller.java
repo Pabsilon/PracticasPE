@@ -45,7 +45,7 @@ public class Controller {
 		//Rellenamos la grafica con los valores.
 		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), resultado);
 		//Mostramos la semilla utilizada.
-		g.setSeed(Long.parseLong(semilla));
+		g.setSeed(algoritmo.getSemilla());
 		//Mostramos el tiempo de ejecucion
 		timeAgo = System.currentTimeMillis() - timeAgo;
 		g.setTime((float)timeAgo/1000);		
