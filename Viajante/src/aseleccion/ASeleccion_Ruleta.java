@@ -38,7 +38,6 @@ public class ASeleccion_Ruleta implements ASeleccion
 			{
 				seleccionado++;
 			}
-			
 			seleccionados[i].copiarCromosoma(poblacion[seleccionado]);
 		}
 	}

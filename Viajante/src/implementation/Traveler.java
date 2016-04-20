@@ -30,20 +30,31 @@ public class Traveler
 	{
 		float[] aptitudes = new float[_poblacion.length];
 		Cromosoma[] seleccionados = new Cromosoma[_poblacion.length];
+		for (int i = 0; i<_poblacion.length; i++){
+			seleccionados[i] = new Cromosoma(rand);
+		}
 		for(int i = 0; i < numGeneraciones; i++)
 		{		
 			for(int j = 0; j < _poblacion.length; j++)
 			{
-				aptitudes[i]=_poblacion[i].getAptitud();
+				aptitudes[j]=_poblacion[j].getAptitud();
 				System.out.println(_poblacion[j].getFenotipo());
 				System.out.println(_poblacion[j].getAptitud());
 			}
 			//Seleccionar
 			asl.seleccionar(_poblacion, aptitudes, seleccionados);
 			//Cruzar
-			//crx.cruzar(p1, p2, h1, h2);
+			for (int k = 0; k<seleccionados.length/2; k++){
+				Cromosoma h1 = new Cromosoma(rand);
+				Cromosoma h2 = new Cromosoma(rand);
+				crx.cruzar(seleccionados[k], seleccionados[k+1], h1, h2);
+				seleccionados[k].copiarCromosoma(h1);
+				seleccionados[k+1].copiarCromosoma(h2);
+			}
+			_poblacion = seleccionados;
 			//Mutar
 			mut.mutar(_poblacion, mutacionProb, rand);
 		}
 	}
+	
 }

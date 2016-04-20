@@ -40,7 +40,7 @@ public class Algoritmo {
 		Traveler t = new Traveler(_poblacion);
 		t.ejecutarAlgoritmo(_simulaciones, _ags, _agc, _agm, _probMut, _rand);
 		
-		return _mejorIndividuo.toString();
+		return "PlaceHolder Text";
 	}
 
 	public long getSeed() {
