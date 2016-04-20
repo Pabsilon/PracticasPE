@@ -45,7 +45,7 @@ public class AMutacion_Inversion implements AMutacion {
 					
 					//La devolvemos a su sitio.
 					System.arraycopy(copia, 0, alelos, inicio, fin-inicio+1);
-					poblacion[i].setGenList(alelos); //TODO utilizar otro m�todo
+					poblacion[i].setGenotipo(alelos); //TODO utilizar otro m�todo
 				}
 			}
 		}

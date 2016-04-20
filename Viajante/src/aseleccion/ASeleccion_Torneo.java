@@ -13,7 +13,7 @@ public class ASeleccion_Torneo implements ASeleccion {
 	}
 
 	@Override
-	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados)
+	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados)
 	{
 		//Coger _participantes elementos al azar
 		float elegidosValor[] = new float[_participantes];

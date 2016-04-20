@@ -19,7 +19,7 @@ public class AMutacion_Insercion implements AMutacion {
 					alelos = insertElement(alelos, (int)(alelos.length * rand.nextFloat()),exchange).clone();
 				}
 			}
-			poblacion[i].setGenList(alelos);
+			poblacion[i].setGenotipo(alelos);
 		}
 		
 	}

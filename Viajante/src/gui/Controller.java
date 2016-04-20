@@ -4,10 +4,10 @@ import acruce.ACruce;
 import amutacion.AMutacion;
 import aseleccion.ASeleccion;
 import gui.GUI;
-import implementation.Algoritmo;
 import implementation.Fabrica_ACruce;
 import implementation.Fabrica_AMutacion;
 import implementation.Fabrica_ASeleccion;
+import implementation.Traveler;
 
 public class Controller {
 	
@@ -20,7 +20,7 @@ public class Controller {
 		g = new GUI(this);
 	}
 
-	void startSimulation(String poblacion, String iteraciones, String metodoSeleccion, boolean elitismo, String cruce, String metodoCruce, String participantes, String mutacion, String metodoMutacion, String semilla) {
+	void startSimulation(String poblacion, String generaciones, String metodoSeleccion, boolean elitismo, String porcentageCruce, String metodoCruce, String participantes, String porcentageMutacion, String metodoMutacion, String semilla) {
 		
 		long timeAgo = System.currentTimeMillis();
 		//Parseo del algoritmo de selección
@@ -29,20 +29,23 @@ public class Controller {
 		ACruce agc = Fabrica_ACruce.generarAlgoritmoCruce(metodoCruce);
 		//Parseo del algoritmo de mutacion
 		AMutacion agm = Fabrica_AMutacion.generarAlgoritmoMutacion(metodoMutacion);
-		//Creacion del algoritmo que vamos a ejecutar.
-		Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Long.parseLong(semilla), agc,agm,ags,Float.parseFloat(mutacion),elitismo);
 		
-		double[] mejorAbsoluto = new double[Integer.parseInt(iteraciones)];
-		double[] mejorGeneracion = new double[Integer.parseInt(iteraciones)];
-		double[] mediaGeneracion = new double[Integer.parseInt(iteraciones)];
+		
+		//Creacion del algoritmo que vamos a ejecutar.
+		//Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Long.parseLong(semilla), agc,agm,ags,Float.parseFloat(mutacion),elitismo);
+		Traveler algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, Float.parseFloat(porcentageCruce), Float.parseFloat(porcentageMutacion),elitismo);
+		
+		double[] mejorAbsoluto = new double[Integer.parseInt(generaciones)];
+		double[] mejorGeneracion = new double[Integer.parseInt(generaciones)];
+		double[] mediaGeneracion = new double[Integer.parseInt(generaciones)];
 		
 		String resultado;
 		
-		resultado = ag.simular(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
+		resultado = algoritmo.ejecutarAlgoritmo(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
 		//Rellenamos la grafica con los valores.
-		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(iteraciones), resultado);
+		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), resultado);
 		//Mostramos la semilla utilizada.
-		g.setSeed(ag.getSeed());
+		g.setSeed(Long.parseLong(semilla));
 		//Mostramos el tiempo de ejecucion
 		timeAgo = System.currentTimeMillis() - timeAgo;
 		g.setTime((float)timeAgo/1000);		

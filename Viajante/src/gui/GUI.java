@@ -107,7 +107,6 @@ public class GUI extends JFrame{
 		_panelSeleccion.setLayout(new MigLayout("", "[213px,grow]", "[25px][25][25]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
-		String[] metodosS = {"Ruleta", "Ranking", "Torneo", "Torneo_Probabilistico"};
 		
 		
 		//Cruce
@@ -207,7 +206,7 @@ public class GUI extends JFrame{
 		_lastSeed.setEditable(false);
 		_lastSeed.setPreferredSize(new Dimension(213, 25));
 		_panelMuestraSemilla.add(_lastSeed, "cell 0 1,alignx left,aligny top");
-		_comboBoxSeleccion = new JComboBox(metodosS);
+		_comboBoxSeleccion = new JComboBox(seleccionS);
 		_comboBoxSeleccion.setPreferredSize(new Dimension(215,25));
 		_comboBoxSeleccion.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {

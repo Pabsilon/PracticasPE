@@ -1,6 +1,10 @@
 package implementation;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.PriorityQueue;
+
+import javafx.util.Pair;
 
 //Clase auxiliar para operaciones auxiliares
 public class FAuxiliares 
@@ -44,5 +48,27 @@ public class FAuxiliares
 		  }
 		  return true;
 	}
+	
+	//Devuelve un heap de minimos para los cromosomas. Es
+	public static PriorityQueue<Cromosoma> getColaPrioridadMinimos()
+	{
+		Comparator<Cromosoma> comparador;
+		comparador = new Comparator<Cromosoma>()
+		{
+
+			@Override
+			public int compare(Cromosoma o1, Cromosoma o2) {
+				if(o1.getAptitud() < o2.getAptitud()) return -1;
+				if(o1.getAptitud() == o2.getAptitud()) return 0;
+				if(o1.getAptitud() > o2.getAptitud()) return 1;
+				return 0;
+			}
+		};
+		
+		PriorityQueue<Cromosoma> monticuloMinimos = new PriorityQueue<Cromosoma>(comparador);
+		
+		return monticuloMinimos;
+	}
+	
 
 }

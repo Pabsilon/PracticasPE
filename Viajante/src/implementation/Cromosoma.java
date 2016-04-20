@@ -7,6 +7,11 @@ public class Cromosoma {
 	
 	private int _genList[];
 	
+	public Cromosoma()
+	{
+		this(new Random());
+	}
+	
 	public Cromosoma(Random rand)
 	{
 		//Generar genes. El gen 0 (Madrid) es fijo
@@ -47,11 +52,11 @@ public class Cromosoma {
 		return _genList.clone();
 	}
 	
-	//TODO Cambiar por setGenotipo
-	public void setGenList(int[] genes){
+	public void setGenotipo(int[] genes){
 		_genList = genes.clone();
 	}
 
+	//TODO Se podria guardar una variable con la aptitudes una vez calculada. Así solo se calcula una vez
 	public int getAptitud()
 	{
 		int sumaDistancias = 0;
@@ -66,7 +71,7 @@ public class Cromosoma {
 	
 	public void copiarCromosoma(final Cromosoma src)
 	{
-		Arrays.copyOf(src._genList, _genList.length);
+		System.arraycopy(src._genList, 0, _genList, 0, _genList.length);
 	}
 
 }

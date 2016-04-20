@@ -6,12 +6,12 @@ import implementation.Cromosoma;
 
 public class ASeleccion_Ruleta implements ASeleccion
 {
-	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados)
+	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados)
 	{
 		//Generar puntuaciones acumuladas
 		float puntuaciones[] = new float[poblacion.length];
 		float puntuacionesAcum[] = new float[poblacion.length];
-		int sumaAptitudes = 0;
+		float sumaAptitudes = 0;
 		for(int i = 0; i < poblacion.length; i++)
 		{
 			sumaAptitudes += aptitudes[i];

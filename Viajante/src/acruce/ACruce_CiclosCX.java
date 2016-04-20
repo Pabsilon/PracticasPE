@@ -98,8 +98,8 @@ public class ACruce_CiclosCX implements ACruce {
 			}
 		}
 		
-		h1.setGenList(genHijo1);
-		h2.setGenList(genHijo2);	
+		h1.setGenotipo(genHijo1);
+		h2.setGenotipo(genHijo2);	
 	}
 
 }

@@ -7,5 +7,5 @@ import implementation.Cromosoma;
 
 public interface ASeleccion
 {
-	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados);
+	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados);
 }
