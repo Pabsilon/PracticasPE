@@ -15,12 +15,15 @@ public class Algoritmo {
 	private ACruce _agc;
 	private AMutacion _agm;
 	private ASeleccion _ags;
+	private float _probMut;
 	private boolean _elitismo;
+	private Cromosoma _mejorIndividuo;
 	
-	public Algoritmo(int poblacion, int simulaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, boolean elitismo){
+	public Algoritmo(int poblacion, int simulaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, float probMut, boolean elitismo){
 		_poblacion = poblacion;
 		_simulaciones = simulaciones;
 		_rand=new Random();
+		_probMut = probMut;
 		if (semilla !=0){
 			_rand.setSeed(semilla);
 		}else{
@@ -34,8 +37,10 @@ public class Algoritmo {
 	}
 
 	public String simular(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion) {
-		// TODO Auto-generated method stub
-		return null;
+		Traveler t = new Traveler(_poblacion);
+		t.ejecutarAlgoritmo(_simulaciones, _ags, _agc, _agm, _probMut, _rand);
+		
+		return _mejorIndividuo.toString();
 	}
 
 	public long getSeed() {

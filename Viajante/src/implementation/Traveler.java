@@ -10,6 +10,10 @@ import aseleccion.ASeleccion;
 public class Traveler 
 {
 	Cromosoma _poblacion[];
+	double[] _mejorAbsoluto;
+	double[] _mejorGeneracion;
+	double[] _mediaGeneracion;
+	
 	public Traveler(int tamanoPoblacion)
 	{
 		Random rand = new Random();

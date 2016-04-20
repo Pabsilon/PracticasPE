@@ -30,7 +30,7 @@ public class Controller {
 		//Parseo del algoritmo de mutacion
 		AMutacion agm = Fabrica_AMutacion.generarAlgoritmoMutacion(metodoMutacion);
 		//Creacion del algoritmo que vamos a ejecutar.
-		Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Long.parseLong(semilla), agc,agm,ags,elitismo);
+		Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Long.parseLong(semilla), agc,agm,ags,Float.parseFloat(mutacion),elitismo);
 		
 		double[] mejorAbsoluto = new double[Integer.parseInt(iteraciones)];
 		double[] mejorGeneracion = new double[Integer.parseInt(iteraciones)];
