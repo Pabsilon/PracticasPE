@@ -13,17 +13,17 @@ public class ASeleccion_Ranking implements ASeleccion {
 	private final float _beta = 1.5f;
 	
 	@Override
-	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados) 
+	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados) 
 	{
-		//Ordenar los elementos de mejor a peor aptitud
-		Comparator<javafx.util.Pair<Float, Integer>> comparador; //Para arreglar el fallo de JavaFX:
+		//Ordenar los elementos de mejor a peor aptitud (Heap de minimos)
+		Comparator<javafx.util.Pair<Integer, Integer>> comparador; //Para arreglar el fallo de JavaFX:
 		//JRE System Libraries -> Click Derecho -> Propiedades, Cambiar a "Workspace Default" (3era opción)
-		comparador = new Comparator<javafx.util.Pair<Float, Integer>>()
+		comparador = new Comparator<javafx.util.Pair<Integer, Integer>>()
 		{
 
 			@Override
-			public int compare(Pair<Float, Integer> o1,
-					Pair<Float, Integer> o2) {
+			public int compare(Pair<Integer, Integer> o1,
+					Pair<Integer, Integer> o2) {
 				if(o1.getKey() > o2.getKey()) return -1;
 				if(o1.getKey() == o2.getKey()) return 0;
 				if(o1.getKey() < o2.getKey()) return 1;
@@ -31,10 +31,10 @@ public class ASeleccion_Ranking implements ASeleccion {
 			}
 		};
 		
-		PriorityQueue<javafx.util.Pair<Float, Integer>> monticuloMaximos = new PriorityQueue<javafx.util.Pair<Float, Integer>>(comparador);
+		PriorityQueue<javafx.util.Pair<Integer, Integer>> monticuloMaximos = new PriorityQueue<javafx.util.Pair<Integer, Integer>>(comparador);
 		for(int i = 0; i < aptitudes.length; i++)
 		{
-			monticuloMaximos.add(new javafx.util.Pair<Float, Integer>(aptitudes[i], i));
+			monticuloMaximos.add(new javafx.util.Pair<Integer, Integer>(aptitudes[i], i));
 		}
 		
 		//Obtener indices ordenados

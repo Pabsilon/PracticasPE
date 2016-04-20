@@ -17,7 +17,7 @@ public class AMutacion_Intercambio implements AMutacion {
 					int aux = alelos[j];
 					alelos[j]=alelos[exchange];
 					alelos[exchange]=aux;
-					poblacion[i].setGenList(alelos); //TODO utilizar otro m�todo
+					poblacion[i].setGenotipo(alelos); //TODO utilizar otro m�todo
 				}
 			}
 		}

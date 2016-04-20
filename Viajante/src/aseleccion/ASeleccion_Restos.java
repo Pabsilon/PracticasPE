@@ -13,7 +13,7 @@ public class ASeleccion_Restos implements ASeleccion {
 	// Ejemplo: Individuo con Pi = 0.3, k = 7: Pi * K = 2.1; Se añaden 2 copias.
 	// El resto se rellena con otro método, supondremos ruleta o torneo.
 	@Override
-	public void seleccionar(Cromosoma[] poblacion, float[] aptitudes, Cromosoma[] seleccionados) 
+	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados) 
 	{
 		
 		int K = poblacion.length;
