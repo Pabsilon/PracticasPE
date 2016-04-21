@@ -37,7 +37,7 @@ public class AMutacion_Insercion implements AMutacion {
 	}
 
 
-	public int[] removeElement(int[] array, int element) {
+	private int[] removeElement(int[] array, int element) {
         if (array != null) {
             final int length = array.length;
             for (int i = 0; i < length; i++) {
