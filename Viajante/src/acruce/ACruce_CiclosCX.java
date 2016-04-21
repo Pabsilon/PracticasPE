@@ -21,81 +21,78 @@ public class ACruce_CiclosCX implements ACruce {
 		genHijo2[0] = SpainMap.getCityID("Madrid");
 		
 		//Hijo1
-		//Creamos el ciclo
-		int ciclo[] = new int[genHijo1.length];
-		Arrays.fill(ciclo, -1);
-		int indices[] = new int[genHijo1.length];
-		//Madrid es fija, cogemos la siguiente como inicio del ciclo
-		ciclo[0] = genPadre1[1];
-		indices[0] = 1;
-		int siguiente = genPadre2[1];
-		genPadre2[0] = -1;
-		genPadre2[1] = -1; //Borramos el cogido del padre
+		int indices[] = new int[genHijo1.length]; //Array que contendra los indices del ciclo en padre1
+		indices[0] = 1; //Cogemos la primera ciudad distinta de Madrid
+		int siguiente = genPadre2[1]; //Miramos cual es la ciudad siguiente a buscar
+		genPadre2[1] = -1; //Borramos esa ciudad del padre 2
 		int i = 1;
-		while(i < SpainMap.getNumberOfCities())
+		while(siguiente != genPadre1[1] && i < SpainMap.getNumberOfCities())
 		{
-			//Cogemos el indicie del numero a buscar en padre1
-			int indx = FAuxiliares.indiceDe(genPadre1, siguiente);
-			if(FAuxiliares.numeroEnArray(ciclo, siguiente))
-			{
-				//Si ya existe (ciclo cerrado) salimos
-				break;
-			}
-			ciclo[i] = genPadre1[indx]; //Guardar ciudad
-			indices[i] = indx;
-			siguiente = genPadre2[indx]; //Siguiente ciudad cogida del padre 2
-			genPadre2[indx] = -1;
+			indices[i] = FAuxiliares.indiceDe(genPadre1, siguiente);
+
+			siguiente = genPadre2[indices[i]];
+			genPadre2[indices[i]] = -1;
 			i++;
 		}
-		//Rellenamos el hijo con los valores del ciclo
+		//Copiamos los valores del ciclo en el hijo
 		for(int j = 0; j < i; j++)
 		{
-			genHijo1[indices[j]] = ciclo[j];
+			genHijo1[indices[j]] = genPadre1[indices[j]];
 		}
-		//Copiamos el resto
-		for(i = 0; i < genHijo1.length; i++)
+		//Copiamos el resto de ciudades
+		for(int j = 0; j < genPadre1.length; j++)
 		{
-			if(genPadre2[i] != -1)
+			if(genHijo1[j] == -1)
 			{
-				genHijo1[i] = genPadre2[i];
+				//Buscamos una ciudad sin asignar
+				int k = 1;
+				while(genPadre2[k] == -1)
+				{
+					k++;
+				}
+				
+				genHijo1[j] = genPadre2[k];
+				genPadre2[k] = -1;
 			}
+			
 		}
 		
 		//Hijo2
 		genPadre2 = p2.getGenotipo();
-		//Creamos el ciclo
-		Arrays.fill(ciclo, -1);
-		ciclo[0] = genPadre2[1];
-		indices[0] = 1;
-		siguiente = genPadre1[1];
-		genPadre1[0] = -1;
-		genPadre1[1] = -1; //Borramos el cogido del padre
+		indices = new int[genHijo2.length]; //Array que contendra los indices del ciclo en padre1
+		indices[0] = 1; //Cogemos la primera ciudad distinta de Madrid
+		siguiente = genPadre1[1]; //Miramos cual es la ciudad siguiente a buscar
+		genPadre1[1] = -1; //Borramos esa ciudad del padre 2
 		i = 1;
-		while(i < SpainMap.getNumberOfCities())
+		while(siguiente != genPadre2[1] && i < SpainMap.getNumberOfCities())
 		{
-			int indx = FAuxiliares.indiceDe(genPadre2, siguiente);
-			if(FAuxiliares.numeroEnArray(ciclo, genPadre2[indx]))
-			{
-				break;
-			}
-			ciclo[i] = genPadre2[indx];
-			indices[i] = indx;
-			siguiente = genPadre1[indx];
-			genPadre1[indx] = -1;
+			indices[i] = FAuxiliares.indiceDe(genPadre2, siguiente);
+
+			siguiente = genPadre1[indices[i]];
+			genPadre1[indices[i]] = -1;
 			i++;
 		}
-		//Rellenamos el hijo con los valores del ciclo
+		//Copiamos los valores del ciclo en el hijo
 		for(int j = 0; j < i; j++)
 		{
-			genHijo2[indices[j]] = ciclo[j];
+			genHijo2[indices[j]] = genPadre2[indices[j]];
 		}
-		//Copiamos el resto
-		for(i = 0; i < genHijo2.length; i++)
+		//Copiamos el resto de ciudades
+		for(int j = 0; j < genPadre2.length; j++)
 		{
-			if(genPadre1[i] != -1)
+			if(genHijo2[j] == -1)
 			{
-				genHijo2[i] = genPadre1[i];
+				//Buscamos una ciudad sin asignar
+				int k = 1;
+				while(genPadre1[k] == -1)
+				{
+					k++;
+				}
+				
+				genHijo2[j] = genPadre1[k];
+				genPadre1[k] = -1;
 			}
+			
 		}
 		
 		h1.setGenotipo(genHijo1);
