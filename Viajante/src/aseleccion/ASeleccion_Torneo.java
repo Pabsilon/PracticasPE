@@ -4,6 +4,10 @@ import java.util.Random;
 
 import implementation.Cromosoma;
 
+/** Implementacion de la seleccion de torneo
+ * @author Jorge Sanchez
+ *
+ */
 public class ASeleccion_Torneo implements ASeleccion {
 	
 	private int _participantes; //Numero de participantes en el torneo

@@ -5,9 +5,12 @@ import java.util.Random;
 
 import implementation.Cromosoma;
 import implementation.FAuxiliares;
-import implementation.Fabrica_ACruce;
 import implementation.SpainMap;
 
+/** Implementacion del Cruce PMX
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_PMX implements ACruce {
 
 	@Override

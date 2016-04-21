@@ -3,15 +3,25 @@ package implementation;
 import java.util.Arrays;
 import java.util.Random;
 
+/** Implementacion de Cromosoma
+ * @author Jorge Sanchez
+ *
+ */
 public class Cromosoma {
 	
 	private int _genList[];
 	
+	/**
+	 * Builder por defecto con semilla aleatoria
+	 */
 	public Cromosoma()
 	{
 		this(new Random());
 	}
 	
+	/**Builder con semilla dada
+	 * @param rand El objeto random a utilizar
+	 */
 	public Cromosoma(Random rand)
 	{
 		//Generar genes. El gen 0 (Madrid) es fijo
@@ -35,6 +45,9 @@ public class Cromosoma {
 		}
 	}
 	
+	/** Devuelve el fenotimo
+	 * @return Un string con las ciudades recorridas.
+	 */
 	public String getFenotipo()
 	{
 		String toRet = "Madrid";
@@ -47,16 +60,25 @@ public class Cromosoma {
 		return toRet;
 	}
 	
+	/**Getter de genotipo
+	 * @return un array con el genotipo
+	 */
 	public int[] getGenotipo()
 	{
 		return _genList.clone();
 	}
 	
+	/**Setter del genotipo
+	 * @param un array con el genotipo
+	 */
 	public void setGenotipo(int[] genes){
 		_genList = genes.clone();
 	}
 
 	//TODO Se podria guardar una variable con la aptitudes una vez calculada. Así solo se calcula una vez
+	/**Calcula la distancia del recorrido del cromosoma actual.
+	 * @return
+	 */
 	public int getAptitud()
 	{
 		int sumaDistancias = 0;
@@ -69,6 +91,9 @@ public class Cromosoma {
 		return sumaDistancias;
 	}
 	
+	/**Metodo para copiar un cromosoma sin problemas de 'punteros'
+	 * @param src
+	 */
 	public void copiarCromosoma(final Cromosoma src)
 	{
 		System.arraycopy(src._genList, 0, _genList, 0, _genList.length);

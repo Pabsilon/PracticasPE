@@ -22,9 +22,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 
-/**GUI del problema. Generada con ayuda de código externo, es prácticamente ilegible.
+/**GUI del problema. Generada con ayuda de codigo externo, es practicamente ilegible.
  * Fly, you fools!
- * @author pabs
+ * @author Pablo Mac-Veigh
  *
  */
 public class GUI extends JFrame{
@@ -57,7 +57,7 @@ public class GUI extends JFrame{
 	}
 	
 	/**
-	 * Inicialización de la gui.
+	 * Inicializacion de la gui.
 	 */
 	//HERE BE DRAGONS. ABANDON ALL HOPE YE WHO ENTERS THIS PLACE
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -294,11 +294,11 @@ public class GUI extends JFrame{
 		_time.setText(Float.toString(time) + " s");
 	}
 	
-	/**Método que rellena la gráfica con la información generada.
-	 * @param mejorAbsoluto El array del mejor absoluto por generación.
-	 * @param mejorGeneracion El array de los mejores de cada generación.
-	 * @param mediaGeneracion El array de medias de cada generación.
-	 * @param numGeneraciones El número de generaciones.
+	/**Metodo que rellena la grafica con la informacion generada.
+	 * @param mejorAbsoluto El array del mejor absoluto por generacion.
+	 * @param mejorGeneracion El array de los mejores de cada generacion.
+	 * @param mediaGeneracion El array de medias de cada generacion.
+	 * @param numGeneraciones El numero de generaciones.
 	 * @param resultado El resultado obtenido.
 	 */
 	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int numGeneraciones, String resultado)

@@ -9,6 +9,10 @@ import implementation.Fabrica_AMutacion;
 import implementation.Fabrica_ASeleccion;
 import implementation.Traveler;
 
+/** Implementacion del controlador
+ * @author Pablo Mac-Veigh, Jorge Sanchez
+ *
+ */
 public class Controller {
 	
 	private GUI g;
@@ -20,6 +24,18 @@ public class Controller {
 		g = new GUI(this);
 	}
 
+	/** Lanza la simulacion y se encarga de mostrarla por la gui.
+	 * @param poblacion String de la poblacion total
+	 * @param generaciones String del numero de generaciones
+	 * @param metodoSeleccion String del metodo de seleccion
+	 * @param elitismo Boolean sobre si usamos elitismo
+	 * @param porcentageCruce String del porcentaje de cruce
+	 * @param metodoCruce String del Metodo de cruce
+	 * @param participantes String del numero de participantes en el cruce (en caso de torneo)
+	 * @param porcentageMutacion String del porcentaje de participacion
+	 * @param metodoMutacion String del metodo de mutacion
+	 * @param semilla String de la semilla (para generar la misma poblacion inicial)
+	 */
 	void startSimulation(String poblacion, String generaciones, String metodoSeleccion, boolean elitismo, String porcentageCruce, String metodoCruce, String participantes, String porcentageMutacion, String metodoMutacion, String semilla) {
 		
 		long timeAgo = System.currentTimeMillis();

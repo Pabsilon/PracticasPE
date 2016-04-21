@@ -4,17 +4,20 @@ import java.util.Random;
 
 import implementation.Cromosoma;
 
+/** Implementacion de la mutacion por inversión.
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class AMutacion_Inversion implements AMutacion {
 
-	// La mutaciï¿½n por inversiï¿½n coje dos puntos de la cadena e invierte el orden de los elementos entre esos puntos.
-	// abc|def|ghi => abc|fed|ghi
+	
+	/* (non-Javadoc)
+	 * 
+	 * Se eligen dos puntos de la cadena de genes, y se invierten estos.
+	 * 
+	 * @see amutacion.AMutacion#mutar(implementation.Cromosoma[], float, java.util.Random)
+	 */
 	public void mutar(Cromosoma[] poblacion, float mutacionProb, Random rand) {
-
-		
-		//TODO Preguntar sobre la posibilidad de mutaciï¿½n, si hay varias mutaciones.
-		//TODO Preguntar si se trata de la inversiï¿½n simple (invertir la cadena sobre el mismo sitio) o normal (invirtiendo la cadena
-		//y metiendola en un punto aleatorio)
-		
 		//para toda la poblacion
 		for(int i =0; i< poblacion.length; i++){
 			
@@ -43,7 +46,7 @@ public class AMutacion_Inversion implements AMutacion {
 					
 					//La devolvemos a su sitio.
 					System.arraycopy(copia, 0, alelos, inicio, fin-inicio+1);
-					poblacion[i].setGenotipo(alelos); //TODO utilizar otro mï¿½todo
+					poblacion[i].setGenotipo(alelos);
 				}
 			}
 		}

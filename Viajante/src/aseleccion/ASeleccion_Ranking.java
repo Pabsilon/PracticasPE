@@ -7,7 +7,10 @@ import java.util.Random;
 import implementation.Cromosoma;
 import javafx.util.Pair;
 
-//TODO Preguntar al profe si javafx.util.Pair la cambiamos por una creada por nosotros
+/**Implementacion de la seleccion por ranking.
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class ASeleccion_Ranking implements ASeleccion {
 
 	private final float _beta = 1.5f;

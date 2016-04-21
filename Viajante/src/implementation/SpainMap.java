@@ -3,6 +3,10 @@ package implementation;
 import java.util.Arrays;
 import java.util.List;
 
+/** Implementacion de las distancias en el mapa de Espana.
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class SpainMap {
 	
 	public SpainMap(){
@@ -45,11 +49,19 @@ public class SpainMap {
 			"A_Coruna",	"Cuenca",	"Gerona",	"Granada",	"Guadalajara",	"Huelva",	"Huesca",
 			"Jaen",	"Leon",	"Lerida",	"Logrono",	"Lugo",	"Madrid",	"Malaga",	"Murcia");
 	
+	/**
+	 * @return El numero de ciudades.
+	 */
 	public static int getNumberOfCities()
 	{
 		return _CITIES.size();
 	}
 	
+	/**Devuelve la distancia entre dos ciudades
+	 * @param cityID1 La primera ciudad
+	 * @param cityID2 La segunda ciudad
+	 * @return La distancia entre las dos
+	 */
 	public static int getDistance(int cityID1,int cityID2){
 		int distance = 0;
 		if (cityID1==cityID2){
@@ -62,10 +74,18 @@ public class SpainMap {
 		return distance;
 	}
 	
+	/** Getter del numero de una ciudad
+	 * @param city El nombre de la ciudad
+	 * @return El numero que tiene esa ciudad.
+	 */
 	public static int getCityID(String city){
 		return _CITIES.indexOf(city);
 	}
 	
+	/** Getter del nombre de una ciudad
+	 * @param cityID el numero de la ciudad
+	 * @return el nombre de la ciudad
+	 */
 	public static String getCityName(int cityID){
 		return _CITIES.get(cityID);
 	}

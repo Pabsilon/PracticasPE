@@ -2,6 +2,10 @@ package acruce;
 
 import implementation.Cromosoma;
 
+/** Implementacion de un cruce propio.
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_Propio implements ACruce {
 
 	@Override

@@ -2,6 +2,10 @@ package acruce;
 
 import implementation.Cromosoma;
 
+/** Implementacion de un cruce aplicando variantes de OX
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_VariantesOX implements ACruce {
 
 	@Override

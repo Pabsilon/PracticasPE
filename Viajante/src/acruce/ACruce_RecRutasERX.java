@@ -2,6 +2,10 @@ package acruce;
 
 import implementation.Cromosoma;
 
+/**Implementacion del cruce por recombinacion de rutas ERX
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_RecRutasERX implements ACruce {
 
 	@Override

@@ -10,6 +10,10 @@ import aseleccion.ASeleccion;
 import javafx.util.Pair;
 
 //Distancia optima dada por el profesor: 5298
+/**Implementacion del Viajante
+ * @author Jorge Sanchez, Pablo Mac-Veigh
+ *
+ */
 public class Traveler 
 {
 	private Cromosoma _poblacion[];
@@ -25,6 +29,17 @@ public class Traveler
 	private Cromosoma _mejorCromosoma;
 	
 	
+	/**Constructora de Traveler
+	 * @param tamanoPoblacion El tamaño de la poblacion
+	 * @param generaciones El numero de generaciones
+	 * @param semilla La semilla utilizada para generar la poblacion inicial
+	 * @param agc El algoritmo de cruce
+	 * @param agm El algoritmo de mutacion
+	 * @param ags El algoritmo de seleccion
+	 * @param cruceProbabilidad La probabilidad de Cruce
+	 * @param mutacionProbabilidad La probabilidad de Mutacion
+	 * @param elitismo Si hay elitismo
+	 */
 	public Traveler(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo)
 	{
 		_generacionTotales = generaciones;
@@ -54,6 +69,12 @@ public class Traveler
 	}
 
 	//Ejecuta las generaciones y devuelve el mejor elemento
+	/**Ejecuta las generaciones y devuelve el mejor elemento
+	 * @param mejorAbsoluto Array que contiene el mejor absoluto hasta esta generacion
+	 * @param mejorGeneracion Array que contiene el mejor de la generacion en esta generacion
+	 * @param mediaGeneracion Array que contiene la media de la generacion en esta generacion
+	 * @return El mejor valor encontrado
+	 */
 	public String ejecutarAlgoritmo(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
 		//Variables auxiliares
@@ -117,7 +138,14 @@ public class Traveler
 		return _mejorCromosoma.getFenotipo();
 	}
 	
-	//Evalua la poblacion. Calcula diferentes datos y devuelve aptitudes, elites y actualiza las arrays de datos para mostrar
+	/**Evalua la poblacion. Calcula diferentes datos y devuelve aptitudes, elites y actualiza las arrays de datos para mostrar
+	 * @param aptitudes El array de aptitudes
+	 * @param elites El array de los elites
+	 * @param mejorAbsoluto El array del mejor absoluto 
+	 * @param mejorGeneracion El array del mejor de la generacion
+	 * @param mediaGeneracion El array de la media de la generacion
+	 * @param generacion la generacion actual
+	 */
 	private void evaluar(int[] aptitudes, Cromosoma[] elites, double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion)
 	{
 		//Generamos aptitudes, su media, mejor elemento (minima aptitud)
@@ -165,6 +193,10 @@ public class Traveler
 		
 	}
 	
+	/** Devuelve a la elite
+	 * @param aptitudes las aptitudes de la poblacion
+	 * @param elites el array de los elites
+	 */
 	private void recuperarElites(int aptitudes[], Cromosoma elites[])
 	{
 		Comparator<javafx.util.Pair<Integer, Integer>> comparador;
@@ -195,6 +227,9 @@ public class Traveler
 		}
 	}
 	
+	/**Devuelve la semilla utilizada para generar la poblacion inicial
+	 * @return
+	 */
 	public long getSemilla(){
 		return _semilla;
 	}

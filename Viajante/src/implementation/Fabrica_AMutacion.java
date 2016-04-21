@@ -7,8 +7,16 @@ import amutacion.AMutacion_Intercambio;
 import amutacion.AMutacion_Inversion;
 import amutacion.AMutacion_Propio;
 
+/** Implementacion de la fabrica de Mutacion
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class Fabrica_AMutacion {
 	
+	/**Fabrica de algoritmos de mutacion
+	 * @param algoritmo El string del nombre del algoritmo
+	 * @return el algoritmo inicializado.
+	 */
 	public static AMutacion generarAlgoritmoMutacion(String algoritmo){
 		// {"Insercion", "Intercambio", "Inversion", "Heuristica", "Propio"};
 		switch (algoritmo){

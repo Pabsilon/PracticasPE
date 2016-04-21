@@ -6,9 +6,12 @@ import java.util.Random;
 import java.util.Vector;
 
 import implementation.Cromosoma;
-import implementation.FAuxiliares;
 import implementation.SpainMap;
 
+/** Implementacion de cruce por Coordinación Ordinal
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_CodOrdinal implements ACruce {
 
 	@Override

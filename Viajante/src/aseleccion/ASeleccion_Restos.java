@@ -4,6 +4,10 @@ import java.util.Random;
 
 import implementation.Cromosoma;
 
+/** Implementacion de la seleccion por restos.
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class ASeleccion_Restos implements ASeleccion {
 
 	

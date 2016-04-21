@@ -6,9 +6,12 @@ import implementation.Cromosoma;
 import implementation.FAuxiliares;
 import implementation.SpainMap;
 
+/** Implementacion del cruce por ciclos.
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_CiclosCX implements ACruce {
 
-	@Override
 	public void cruzar(Cromosoma p1, Cromosoma p2, Cromosoma h1, Cromosoma h2) 
 	{
 		int[] genPadre1 = p1.getGenotipo();

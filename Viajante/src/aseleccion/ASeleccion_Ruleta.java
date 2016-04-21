@@ -4,6 +4,10 @@ import java.util.Random;
 
 import implementation.Cromosoma;
 
+/** Implementacion de la seleccion por ruleta
+ * @author Jorge Sanchez
+ *
+ */
 public class ASeleccion_Ruleta implements ASeleccion
 {
 	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados)

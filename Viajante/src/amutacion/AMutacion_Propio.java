@@ -3,12 +3,20 @@ package amutacion;
 import java.util.Random;
 
 import implementation.Cromosoma;
+import implementation.FAuxiliares;
 
+/** Implementacion del algorimo propio de mutacion.
+ *  Es una mezcla entre inversion e insercion
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class AMutacion_Propio implements AMutacion {
-	
-	
-	//Se trata de una mutacion que mezcla inversión e inserción.
-	@Override
+	/* (non-Javadoc)
+	 * 
+	 * Elegimos dos puntos, invertimos los valores entre esos dos puntos y los insertamos en una poscion aleatoria de los genes.
+	 * 
+	 * @see amutacion.AMutacion#mutar(implementation.Cromosoma[], float, java.util.Random)
+	 */
 	public void mutar(Cromosoma[] poblacion, float mutacionProb, Random rand) {
 		for(int i =0; i< poblacion.length; i++){
 			
@@ -40,10 +48,10 @@ public class AMutacion_Propio implements AMutacion {
 					int pInsercion = (int) Math.floor((alelos.length-copia.length-1)*rand.nextFloat()+1);
 					int[] aux = alelos.clone();
 					for (int j = 0; j<copia.length; j++){
-						aux = removeElement(aux, copia[j]);
+						aux = FAuxiliares.removeElement(aux, copia[j]);
 					}
 					for (int j = pInsercion; j<pInsercion + copia.length; j++){
-						aux = insertElement(aux, j, copia[j-pInsercion]);
+						aux = FAuxiliares.insertElement(aux, j, copia[j-pInsercion]);
 					}
 					
 					
@@ -53,34 +61,4 @@ public class AMutacion_Propio implements AMutacion {
 			}
 		}
 	}
-	
-	private int[] insertElement(int[] array, int pos, int k) {
-		final int length = array.length;
-		int result[] = new int[length+1];
-		if (array != null) {
-			System.arraycopy(array, 0, result, 0, pos);
-			result[pos]=k;
-			System.arraycopy(array, pos, result, pos +1, length-pos);
-		}
-		return result;
-	}
-	
-	private int[] removeElement(int[] array, int element) {
-        if (array != null) {
-            final int length = array.length;
-            for (int i = 0; i < length; i++) {
-                if (array[i] == element) {
-                    if (length == 1) {
-                        return null;
-                    }
-                    int[] result = new int[length-1];
-                    System.arraycopy(array, 0, result, 0, i);
-                    System.arraycopy(array, i + 1, result, i, length - i - 1);
-                    return result;
-                }
-            }
-        }
-        return array;
-    }
-
 }

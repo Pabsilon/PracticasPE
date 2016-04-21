@@ -6,12 +6,16 @@ import java.util.PriorityQueue;
 import implementation.Cromosoma;
 import javafx.util.Pair;
 
+/** Implementacion de la seleccion por Truncamiento.
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class Aseleccion_Truncamiento implements ASeleccion {
 	
 	private final float _porcentaje = 0.25f;
 
-	//El algoritmo de selección por truncamiento elige el top % de una población y llena 
-	//la nueva población con esos individuos
+	//El algoritmo de seleccion por truncamiento elige el top 25 de una poblacion y llena 
+	//la nueva poblacion con esos individuos
 	
 	public void seleccionar(Cromosoma[] poblacion, int[] aptitudes, Cromosoma[] seleccionados) {
 		
@@ -19,7 +23,7 @@ public class Aseleccion_Truncamiento implements ASeleccion {
 		int numCopias = poblacion.length / aCopiar;
 		Comparator<javafx.util.Pair<Integer, Integer>> comparador;
 		//Para arreglar el fallo de JavaFX:
-		//JRE System Libraries -> Click Derecho -> Propiedades, Cambiar a "Workspace Default" (3era opción)
+		//JRE System Libraries -> Click Derecho -> Propiedades, Cambiar a "Workspace Default" (3era opcion)
 		comparador = new Comparator<javafx.util.Pair<Integer, Integer>>()
 		{
 

@@ -7,6 +7,10 @@ import implementation.Cromosoma;
 import implementation.FAuxiliares;
 import implementation.SpainMap;
 
+/** Implementación del cruce OX
+ * @author Jorge Sanchez
+ *
+ */
 public class ACruce_OX implements ACruce {
 
 	@Override

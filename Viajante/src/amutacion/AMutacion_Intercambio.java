@@ -4,6 +4,10 @@ import java.util.Random;
 
 import implementation.Cromosoma;
 
+/**Implementacion de la mutacion por intercambio
+ * @author Pablo Mac-Veigh
+ *
+ */
 public class AMutacion_Intercambio implements AMutacion {
 
 	@Override
@@ -13,11 +17,14 @@ public class AMutacion_Intercambio implements AMutacion {
 			int alelos[] = poblacion[i].getGenotipo();
 			for (int j = 1; j<alelos.length; j++){
 				if (rand.nextFloat()<mutacionProb){
-					int exchange = (int) (alelos.length * rand.nextFloat());
+					//Elegimos el elemento a intercambiar
+					int exchange = (int) (alelos.length-1 * rand.nextFloat()+1);
 					int aux = alelos[j];
+					//Lo intercambiamos
 					alelos[j]=alelos[exchange];
 					alelos[exchange]=aux;
-					poblacion[i].setGenotipo(alelos); //TODO utilizar otro m�todo
+					//cambiamos el genotipo
+					poblacion[i].setGenotipo(alelos);
 				}
 			}
 		}
