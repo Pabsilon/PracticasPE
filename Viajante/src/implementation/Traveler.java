@@ -32,7 +32,7 @@ public class Traveler
 		_ags = ags;
 		_agm = agm;
 		_probabilidadCruce = cruceProbabilidad;
-		_probabilidadMutacion = mutacionProbabilidad;
+		_probabilidadMutacion = mutacionProbabilidad/100;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
 		

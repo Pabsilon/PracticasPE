@@ -16,7 +16,7 @@ public class AMutacion_Insercion implements AMutacion {
 				if (rand.nextFloat()<mutacionProb){
 					int exchange = alelos[j];
 					alelos = removeElement(alelos, exchange).clone();
-					alelos = insertElement(alelos, (int)(alelos.length * rand.nextFloat()),exchange).clone();
+					alelos = insertElement(alelos, (int)(1+(alelos.length-1) * rand.nextFloat()),exchange).clone();
 				}
 			}
 			poblacion[i].setGenotipo(alelos);
