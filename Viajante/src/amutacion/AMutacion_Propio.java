@@ -10,7 +10,7 @@ public class AMutacion_Propio implements AMutacion {
 	//Se trata de una mutacion que mezcla inversión e inserción.
 	@Override
 	public void mutar(Cromosoma[] poblacion, float mutacionProb, Random rand) {
-for(int i =0; i< poblacion.length; i++){
+		for(int i =0; i< poblacion.length; i++){
 			
 			if (rand.nextFloat()<mutacionProb){
 				int[] alelos = poblacion[i].getGenotipo();
@@ -18,7 +18,7 @@ for(int i =0; i< poblacion.length; i++){
 				int fin;
 				
 				//Buscamos el primer punto de la inversion				
-				inicio = (int) Math.floor((alelos.length-1)*rand.nextFloat());
+				inicio = (int) Math.floor((alelos.length-1)*rand.nextFloat()+1);
 				
 				//Calculamos un segundo punto para la inversion.
 				fin = (int) Math.floor((alelos.length-inicio)*rand.nextFloat());
@@ -36,18 +36,51 @@ for(int i =0; i< poblacion.length; i++){
 					}
 					
 					//La devolvemos a un sitio aleatorio
-					//TODO
+					//Punto Aleatorio:
+					int pInsercion = (int) Math.floor((alelos.length-copia.length-1)*rand.nextFloat()+1);
+					int[] aux = alelos.clone();
+					for (int j = 0; j<copia.length; j++){
+						aux = removeElement(aux, copia[j]);
+					}
+					for (int j = pInsercion; j<pInsercion + copia.length; j++){
+						aux = insertElement(aux, j, copia[j-pInsercion]);
+					}
 					
 					
 					
-					System.arraycopy(copia, 0, alelos, inicio, fin-inicio+1);
-					
-					
-					
-					poblacion[i].setGenotipo(alelos); //TODO utilizar otro m�todo
+					poblacion[i].setGenotipo(aux);
 				}
 			}
 		}
 	}
+	
+	private int[] insertElement(int[] array, int pos, int k) {
+		final int length = array.length;
+		int result[] = new int[length+1];
+		if (array != null) {
+			System.arraycopy(array, 0, result, 0, pos);
+			result[pos]=k;
+			System.arraycopy(array, pos, result, pos +1, length-pos);
+		}
+		return result;
+	}
+	
+	private int[] removeElement(int[] array, int element) {
+        if (array != null) {
+            final int length = array.length;
+            for (int i = 0; i < length; i++) {
+                if (array[i] == element) {
+                    if (length == 1) {
+                        return null;
+                    }
+                    int[] result = new int[length-1];
+                    System.arraycopy(array, 0, result, 0, i);
+                    System.arraycopy(array, i + 1, result, i, length - i - 1);
+                    return result;
+                }
+            }
+        }
+        return array;
+    }
 
 }

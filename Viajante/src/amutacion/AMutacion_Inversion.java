@@ -24,7 +24,7 @@ public class AMutacion_Inversion implements AMutacion {
 				int fin;
 				
 				//Buscamos el primer punto de la inversion				
-				inicio = (int) Math.floor((alelos.length-1)*rand.nextFloat());
+				inicio = (int) Math.floor((alelos.length-1)*rand.nextFloat()+1);
 				
 				//Calculamos un segundo punto para la inversion.
 				fin = (int) Math.floor((alelos.length-inicio)*rand.nextFloat());
