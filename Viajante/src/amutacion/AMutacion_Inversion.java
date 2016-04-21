@@ -30,8 +30,6 @@ public class AMutacion_Inversion implements AMutacion {
 				fin = (int) Math.floor((alelos.length-inicio)*rand.nextFloat());
 				fin+=inicio;
 				
-				System.out.println("Inicio: "+inicio);
-				System.out.println("Fin: "+fin);
 				if (fin!=0){
 					int[] copia = new int[fin-inicio+1];
 					System.arraycopy(alelos, inicio, copia, 0, fin-inicio+1);
