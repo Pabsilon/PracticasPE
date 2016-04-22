@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.math.plot.Plot2DPanel;
@@ -37,7 +38,9 @@ public class GUI extends JFrame{
 	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
 	JPanel _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	//Labels
-	JLabel _realizadoEn, _time,_labelMutacion, _labelCruce, _labelMejorResultado, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
+	JLabel _realizadoEn, _time,_labelMutacion, _labelCruce, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
+
+	JTextArea _labelMejorResultado;
 	//ComboBox
 	@SuppressWarnings("rawtypes")
 	JComboBox _comboBoxSeleccion, _tipoSeleccion ,_comboBoxMutacion, _comboBoxCruce;
@@ -66,7 +69,7 @@ public class GUI extends JFrame{
 		//Principal
 		_panelPrincipal = new JPanel(new BorderLayout());
 		_panelOpciones = new JPanel();
-		_panelGrafica = new JPanel(new BorderLayout());
+		_panelGrafica = new JPanel();
 		_panelPrincipal.add(_panelOpciones, BorderLayout.LINE_START);
 		_panelPrincipal.add(_panelGrafica, BorderLayout.CENTER);
 		
@@ -260,17 +263,25 @@ public class GUI extends JFrame{
 				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText());
 			}
 		});
+		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
 		
 		//Grafica
 		_plot = new Plot2DPanel();
-		_panelGrafica.add(_plot, BorderLayout.CENTER);
+		_panelGrafica.add(_plot, "cell 0 0,grow");
 		
 		//Resultados
 		_panelResultados = new JPanel();
-		_labelMejorResultado = new JLabel();
-		_panelResultados.add(_labelMejorResultado);
+		_panelResultados.setLayout(new MigLayout("", "[960px]", "[15px]"));
+		_labelMejorResultado = new JTextArea(1,80);
+		_labelMejorResultado.setLineWrap(true);
+		_labelMejorResultado.setEditable(false);  
+		_labelMejorResultado.setCursor(null);  
+		_labelMejorResultado.setOpaque(false);  
+		_labelMejorResultado.setFocusable(false);
+		_labelMejorResultado.setWrapStyleWord(true);
+		_panelResultados.add(_labelMejorResultado, "cell 0 0");
 		
-		_panelGrafica.add(_panelResultados, BorderLayout.PAGE_END);
+		_panelGrafica.add(_panelResultados, "cell 0 1,growx,aligny top");
 		
 		//Frame
 		this.setContentPane(_panelPrincipal);
@@ -317,7 +328,6 @@ public class GUI extends JFrame{
 		_plot.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
 		_plot.addLinePlot("Mejor Generacion", x, mejorGeneracion);
 		_plot.addLinePlot("Media Generacion", x, mediaGeneracion);
-		
 		_labelMejorResultado.setText(resultado);
 	}
 }

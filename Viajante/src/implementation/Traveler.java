@@ -30,7 +30,7 @@ public class Traveler
 	
 	
 	/**Constructora de Traveler
-	 * @param tamanoPoblacion El tamaño de la poblacion
+	 * @param tamanoPoblacion El tamaï¿½o de la poblacion
 	 * @param generaciones El numero de generaciones
 	 * @param semilla La semilla utilizada para generar la poblacion inicial
 	 * @param agc El algoritmo de cruce
@@ -135,7 +135,7 @@ public class Traveler
 			
 		}
 		
-		return _mejorCromosoma.getFenotipo();
+		return "Distancia: " +_mejorCromosoma.getAptitud() + "\nRecorrido: " +_mejorCromosoma.getFenotipo();
 	}
 	
 	/**Evalua la poblacion. Calcula diferentes datos y devuelve aptitudes, elites y actualiza las arrays de datos para mostrar
