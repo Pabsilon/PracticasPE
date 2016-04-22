@@ -25,7 +25,7 @@ public class ASeleccion_Restos implements ASeleccion {
 		//Generar puntuaciones acumuladas
 		float puntuaciones[] = new float[poblacion.length];
 		float puntuacionesAcum[] = new float[poblacion.length];
-		int sumaAptitudes = 0;
+		float sumaAptitudes = 0;
 		for(int i = 0; i < poblacion.length; i++)
 		{
 			sumaAptitudes += aptitudes[i];
