@@ -79,7 +79,7 @@ public class GUI extends JFrame{
 		_textFieldN = new JTextField("1");
 		_textFieldN.setPreferredSize(new Dimension(70,25));
 		String[] seleccionS = {"Ruleta", "Torneo", "Ranking", "Restos", "Truncamiento"};
-		String[] cruceS = {"PMX", "OX", "Variantes OX", "Ciclos (CX)", "Rec.Rutas (ERX)", "Cod. Ordinal", "Propio"};
+		String[] cruceS = {"PMX", "OX", "OX_PP", "OX_OP", "Ciclos (CX)", "Rec.Rutas (ERX)", "Cod. Ordinal", "Propio"};
 		String[] mutacionS = {"Insercion", "Intercambio", "Inversion", "Heuristica", "Propio"};
 		_tipoSeleccion = new JComboBox(seleccionS);
 		_tipoSeleccion.setPreferredSize(new Dimension(215,25));
