@@ -110,6 +110,8 @@ public class FAuxiliares
 		HashSet<Integer> aux = new HashSet<Integer>();
 		  for (int i : gen)
 		  {
+			  if(i == -1)
+				  return false;
 		    if (aux.contains(i)) 
 		    	return false;
 		    aux.add(i);
