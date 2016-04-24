@@ -352,6 +352,7 @@ public class GUI extends JFrame{
 		_panelMapa.removeAll();
 		
 		Graph graph = new SingleGraph("Mapa");
+		graph.addAttribute("ui.antialias");
 		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		//viewer.enableAutoLayout();
 		
@@ -360,6 +361,7 @@ public class GUI extends JFrame{
 		{
 			Node nod = graph.addNode(SpainMap.getCityName(i));
 			nod.addAttribute("ui.label", SpainMap.getCityName(i));
+			nod.addAttribute("ui.frozen");
 			if(SpainMap.getCityName(i) == "Madrid"){
 				nod.addAttribute("ui.style", "fill-color: rgb(0,100,255);");
 				nod.addAttribute("xy", -3.41, 40.20 );
