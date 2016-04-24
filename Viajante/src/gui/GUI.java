@@ -352,6 +352,8 @@ public class GUI extends JFrame{
 	
 	public void drawCities(int[] resultado)
 	{
+		_panelMapa.removeAll();
+		
 		Graph graph = new SingleGraph("Mapa");
 		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		viewer.enableAutoLayout();
