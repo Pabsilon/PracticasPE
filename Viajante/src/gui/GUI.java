@@ -368,92 +368,92 @@ public class GUI extends JFrame{
 		
 		for(int i : resultado)
 		{
-			Node nod = graph.addNode(SpainMap.getCityName(i));
-			nod.addAttribute("ui.label", SpainMap.getCityName(i));
+			Node nod = graph.addNode(SpainMap.getCityName(resultado[i]));
+			nod.addAttribute("ui.label", SpainMap.getCityName(resultado[i]));
 			nod.addAttribute("ui.frozen");
-			if(SpainMap.getCityName(i) == "Madrid"){
+			if(SpainMap.getCityName(resultado[i]) == "Madrid"){
 				nod.addAttribute("ui.style", "fill-color: rgb(0,100,255);");
 				nod.addAttribute("xy", -3.41, 40.20 );
 			}
-			if(SpainMap.getCityName(i) == "Albacete"){
+			if(SpainMap.getCityName(resultado[i]) == "Albacete"){
 				nod.addAttribute("xy", -1.52, 39.00 );
 			}
-			if(SpainMap.getCityName(i) == "Alicante"){
+			if(SpainMap.getCityName(resultado[i]) == "Alicante"){
 				nod.addAttribute("xy", -0.29, 38.20 );
 			}
-			if(SpainMap.getCityName(i) == "Almeria"){
+			if(SpainMap.getCityName(resultado[i]) == "Almeria"){
 				nod.addAttribute("xy", -2.28, 36.50 );
 			}
-			if(SpainMap.getCityName(i) == "Avila"){
+			if(SpainMap.getCityName(resultado[i]) == "Avila"){
 				nod.addAttribute("xy", -4.42, 40.39 );
 			}
-			if(SpainMap.getCityName(i) == "Badajoz"){
+			if(SpainMap.getCityName(resultado[i]) == "Badajoz"){
 				nod.addAttribute("xy", -6.58, 38.53 );
 			}
-			if(SpainMap.getCityName(i) == "Barcelona"){
+			if(SpainMap.getCityName(resultado[i]) == "Barcelona"){
 				nod.addAttribute("xy", 2.11, 41.23 );
 			}
-			if(SpainMap.getCityName(i) == "Bilbao"){
+			if(SpainMap.getCityName(resultado[i]) == "Bilbao"){
 				nod.addAttribute("xy", -2.55, 43.15 );
 			}
-			if(SpainMap.getCityName(i) == "Burgos"){
+			if(SpainMap.getCityName(resultado[i]) == "Burgos"){
 				nod.addAttribute("xy", -3.42, 42.20 );
 			}
-			if(SpainMap.getCityName(i) == "Caceres"){
+			if(SpainMap.getCityName(resultado[i]) == "Caceres"){
 				nod.addAttribute("xy", -6.22, 39.28 );
 			}
-			if(SpainMap.getCityName(i) == "Cadiz"){
+			if(SpainMap.getCityName(resultado[i]) == "Cadiz"){
 				nod.addAttribute("xy", -6.18, 36.32 );
 			}
-			if(SpainMap.getCityName(i) == "Castellon"){
+			if(SpainMap.getCityName(resultado[i]) == "Castellon"){
 				nod.addAttribute("xy", -0.02, 39.59 );
 			}
-			if(SpainMap.getCityName(i) == "Ciudad_Real"){
+			if(SpainMap.getCityName(resultado[i]) == "Ciudad_Real"){
 				nod.addAttribute("xy", -3.55, 38.59);
 			}
-			if(SpainMap.getCityName(i) == "Cordoba"){
+			if(SpainMap.getCityName(resultado[i]) == "Cordoba"){
 				nod.addAttribute("xy", -4.47, 37.53 );
 			}
-			if(SpainMap.getCityName(i) == "A_Coruna"){
+			if(SpainMap.getCityName(resultado[i]) == "A_Coruna"){
 				nod.addAttribute("xy", -8.23, 43.22 );
 			}
-			if(SpainMap.getCityName(i) == "Cuenca"){
+			if(SpainMap.getCityName(resultado[i]) == "Cuenca"){
 				nod.addAttribute("xy", -2.08, 40.04 );
 			}
-			if(SpainMap.getCityName(i) == "Gerona"){
+			if(SpainMap.getCityName(resultado[i]) == "Gerona"){
 				nod.addAttribute("xy", 2.49, 41.59 );
 			}
-			if(SpainMap.getCityName(i) == "Granada"){
+			if(SpainMap.getCityName(resultado[i]) == "Granada"){
 				nod.addAttribute("xy", -3.35, 37.11 );
 			}
-			if(SpainMap.getCityName(i) == "Guadalajara"){
+			if(SpainMap.getCityName(resultado[i]) == "Guadalajara"){
 				nod.addAttribute("xy", -3.10, 40.38 );
 			}
-			if(SpainMap.getCityName(i) == "Huelva"){
+			if(SpainMap.getCityName(resultado[i]) == "Huelva"){
 				nod.addAttribute("xy", -6.57, 37.16 );
 			}
-			if(SpainMap.getCityName(i) == "Huesca"){
+			if(SpainMap.getCityName(resultado[i]) == "Huesca"){
 				nod.addAttribute("xy", -0.24, 42.08 );
 			}
-			if(SpainMap.getCityName(i) == "Jaen"){
+			if(SpainMap.getCityName(resultado[i]) == "Jaen"){
 				nod.addAttribute("xy", -3.47, 37.46 );
 			}
-			if(SpainMap.getCityName(i) == "Leon"){
+			if(SpainMap.getCityName(resultado[i]) == "Leon"){
 				nod.addAttribute("xy", -5.34, 42.36 );
 			}
-			if(SpainMap.getCityName(i) == "Lerida"){
+			if(SpainMap.getCityName(resultado[i]) == "Lerida"){
 				nod.addAttribute("xy", -0.38, 41.37 );
 			}
-			if(SpainMap.getCityName(i) == "Logrono"){
+			if(SpainMap.getCityName(resultado[i]) == "Logrono"){
 				nod.addAttribute("xy", -2.27, 42.28 );
 			}
-			if(SpainMap.getCityName(i) == "Lugo"){
+			if(SpainMap.getCityName(resultado[i]) == "Lugo"){
 				nod.addAttribute("xy", -7.33, 43.01 );
 			}
-			if(SpainMap.getCityName(i) == "Malaga"){
+			if(SpainMap.getCityName(resultado[i]) == "Malaga"){
 				nod.addAttribute("xy", -4.25, 36.43 );
 			}
-			if(SpainMap.getCityName(i) == "Murcia"){
+			if(SpainMap.getCityName(resultado[i]) == "Murcia"){
 				nod.addAttribute("xy", -1.07, 37.59 );
 			}
 			
@@ -462,12 +462,12 @@ public class GUI extends JFrame{
 		
 		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
-			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
+			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
+			ed.addAttribute("ui.label", SpainMap.getDistance(resultado[i - 1], resultado[i]));
 		}
 		
-		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
-		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
+		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]), SpainMap.getCityName(resultado[resultado.length - 1]));
+		ed.addAttribute("ui.label", SpainMap.getDistance(resultado[0], resultado[resultado.length - 1]));
 		
 		ViewPanel view = viewer.addDefaultView(false);
 		view.setBounds(0, 0, _panelMapaOrdenado.getWidth(), _panelMapaOrdenado.getHeight());
@@ -480,26 +480,27 @@ public class GUI extends JFrame{
 	{
 		_panelMapaDesordenado.removeAll();
 		
-		Graph graph = new SingleGraph("Mapa");
+		Graph graph = new SingleGraph("Mapa2");
+		graph.clear();
 		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		viewer.enableAutoLayout();
 		
 		for(int i : resultado)
 		{
-			Node nod = graph.addNode(SpainMap.getCityName(i));
-			nod.addAttribute("ui.label", SpainMap.getCityName(i));
-			if(SpainMap.getCityName(i) == "Madrid")
+			Node nod = graph.addNode(SpainMap.getCityName(resultado[i]));
+			nod.addAttribute("ui.label", SpainMap.getCityName(resultado[i]));
+			if(SpainMap.getCityName(resultado[i]) == "Madrid")
 				nod.addAttribute("ui.style", "fill-color: rgb(0,100,255);");
 		}
 		
 		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
-			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
+			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
+			ed.addAttribute("ui.label", SpainMap.getDistance(resultado[i - 1], resultado[i]));
 		}
 		
-		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
-		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
+		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]), SpainMap.getCityName(resultado[resultado.length - 1]));
+		ed.addAttribute("ui.label", SpainMap.getDistance(resultado[0], resultado[resultado.length - 1]));
 		
 		ViewPanel view = viewer.addDefaultView(false);
 		view.setBounds(0, 0, _panelMapaDesordenado.getWidth(), _panelMapaDesordenado.getHeight());
