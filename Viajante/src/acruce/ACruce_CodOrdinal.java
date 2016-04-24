@@ -84,7 +84,7 @@ public class ACruce_CodOrdinal implements ACruce {
 		
 	}
 
-	//TODO Como sabemos que es una cadena de 0 - Nº Ciudades, esto podria crearse directamente con un bucle for
+	//TODO Como sabemos que es una cadena de 0 - Nº Ciudades, esto podria crearse directamente con un bucle for. Pero por si acaso cambia en un futuro dejarlo asi...
 	private void obtenerVectorOrdenado(Vector<Integer> listaDinamicaP1, Vector<Integer> listaDinamicaP2, int[] genPadre1, int[] genPadre2)
 	{
 		PriorityQueue<Integer> colaP1 = new PriorityQueue<Integer>();

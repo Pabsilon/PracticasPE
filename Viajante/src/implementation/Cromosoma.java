@@ -10,6 +10,7 @@ import java.util.Random;
 public class Cromosoma {
 	
 	private int _genList[];
+	private int _aptitud;
 	
 	/**
 	 * Builder por defecto con semilla aleatoria
@@ -24,6 +25,9 @@ public class Cromosoma {
 	 */
 	public Cromosoma(Random rand)
 	{
+		//Aptitud sin generar
+		_aptitud = -1;
+		
 		//Generar genes. El gen 0 (Madrid) es fijo
 		_genList = new int[SpainMap.getNumberOfCities()];
 		_genList[0] = SpainMap.getCityID("Madrid");
@@ -73,22 +77,27 @@ public class Cromosoma {
 	 */
 	public void setGenotipo(int[] genes){
 		_genList = genes.clone();
+		_aptitud = -1; //Recalcular aptitud
 	}
 
-	//TODO Se podria guardar una variable con la aptitudes una vez calculada. Así solo se calcula una vez
 	/**Calcula la distancia del recorrido del cromosoma actual.
 	 * @return
 	 */
 	public int getAptitud()
 	{
-		int sumaDistancias = 0;
-		for(int i = 1; i < _genList.length; i++)
+		if(_aptitud == -1)
 		{
-			sumaDistancias += SpainMap.getDistance(_genList[i-1], _genList[i]);
+			int sumaDistancias = 0;
+			for(int i = 1; i < _genList.length; i++)
+			{
+				sumaDistancias += SpainMap.getDistance(_genList[i-1], _genList[i]);
+			}
+			sumaDistancias += SpainMap.getDistance(_genList[_genList.length - 1], _genList[0]); //Distancia de la ultima a Madrid
+			
+			_aptitud = sumaDistancias;
 		}
-		sumaDistancias += SpainMap.getDistance(_genList[_genList.length - 1], _genList[0]); //Distancia de la ultima a Madrid
 		
-		return sumaDistancias;
+		return _aptitud;
 	}
 	
 	/**Metodo para copiar un cromosoma sin problemas de 'punteros'
@@ -97,6 +106,7 @@ public class Cromosoma {
 	public void copiarCromosoma(final Cromosoma src)
 	{
 		System.arraycopy(src._genList, 0, _genList, 0, _genList.length);
+		_aptitud = -1; //Recalcular aptitud
 	}
 
 }
