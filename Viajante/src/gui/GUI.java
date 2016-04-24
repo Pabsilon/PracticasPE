@@ -79,6 +79,7 @@ public class GUI extends JFrame{
 	private void inicializarGUI()
 	{
 		//Principal
+		this.setTitle("Practica 2: TSP");
 		_panelPrincipal = new JPanel(new BorderLayout());
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
