@@ -28,6 +28,7 @@ public class ACruce_RecRutasERX implements ACruce {
 		genHijo2[0] = SpainMap.getCityID("Madrid");		
 		
 		//Construir tabla de conectividades
+		@SuppressWarnings("unchecked")
 		HashSet<Integer> tablaConectividades[] = new HashSet[SpainMap.getNumberOfCities()];
 		for(int i = 0; i < SpainMap.getNumberOfCities(); i++)
 		{

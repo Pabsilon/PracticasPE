@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -35,8 +36,9 @@ public class GUI extends JFrame{
 	private Controller _controller;
 	
 	//Paneles
-	JPanel _panelPrincipal, _panelOpciones, _panelGrafica;
+	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapa;
 	JPanel _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelPoblacion, _panelIteraciones, _panelSemilla;
+	JTabbedPane _test;
 	//Labels
 	JLabel _realizadoEn, _time,_labelMutacion, _labelCruce, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
 
@@ -70,8 +72,12 @@ public class GUI extends JFrame{
 		_panelPrincipal = new JPanel(new BorderLayout());
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
+		_panelMapa = new JPanel();
+		_test = new JTabbedPane();
+		_test.add("Grafica", _panelGrafica);
+		_test.add("Mapa", _panelMapa);
 		_panelPrincipal.add(_panelOpciones, BorderLayout.LINE_START);
-		_panelPrincipal.add(_panelGrafica, BorderLayout.CENTER);
+		_panelPrincipal.add(_test, BorderLayout.CENTER);
 		
 		//N
 		_labelN = new JLabel("N: ");
