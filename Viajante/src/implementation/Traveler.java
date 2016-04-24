@@ -75,7 +75,7 @@ public class Traveler
 	 * @param mediaGeneracion Array que contiene la media de la generacion en esta generacion
 	 * @return El mejor valor encontrado
 	 */
-	public String ejecutarAlgoritmo(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
+	public Cromosoma ejecutarAlgoritmo(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
 		//Variables auxiliares
 		int aptitudes[] = new int[_poblacion.length];
@@ -135,7 +135,7 @@ public class Traveler
 			
 		}
 		
-		return "Distancia: " +_mejorCromosoma.getAptitud() + "\nRecorrido: " +_mejorCromosoma.getFenotipo();
+		return _mejorCromosoma;
 	}
 	
 	/**Evalua la poblacion. Calcula diferentes datos y devuelve aptitudes, elites y actualiza las arrays de datos para mostrar

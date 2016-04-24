@@ -4,6 +4,7 @@ import acruce.ACruce;
 import amutacion.AMutacion;
 import aseleccion.ASeleccion;
 import gui.GUI;
+import implementation.Cromosoma;
 import implementation.Fabrica_ACruce;
 import implementation.Fabrica_AMutacion;
 import implementation.Fabrica_ASeleccion;
@@ -55,11 +56,12 @@ public class Controller {
 		double[] mejorGeneracion = new double[Integer.parseInt(generaciones)];
 		double[] mediaGeneracion = new double[Integer.parseInt(generaciones)];
 		
-		String resultado;
-		
+		Cromosoma resultado;		
 		resultado = algoritmo.ejecutarAlgoritmo(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
 		//Rellenamos la grafica con los valores.
-		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), resultado);
+		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), "Distancia: " +resultado.getAptitud() + "\nRecorrido: " + resultado.getFenotipo());
+		//Dibujar mapa
+		g.drawCities(resultado.getGenotipo());
 		//Mostramos la semilla utilizada.
 		g.setSeed(algoritmo.getSemilla());
 		//Mostramos el tiempo de ejecucion
