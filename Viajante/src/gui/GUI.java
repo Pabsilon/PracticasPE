@@ -46,13 +46,13 @@ public class GUI extends JFrame{
 	private Controller _controller;
 	
 	//Paneles
-	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapaOrdenado, _panelMapaDesordenado;
-	JPanel _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelPoblacion, _panelIteraciones, _panelSemilla;
+	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapaOrdenado, _panelMapaDesordenado, _mapaOrdenado,_mapaDesordenado;
+	JPanel _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelResultados2, _panelResultados3, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	JTabbedPane _test;
 	//Labels
 	JLabel _realizadoEn, _time,_labelMutacion, _labelCruce, _labelSeleccion, _labelPoblacion, _labelN, _labelIteraciones, _labelSemilla;
 
-	JTextArea _labelMejorResultado;
+	JTextArea _labelMejorResultado, _labelMejorResultado2, _labelMejorResultado3;
 	//ComboBox
 	@SuppressWarnings("rawtypes")
 	JComboBox _comboBoxSeleccion, _tipoSeleccion ,_comboBoxMutacion, _comboBoxCruce;
@@ -85,6 +85,8 @@ public class GUI extends JFrame{
 		_panelGrafica = new JPanel();
 		_panelMapaOrdenado = new JPanel(new BorderLayout());
 		_panelMapaDesordenado = new JPanel(new BorderLayout());
+		_mapaOrdenado = new JPanel(new BorderLayout());
+		_mapaDesordenado = new JPanel(new BorderLayout());
 		_test = new JTabbedPane();
 		_test.add("Grafica", _panelGrafica);
 		_test.add("Mapa Ordenado", _panelMapaOrdenado);
@@ -283,10 +285,14 @@ public class GUI extends JFrame{
 			}
 		});
 		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
+		_panelMapaOrdenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
+		_panelMapaDesordenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
 		
 		//Grafica
 		_plot = new Plot2DPanel();
 		_panelGrafica.add(_plot, "cell 0 0,grow");
+		_panelMapaOrdenado.add(_mapaOrdenado, "cell 0 0,grow");
+		_panelMapaDesordenado.add(_mapaDesordenado, "cell 0 0,grow");
 		
 		//Resultados
 		_panelResultados = new JPanel();
@@ -300,7 +306,31 @@ public class GUI extends JFrame{
 		_labelMejorResultado.setWrapStyleWord(true);
 		_panelResultados.add(_labelMejorResultado, "cell 0 0");
 		
+		_panelResultados2 = new JPanel();
+		_panelResultados2.setLayout(new MigLayout("", "[960px]", "[15px]"));
+		_labelMejorResultado2 = new JTextArea(1,80);
+		_labelMejorResultado2.setLineWrap(true);
+		_labelMejorResultado2.setEditable(false);  
+		_labelMejorResultado2.setCursor(null);  
+		_labelMejorResultado2.setOpaque(false);  
+		_labelMejorResultado2.setFocusable(false);
+		_labelMejorResultado2.setWrapStyleWord(true);
+		_panelResultados2.add(_labelMejorResultado2, "cell 0 0");
+		
+		_panelResultados3 = new JPanel();
+		_panelResultados3.setLayout(new MigLayout("", "[960px]", "[15px]"));
+		_labelMejorResultado3 = new JTextArea(1,80);
+		_labelMejorResultado3.setLineWrap(true);
+		_labelMejorResultado3.setEditable(false);  
+		_labelMejorResultado3.setCursor(null);  
+		_labelMejorResultado3.setOpaque(false);  
+		_labelMejorResultado3.setFocusable(false);
+		_labelMejorResultado3.setWrapStyleWord(true);
+		_panelResultados3.add(_labelMejorResultado3, "cell 0 0");
+		
 		_panelGrafica.add(_panelResultados, "cell 0 1,growx,aligny top");
+		_panelMapaOrdenado.add(_panelResultados2, "cell 0 1,growx,aligny top");
+		_panelMapaDesordenado.add(_panelResultados3, "cell 0 1,growx,aligny top");
 		
 		//Frame
 		this.setContentPane(_panelPrincipal);
@@ -348,6 +378,8 @@ public class GUI extends JFrame{
 		_plot.addLinePlot("Mejor Generacion", x, mejorGeneracion);
 		_plot.addLinePlot("Media Generacion", x, mediaGeneracion);
 		_labelMejorResultado.setText(resultado);
+		_labelMejorResultado2.setText(resultado);
+		_labelMejorResultado3.setText(resultado);
 	}
 	
 	public void drawCities(int[] resultado)
@@ -358,7 +390,7 @@ public class GUI extends JFrame{
 	
 	private void crearMapaOrdenado(int[] resultado)
 	{
-		_panelMapaOrdenado.removeAll();
+		_mapaOrdenado.removeAll();
 		
 		Graph graph = new SingleGraph("Mapa");
 		graph.addAttribute("ui.antialias");
@@ -470,15 +502,15 @@ public class GUI extends JFrame{
 		ed.addAttribute("ui.label", SpainMap.getDistance(resultado[0], resultado[resultado.length - 1]));
 		
 		ViewPanel view = viewer.addDefaultView(false);
-		view.setBounds(0, 0, _panelMapaOrdenado.getWidth(), _panelMapaOrdenado.getHeight());
-		_panelMapaOrdenado.add(view, BorderLayout.CENTER);
-		_panelMapaOrdenado.repaint();
-		_panelMapaOrdenado.validate();		
+		view.setBounds(0, 0, _mapaOrdenado.getWidth(), _mapaOrdenado.getHeight());
+		_mapaOrdenado.add(view, BorderLayout.CENTER);
+		_mapaOrdenado.repaint();
+		_mapaOrdenado.validate();		
 	}
 	
 	private void crearMapaDesordenado(int resultado[])
 	{
-		_panelMapaDesordenado.removeAll();
+		_mapaDesordenado.removeAll();
 		
 		Graph graph = new SingleGraph("Mapa2");
 		graph.clear();
@@ -503,9 +535,9 @@ public class GUI extends JFrame{
 		ed.addAttribute("ui.label", SpainMap.getDistance(resultado[0], resultado[resultado.length - 1]));
 		
 		ViewPanel view = viewer.addDefaultView(false);
-		view.setBounds(0, 0, _panelMapaDesordenado.getWidth(), _panelMapaDesordenado.getHeight());
-		_panelMapaDesordenado.add(view, BorderLayout.CENTER);
-		_panelMapaDesordenado.repaint();
-		_panelMapaDesordenado.validate();
+		view.setBounds(0, 0, _panelMapaDesordenado.getWidth(), _mapaDesordenado.getHeight());
+		_mapaDesordenado.add(view, BorderLayout.CENTER);
+		_mapaDesordenado.repaint();
+		_mapaDesordenado.validate();
 	}
 }
