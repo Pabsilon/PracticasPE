@@ -46,7 +46,7 @@ public class GUI extends JFrame{
 	private Controller _controller;
 	
 	//Paneles
-	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapa;
+	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapaOrdenado, _panelMapaDesordenado;
 	JPanel _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	JTabbedPane _test;
 	//Labels
@@ -83,10 +83,12 @@ public class GUI extends JFrame{
 		_panelPrincipal = new JPanel(new BorderLayout());
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
-		_panelMapa = new JPanel(new BorderLayout());
+		_panelMapaOrdenado = new JPanel(new BorderLayout());
+		_panelMapaDesordenado = new JPanel(new BorderLayout());
 		_test = new JTabbedPane();
 		_test.add("Grafica", _panelGrafica);
-		_test.add("Mapa", _panelMapa);
+		_test.add("Mapa Ordenado", _panelMapaOrdenado);
+		_test.add("Mapa Desordenado", _panelMapaDesordenado);
 		_panelPrincipal.add(_panelOpciones, BorderLayout.LINE_START);
 		_panelPrincipal.add(_test, BorderLayout.CENTER);
 		
@@ -350,7 +352,13 @@ public class GUI extends JFrame{
 	
 	public void drawCities(int[] resultado)
 	{
-		_panelMapa.removeAll();
+		crearMapaOrdenado(resultado);
+		crearMapaDesordenado(resultado);
+	}
+	
+	private void crearMapaOrdenado(int[] resultado)
+	{
+		_panelMapaOrdenado.removeAll();
 		
 		Graph graph = new SingleGraph("Mapa");
 		graph.addAttribute("ui.antialias");
@@ -452,19 +460,51 @@ public class GUI extends JFrame{
 			
 		}
 		
-		for(int i = 1; i < resultado.length; i++)
+		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
+			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
 			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
 		}
 		
-		//Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
-		//ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
+		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
+		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
 		
 		ViewPanel view = viewer.addDefaultView(false);
-		view.setBounds(0, 0, _panelMapa.getWidth(), _panelMapa.getHeight());
-		_panelMapa.add(view, BorderLayout.CENTER);
-		_panelMapa.repaint();
-		_panelMapa.validate();
+		view.setBounds(0, 0, _panelMapaOrdenado.getWidth(), _panelMapaOrdenado.getHeight());
+		_panelMapaOrdenado.add(view, BorderLayout.CENTER);
+		_panelMapaOrdenado.repaint();
+		_panelMapaOrdenado.validate();		
+	}
+	
+	private void crearMapaDesordenado(int resultado[])
+	{
+		_panelMapaDesordenado.removeAll();
+		
+		Graph graph = new SingleGraph("Mapa");
+		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+		viewer.enableAutoLayout();
+		
+		for(int i : resultado)
+		{
+			Node nod = graph.addNode(SpainMap.getCityName(i));
+			nod.addAttribute("ui.label", SpainMap.getCityName(i));
+			if(SpainMap.getCityName(i) == "Madrid")
+				nod.addAttribute("ui.style", "fill-color: rgb(0,100,255);");
+		}
+		
+		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
+		{
+			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
+			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
+		}
+		
+		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
+		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
+		
+		ViewPanel view = viewer.addDefaultView(false);
+		view.setBounds(0, 0, _panelMapaDesordenado.getWidth(), _panelMapaDesordenado.getHeight());
+		_panelMapaDesordenado.add(view, BorderLayout.CENTER);
+		_panelMapaDesordenado.repaint();
+		_panelMapaDesordenado.validate();
 	}
 }
