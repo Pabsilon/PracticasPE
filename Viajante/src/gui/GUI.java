@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.math.plot.Plot2DPanel;
+
+import implementation.SpainMap;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -23,6 +28,14 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
+
+import org.graphstream.graph.Edge;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.swingViewer.*;
+import org.graphstream.ui.view.Viewer;
 
 /**GUI del problema. Generada con ayuda de codigo externo, es practicamente ilegible.
  * Fly, you fools!
@@ -72,7 +85,7 @@ public class GUI extends JFrame{
 		_panelPrincipal = new JPanel(new BorderLayout());
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
-		_panelMapa = new JPanel();
+		_panelMapa = new JPanel(new BorderLayout());
 		_test = new JTabbedPane();
 		_test.add("Grafica", _panelGrafica);
 		_test.add("Mapa", _panelMapa);
@@ -335,5 +348,35 @@ public class GUI extends JFrame{
 		_plot.addLinePlot("Mejor Generacion", x, mejorGeneracion);
 		_plot.addLinePlot("Media Generacion", x, mediaGeneracion);
 		_labelMejorResultado.setText(resultado);
+	}
+	
+	public void drawCities(int[] resultado)
+	{
+		Graph graph = new SingleGraph("Mapa");
+		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+		viewer.enableAutoLayout();
+		
+		for(int i : resultado)
+		{
+			Node nod = graph.addNode(SpainMap.getCityName(i));
+			nod.addAttribute("ui.label", SpainMap.getCityName(i));
+			if(SpainMap.getCityName(i) == "Madrid")
+				nod.addAttribute("ui.style", "fill-color: rgb(0,100,255);");
+		}
+		
+		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
+		{
+			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
+			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
+		}
+		
+		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
+		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
+		
+		ViewPanel view = viewer.addDefaultView(false);
+		view.setBounds(0, 0, _panelMapa.getWidth(), _panelMapa.getHeight());
+		_panelMapa.add(view, BorderLayout.CENTER);
+		_panelMapa.repaint();
+		_panelMapa.validate();
 	}
 }
