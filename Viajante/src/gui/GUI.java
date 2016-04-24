@@ -460,14 +460,11 @@ public class GUI extends JFrame{
 			
 		}
 		
-		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
+		for(int i = 1; i < resultado.length; i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
+			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
 			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
 		}
-		
-		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
-		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
 		
 		ViewPanel view = viewer.addDefaultView(false);
 		view.setBounds(0, 0, _panelMapaOrdenado.getWidth(), _panelMapaOrdenado.getHeight());
@@ -492,13 +489,13 @@ public class GUI extends JFrame{
 				nod.addAttribute("ui.style", "fill-color: rgb(0,100,255);");
 		}
 		
-		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
+		for(int i = 1; i < resultado.length; i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(i - 1) + SpainMap.getCityName(i), SpainMap.getCityName(i - 1), SpainMap.getCityName(i));
+			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
 			ed.addAttribute("ui.label", SpainMap.getDistance(i-1, i));
 		}
 		
-		Edge ed = graph.addEdge(SpainMap.getCityName(0) + SpainMap.getCityName(resultado.length - 1), SpainMap.getCityName(0), SpainMap.getCityName(resultado.length - 1));
+		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]), SpainMap.getCityName(resultado[resultado.length - 1]));
 		ed.addAttribute("ui.label", SpainMap.getDistance(0, resultado.length - 1));
 		
 		ViewPanel view = viewer.addDefaultView(false);
