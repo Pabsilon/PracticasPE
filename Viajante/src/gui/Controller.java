@@ -37,7 +37,7 @@ public class Controller {
 	 * @param metodoMutacion String del metodo de mutacion
 	 * @param semilla String de la semilla (para generar la misma poblacion inicial)
 	 */
-	void startSimulation(String poblacion, String generaciones, String metodoSeleccion, boolean elitismo, String porcentageCruce, String metodoCruce, String participantes, String porcentageMutacion, String metodoMutacion, String semilla) {
+	void startSimulation(String poblacion, String generaciones, String metodoSeleccion, boolean elitismo, String porcentageCruce, String metodoCruce, String participantes, String porcentageMutacion, String metodoMutacion, String semilla, boolean intervaloCruce, boolean intervaloMutacion, boolean intervaloGeneraciones, int parametrosIntervalo[]) {
 		
 		long timeAgo = System.currentTimeMillis();
 		//Parseo del algoritmo de selección
@@ -66,7 +66,48 @@ public class Controller {
 		g.setSeed(algoritmo.getSemilla());
 		//Mostramos el tiempo de ejecucion
 		timeAgo = System.currentTimeMillis() - timeAgo;
-		g.setTime((float)timeAgo/1000);		
+		g.setTime((float)timeAgo/1000);
+		
+		//Parte opcional
+		if(intervaloCruce)
+		{
+			for(int i = parametrosIntervalo[0]; i < parametrosIntervalo[1]; i = i + parametrosIntervalo[3])
+			{
+				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
+				
+				mejorAbsoluto = new double[Integer.parseInt(generaciones)];
+				mejorGeneracion = new double[Integer.parseInt(generaciones)];
+				mediaGeneracion = new double[Integer.parseInt(generaciones)];
+				
+				g.fillPlotOpcional(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), "Distancia: " +resultado.getAptitud() + "\nRecorrido: " + resultado.getFenotipo());
+			}
+		}
+		else if(intervaloMutacion)
+		{
+			for(int i = parametrosIntervalo[0]; i < parametrosIntervalo[1]; i = i + parametrosIntervalo[3])
+			{
+				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, Float.parseFloat(porcentageCruce), i,elitismo);
+				
+				mejorAbsoluto = new double[Integer.parseInt(generaciones)];
+				mejorGeneracion = new double[Integer.parseInt(generaciones)];
+				mediaGeneracion = new double[Integer.parseInt(generaciones)];
+				
+				g.fillPlotOpcional(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), "Distancia: " +resultado.getAptitud() + "\nRecorrido: " + resultado.getFenotipo());
+			}
+		}
+		else if(intervaloGeneraciones)
+		{
+			for(int i = parametrosIntervalo[0]; i < parametrosIntervalo[1]; i = i + parametrosIntervalo[3])
+			{
+				algoritmo = new Traveler(Integer.parseInt(poblacion), i, Long.parseLong(semilla), agc,agm,ags, Float.parseFloat(porcentageCruce), Float.parseFloat(porcentageMutacion),elitismo);
+				
+				mejorAbsoluto = new double[i];
+				mejorGeneracion = new double[i];
+				mediaGeneracion = new double[i];
+				
+				g.fillPlotOpcional(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), "Distancia: " +resultado.getAptitud() + "\nRecorrido: " + resultado.getFenotipo());
+			}
+		}
 	}
 
 }

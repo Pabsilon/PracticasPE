@@ -21,7 +21,9 @@ import implementation.SpainMap;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
@@ -46,7 +48,7 @@ public class GUI extends JFrame{
 	private Controller _controller;
 	
 	//Paneles
-	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapaOrdenado, _panelMapaDesordenado, _mapaOrdenado,_mapaDesordenado;
+	JPanel _panelPrincipal, _panelOpciones, _panelGrafica, _panelMapaOrdenado, _panelMapaDesordenado, _mapaOrdenado,_mapaDesordenado, _panelGraficaOpcional;
 	JPanel _panelParticipantes, _panelMutacion, _panelCruce, _panelSeleccion, _panelResultados, _panelResultados2, _panelResultados3, _panelPoblacion, _panelIteraciones, _panelSemilla;
 	JTabbedPane _test;
 	//Labels
@@ -62,6 +64,7 @@ public class GUI extends JFrame{
 	JButton _botonComenzar;
 	//Plot
 	Plot2DPanel _plot;
+	Plot2DPanel _plotOpcional;
 	//CheckBox
 	JCheckBox _elitismo;
 	
@@ -83,6 +86,7 @@ public class GUI extends JFrame{
 		_panelPrincipal = new JPanel(new BorderLayout());
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
+		_panelGraficaOpcional = new JPanel();
 		_panelMapaOrdenado = new JPanel(new BorderLayout());
 		_panelMapaDesordenado = new JPanel(new BorderLayout());
 		_mapaOrdenado = new JPanel(new BorderLayout());
@@ -281,7 +285,7 @@ public class GUI extends JFrame{
 		_botonComenzar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText());
+				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), intervaloMutacion, intervaloGeneraciones, parametrosIntervalo);
 			}
 		});
 		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
@@ -293,6 +297,10 @@ public class GUI extends JFrame{
 		_panelGrafica.add(_plot, "cell 0 0,grow");
 		_panelMapaOrdenado.add(_mapaOrdenado, "cell 0 0,grow");
 		_panelMapaDesordenado.add(_mapaDesordenado, "cell 0 0,grow");
+		
+		//Grafica opcional
+		_plotOpcional = new Plot2DPanel();
+		_panelGraficaOpcional.add(_plot, "cell 0 0,grow");
 		
 		//Resultados
 		_panelResultados = new JPanel();
@@ -380,8 +388,32 @@ public class GUI extends JFrame{
 		_labelMejorResultado.setText(resultado);
 		_labelMejorResultado2.setText(resultado);
 		_labelMejorResultado3.setText(resultado);
+		
+		//Remover plot opcional valores
+		_plotOpcional.removeAllPlots();
 	}
 	
+	public void fillPlotOpcional(double[] mejorAbsoluto,
+			double[] mejorGeneracion, double[] mediaGeneracion, int parseInt,
+			String string) 
+	{
+
+		
+		//Posicion de la leyenda
+		_plotOpcional.addLegend("SOUTH");
+		
+		double[] x = new double[mediaGeneracion.length];
+		for(int i = 0; i < mediaGeneracion.length; i++)
+		{
+			x[i] = i + 1;
+		}
+		//A�adir las lineas
+		_plotOpcional.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
+		_plotOpcional.addLinePlot("Mejor Generacion", x, mejorGeneracion);
+		_plotOpcional.addLinePlot("Media Generacion", x, mediaGeneracion);
+		
+	}
+
 	public void drawCities(int[] resultado)
 	{
 		crearMapaOrdenado(resultado);
