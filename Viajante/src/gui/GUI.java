@@ -395,7 +395,6 @@ public class GUI extends JFrame{
 		Graph graph = new SingleGraph("Mapa");
 		graph.addAttribute("ui.antialias");
 		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-		//viewer.enableAutoLayout();
 		
 		
 		for(int i : resultado)
@@ -516,6 +515,7 @@ public class GUI extends JFrame{
 		graph.clear();
 		Viewer viewer = new Viewer(graph, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		viewer.enableAutoLayout();
+		graph.addAttribute("ui.antialias");
 		
 		for(int i : resultado)
 		{
