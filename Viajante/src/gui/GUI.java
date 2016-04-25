@@ -393,24 +393,20 @@ public class GUI extends JFrame{
 		_plotOpcional.removeAllPlots();
 	}
 	
-	public void fillPlotOpcional(double[] mejorAbsoluto,
-			double[] mejorGeneracion, double[] mediaGeneracion, int parseInt,
-			String string) 
+	public void fillPlotOpcional(double[] mejorAbsoluto) 
 	{
 
 		
 		//Posicion de la leyenda
 		_plotOpcional.addLegend("SOUTH");
 		
-		double[] x = new double[mediaGeneracion.length];
-		for(int i = 0; i < mediaGeneracion.length; i++)
+		double[] x = new double[mejorAbsoluto.length];
+		for(int i = 0; i < mejorAbsoluto.length; i++)
 		{
 			x[i] = i + 1;
 		}
 		//A�adir las lineas
-		_plotOpcional.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
-		_plotOpcional.addLinePlot("Mejor Generacion", x, mejorGeneracion);
-		_plotOpcional.addLinePlot("Media Generacion", x, mediaGeneracion);
+		_plotOpcional.addLinePlot("Mejor", x, mejorAbsoluto);
 		
 	}
 
