@@ -18,10 +18,6 @@ import org.math.plot.Plot2DPanel;
 
 import implementation.SpainMap;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.border.SoftBevelBorder;
@@ -106,6 +102,7 @@ public class GUI extends JFrame{
 		this.setTitle("Practica 2: TSP");
 		_panelPrincipal = new JPanel();
 		_panelOpciones = new JPanel();
+		_panelOpciones.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		_panelGrafica = new JPanel();
 		_panelGraficaOpcional = new JPanel();
 		_panelMapaOrdenado = new JPanel();
@@ -118,7 +115,7 @@ public class GUI extends JFrame{
 		_test.add("Mapa Ordenado", _panelMapaOrdenado);
 		_test.add("Mapa Desordenado", _panelMapaDesordenado);
 		_panelPrincipal.setLayout(new MigLayout("", "[253px][919px]", "[600px]"));
-		_panelPrincipal.add(_panelOpciones, "cell 0 0,alignx center,growy");
+		_panelPrincipal.add(_panelOpciones, "cell 0 0,alignx center,aligny top");
 		_panelPrincipal.add(_test, "cell 1 0,grow");
 		
 		//N
@@ -154,7 +151,7 @@ public class GUI extends JFrame{
 		//Metodo seleccion
 		_panelSeleccion = new JPanel();
 		_panelSeleccion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		_panelSeleccion.setLayout(new MigLayout("", "[213px,grow]", "[25px][25][25]"));
+		_panelSeleccion.setLayout(new MigLayout("", "[213px]", "[25px][25][25]"));
 		_labelSeleccion = new JLabel("Metodo Seleccion:");
 		_panelSeleccion.add(_labelSeleccion, "cell 0 0,alignx left,aligny center");
 		
@@ -189,74 +186,6 @@ public class GUI extends JFrame{
 		
 		JPanel _panelIntervalos = new JPanel();
 		_panelIntervalos.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		
-		//Layout
-		GroupLayout gl__panelOpciones = new GroupLayout(_panelOpciones);
-		gl__panelOpciones.setHorizontalGroup(
-			gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(_realizadoEn)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(_time, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelMuestraSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(9)
-							.addComponent(_panelIntervalos, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		gl__panelOpciones.setVerticalGroup(
-			gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(_panelPoblacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_panelIteraciones, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_panelCruce, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_panelMutacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_panelSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-					.addGap(7)
-					.addComponent(_panelIntervalos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(_botonComenzar)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-						.addComponent(_realizadoEn)
-						.addComponent(_time))
-					.addGap(105))
-		);
 		_panelIntervalos.setLayout(new MigLayout("", "[][][grow][grow][grow][][grow]", "[][][]"));
 		
 		lblCruce = new JLabel("Cruce:");
@@ -395,7 +324,18 @@ public class GUI extends JFrame{
 		
 		_comboBoxCruce = new JComboBox(cruceS);
 		_panelCruce.add(_comboBoxCruce, "cell 0 1 2 1,growx");
-		_panelOpciones.setLayout(gl__panelOpciones);
+		_panelOpciones.setLayout(new MigLayout("", "[67px][6px][159px]", "[45px][45px][103px][74px][74px][45px][64px][91px][23px][14px]"));
+		_panelOpciones.add(_realizadoEn, "cell 0 9,alignx right,aligny top");
+		_panelOpciones.add(_time, "cell 2 9,alignx left,aligny top");
+		_panelOpciones.add(_panelPoblacion, "cell 0 0 3 1,grow");
+		_panelOpciones.add(_panelIteraciones, "cell 0 1 3 1,growx,aligny top");
+		_panelOpciones.add(_panelSeleccion, "cell 0 2 3 1,alignx center,growy");
+		_panelOpciones.add(_panelCruce, "cell 0 3 3 1,growx,aligny top");
+		_panelOpciones.add(_panelMutacion, "cell 0 4 3 1,growx,aligny top");
+		_panelOpciones.add(_panelSemilla, "cell 0 5 3 1,growx,aligny top");
+		_panelOpciones.add(_panelMuestraSemilla, "cell 0 6 3 1,grow");
+		_panelOpciones.add(_panelIntervalos, "cell 0 7 3 1,growx,aligny top");
+		_panelOpciones.add(_botonComenzar, "cell 0 8 3 1,growx,aligny top");
 		_botonComenzar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
@@ -422,7 +362,7 @@ public class GUI extends JFrame{
 			}
 		});
 		_panelGrafica.setLayout(new MigLayout("", "[600px]", "[560px][60px]"));
-		_panelGraficaOpcional.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
+		_panelGraficaOpcional.setLayout(new MigLayout("", "[925px]", "[560px]"));
 		_panelMapaOrdenado.setLayout(new MigLayout("", "[925px]", "[550px][60px]"));
 		_panelMapaDesordenado.setLayout(new MigLayout("", "[925px]", "[550px][60px]"));
 		
@@ -476,7 +416,7 @@ public class GUI extends JFrame{
 		
 		//Frame
 		this.setContentPane(_panelPrincipal);
-		this.setPreferredSize(new Dimension(1200, 700));
+		this.setPreferredSize(new Dimension(1200, 650));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);		
