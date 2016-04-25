@@ -71,42 +71,48 @@ public class Controller {
 		//Parte opcional
 		if(intervaloCruce)
 		{
-			double opcional[] = new double[Integer.parseInt(generaciones)];
+			double opcional[] = new double[((parametrosIntervalo[0][1] - parametrosIntervalo[0][0]) / parametrosIntervalo[0][2]) + 1];
 			int k = 0;
-			for(int i = parametrosIntervalo[0][0]; i < parametrosIntervalo[0][1]; i = i + parametrosIntervalo[0][2])
+			for(int i = parametrosIntervalo[0][0]; i <= parametrosIntervalo[0][1]; i = i + parametrosIntervalo[0][2])
 			{
-				mejorAbsoluto = new double[Integer.parseInt(generaciones)];
-				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
-				opcional[k] = mejorAbsoluto[mejorAbsoluto.length - 1];
+				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);	
+				resultado = algoritmo.ejecutarAlgoritmo(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
+				opcional[k] = resultado.getAptitud();
+				k++;
 			}
 			
-			g.fillPlotOpcional(opcional);
+			g.fillPlotOpcional(opcional, "Cruce");
 		}
 		if(intervaloMutacion)
 		{
-			double opcional[] = new double[Integer.parseInt(generaciones)];
+			double opcional[] = new double[((parametrosIntervalo[1][1] - parametrosIntervalo[1][0]) / parametrosIntervalo[1][2]) + 1];
 			int k = 0;
-			for(int i = parametrosIntervalo[1][0]; i < parametrosIntervalo[1][1]; i = i + parametrosIntervalo[1][2])
+			for(int i = parametrosIntervalo[1][0]; i <= parametrosIntervalo[1][1]; i = i + parametrosIntervalo[1][2])
 			{
-				mejorAbsoluto = new double[Integer.parseInt(generaciones)];
-				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
-				opcional[k] = mejorAbsoluto[mejorAbsoluto.length - 1];
+				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);	
+				resultado = algoritmo.ejecutarAlgoritmo(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
+				opcional[k] = resultado.getAptitud();
+				k++;
 			}
 			
-			g.fillPlotOpcional(opcional);
+			g.fillPlotOpcional(opcional, "Mutacion");
 		}
 		if(intervaloGeneraciones)
 		{
-			double opcional[] = new double[parametrosIntervalo[2][1]];
+			double opcional[] = new double[((parametrosIntervalo[2][1] - parametrosIntervalo[2][0]) / parametrosIntervalo[2][2]) + 1];
 			int k = 0;
-			for(int i = parametrosIntervalo[2][0]; i < parametrosIntervalo[2][1]; i = i + parametrosIntervalo[2][3])
+			mejorAbsoluto = new double[parametrosIntervalo[2][1]];
+			mejorGeneracion = new double[parametrosIntervalo[2][1]];
+			mediaGeneracion = new double[parametrosIntervalo[2][1]];
+			for(int i = parametrosIntervalo[2][0]; i <= parametrosIntervalo[2][1]; i = i + parametrosIntervalo[2][2])
 			{
-				mejorAbsoluto = new double[i];
-				algoritmo = new Traveler(Integer.parseInt(poblacion), i, Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
-				opcional[k] = mejorAbsoluto[mejorAbsoluto.length - 1];
+				algoritmo = new Traveler(Integer.parseInt(poblacion), i, Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);	
+				resultado = algoritmo.ejecutarAlgoritmo(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
+				opcional[k] = resultado.getAptitud();
+				k++;
 			}
 			
-			g.fillPlotOpcional(opcional);
+			g.fillPlotOpcional(opcional, "Generaciones");
 		}
 	}
 

@@ -410,7 +410,7 @@ public class GUI extends JFrame{
 					parametros[2][1] = Integer.parseInt(_generacionesHasta.getText());
 					parametros[2][2] = Integer.parseInt(_generacionesIntervalo.getText());
 				}
-				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), _mutacionCheck.isSelected(), _generacionCheck.isSelected(), _cruceCheck.isSelected(),parametros);
+				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), _cruceCheck.isSelected(), _mutacionCheck.isSelected(), _generacionCheck.isSelected(),parametros);
 			}
 		});
 		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
@@ -519,7 +519,7 @@ public class GUI extends JFrame{
 		_plotOpcional.removeAllPlots();
 	}
 	
-	public void fillPlotOpcional(double[] mejorAbsoluto) 
+	public void fillPlotOpcional(double[] mejorAbsoluto, String tipo) 
 	{
 
 		
@@ -532,7 +532,7 @@ public class GUI extends JFrame{
 			x[i] = i + 1;
 		}
 		//A�adir las lineas
-		_plotOpcional.addLinePlot("Mejor", x, mejorAbsoluto);
+		_plotOpcional.addLinePlot(tipo, x, mejorAbsoluto);
 		
 	}
 
