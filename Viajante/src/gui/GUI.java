@@ -376,7 +376,7 @@ public class GUI extends JFrame{
 		_textFieldPoblacion = new JTextField("100");
 		_textFieldPoblacion.setPreferredSize(new Dimension(100,25));
 		_panelPoblacion.add(_textFieldPoblacion, "cell 1 0,alignx left,aligny top");
-		_textFieldIteraciones = new JTextField("100");
+		_textFieldIteraciones = new JTextField("300");
 		_textFieldIteraciones.setPreferredSize(new Dimension(100,25));
 		_panelIteraciones.add(_textFieldIteraciones, "cell 1 0,alignx left,aligny top");
 		_labelCruce = new JLabel("Cruce:");
@@ -391,16 +391,25 @@ public class GUI extends JFrame{
 		_botonComenzar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				int[][] parametros = new int[2][2];
-				parametros[0][0] = Integer.parseInt(_cruceDesde.getText());
-				parametros[0][1] = Integer.parseInt(_cruceHasta.getText());
-				parametros[0][2] = Integer.parseInt(_cruceIntervalo.getText());
-				parametros[1][0] = Integer.parseInt(_mutacionDesde.getText());
-				parametros[1][1] = Integer.parseInt(_mutacionHasta.getText());
-				parametros[1][2] = Integer.parseInt(_mutacionIntervalo.getText());
-				parametros[2][0] = Integer.parseInt(_generacionesDesde.getText());
-				parametros[2][1] = Integer.parseInt(_generacionesHasta.getText());
-				parametros[2][2] = Integer.parseInt(_generacionesIntervalo.getText());
+				int[][] parametros = new int[3][3];
+				if(_cruceCheck.isSelected())
+				{
+					parametros[0][0] = Integer.parseInt(_cruceDesde.getText());
+					parametros[0][1] = Integer.parseInt(_cruceHasta.getText());
+					parametros[0][2] = Integer.parseInt(_cruceIntervalo.getText());
+				}
+				if(_mutacionCheck.isSelected())
+				{
+					parametros[1][0] = Integer.parseInt(_mutacionDesde.getText());
+					parametros[1][1] = Integer.parseInt(_mutacionHasta.getText());
+					parametros[1][2] = Integer.parseInt(_mutacionIntervalo.getText());
+				}
+				if(_generacionCheck.isSelected())
+				{
+					parametros[2][0] = Integer.parseInt(_generacionesDesde.getText());
+					parametros[2][1] = Integer.parseInt(_generacionesHasta.getText());
+					parametros[2][2] = Integer.parseInt(_generacionesIntervalo.getText());
+				}
 				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), _mutacionCheck.isSelected(), _generacionCheck.isSelected(), _cruceCheck.isSelected(),parametros);
 			}
 		});

@@ -73,7 +73,7 @@ public class Controller {
 		{
 			double opcional[] = new double[Integer.parseInt(generaciones)];
 			int k = 0;
-			for(int i = parametrosIntervalo[0]; i < parametrosIntervalo[1]; i = i + parametrosIntervalo[3])
+			for(int i = parametrosIntervalo[0][0]; i < parametrosIntervalo[0][1]; i = i + parametrosIntervalo[0][2])
 			{
 				mejorAbsoluto = new double[Integer.parseInt(generaciones)];
 				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
@@ -82,11 +82,11 @@ public class Controller {
 			
 			g.fillPlotOpcional(opcional);
 		}
-		else if(intervaloMutacion)
+		if(intervaloMutacion)
 		{
 			double opcional[] = new double[Integer.parseInt(generaciones)];
 			int k = 0;
-			for(int i = parametrosIntervalo[0]; i < parametrosIntervalo[1]; i = i + parametrosIntervalo[3])
+			for(int i = parametrosIntervalo[1][0]; i < parametrosIntervalo[1][1]; i = i + parametrosIntervalo[1][2])
 			{
 				mejorAbsoluto = new double[Integer.parseInt(generaciones)];
 				algoritmo = new Traveler(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
@@ -95,11 +95,11 @@ public class Controller {
 			
 			g.fillPlotOpcional(opcional);
 		}
-		else if(intervaloGeneraciones)
+		if(intervaloGeneraciones)
 		{
-			double opcional[] = new double[parametrosIntervalo[1]];
+			double opcional[] = new double[parametrosIntervalo[2][1]];
 			int k = 0;
-			for(int i = parametrosIntervalo[0]; i < parametrosIntervalo[1]; i = i + parametrosIntervalo[3])
+			for(int i = parametrosIntervalo[2][0]; i < parametrosIntervalo[2][1]; i = i + parametrosIntervalo[2][3])
 			{
 				mejorAbsoluto = new double[i];
 				algoritmo = new Traveler(Integer.parseInt(poblacion), i, Long.parseLong(semilla), agc,agm,ags, i, Float.parseFloat(porcentageMutacion),elitismo);
