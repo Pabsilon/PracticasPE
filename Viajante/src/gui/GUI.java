@@ -117,8 +117,8 @@ public class GUI extends JFrame{
 		_test.add("Grafica Opcional", _panelGraficaOpcional);
 		_test.add("Mapa Ordenado", _panelMapaOrdenado);
 		_test.add("Mapa Desordenado", _panelMapaDesordenado);
-		_panelPrincipal.setLayout(new MigLayout("", "[223px][937px]", "[670px]"));
-		_panelPrincipal.add(_panelOpciones, "cell 0 0,alignx left,growy");
+		_panelPrincipal.setLayout(new MigLayout("", "[253px][919px]", "[600px]"));
+		_panelPrincipal.add(_panelOpciones, "cell 0 0,alignx center,growy");
 		_panelPrincipal.add(_test, "cell 1 0,grow");
 		
 		//N
@@ -195,40 +195,40 @@ public class GUI extends JFrame{
 		gl__panelOpciones.setHorizontalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelMuestraSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_panelIntervalos, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl__panelOpciones.createSequentialGroup()
-							.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addContainerGap()
 							.addComponent(_realizadoEn)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(_time, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+							.addComponent(_time, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelMuestraSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addGap(9)
+							.addComponent(_panelIntervalos, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		gl__panelOpciones.setVerticalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.LEADING)
@@ -421,10 +421,10 @@ public class GUI extends JFrame{
 				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), _cruceCheck.isSelected(), _mutacionCheck.isSelected(), _generacionCheck.isSelected(),parametros);
 			}
 		});
-		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
+		_panelGrafica.setLayout(new MigLayout("", "[600px]", "[560px][60px]"));
 		_panelGraficaOpcional.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
-		_panelMapaOrdenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
-		_panelMapaDesordenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
+		_panelMapaOrdenado.setLayout(new MigLayout("", "[925px]", "[550px][60px]"));
+		_panelMapaDesordenado.setLayout(new MigLayout("", "[925px]", "[550px][60px]"));
 		
 		//Grafica
 		_plot = new Plot2DPanel();
