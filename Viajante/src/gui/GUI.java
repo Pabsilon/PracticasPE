@@ -67,6 +67,27 @@ public class GUI extends JFrame{
 	Plot2DPanel _plotOpcional;
 	//CheckBox
 	JCheckBox _elitismo;
+	private JLabel lblCruce;
+	private JLabel lblMut;
+	private JLabel lblGen;
+	private JTextField _mutacionDesde;
+	private JTextField _generacionesDesde;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JTextField _cruceHasta;
+	private JTextField _mutacionHasta;
+	private JTextField _generacionesHasta;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JTextField _cruceIntervalo;
+	private JTextField _mutacionIntervalo;
+	private JTextField _generacionesIntervalo;
+	private JCheckBox _cruceCheck;
+	private JCheckBox _mutacionCheck;
+	private JCheckBox _generacionCheck;
+	private JTextField _cruceDesde;
 	
 	public GUI(Controller c) {
 		_controller = c;
@@ -87,12 +108,13 @@ public class GUI extends JFrame{
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
 		_panelGraficaOpcional = new JPanel();
-		_panelMapaOrdenado = new JPanel(new BorderLayout());
-		_panelMapaDesordenado = new JPanel(new BorderLayout());
-		_mapaOrdenado = new JPanel(new BorderLayout());
-		_mapaDesordenado = new JPanel(new BorderLayout());
+		_panelMapaOrdenado = new JPanel();
+		_panelMapaDesordenado = new JPanel();
+		_mapaOrdenado = new JPanel();
+		_mapaDesordenado = new JPanel();
 		_test = new JTabbedPane();
 		_test.add("Grafica", _panelGrafica);
+		_test.add("Grafica Opcional", _panelGraficaOpcional);
 		_test.add("Mapa Ordenado", _panelMapaOrdenado);
 		_test.add("Mapa Desordenado", _panelMapaDesordenado);
 		_panelPrincipal.add(_panelOpciones, BorderLayout.LINE_START);
@@ -116,7 +138,6 @@ public class GUI extends JFrame{
 		_labelPoblacion = new JLabel("Poblacion:");
 		_panelPoblacion.setLayout(new MigLayout("", "[130px][78px]", "[25px]"));
 		_panelPoblacion.add(_labelPoblacion, "cell 0 0,alignx left,aligny center");
-		
 		
 		//Numero de Iteraciones
 		_panelIteraciones = new JPanel();
@@ -165,41 +186,49 @@ public class GUI extends JFrame{
 		
 		_time = new JLabel("");
 		
+		JPanel _panelIntervalos = new JPanel();
+		_panelIntervalos.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
 		//Layout
 		GroupLayout gl__panelOpciones = new GroupLayout(_panelOpciones);
 		gl__panelOpciones.setHorizontalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(24)
-							.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl__panelOpciones.createSequentialGroup()
-									.addComponent(_realizadoEn)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(_time))
-								.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addContainerGap(21, Short.MAX_VALUE)
-							.addComponent(_panelSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl__panelOpciones.createSequentialGroup()
-							.addContainerGap(22, Short.MAX_VALUE)
-							.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(_panelIntervalos, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addGap(21)
+								.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addGap(21)
+								.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addGap(21)
+								.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE))
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addGap(21)
+								.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addGap(21)
+								.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addContainerGap(21, Short.MAX_VALUE)
+								.addComponent(_panelSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl__panelOpciones.createSequentialGroup()
+								.addContainerGap(22, Short.MAX_VALUE)
+								.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
+								.addGap(24)
+								.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
+									.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+									.addGroup(gl__panelOpciones.createSequentialGroup()
+										.addComponent(_realizadoEn)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(_time)
+										.addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE))))))
 					.addContainerGap())
 		);
 		gl__panelOpciones.setVerticalGroup(
@@ -219,14 +248,89 @@ public class GUI extends JFrame{
 					.addComponent(_panelSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-					.addGap(91)
-					.addComponent(_botonComenzar, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(_panelIntervalos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(19)
+					.addComponent(_botonComenzar)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.BASELINE)
 						.addComponent(_realizadoEn)
 						.addComponent(_time))
 					.addGap(105))
 		);
+		_panelIntervalos.setLayout(new MigLayout("", "[][][grow][grow][grow][][grow]", "[][][]"));
+		
+		lblCruce = new JLabel("Cruce:");
+		_panelIntervalos.add(lblCruce, "cell 0 0,alignx trailing");
+		
+		_cruceCheck = new JCheckBox("");
+		_panelIntervalos.add(_cruceCheck, "cell 1 0");
+		
+		_cruceDesde = new JTextField();
+		_panelIntervalos.add(_cruceDesde, "cell 2 0,growx");
+		_cruceDesde.setColumns(10);
+		
+		label = new JLabel("-");
+		_panelIntervalos.add(label, "cell 3 0,alignx trailing");
+		
+		_cruceHasta = new JTextField();
+		_panelIntervalos.add(_cruceHasta, "cell 4 0,growx");
+		_cruceHasta.setColumns(10);
+		
+		label_3 = new JLabel(":");
+		_panelIntervalos.add(label_3, "cell 5 0,alignx trailing");
+		
+		_cruceIntervalo = new JTextField();
+		_panelIntervalos.add(_cruceIntervalo, "cell 6 0,growx");
+		_cruceIntervalo.setColumns(10);
+		
+		lblMut = new JLabel("Mut:");
+		_panelIntervalos.add(lblMut, "cell 0 1,alignx trailing");
+		
+		_mutacionCheck = new JCheckBox("");
+		_panelIntervalos.add(_mutacionCheck, "cell 1 1");
+		
+		_mutacionDesde = new JTextField();
+		_panelIntervalos.add(_mutacionDesde, "cell 2 1,growx");
+		_mutacionDesde.setColumns(10);
+		
+		label_1 = new JLabel("-");
+		_panelIntervalos.add(label_1, "cell 3 1,alignx trailing");
+		
+		_mutacionHasta = new JTextField();
+		_panelIntervalos.add(_mutacionHasta, "cell 4 1,growx");
+		_mutacionHasta.setColumns(10);
+		
+		label_4 = new JLabel(":");
+		_panelIntervalos.add(label_4, "cell 5 1,alignx trailing");
+		
+		_mutacionIntervalo = new JTextField();
+		_panelIntervalos.add(_mutacionIntervalo, "cell 6 1,growx");
+		_mutacionIntervalo.setColumns(10);
+		
+		lblGen = new JLabel("Gen:");
+		_panelIntervalos.add(lblGen, "cell 0 2,alignx trailing");
+		
+		_generacionCheck = new JCheckBox("");
+		_panelIntervalos.add(_generacionCheck, "cell 1 2");
+		
+		_generacionesDesde = new JTextField();
+		_panelIntervalos.add(_generacionesDesde, "cell 2 2,growx");
+		_generacionesDesde.setColumns(10);
+		
+		label_2 = new JLabel("-");
+		_panelIntervalos.add(label_2, "cell 3 2,alignx trailing");
+		
+		_generacionesHasta = new JTextField();
+		_panelIntervalos.add(_generacionesHasta, "cell 4 2,growx");
+		_generacionesHasta.setColumns(10);
+		
+		label_5 = new JLabel(":");
+		_panelIntervalos.add(label_5, "cell 5 2,alignx trailing");
+		
+		_generacionesIntervalo = new JTextField();
+		_panelIntervalos.add(_generacionesIntervalo, "cell 6 2,growx");
+		_generacionesIntervalo.setColumns(10);
 		_panelMuestraSemilla.setLayout(new MigLayout("", "[213px]", "[25px][25px]"));
 		JLabel lblUltimaSemilla = new JLabel("Ultima Semilla Utilizada:");
 		_panelMuestraSemilla.add(lblUltimaSemilla, "cell 0 0,alignx left,aligny top");
@@ -252,7 +356,9 @@ public class GUI extends JFrame{
 			}
 			
 		});
+		
 		_panelSeleccion.add(_comboBoxSeleccion, "cell 0 1,alignx left,aligny top");
+		
 		
 		_elitismo = new JCheckBox("Elitismo");
 		_panelSeleccion.add(_elitismo, "cell 0 2");
@@ -285,10 +391,21 @@ public class GUI extends JFrame{
 		_botonComenzar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), intervaloMutacion, intervaloGeneraciones, parametrosIntervalo);
+				int[][] parametros = new int[2][2];
+				parametros[0][0] = Integer.parseInt(_cruceDesde.getText());
+				parametros[0][1] = Integer.parseInt(_cruceHasta.getText());
+				parametros[0][2] = Integer.parseInt(_cruceIntervalo.getText());
+				parametros[1][0] = Integer.parseInt(_mutacionDesde.getText());
+				parametros[1][1] = Integer.parseInt(_mutacionHasta.getText());
+				parametros[1][2] = Integer.parseInt(_mutacionIntervalo.getText());
+				parametros[2][0] = Integer.parseInt(_generacionesDesde.getText());
+				parametros[2][1] = Integer.parseInt(_generacionesHasta.getText());
+				parametros[2][2] = Integer.parseInt(_generacionesIntervalo.getText());
+				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText(), _mutacionCheck.isSelected(), _generacionCheck.isSelected(), _cruceCheck.isSelected(),parametros);
 			}
 		});
 		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
+		_panelGraficaOpcional.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
 		_panelMapaOrdenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
 		_panelMapaDesordenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
 		
@@ -300,7 +417,7 @@ public class GUI extends JFrame{
 		
 		//Grafica opcional
 		_plotOpcional = new Plot2DPanel();
-		_panelGraficaOpcional.add(_plot, "cell 0 0,grow");
+		_panelGraficaOpcional.add(_plotOpcional, "cell 0 0,grow");
 		
 		//Resultados
 		_panelResultados = new JPanel();

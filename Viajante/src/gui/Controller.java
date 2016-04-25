@@ -37,10 +37,10 @@ public class Controller {
 	 * @param metodoMutacion String del metodo de mutacion
 	 * @param semilla String de la semilla (para generar la misma poblacion inicial)
 	 */
-	void startSimulation(String poblacion, String generaciones, String metodoSeleccion, boolean elitismo, String porcentageCruce, String metodoCruce, String participantes, String porcentageMutacion, String metodoMutacion, String semilla, boolean intervaloCruce, boolean intervaloMutacion, boolean intervaloGeneraciones, int parametrosIntervalo[]) {
+	void startSimulation(String poblacion, String generaciones, String metodoSeleccion, boolean elitismo, String porcentageCruce, String metodoCruce, String participantes, String porcentageMutacion, String metodoMutacion, String semilla, boolean intervaloCruce, boolean intervaloMutacion, boolean intervaloGeneraciones, int parametrosIntervalo[][]) {
 		
 		long timeAgo = System.currentTimeMillis();
-		//Parseo del algoritmo de selección
+		//Parseo del algoritmo de selecciï¿½n
 		ASeleccion ags = Fabrica_ASeleccion.generarAlgoritmoSeleccion(metodoSeleccion, Integer.parseInt(participantes));
 		//Parseo del Algoritmo de cruce
 		ACruce agc = Fabrica_ACruce.generarAlgoritmoCruce(metodoCruce);
