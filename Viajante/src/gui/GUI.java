@@ -104,7 +104,7 @@ public class GUI extends JFrame{
 	{
 		//Principal
 		this.setTitle("Practica 2: TSP");
-		_panelPrincipal = new JPanel(new BorderLayout());
+		_panelPrincipal = new JPanel();
 		_panelOpciones = new JPanel();
 		_panelGrafica = new JPanel();
 		_panelGraficaOpcional = new JPanel();
@@ -117,8 +117,9 @@ public class GUI extends JFrame{
 		_test.add("Grafica Opcional", _panelGraficaOpcional);
 		_test.add("Mapa Ordenado", _panelMapaOrdenado);
 		_test.add("Mapa Desordenado", _panelMapaDesordenado);
-		_panelPrincipal.add(_panelOpciones, BorderLayout.LINE_START);
-		_panelPrincipal.add(_test, BorderLayout.CENTER);
+		_panelPrincipal.setLayout(new MigLayout("", "[223px][937px]", "[670px]"));
+		_panelPrincipal.add(_panelOpciones, "cell 0 0,alignx left,growy");
+		_panelPrincipal.add(_test, "cell 1 0,grow");
 		
 		//N
 		_labelN = new JLabel("N: ");
@@ -147,7 +148,7 @@ public class GUI extends JFrame{
 		_panelIteraciones.add(_labelIteraciones, "cell 0 0,alignx left,aligny center");
 		
 		//Participantes del torneo
-		_textFieldParticipantes = new JTextField("2");
+		_textFieldParticipantes = new JTextField("3");
 		_textFieldParticipantes.setPreferredSize(new Dimension(72,25));
 		
 		//Metodo seleccion
@@ -194,36 +195,40 @@ public class GUI extends JFrame{
 		gl__panelOpciones.setHorizontalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl__panelOpciones.createSequentialGroup()
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
-							.addGap(24)
-							.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-								.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-								.addGroup(gl__panelOpciones.createSequentialGroup()
-									.addComponent(_realizadoEn)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(_time)
-									.addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE))))
-						.addGroup(Alignment.LEADING, gl__panelOpciones.createSequentialGroup()
-							.addGap(21)
-							.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
-								.addComponent(_panelIntervalos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-								.addComponent(_panelMuestraSemilla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-								.addComponent(_panelSemilla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-								.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-					.addContainerGap())
+					.addContainerGap()
+					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelPoblacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelIteraciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelSeleccion, GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelCruce, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelMutacion, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelMuestraSemilla, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_panelIntervalos, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_botonComenzar, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl__panelOpciones.createSequentialGroup()
+							.addComponent(_realizadoEn)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(_time, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl__panelOpciones.setVerticalGroup(
 			gl__panelOpciones.createParallelGroup(Alignment.LEADING)
@@ -242,12 +247,12 @@ public class GUI extends JFrame{
 					.addComponent(_panelSemilla, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(_panelMuestraSemilla, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(7)
 					.addComponent(_panelIntervalos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(19)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(_botonComenzar)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl__panelOpciones.createParallelGroup(Alignment.LEADING)
 						.addComponent(_realizadoEn)
 						.addComponent(_time))
 					.addGap(105))
@@ -261,6 +266,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(_cruceCheck, "cell 1 0");
 		
 		_cruceDesde = new JTextField();
+		_cruceDesde.setText("0");
 		_panelIntervalos.add(_cruceDesde, "cell 2 0,growx");
 		_cruceDesde.setColumns(10);
 		
@@ -268,6 +274,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(label, "cell 3 0,alignx trailing");
 		
 		_cruceHasta = new JTextField();
+		_cruceHasta.setText("100");
 		_panelIntervalos.add(_cruceHasta, "cell 4 0,growx");
 		_cruceHasta.setColumns(10);
 		
@@ -275,6 +282,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(label_3, "cell 5 0,alignx trailing");
 		
 		_cruceIntervalo = new JTextField();
+		_cruceIntervalo.setText("10");
 		_panelIntervalos.add(_cruceIntervalo, "cell 6 0,growx");
 		_cruceIntervalo.setColumns(10);
 		
@@ -285,6 +293,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(_mutacionCheck, "cell 1 1");
 		
 		_mutacionDesde = new JTextField();
+		_mutacionDesde.setText("0");
 		_panelIntervalos.add(_mutacionDesde, "cell 2 1,growx");
 		_mutacionDesde.setColumns(10);
 		
@@ -292,6 +301,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(label_1, "cell 3 1,alignx trailing");
 		
 		_mutacionHasta = new JTextField();
+		_mutacionHasta.setText("100");
 		_panelIntervalos.add(_mutacionHasta, "cell 4 1,growx");
 		_mutacionHasta.setColumns(10);
 		
@@ -299,6 +309,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(label_4, "cell 5 1,alignx trailing");
 		
 		_mutacionIntervalo = new JTextField();
+		_mutacionIntervalo.setText("10");
 		_panelIntervalos.add(_mutacionIntervalo, "cell 6 1,growx");
 		_mutacionIntervalo.setColumns(10);
 		
@@ -309,6 +320,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(_generacionCheck, "cell 1 2");
 		
 		_generacionesDesde = new JTextField();
+		_generacionesDesde.setText("0");
 		_panelIntervalos.add(_generacionesDesde, "cell 2 2,growx");
 		_generacionesDesde.setColumns(10);
 		
@@ -316,6 +328,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(label_2, "cell 3 2,alignx trailing");
 		
 		_generacionesHasta = new JTextField();
+		_generacionesHasta.setText("100");
 		_panelIntervalos.add(_generacionesHasta, "cell 4 2,growx");
 		_generacionesHasta.setColumns(10);
 		
@@ -323,6 +336,7 @@ public class GUI extends JFrame{
 		_panelIntervalos.add(label_5, "cell 5 2,alignx trailing");
 		
 		_generacionesIntervalo = new JTextField();
+		_generacionesIntervalo.setText("10");
 		_panelIntervalos.add(_generacionesIntervalo, "cell 6 2,growx");
 		_generacionesIntervalo.setColumns(10);
 		_panelMuestraSemilla.setLayout(new MigLayout("", "[213px]", "[25px][25px]"));
