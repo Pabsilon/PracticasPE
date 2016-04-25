@@ -525,12 +525,13 @@ public class GUI extends JFrame{
 		
 		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
+			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]),true);
 			ed.addAttribute("ui.label", SpainMap.getDistance(resultado[i - 1], resultado[i]));
 		}
 		
-		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]), SpainMap.getCityName(resultado[resultado.length - 1]));
+		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]),true);
 		ed.addAttribute("ui.label", SpainMap.getDistance(resultado[0], resultado[resultado.length - 1]));
+		ed.addAttribute("ui.style", "fill-color: rgb(255,0,0);");
 		
 		ViewPanel view = viewer.addDefaultView(false);
 		view.setBounds(0, 0, _mapaOrdenado.getWidth(), _mapaOrdenado.getHeight());
@@ -559,12 +560,13 @@ public class GUI extends JFrame{
 		
 		for(int i = 1; i < SpainMap.getNumberOfCities(); i++)
 		{
-			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]));
+			Edge ed= graph.addEdge(SpainMap.getCityName(resultado[i - 1]) + SpainMap.getCityName(resultado[i]), SpainMap.getCityName(resultado[i - 1]), SpainMap.getCityName(resultado[i]),true);
 			ed.addAttribute("ui.label", SpainMap.getDistance(resultado[i - 1], resultado[i]));
 		}
 		
-		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]), SpainMap.getCityName(resultado[resultado.length - 1]));
+		Edge ed = graph.addEdge(SpainMap.getCityName(resultado[0]) + SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[resultado.length - 1]), SpainMap.getCityName(resultado[0]),true);
 		ed.addAttribute("ui.label", SpainMap.getDistance(resultado[0], resultado[resultado.length - 1]));
+		ed.addAttribute("ui.style", "fill-color: rgb(255,0,0);");
 		
 		ViewPanel view = viewer.addDefaultView(false);
 		view.setBounds(0, 0, _panelMapaDesordenado.getWidth(), _mapaDesordenado.getHeight());
