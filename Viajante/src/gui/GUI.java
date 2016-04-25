@@ -284,7 +284,7 @@ public class GUI extends JFrame{
 				_controller.startSimulation(_textFieldPoblacion.getText(),_textFieldIteraciones.getText(),(String) _comboBoxSeleccion.getSelectedItem(),_elitismo.isSelected(),_textFieldCruce.getText(), (String)_comboBoxCruce.getSelectedItem(), _textFieldParticipantes.getText(), _textFieldMutacion.getText(), (String)_comboBoxMutacion.getSelectedItem(), _textFieldSemilla.getText());
 			}
 		});
-		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
+		_panelGrafica.setLayout(new MigLayout("", "[925px]", "[560px][60px]"));
 		_panelMapaOrdenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
 		_panelMapaDesordenado.setLayout(new MigLayout("", "[925px]", "[660px][60px]"));
 		
