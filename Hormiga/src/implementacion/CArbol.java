@@ -46,7 +46,8 @@ public class CArbol
 	}
 
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
-	public static CArbol generarArbolAleatorio() {
+	public static CArbol generarArbolAleatorio()
+	{
 		
 		
 		
