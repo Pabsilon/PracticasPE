@@ -93,27 +93,26 @@ public class CArbol
 	{
 		h._padre = this;
 		_hijos.add(h);
-		_profundidad = h._profundidad + 1;
-		_numeroNodos = h._numeroNodos + 1;
 		
-		actualizarDatosPadre(_padre);
+		actualizarDatosPadre(this);
 	}
 
-	private void actualizarDatosPadre(CArbol arbol)
+	private static void actualizarDatosPadre(CArbol padre)
 	{
-		if(arbol == null) return;
+		if(padre == null) return;
 		
 		//Actualiza la profundidad y numero de nodos de los padres recursivamente
-		_profundidad = 0;
-		_numeroNodos = 0;
-		for(CArbol hijo : _hijos)
+		padre._profundidad = 0;
+		padre._numeroNodos = 0;
+		for(CArbol hijo : padre._hijos)
 		{
-			_profundidad += hijo._profundidad;
-			_numeroNodos = hijo._numeroNodos;
+			padre._profundidad += hijo._profundidad;
+			padre._numeroNodos += hijo._numeroNodos;
 		}
-		_numeroNodos++; //Anadirse a si mismo
+		padre._numeroNodos++; //Anadirse a si mismo
+		padre._profundidad++;
 		
-		actualizarDatosPadre(_padre);
+		actualizarDatosPadre(padre._padre);
 	}
 
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
