@@ -100,6 +100,23 @@ public class CArbol
 		addHijo(h);
 	}
 	
+	//Crea un arbol igual al arbol pasado como parametro
+	public CArbol(CArbol aCopiar)
+	{
+		_operador = aCopiar._operador;
+		_tipoOperador = aCopiar._tipoOperador;
+		_padre = aCopiar._padre;
+		_profundidad = aCopiar._profundidad;
+		_numeroNodos = aCopiar._numeroNodos;
+		
+		//Copiar recursivamente los hijos
+		_hijos = new LinkedList<>();
+		for(CArbol hijo : aCopiar._hijos)
+		{
+			_hijos.add(new CArbol(hijo));
+		}
+	}
+	
 	public void addHijo(CArbol h)
 	{
 		h._padre = this;
@@ -227,8 +244,8 @@ public class CArbol
 		CArbol old = this.getSubarbol(indx);
 		CArbol padreOld = old._padre;
 		
-		padreOld._hijos.remove(indx);
-		padreOld.addHijo(old);
+		padreOld._hijos.remove(old);
+		padreOld.addHijo(nuevo);
 	}
 	
 	//Hace un recorrido en anchura y devuelve el arbol en la posicion indx
@@ -261,5 +278,10 @@ public class CArbol
 		toRet += ")";
 		
 		return toRet;
+	}
+	
+	public CArbol crearCopia()
+	{
+		return new CArbol(this);
 	}
 }
