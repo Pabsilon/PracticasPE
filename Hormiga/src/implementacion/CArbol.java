@@ -9,12 +9,23 @@ public class CArbol
 {
 	static public enum EOperador
 	{
-		AVANZA, 
-		GIRA_DERECHA,
-		GIRA_IZQUIERDA,
-		SIC, //Si comida delante ejecuta a else b
-		PROGN2, //Evalua a, luego b y devuelve valor b
-		PROGN3; //Evalua a, b, c y deveulve c
+		AVANZA("AVANZA"), 
+		GIRA_DERECHA("GIRA_DERECHA"),
+		GIRA_IZQUIERDA("GIRA_IZQUIERDA"),
+		SIC("SIC"), //Si comida delante ejecuta a else b
+		PROGN2("PROGN2"), //Evalua a, luego b y devuelve valor b
+		PROGN3("PROGN3"); //Evalua a, b, c y deveulve c
+		
+		private String _name;
+		private EOperador(String s)
+		{
+			_name = s;
+		}
+		
+		@Override
+		public String toString() {
+			return _name;
+		}
 		
 		public static EOperador fromInteger(int x)
 		{
@@ -121,13 +132,13 @@ public class CArbol
 		//Cola con los arboles aun sin terminar
 		Queue<CArbol> cola = new LinkedList<CArbol>();
 			
-		CArbol arbol = new CArbol();
-		if(arbol._tipoOperador == ETipoOperador.TERMINAL) //Si la raiz es un terminal, terminamos
+		CArbol raiz = new CArbol();
+		if(raiz._tipoOperador == ETipoOperador.TERMINAL) //Si la raiz es un terminal, terminamos
 		{
-			return arbol;
+			return raiz;
 		}
-		cola.add(arbol);
-		while(!cola.isEmpty() && arbol._profundidad < profundidadMaxima)
+		cola.add(raiz);
+		while(!cola.isEmpty() && raiz._profundidad < profundidadMaxima)
 		{
 			CArbol arbolAux = cola.poll();
 			
@@ -179,7 +190,7 @@ public class CArbol
 		}
 		
 		
-		return null;
+		return raiz;
 	}
 	
 	//Devuelve el tipo de un operador
@@ -236,5 +247,19 @@ public class CArbol
 		}
 		
 		return cola.peek();
+	}
+	
+	@Override
+	public String toString()
+	{
+		String toRet = " (" + _operador.toString();
+		for(CArbol h: _hijos)
+		{
+			toRet += h.toString();
+		}
+		
+		toRet += ")";
+		
+		return toRet;
 	}
 }
