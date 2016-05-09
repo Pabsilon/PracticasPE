@@ -5,8 +5,13 @@ public class Hormiga
 {
 	private CArbol _cromosoma;
 	
-	public Hormiga()
+	public Hormiga(int profundidadMaxima)
 	{
-		_cromosoma = CArbol.generarArbolAleatorio();
+		_cromosoma = CArbol.generarArbolAleatorio(profundidadMaxima);
+	}
+
+	public CArbol getCromosoma()
+	{
+		return _cromosoma;
 	}
 }

@@ -55,7 +55,8 @@ public class Algoritmo
 		_poblacion = new Hormiga[tamanoPoblacion];
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
-			_poblacion[i] = new Hormiga();
+			//TODO hacer esto
+			//_poblacion[i] = new Hormiga();
 		}
 		
 		_mejorIndividuo = null;
