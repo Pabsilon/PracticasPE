@@ -14,4 +14,9 @@ public class Hormiga
 	{
 		return _cromosoma;
 	}
+	
+	public void setCromosoma(CArbol nuevoCrom)
+	{
+		_cromosoma = nuevoCrom.crearCopia();
+	}
 }
