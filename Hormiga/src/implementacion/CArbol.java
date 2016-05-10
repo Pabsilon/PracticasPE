@@ -1,6 +1,7 @@
 package implementacion;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Queue;
 import java.util.Random;
 
@@ -103,17 +104,22 @@ public class CArbol
 	//Crea un arbol igual al arbol pasado como parametro
 	public CArbol(CArbol aCopiar)
 	{
+		copiaArbol(aCopiar);
+	}
+	
+	private void copiaArbol(CArbol aCopiar)
+	{
 		_operador = aCopiar._operador;
 		_tipoOperador = aCopiar._tipoOperador;
-		_padre = aCopiar._padre;
 		_profundidad = aCopiar._profundidad;
-		_numeroNodos = aCopiar._numeroNodos;
+		_numeroNodos = aCopiar._numeroNodos;		
+		_padre = null;
 		
 		//Copiar recursivamente los hijos
 		_hijos = new LinkedList<>();
 		for(CArbol hijo : aCopiar._hijos)
 		{
-			_hijos.add(new CArbol(hijo));
+			this.addHijo(new CArbol(hijo));
 		}
 	}
 	
@@ -122,6 +128,15 @@ public class CArbol
 		h._padre = this;
 		_hijos.add(h);
 		
+		actualizarDatos(this);
+	}
+
+	public void removerHijo(CArbol old)
+	{
+		old._padre = null;
+		_hijos.remove(old);
+
+
 		actualizarDatos(this);
 	}
 
@@ -270,19 +285,19 @@ public class CArbol
 	//Cambia el subarbol en la posicion indx por el arbol del argumento
 	public void setSubarbol(int indx, CArbol nuevo)
 	{
-		CArbol old = this.getSubarbol(indx);
+		CArbol old = getSubarbol(indx);
 		CArbol padreOld = old._padre;
 		
 		//Si no es el nodo raiz
 		if(!(padreOld == null))
 		{
-			padreOld._hijos.remove(old);
+			padreOld.removerHijo(old);
 			padreOld.addHijo(nuevo);
 		}
 		else
 		{
 			//Si es el nodo raiz, es como copiar el arbol
-			old = nuevo;
+			this.copiaArbol(nuevo);
 		}
 		
 	}
@@ -297,7 +312,12 @@ public class CArbol
 		while(!cola.isEmpty())
 		{
 			CArbol a = cola.poll();
-			cola.addAll(a._hijos);
+			
+			ListIterator it = a._hijos.listIterator();
+			while(it.hasNext())
+			{
+				cola.add((CArbol) it.next());
+			}
 			
 			if(a._tipoOperador == ETipoOperador.TERMINAL)
 			{
@@ -318,7 +338,12 @@ public class CArbol
 		while(!cola.isEmpty())
 		{
 			CArbol a = cola.poll();
-			cola.addAll(a._hijos);
+
+			ListIterator it = a._hijos.listIterator();
+			while(it.hasNext())
+			{
+				cola.add((CArbol) it.next());
+			}
 			
 			if(a._tipoOperador == ETipoOperador.FUNCION)
 			{
@@ -340,11 +365,15 @@ public class CArbol
 		while(i < indx)
 		{
 			CArbol a = cola.poll();
-			cola.addAll(a._hijos);
+			ListIterator it = a._hijos.listIterator();
+			while(it.hasNext())
+			{
+				cola.add((CArbol) it.next());
+			}
 			i++;
 		}
 		
-		return cola.peek();
+		return cola.poll();
 	}
 	
 	@Override
