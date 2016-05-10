@@ -231,7 +231,7 @@ public class CArbol
 			CArbol arbolAux = cola.poll();
 			
 			Random rand = new Random();
-			arbolAux.addHijo(new CArbol(CArbol.EOperador.fromInteger(rand.nextInt(3)))); //Operadores terminales van de 0 - 2
+			arbolAux._operador = CArbol.EOperador.fromInteger(rand.nextInt(3)); //Operadores terminales van de 0 - 2
 		}
 		
 		
