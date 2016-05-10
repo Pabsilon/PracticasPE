@@ -99,7 +99,6 @@ public class CArbol
 		
 		addHijo(h);
 	}
-<<<<<<< HEAD
 	
 	//Crea un arbol igual al arbol pasado como parametro
 	public CArbol(CArbol aCopiar)
@@ -118,9 +117,6 @@ public class CArbol
 		}
 	}
 	
-=======
-
->>>>>>> 8d807887c835dcdcc5be0af8f0e109b296d43e40
 	public void addHijo(CArbol h)
 	{
 		h._padre = this;
