@@ -99,6 +99,7 @@ public class CArbol
 		
 		addHijo(h);
 	}
+<<<<<<< HEAD
 	
 	//Crea un arbol igual al arbol pasado como parametro
 	public CArbol(CArbol aCopiar)
@@ -117,6 +118,9 @@ public class CArbol
 		}
 	}
 	
+=======
+
+>>>>>>> 8d807887c835dcdcc5be0af8f0e109b296d43e40
 	public void addHijo(CArbol h)
 	{
 		h._padre = this;
@@ -155,7 +159,7 @@ public class CArbol
 			return raiz;
 		}
 		cola.add(raiz);
-		while(!cola.isEmpty() && raiz._profundidad < profundidadMaxima)
+		while(!cola.isEmpty() && raiz._profundidad - 1 < profundidadMaxima) //Generamos hasta profundiad - 1 como maximo
 		{
 			CArbol arbolAux = cola.poll();
 			
@@ -204,6 +208,15 @@ public class CArbol
 					cola.add(hijo3);
 				}
 			}
+		}
+		
+		//Estamos en la ultima profundidad, por lo que solo se deben generar funciones terminales
+		while(!cola.isEmpty())
+		{
+			CArbol arbolAux = cola.poll();
+			
+			Random rand = new Random();
+			arbolAux.addHijo(new CArbol(CArbol.EOperador.fromInteger(rand.nextInt(3)))); //Operadores terminales van de 0 - 2
 		}
 		
 		
