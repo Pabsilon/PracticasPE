@@ -17,7 +17,8 @@ public class Main
 		
 		for(int i = 0; i < 15; i++)
 		{
-			System.out.println(new Hormiga(4).getCromosoma());
+			Hormiga h = new Hormiga(4);
+			System.out.println(h.getCromosoma().toString() + h.getCromosoma().getProfundidad());
 		}
 		
 	}

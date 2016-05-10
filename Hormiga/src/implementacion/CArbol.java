@@ -122,25 +122,24 @@ public class CArbol
 		h._padre = this;
 		_hijos.add(h);
 		
-		actualizarDatosPadre(this);
+		actualizarDatos(this);
 	}
 
-	private static void actualizarDatosPadre(CArbol padre)
+	private static void actualizarDatos(CArbol arbol)
 	{
-		if(padre == null) return;
+		if(arbol == null) return;
 		
-		//Actualiza la profundidad y numero de nodos de los padres recursivamente
-		padre._profundidad = 0;
-		padre._numeroNodos = 0;
-		for(CArbol hijo : padre._hijos)
+		//Actualiza la profundidad y numero de nodos recursivamente
+		arbol._profundidad = 0;
+		arbol._numeroNodos = 0;
+		for(CArbol hijo : arbol._hijos)
 		{
-			padre._profundidad += hijo._profundidad;
-			padre._numeroNodos += hijo._numeroNodos;
+			arbol._profundidad = hijo._profundidad >= arbol._profundidad ? hijo._profundidad + 1 : arbol._profundidad;
+			arbol._numeroNodos += hijo._numeroNodos;
 		}
-		padre._numeroNodos++; //Anadirse a si mismo
-		padre._profundidad++;
+		arbol._numeroNodos++; //Anadirse a si mismo
 		
-		actualizarDatosPadre(padre._padre);
+		actualizarDatos(arbol._padre);
 	}
 
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
@@ -155,10 +154,9 @@ public class CArbol
 			return raiz;
 		}
 		cola.add(raiz);
-		while(!cola.isEmpty() && raiz._profundidad - 1 < profundidadMaxima) //Generamos hasta profundiad - 1 como maximo
+		while(!cola.isEmpty()) //Generamos hasta profundiad - 1 como maximo
 		{
 			CArbol arbolAux = cola.poll();
-			
 			//Generar dependiendo del tipo de operacion
 			if((arbolAux._operador == EOperador.SIC) || (arbolAux._operador == EOperador.PROGN2))
 			{
@@ -168,6 +166,16 @@ public class CArbol
 				
 				arbolAux.addHijo(hijo1);
 				arbolAux.addHijo(hijo2);
+				
+				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
+				if(raiz._profundidad == profundidadMaxima - 1)
+				{
+					Random rand = new Random();
+					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+					hijo2._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+					
+					break;
+				}
 				
 				//Add a la cola solo si es de tipo funcion
 				if(hijo1._tipoOperador == ETipoOperador.FUNCION)
@@ -189,6 +197,17 @@ public class CArbol
 				arbolAux.addHijo(hijo1);
 				arbolAux.addHijo(hijo2);
 				arbolAux.addHijo(hijo3);
+				
+				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
+				if(raiz._profundidad == profundidadMaxima - 1)
+				{
+					Random rand = new Random();
+					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+					hijo2._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+					hijo3._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+					
+					break;
+				}
 				
 				//Add a la cola solo si es de tipo funcion
 				if(hijo1._tipoOperador == ETipoOperador.FUNCION)
@@ -292,5 +311,9 @@ public class CArbol
 	public CArbol crearCopia()
 	{
 		return new CArbol(this);
+	}
+
+	public int getProfundidad() {
+		return _profundidad;
 	}
 }
