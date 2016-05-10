@@ -20,8 +20,8 @@ public class ACruce_Intercambio implements ACruce {
 		int puntoCorte2 = rand.nextInt(Arbolh2.getNumeroNodos());
 		
 		//Intercambiar subarboles
-		CArbol subArbol1 = Arbolh1.getSubarbol(puntoCorte1);
-		CArbol subArbol2 = Arbolh2.getSubarbol(puntoCorte2);
+		CArbol subArbol1 = Arbolh1.getSubarbol(puntoCorte1).crearCopia();
+		CArbol subArbol2 = Arbolh2.getSubarbol(puntoCorte2).crearCopia();
 		Arbolh1.setSubarbol(puntoCorte1, subArbol2);
 		Arbolh2.setSubarbol(puntoCorte2, subArbol1);
 		
