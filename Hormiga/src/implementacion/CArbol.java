@@ -264,7 +264,7 @@ public class CArbol
 	public CArbol getSubarbol(int indx)
 	{
 		//Recorrido en anchura
-		return recorridoEnAnchura(indx);
+		return getSubArbol_index(indx);
 	}
 	
 	public void setSubarbol(int indx, CArbol nuevo)
@@ -276,8 +276,50 @@ public class CArbol
 		padreOld.addHijo(nuevo);
 	}
 	
+	//Devuelve un array con todos los nodos del arbol que son terminales
+	public LinkedList<CArbol> getAllTerminals()
+	{
+		LinkedList<CArbol> toRet = new LinkedList<>();
+		
+		Queue<CArbol> cola = new LinkedList<CArbol>();
+		cola.add(this);
+		while(!cola.isEmpty())
+		{
+			CArbol a = cola.poll();
+			cola.addAll(a._hijos);
+			
+			if(a._tipoOperador == ETipoOperador.TERMINAL)
+			{
+				toRet.add(a);
+			}
+		}
+		
+		return toRet;
+	}
+	
+	//Devuelve un array con todos los nodos del arbol que son funciones
+	public LinkedList<CArbol> getAllFunctions()
+	{
+		LinkedList<CArbol> toRet = new LinkedList<>();
+		
+		Queue<CArbol> cola = new LinkedList<CArbol>();
+		cola.add(this);
+		while(!cola.isEmpty())
+		{
+			CArbol a = cola.poll();
+			cola.addAll(a._hijos);
+			
+			if(a._tipoOperador == ETipoOperador.FUNCION)
+			{
+				toRet.add(a);
+			}
+		}
+		
+		return toRet;
+	}
+	
 	//Hace un recorrido en anchura y devuelve el arbol en la posicion indx
-	private CArbol recorridoEnAnchura(int indx)
+	private CArbol getSubArbol_index(int indx)
 	{
 		if(indx > _numeroNodos) assert(false);
 		
@@ -315,5 +357,11 @@ public class CArbol
 
 	public int getProfundidad() {
 		return _profundidad;
+	}
+	
+	public void setOperador(EOperador op)
+	{
+		_operador = op;
+		_tipoOperador = getTipoOperador(_operador);
 	}
 }
