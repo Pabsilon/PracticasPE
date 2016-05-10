@@ -267,13 +267,24 @@ public class CArbol
 		return getSubArbol_index(indx);
 	}
 	
+	//Cambia el subarbol en la posicion indx por el arbol del argumento
 	public void setSubarbol(int indx, CArbol nuevo)
 	{
 		CArbol old = this.getSubarbol(indx);
 		CArbol padreOld = old._padre;
 		
-		padreOld._hijos.remove(old);
-		padreOld.addHijo(nuevo);
+		//Si no es el nodo raiz
+		if(!(padreOld == null))
+		{
+			padreOld._hijos.remove(old);
+			padreOld.addHijo(nuevo);
+		}
+		else
+		{
+			//Si es el nodo raiz, es como copiar el arbol
+			old = nuevo;
+		}
+		
 	}
 	
 	//Devuelve un array con todos los nodos del arbol que son terminales
