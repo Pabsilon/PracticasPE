@@ -1,5 +1,6 @@
 package implementacion;
 
+import java.util.PriorityQueue;
 import java.util.Random;
 
 import acruce.ACruce;
@@ -18,6 +19,7 @@ public class Algoritmo
 	private final boolean _elitismo;
 	private final int _numeroElites;
 	private long _semilla;
+	private int _profundidadMaxima;
 	
 	private Hormiga _mejorIndividuo;
 	
@@ -43,7 +45,7 @@ public class Algoritmo
 		_probabilidadMutacion = mutacionProbabilidad/100;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
-		
+		_profundidadMaxima = 4; //TODO cambiar esto a argumento
 		
 		_semilla = semilla;
 		//Generar poblacion usando la semilla de parametro
@@ -56,7 +58,7 @@ public class Algoritmo
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
 			//TODO hacer esto
-			//_poblacion[i] = new Hormiga();
+			_poblacion[i] = new Hormiga(_profundidadMaxima);
 		}
 		
 		_mejorIndividuo = null;
@@ -71,14 +73,68 @@ public class Algoritmo
 	 */
 	public Hormiga ejecutarAlgoritmo(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
+		//Cola de maximos donde se guarda la poblacion. Los mejores son los primeros
+		PriorityQueue<Hormiga> elite = Hormiga.crearColaPrioridadHormiga();
+		int aptitudes[] = new int[_poblacion.length];
+		Hormiga seleccionados[] = new Hormiga[_poblacion.length]; //No inicializamos los elementos porque el algoritmo de seleccion ya lo hace
+		
 		for(int g = 0; g < _generacionTotales; g++)
 		{
 			//Evaluar
+			evaluar(mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
 			//Seleccionar
+			_ags.seleccionar(_poblacion, aptitudes, seleccionados);
 			//Cruzar
+			cruzar(seleccionados);
 			//Mutar
+			//TODO quitar rand de parametro
+			_agm.mutar(seleccionados, _probabilidadMutacion, new Random());
+			
+			//Cambiar a la nueva poblacion
+			_poblacion = seleccionados;
 		}
 		
 		return _mejorIndividuo;
+	}
+
+	private void cruzar(Hormiga[] seleccionados)
+	{
+		Random rand = new Random();
+		for(int i = 0; i < seleccionados.length; i++)
+		{
+			if(rand.nextFloat() <= _probabilidadCruce)
+			{
+				Hormiga p1 = seleccionados[i];
+				int indx2 = rand.nextInt(_poblacion.length);
+				indx2 = indx2 == i ? i + 1 : indx2; //Si el padre 2 es el mismo que el padre 1, elegir el siguiente.
+				Hormiga p2 = seleccionados[indx2];
+				Hormiga hijo1 = new Hormiga(0);
+				Hormiga hijo2 = new Hormiga(0);
+				
+				_agc.cruzar(p1, p2, hijo1, hijo2);
+				
+				seleccionados[i] = hijo1;
+				seleccionados[indx2] = hijo2;
+			}
+		}
+	}
+
+	private void evaluar(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, PriorityQueue<Hormiga> elite) 
+	{
+		float sumaApt = 0;
+		for(Hormiga h : _poblacion)
+		{
+			sumaApt += h.getAptitud();			
+			elite.add(h);
+		}
+		//Si el mejor de eta generacion es mejor que el maximo global, sustituir
+		if(elite.peek().getAptitud() > _mejorIndividuo.getAptitud())
+		{
+			_mejorIndividuo = elite.peek().crearCopia();
+		}
+		
+		mejorAbsoluto[generacion] = _mejorIndividuo.getAptitud();
+		mejorGeneracion[generacion] = elite.peek().getAptitud();
+		mediaGeneracion[generacion] = sumaApt / _poblacion.length;
 	}
 }
