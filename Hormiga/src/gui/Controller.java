@@ -12,6 +12,10 @@ public class Controller {
 		actualizaMapa(t);
 	}
 	
+	public void comenzarSimulacion (String cruce, String mutacion, String probMutacion, String seleccion){
+		
+	}
+	
 	public void actualizaMapa(Tablero t){
 		for (int i=0; i<32; i++){
 			for (int j = 0; j<32; j++){

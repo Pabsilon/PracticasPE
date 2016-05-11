@@ -8,7 +8,7 @@ import implementacion.Hormiga;
 public class AMutacion_Arbol implements AMutacion {
 
 	@Override
-	public void mutar(Hormiga individuo)
+	public void mutar(Hormiga individuo, float mutProb)
 	{
 		CArbol raiz = individuo.getCromosoma();
 

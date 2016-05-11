@@ -1,11 +1,15 @@
 package implementacion;
 
-import acruce.ACruce_Intercambio;
+//import acruce.ACruce_Intercambio;
+
+import gui.Controller;
 
 public class Main
 {
+	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
+		/*
 		Hormiga p1 = new Hormiga(4);
 		Hormiga p2 = new Hormiga(4);
 		Hormiga h1 = new Hormiga(4);
@@ -19,5 +23,7 @@ public class Main
 		System.out.println(p2.getCromosoma());
 		System.out.println(h1.getCromosoma());
 		System.out.println(h2.getCromosoma());
+		*/
+		Controller c = new Controller();
 	}
 }

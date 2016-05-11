@@ -5,6 +5,6 @@ import implementacion.Hormiga;
 
 public interface AMutacion {
 	
-	public void mutar(Hormiga individuo);
+	public void mutar(Hormiga individuo, float mutProb);
 
 }

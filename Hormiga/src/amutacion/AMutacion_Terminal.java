@@ -10,7 +10,7 @@ public class AMutacion_Terminal implements AMutacion
 {
 
 	@Override
-	public void mutar(Hormiga individuo)
+	public void mutar(Hormiga individuo, float mutProb)
 	{
 		CArbol raiz = individuo.getCromosoma();
 		Vector<CArbol> terminales = raiz.getAllTerminals();

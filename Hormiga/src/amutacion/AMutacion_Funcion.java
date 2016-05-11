@@ -11,7 +11,7 @@ public class AMutacion_Funcion implements AMutacion
 {
 
 	@Override
-	public void mutar(Hormiga individuo)
+	public void mutar(Hormiga individuo, float mutProb)
 	{
 		CArbol raiz = individuo.getCromosoma();
 		Vector<CArbol> funciones = raiz.getAllFunctions();

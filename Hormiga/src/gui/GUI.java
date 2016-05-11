@@ -2,7 +2,8 @@ package gui;
 
 import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JTabbedPane;
 
@@ -14,6 +15,13 @@ import java.awt.Color;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GUI extends JFrame{
 	
@@ -33,6 +41,7 @@ public class GUI extends JFrame{
 		_mapa[x][y].setBackground(Color.RED);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GUI(Controller c) {
 		this.setTitle("Practica 3: Hormiga");
 		getContentPane().setLayout(new MigLayout("", "[grow]", "[grow]"));
@@ -46,8 +55,66 @@ public class GUI extends JFrame{
 		
 		JPanel panelSetUp = new JPanel();
 		panelSetUp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panelProblema.add(panelSetUp, "cell 0 0,grow");
-		panelSetUp.setLayout(new MigLayout("", "[]", "[]"));
+		panelProblema.add(panelSetUp, "cell 0 0,alignx center,growy");
+		
+		JPanel PanelMutacion = new JPanel();
+		PanelMutacion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		PanelMutacion.setLayout(new MigLayout("", "[185][]", "[14px][]"));
+		
+		JLabel lblMutacin = new JLabel("Metodo de Mutacion:");
+		PanelMutacion.add(lblMutacin, "cell 0 0,alignx left,aligny top");
+		
+		String[] mutaciones = {"Arbol","Funcion","Terminal"};
+		JComboBox comboMutacion = new JComboBox(mutaciones);
+		PanelMutacion.add(comboMutacion, "flowx,cell 0 1,growx");
+		
+		probMutacion = new JTextField("0.05");
+		PanelMutacion.add(probMutacion, "cell 1 1");
+		probMutacion.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setLayout(new MigLayout("", "[185,grow][]", "[][]"));
+		
+		JLabel lblSeleccion = new JLabel("Metodo de Seleccion:");
+		panel.add(lblSeleccion, "cell 0 0");
+		
+		String[] selecciones = {"Ranking","Restos","Ruleta","Torneo","Truncamiento"};
+		JComboBox comboSeleccion = new JComboBox(selecciones);
+		panel.add(comboSeleccion, "cell 0 1,growx");
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_1.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JLabel lblMetodoDeCruce = new JLabel("Metodo de Cruce:");
+		panel_1.add(lblMetodoDeCruce, "cell 0 0");
+		
+		String[] cruces = {"Intercambio"};
+		JComboBox comboCruce = new JComboBox(cruces);
+		panel_1.add(comboCruce, "cell 0 1,growx");
+		
+		JButton botonComenzar = new JButton("Comenzar");
+		GroupLayout gl_panelSetUp = new GroupLayout(panelSetUp);
+		gl_panelSetUp.setHorizontalGroup(
+			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
+				.addComponent(PanelMutacion, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+				.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+		);
+		gl_panelSetUp.setVerticalGroup(
+			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addComponent(PanelMutacion, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 354, Short.MAX_VALUE)
+					.addComponent(botonComenzar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+		);
+		panelSetUp.setLayout(gl_panelSetUp);
 		
 		JPanel panelMapa = new JPanel();
 		panelMapa.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -68,6 +135,12 @@ public class GUI extends JFrame{
 		tabPanel.addTab("Grafica", null, panelGrafica, null);
 		panelGrafica.setLayout(new BorderLayout(0, 0));
 		
+		botonComenzar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				c.comenzarSimulacion((String) comboCruce.getSelectedItem(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem());
+			}
+		});
+		
 		plot = new Plot2DPanel();
 		panelGrafica.add(plot);
 		
@@ -82,5 +155,5 @@ public class GUI extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private JTextField probMutacion;
 }
