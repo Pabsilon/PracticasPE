@@ -61,8 +61,12 @@ public class Hormiga
 			return monticuloMinimos;
 		}
 
-		public Hormiga crearCopia() {
-			// TODO Auto-generated method stub
-			return null;
+		public Hormiga crearCopia()
+		{
+			Hormiga toRet = new Hormiga(0);
+			toRet._aptitud = _aptitud;
+			toRet._cromosoma = _cromosoma.crearCopia();
+			
+			return toRet;
 		}
 }

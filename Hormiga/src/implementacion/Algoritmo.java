@@ -76,7 +76,7 @@ public class Algoritmo
 		//Cola de maximos donde se guarda la poblacion. Los mejores son los primeros
 		PriorityQueue<Hormiga> elite = Hormiga.crearColaPrioridadHormiga();
 		int aptitudes[] = new int[_poblacion.length];
-		Hormiga seleccionados[] = new Hormiga[_poblacion.length];
+		Hormiga seleccionados[] = new Hormiga[_poblacion.length]; //No inicializamos los elementos porque el algoritmo de seleccion ya lo hace
 		
 		for(int g = 0; g < _generacionTotales; g++)
 		{
@@ -87,6 +87,11 @@ public class Algoritmo
 			//Cruzar
 			cruzar(seleccionados);
 			//Mutar
+			//TODO quitar rand de parametro
+			_agm.mutar(seleccionados, _probabilidadMutacion, new Random());
+			
+			//Cambiar a la nueva poblacion
+			_poblacion = seleccionados;
 		}
 		
 		return _mejorIndividuo;
@@ -95,19 +100,21 @@ public class Algoritmo
 	private void cruzar(Hormiga[] seleccionados)
 	{
 		Random rand = new Random();
-		for(Hormiga h : _poblacion)
+		for(int i = 0; i < seleccionados.length; i++)
 		{
-			if(rand.nextFloat() < _probabilidadCruce)
+			if(rand.nextFloat() <= _probabilidadCruce)
 			{
-				//TODO puede salir el cruce consigo mismo, preguntar que tal es eso
-				Hormiga p2 = _poblacion[rand.nextInt(_poblacion.length)];
+				Hormiga p1 = seleccionados[i];
+				int indx2 = rand.nextInt(_poblacion.length);
+				indx2 = indx2 == i ? i + 1 : indx2; //Si el padre 2 es el mismo que el padre 1, elegir el siguiente.
+				Hormiga p2 = seleccionados[indx2];
 				Hormiga hijo1 = new Hormiga(0);
 				Hormiga hijo2 = new Hormiga(0);
 				
-				_agc.cruzar(h, p2, hijo1, hijo2);
+				_agc.cruzar(p1, p2, hijo1, hijo2);
 				
-				h = hijo1;
-				p2 = hijo2;
+				seleccionados[i] = hijo1;
+				seleccionados[indx2] = hijo2;
 			}
 		}
 	}
