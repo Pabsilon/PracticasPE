@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Vector;
 
 //Custom arbol para representar el individuo
 public class CArbol 
@@ -104,10 +105,11 @@ public class CArbol
 	//Crea un arbol igual al arbol pasado como parametro
 	public CArbol(CArbol aCopiar)
 	{
-		copiaArbol(aCopiar);
+		copiarArbol(aCopiar);
 	}
 	
-	private void copiaArbol(CArbol aCopiar)
+	//Convierte este arbol en una copia del arbol aCopiar
+	public void copiarArbol(CArbol aCopiar)
 	{
 		_operador = aCopiar._operador;
 		_tipoOperador = aCopiar._tipoOperador;
@@ -160,6 +162,7 @@ public class CArbol
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
 	public static CArbol generarArbolAleatorio(int profundidadMaxima)
 	{
+		//TODO ramped and half etc
 		//Cola con los arboles aun sin terminar
 		Queue<CArbol> cola = new LinkedList<CArbol>();
 			
@@ -297,15 +300,15 @@ public class CArbol
 		else
 		{
 			//Si es el nodo raiz, es como copiar el arbol
-			this.copiaArbol(nuevo);
+			this.copiarArbol(nuevo);
 		}
 		
 	}
 	
 	//Devuelve un array con todos los nodos del arbol que son terminales
-	public LinkedList<CArbol> getAllTerminals()
+	public Vector<CArbol> getAllTerminals()
 	{
-		LinkedList<CArbol> toRet = new LinkedList<>();
+		Vector<CArbol> toRet = new Vector<>();
 		
 		Queue<CArbol> cola = new LinkedList<CArbol>();
 		cola.add(this);
@@ -329,9 +332,9 @@ public class CArbol
 	}
 	
 	//Devuelve un array con todos los nodos del arbol que son funciones
-	public LinkedList<CArbol> getAllFunctions()
+	public Vector<CArbol> getAllFunctions()
 	{
-		LinkedList<CArbol> toRet = new LinkedList<>();
+		Vector<CArbol> toRet = new Vector<>();
 		
 		Queue<CArbol> cola = new LinkedList<CArbol>();
 		cola.add(this);
@@ -403,5 +406,10 @@ public class CArbol
 	{
 		_operador = op;
 		_tipoOperador = getTipoOperador(_operador);
+	}
+
+	public EOperador getOperador()
+	{
+		return _operador;
 	}
 }

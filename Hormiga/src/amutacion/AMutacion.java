@@ -5,6 +5,6 @@ import implementacion.Hormiga;
 
 public interface AMutacion {
 	
-	public void mutar(Hormiga[] poblacion, float mutationProb, Random rand);
+	public void mutar(Hormiga individuo);
 
 }

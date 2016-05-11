@@ -87,14 +87,26 @@ public class Algoritmo
 			//Cruzar
 			cruzar(seleccionados);
 			//Mutar
-			//TODO quitar rand de parametro
-			_agm.mutar(seleccionados, _probabilidadMutacion, new Random());
+			//TODO Preguntar si la mutacion se elige cual usar o es una probabildiad
+			mutar(seleccionados);
 			
 			//Cambiar a la nueva poblacion
 			_poblacion = seleccionados;
 		}
 		
 		return _mejorIndividuo;
+	}
+
+	private void mutar(Hormiga[] seleccionados)
+	{
+		Random rand = new Random();
+		for(int i = 0; i < _poblacion.length; i++)
+		{
+			if(_probabilidadMutacion <= rand.nextFloat())
+			{
+				_agm.mutar(seleccionados[i]);
+			}
+		}
 	}
 
 	private void cruzar(Hormiga[] seleccionados)
