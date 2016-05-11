@@ -19,6 +19,7 @@ public class Algoritmo
 	private final boolean _elitismo;
 	private final int _numeroElites;
 	private long _semilla;
+	private int _profundidadMaxima;
 	
 	private Hormiga _mejorIndividuo;
 	
@@ -44,7 +45,7 @@ public class Algoritmo
 		_probabilidadMutacion = mutacionProbabilidad/100;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
-		
+		_profundidadMaxima = 4; //TODO cambiar esto a argumento
 		
 		_semilla = semilla;
 		//Generar poblacion usando la semilla de parametro
@@ -57,7 +58,7 @@ public class Algoritmo
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
 			//TODO hacer esto
-			//_poblacion[i] = new Hormiga();
+			_poblacion[i] = new Hormiga(_profundidadMaxima);
 		}
 		
 		_mejorIndividuo = null;
@@ -84,10 +85,31 @@ public class Algoritmo
 			//Seleccionar
 			_ags.seleccionar(_poblacion, aptitudes, seleccionados);
 			//Cruzar
+			cruzar(seleccionados);
 			//Mutar
 		}
 		
 		return _mejorIndividuo;
+	}
+
+	private void cruzar(Hormiga[] seleccionados)
+	{
+		Random rand = new Random();
+		for(Hormiga h : _poblacion)
+		{
+			if(rand.nextFloat() < _probabilidadCruce)
+			{
+				//TODO puede salir el cruce consigo mismo, preguntar que tal es eso
+				Hormiga p2 = _poblacion[rand.nextInt(_poblacion.length)];
+				Hormiga hijo1 = new Hormiga(0);
+				Hormiga hijo2 = new Hormiga(0);
+				
+				_agc.cruzar(h, p2, hijo1, hijo2);
+				
+				h = hijo1;
+				p2 = hijo2;
+			}
+		}
 	}
 
 	private void evaluar(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, PriorityQueue<Hormiga> elite) 
