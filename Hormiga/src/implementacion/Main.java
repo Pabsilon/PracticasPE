@@ -14,5 +14,10 @@ public class Main
 		ACruce_Intercambio c = new ACruce_Intercambio();
 		
 		c.cruzar(p1, p2, h1, h2);
+		
+		System.out.println(p1.getCromosoma());
+		System.out.println(p2.getCromosoma());
+		System.out.println(h1.getCromosoma());
+		System.out.println(h2.getCromosoma());
 	}
 }

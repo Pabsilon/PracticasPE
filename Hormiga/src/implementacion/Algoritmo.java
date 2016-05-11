@@ -1,5 +1,6 @@
 package implementacion;
 
+import java.util.PriorityQueue;
 import java.util.Random;
 
 import acruce.ACruce;
@@ -71,14 +72,40 @@ public class Algoritmo
 	 */
 	public Hormiga ejecutarAlgoritmo(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
+		//Cola de maximos donde se guarda la poblacion. Los mejores son los primeros
+		PriorityQueue<Hormiga> elite = Hormiga.crearColaPrioridadHormiga();
+		int aptitudes[] = new int[_poblacion.length];
+		Hormiga seleccionados[] = new Hormiga[_poblacion.length];
+		
 		for(int g = 0; g < _generacionTotales; g++)
 		{
 			//Evaluar
+			evaluar(mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
 			//Seleccionar
+			_ags.seleccionar(_poblacion, aptitudes, seleccionados);
 			//Cruzar
 			//Mutar
 		}
 		
 		return _mejorIndividuo;
+	}
+
+	private void evaluar(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, PriorityQueue<Hormiga> elite) 
+	{
+		float sumaApt = 0;
+		for(Hormiga h : _poblacion)
+		{
+			sumaApt += h.getAptitud();			
+			elite.add(h);
+		}
+		//Si el mejor de eta generacion es mejor que el maximo global, sustituir
+		if(elite.peek().getAptitud() > _mejorIndividuo.getAptitud())
+		{
+			_mejorIndividuo = elite.peek().crearCopia();
+		}
+		
+		mejorAbsoluto[generacion] = _mejorIndividuo.getAptitud();
+		mejorGeneracion[generacion] = elite.peek().getAptitud();
+		mediaGeneracion[generacion] = sumaApt / _poblacion.length;
 	}
 }
