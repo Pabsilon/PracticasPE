@@ -41,8 +41,8 @@ public class Algoritmo
 		_agc = agc;
 		_ags = ags;
 		_agm = agm;
-		_probabilidadCruce = cruceProbabilidad;
-		_probabilidadMutacion = mutacionProbabilidad/100;
+		_probabilidadCruce = cruceProbabilidad/100.0f;
+		_probabilidadMutacion = mutacionProbabilidad/100.0f;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
 		_profundidadMaxima = 4; //TODO cambiar esto a argumento
@@ -61,7 +61,7 @@ public class Algoritmo
 			_poblacion[i] = new Hormiga(_profundidadMaxima);
 		}
 		
-		_mejorIndividuo = null;
+		_mejorIndividuo = _poblacion[0];
 	}
 
 	//Ejecuta las generaciones y devuelve el mejor elemento
@@ -90,6 +90,8 @@ public class Algoritmo
 			//TODO Preguntar si la mutacion se elige cual usar o es una probabildiad
 			mutar(seleccionados);
 			
+			//TODO elitismo aqui
+			
 			//Cambiar a la nueva poblacion
 			_poblacion = seleccionados;
 		}
@@ -104,7 +106,6 @@ public class Algoritmo
 		{
 			if(_probabilidadMutacion <= rand.nextFloat())
 			{
-				//TODO fix
 				_agm.mutar(seleccionados[i]);
 			}
 		}
@@ -149,5 +150,9 @@ public class Algoritmo
 		mejorAbsoluto[generacion] = _mejorIndividuo.getAptitud();
 		mejorGeneracion[generacion] = elite.peek().getAptitud();
 		mediaGeneracion[generacion] = sumaApt / _poblacion.length;
+	}
+
+	public long getSemilla() {
+		return _semilla;
 	}
 }

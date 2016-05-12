@@ -69,4 +69,8 @@ public class Hormiga
 			
 			return toRet;
 		}
+
+		public String getFenotipo() {
+			return _cromosoma.toString();
+		}
 }

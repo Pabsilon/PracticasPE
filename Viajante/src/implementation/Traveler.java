@@ -46,8 +46,8 @@ public class Traveler
 		_agc = agc;
 		_ags = ags;
 		_agm = agm;
-		_probabilidadCruce = cruceProbabilidad;
-		_probabilidadMutacion = mutacionProbabilidad/100;
+		_probabilidadCruce = cruceProbabilidad/100.0f; //No teniamos /100... por lo que siempre cruzaba
+		_probabilidadMutacion = mutacionProbabilidad/100.0f;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
 		

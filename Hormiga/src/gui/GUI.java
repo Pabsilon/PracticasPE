@@ -1,7 +1,11 @@
 package gui;
 
+import implementacion.Hormiga;
+
 import javax.swing.JFrame;
+
 import net.miginfocom.swing.MigLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +14,7 @@ import javax.swing.JTabbedPane;
 import org.math.plot.Plot2DPanel;
 
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -68,7 +73,7 @@ public class GUI extends JFrame{
 		JComboBox comboMutacion = new JComboBox(mutaciones);
 		PanelMutacion.add(comboMutacion, "flowx,cell 0 1,growx");
 		
-		probMutacion = new JTextField("0.05");
+		probMutacion = new JTextField("5");
 		PanelMutacion.add(probMutacion, "cell 1 1");
 		probMutacion.setColumns(10);
 		
@@ -137,7 +142,7 @@ public class GUI extends JFrame{
 		
 		botonComenzar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				c.comenzarSimulacion((String) comboCruce.getSelectedItem(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem());
+				c.comenzarSimulacion("100", "100", "3", (String) comboCruce.getSelectedItem(), "60", (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), false, "0");			
 			}
 		});
 		
@@ -156,4 +161,15 @@ public class GUI extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField probMutacion;
+
+	public void drawHormiga(Hormiga resultado)
+	{
+				
+	}
+
+	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int parseInt, String fenotipo)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
