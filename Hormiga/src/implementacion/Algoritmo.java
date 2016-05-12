@@ -105,7 +105,7 @@ public class Algoritmo
 			if(_probabilidadMutacion <= rand.nextFloat())
 			{
 				//TODO fix
-				_agm.mutar(seleccionados[i], 0.0f);
+				_agm.mutar(seleccionados[i]);
 			}
 		}
 	}
