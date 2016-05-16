@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -27,6 +28,8 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.JCheckBox;
 
 public class GUI extends JFrame{
 	
@@ -66,31 +69,47 @@ public class GUI extends JFrame{
 		PanelMutacion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		PanelMutacion.setLayout(new MigLayout("", "[185][]", "[14px][]"));
 		
-		JLabel lblMutacin = new JLabel("Metodo de Mutacion:");
-		PanelMutacion.add(lblMutacin, "cell 0 0,alignx left,aligny top");
+		JLabel lblMutacin = new JLabel("Mutacion:");
+		PanelMutacion.add(lblMutacin, "flowx,cell 0 0,alignx left,aligny top");
 		
 		String[] mutaciones = {"Arbol","Funcion","Terminal"};
 		JComboBox comboMutacion = new JComboBox(mutaciones);
 		PanelMutacion.add(comboMutacion, "flowx,cell 0 1,growx");
 		
-		probMutacion = new JTextField("5");
-		PanelMutacion.add(probMutacion, "cell 1 1");
-		probMutacion.setColumns(10);
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setLayout(new MigLayout("", "[185,grow][]", "[][]"));
+		panel.setLayout(new MigLayout("", "[185,grow][]", "[][][]"));
 		
 		JLabel lblSeleccion = new JLabel("Metodo de Seleccion:");
 		panel.add(lblSeleccion, "cell 0 0");
 		
+		JTextField textFieldParticipantes;
+		textFieldParticipantes = new JTextField("3");
+		textFieldParticipantes.setPreferredSize(new Dimension(72,25));
+		
 		String[] selecciones = {"Ranking","Restos","Ruleta","Torneo","Truncamiento"};
 		JComboBox comboSeleccion = new JComboBox(selecciones);
 		panel.add(comboSeleccion, "cell 0 1,growx");
+		comboSeleccion.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				String s = (String)comboSeleccion.getSelectedItem();
+				if (s=="Torneo"){
+					panel.add(textFieldParticipantes, "cell 0 2,alignx left,aligny center");
+					panelSetUp.revalidate();
+					panelSetUp.repaint();
+				}else{
+					panel.remove(textFieldParticipantes);
+					panelSetUp.revalidate();
+					panelSetUp.repaint();
+				}
+				
+			}
+			
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_1.setLayout(new MigLayout("", "[grow]", "[][]"));
+		panel_1.setLayout(new MigLayout("", "[grow]", "[][][]"));
 		
 		JLabel lblMetodoDeCruce = new JLabel("Metodo de Cruce:");
 		panel_1.add(lblMetodoDeCruce, "cell 0 0");
@@ -100,25 +119,135 @@ public class GUI extends JFrame{
 		panel_1.add(comboCruce, "cell 0 1,growx");
 		
 		JButton botonComenzar = new JButton("Comenzar");
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		GroupLayout gl_panelSetUp = new GroupLayout(panelSetUp);
 		gl_panelSetUp.setHorizontalGroup(
 			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
-				.addComponent(PanelMutacion, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-				.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+				.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(PanelMutacion, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_panelSetUp.setVerticalGroup(
 			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelSetUp.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(PanelMutacion, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 354, Short.MAX_VALUE)
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
 					.addComponent(botonComenzar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
 		);
+		panel_5.setLayout(new MigLayout("", "[][]", "[]"));
+		
+		JLabel lblGeneradoEn = new JLabel("Generado en:");
+		panel_5.add(lblGeneradoEn, "cell 0 0");
+		
+		JLabel generadoEn = new JLabel("");
+		panel_5.add(generadoEn, "cell 1 0");
+		panel_4.setLayout(new MigLayout("", "[][grow]", "[][]"));
+		
+		JLabel lblSemilla = new JLabel("Semilla:");
+		panel_4.add(lblSemilla, "cell 0 0,alignx trailing");
+		
+		semilla = new JTextField();
+		semilla.setHorizontalAlignment(SwingConstants.TRAILING);
+		semilla.setText("0");
+		panel_4.add(semilla, "cell 1 0,growx");
+		semilla.setColumns(10);
+		
+		JLabel lblAnterior = new JLabel("Anterior:");
+		panel_4.add(lblAnterior, "cell 0 1,alignx trailing");
+		
+		semillaAnt = new JTextField();
+		semillaAnt.setHorizontalAlignment(SwingConstants.TRAILING);
+		semillaAnt.setEditable(false);
+		semillaAnt.setText("0");
+		panel_4.add(semillaAnt, "cell 1 1,growx");
+		semillaAnt.setColumns(10);
+		
+		probMutacion = new JTextField("5");
+		probMutacion.setHorizontalAlignment(SwingConstants.TRAILING);
+		PanelMutacion.add(probMutacion, "cell 0 0");
+		probMutacion.setColumns(10);
+		
+		JCheckBox elitismo = new JCheckBox("Elitismo");
+		panel.add(elitismo, "cell 0 2");
+		panel_3.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
+		JLabel lblGeneraciones = new JLabel("Generaciones:");
+		panel_3.add(lblGeneraciones, "cell 0 0,alignx trailing");
+		
+		generaciones = new JTextField();
+		generaciones.setHorizontalAlignment(SwingConstants.TRAILING);
+		generaciones.setText("300");
+		panel_3.add(generaciones, "cell 1 0,growx");
+		generaciones.setColumns(10);
+		panel_2.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
+		JLabel lblPoblacion = new JLabel("Poblacion:");
+		panel_2.add(lblPoblacion, "cell 0 0,alignx trailing");
+		
+		poblacion = new JTextField();
+		poblacion.setHorizontalAlignment(SwingConstants.TRAILING);
+		poblacion.setText("100");
+		panel_2.add(poblacion, "cell 1 0,growx");
+		poblacion.setColumns(10);
+		
+		JLabel labelProbCruce = new JLabel("Probabilidad:");
+		panel_1.add(labelProbCruce, "flowx,cell 0 2");
+		
+		probabilidadCruce = new JTextField();
+		probabilidadCruce.setHorizontalAlignment(SwingConstants.TRAILING);
+		probabilidadCruce.setText("60");
+		panel_1.add(probabilidadCruce, "cell 0 2");
+		probabilidadCruce.setColumns(10);
 		panelSetUp.setLayout(gl_panelSetUp);
 		
 		JPanel panelMapa = new JPanel();
@@ -142,7 +271,7 @@ public class GUI extends JFrame{
 		
 		botonComenzar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				c.comenzarSimulacion("100", "100", "3", (String) comboCruce.getSelectedItem(), "60", (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), false, "0");			
+				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText());
 			}
 		});
 		
@@ -161,6 +290,11 @@ public class GUI extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField probMutacion;
+	private JTextField probabilidadCruce;
+	private JTextField poblacion;
+	private JTextField generaciones;
+	private JTextField semilla;
+	private JTextField semillaAnt;
 
 	public void drawHormiga(Hormiga resultado)
 	{
