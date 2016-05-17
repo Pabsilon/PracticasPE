@@ -1,6 +1,5 @@
 package gui;
 
-import acruce.ACruce;
 import acruce.ACruce_Intercambio;
 import amutacion.AMutacion;
 import aseleccion.ASeleccion;
@@ -20,7 +19,7 @@ public class Controller {
 		actualizaMapa(t);
 	}
 	
-	public void comenzarSimulacion (String poblacion, String generaciones, String torneoParticipantes, String metodoCruce, String probCruece, String metodoMutacion, String probMutacion, String metodoSeleccion, boolean elitismo, String semilla)
+	public void comenzarSimulacion (String poblacion, String generaciones, String torneoParticipantes, String metodoCruce, String probCruece, String metodoMutacion, String probMutacion, String metodoSeleccion, boolean elitismo, String semilla, boolean bloating, String metodoBloating)
 	{
 		long timeAgo = System.currentTimeMillis();
 		//Parseo del algoritmo de selecci�n
@@ -44,10 +43,10 @@ public class Controller {
 		//Dibujar mapa
 		g.drawHormiga(resultado);
 		//Mostramos la semilla utilizada.
-		//g.setSeed(algoritmo.getSemilla());
+		g.setSeed(algoritmo.getSemilla());
 		//Mostramos el tiempo de ejecucion
 		timeAgo = System.currentTimeMillis() - timeAgo;
-		//g.setTime((float)timeAgo/1000);
+		g.setTime((float)timeAgo/1000);
 	}
 	
 	public void actualizaMapa(Tablero t){
@@ -55,6 +54,10 @@ public class Controller {
 			for (int j = 0; j<32; j++){
 				if (t.getValue(i, j).equalsIgnoreCase("Comida")){
 					g.setComida(i, j);
+				}else if (t.getValue(i, j).equalsIgnoreCase("Comido")){
+					g.setComido(i, j);
+				}else if (t.getValue(i, j).equalsIgnoreCase("Hormiga")){
+					g.setHormiga(i, j);
 				}
 			}
 		}

@@ -35,6 +35,8 @@ public class GUI extends JFrame{
 	
 	Plot2DPanel plot;
 	JPanel[][] _mapa;
+	JLabel _generadoEn;
+	JTextField _semillaAnt;
 	final int _mapSize = 32;
 	
 	public void setComida(int x, int y){
@@ -67,7 +69,7 @@ public class GUI extends JFrame{
 		
 		JPanel PanelMutacion = new JPanel();
 		PanelMutacion.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		PanelMutacion.setLayout(new MigLayout("", "[185][]", "[14px][]"));
+		PanelMutacion.setLayout(new MigLayout("", "[185]", "[14px][]"));
 		
 		JLabel lblMutacin = new JLabel("Mutacion:");
 		PanelMutacion.add(lblMutacin, "flowx,cell 0 0,alignx left,aligny top");
@@ -78,7 +80,7 @@ public class GUI extends JFrame{
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setLayout(new MigLayout("", "[185,grow][]", "[][][]"));
+		panel.setLayout(new MigLayout("", "[185,grow]", "[][][]"));
 		
 		JLabel lblSeleccion = new JLabel("Metodo de Seleccion:");
 		panel.add(lblSeleccion, "cell 0 0");
@@ -131,38 +133,41 @@ public class GUI extends JFrame{
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		GroupLayout gl_panelSetUp = new GroupLayout(panelSetUp);
 		gl_panelSetUp.setHorizontalGroup(
 			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
-				.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
 				.addGroup(gl_panelSetUp.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(gl_panelSetUp.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(gl_panelSetUp.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_panelSetUp.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(PanelMutacion, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(gl_panelSetUp.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_panelSetUp.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(gl_panelSetUp.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-					.addContainerGap())
+					.addGroup(gl_panelSetUp.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(PanelMutacion, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_panelSetUp.createSequentialGroup()
+							.addGroup(gl_panelSetUp.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+								.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+							.addContainerGap())
+						.addGroup(gl_panelSetUp.createSequentialGroup()
+							.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		gl_panelSetUp.setVerticalGroup(
 			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
@@ -178,19 +183,30 @@ public class GUI extends JFrame{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(PanelMutacion, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-					.addComponent(botonComenzar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+					.addComponent(botonComenzar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
+		panel_6.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JCheckBox checkBloating = new JCheckBox("Bloating");
+		panel_6.add(checkBloating, "cell 0 0");
+		
+		String[] bloatings = {"Tarpeian","Penalizacion"};
+		JComboBox comboBloating = new JComboBox(bloatings);
+		panel_6.add(comboBloating, "cell 0 1,growx");
 		panel_5.setLayout(new MigLayout("", "[][]", "[]"));
 		
 		JLabel lblGeneradoEn = new JLabel("Generado en:");
 		panel_5.add(lblGeneradoEn, "cell 0 0");
 		
-		JLabel generadoEn = new JLabel("");
-		panel_5.add(generadoEn, "cell 1 0");
+		_generadoEn = new JLabel("");
+		panel_5.add(_generadoEn, "cell 1 0");
 		panel_4.setLayout(new MigLayout("", "[][grow]", "[][]"));
 		
 		JLabel lblSemilla = new JLabel("Semilla:");
@@ -205,12 +221,12 @@ public class GUI extends JFrame{
 		JLabel lblAnterior = new JLabel("Anterior:");
 		panel_4.add(lblAnterior, "cell 0 1,alignx trailing");
 		
-		semillaAnt = new JTextField();
-		semillaAnt.setHorizontalAlignment(SwingConstants.TRAILING);
-		semillaAnt.setEditable(false);
-		semillaAnt.setText("0");
-		panel_4.add(semillaAnt, "cell 1 1,growx");
-		semillaAnt.setColumns(10);
+		_semillaAnt = new JTextField();
+		_semillaAnt.setHorizontalAlignment(SwingConstants.TRAILING);
+		_semillaAnt.setEditable(false);
+		_semillaAnt.setText("0");
+		panel_4.add(_semillaAnt, "cell 1 1,growx");
+		_semillaAnt.setColumns(10);
 		
 		probMutacion = new JTextField("5");
 		probMutacion.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -271,7 +287,7 @@ public class GUI extends JFrame{
 		
 		botonComenzar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText());
+				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText(), checkBloating.isSelected(), (String) comboBloating.getSelectedItem());
 			}
 		});
 		
@@ -284,6 +300,14 @@ public class GUI extends JFrame{
 		this.setVisible(true);	
 		
 	}
+	
+	public void setTime(float time){
+		_generadoEn.setText(Float.toString(time) + " s");
+	}
+	
+	public void setSeed(long semilla){
+		_semillaAnt.setText(Long.toString(semilla));
+	}
 
 	/**
 	 * 
@@ -294,7 +318,6 @@ public class GUI extends JFrame{
 	private JTextField poblacion;
 	private JTextField generaciones;
 	private JTextField semilla;
-	private JTextField semillaAnt;
 
 	public void drawHormiga(Hormiga resultado)
 	{
