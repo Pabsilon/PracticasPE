@@ -155,7 +155,28 @@ public class Tablero {
 	}
 	
 	public String getValue(int x, int y){
+		if((x < 0) || (x >= _sizeT) || (y < 0) || (y >= _sizeT))
+		{
+			return "Vacio";
+		}
 		return _mapa[x][y];
+	}
+
+	public void pasoHormiga(int x, int y)
+	{
+		if((x < 0) || (x >= _sizeT) || (y < 0) || (y >= _sizeT))
+		{
+			return;
+		}
+		
+		if(_mapa[x][y].equals("Comida"))
+		{
+			_mapa[x][y] = "Comido";
+		}
+		else
+		{
+			_mapa[x][y] = "Hormiga";
+		}
 	}
 
 }

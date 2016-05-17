@@ -58,7 +58,7 @@ public class Algoritmo
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
 			//TODO hacer esto
-			_poblacion[i] = new Hormiga(_profundidadMaxima);
+			_poblacion[i] = new Hormiga(_profundidadMaxima, rand);
 		}
 		
 		_mejorIndividuo = _poblacion[0];
@@ -122,8 +122,8 @@ public class Algoritmo
 				int indx2 = rand.nextInt(_poblacion.length);
 				indx2 = indx2 == i ? (i + 1) % _poblacion.length : indx2; //Si el padre 2 es el mismo que el padre 1, elegir el siguiente.
 				Hormiga p2 = seleccionados[indx2];
-				Hormiga hijo1 = new Hormiga(0);
-				Hormiga hijo2 = new Hormiga(0);
+				Hormiga hijo1 = new Hormiga(0, rand);
+				Hormiga hijo2 = new Hormiga(0, rand);
 				
 				_agc.cruzar(p1, p2, hijo1, hijo2);
 				
