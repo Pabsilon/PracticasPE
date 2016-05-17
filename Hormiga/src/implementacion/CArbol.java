@@ -186,7 +186,7 @@ public class CArbol
 				arbolAux.addHijo(hijo2);
 				
 				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
-				if(raiz._profundidad == profundidadMaxima - 1)
+				if(raiz._profundidad >= profundidadMaxima - 1)
 				{
 					Random rand = new Random();
 					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
@@ -217,7 +217,7 @@ public class CArbol
 				arbolAux.addHijo(hijo3);
 				
 				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
-				if(raiz._profundidad == profundidadMaxima - 1)
+				if(raiz._profundidad >= profundidadMaxima - 1)
 				{
 					Random rand = new Random();
 					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));

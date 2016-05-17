@@ -120,7 +120,7 @@ public class Algoritmo
 			{
 				Hormiga p1 = seleccionados[i];
 				int indx2 = rand.nextInt(_poblacion.length);
-				indx2 = indx2 == i ? i + 1 : indx2; //Si el padre 2 es el mismo que el padre 1, elegir el siguiente.
+				indx2 = indx2 == i ? (i + 1) % _poblacion.length : indx2; //Si el padre 2 es el mismo que el padre 1, elegir el siguiente.
 				Hormiga p2 = seleccionados[indx2];
 				Hormiga hijo1 = new Hormiga(0);
 				Hormiga hijo2 = new Hormiga(0);
