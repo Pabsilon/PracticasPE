@@ -3,6 +3,7 @@ package implementacion;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import abloating.ABloating;
 import acruce.ACruce;
 import amutacion.AMutacion;
 import aseleccion.ASeleccion;
@@ -15,6 +16,8 @@ public class Algoritmo
 	private final ACruce _agc;
 	private final ASeleccion _ags;
 	private final AMutacion _agm;
+	private final ABloating _agb;
+	private final boolean _bloating;
 	private final float _probabilidadCruce, _probabilidadMutacion;
 	private final boolean _elitismo;
 	private final int _numeroElites;
@@ -35,17 +38,19 @@ public class Algoritmo
 	 * @param mutacionProbabilidad La probabilidad de Mutacion
 	 * @param elitismo Si hay elitismo
 	 */
-	public Algoritmo(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo)
+	public Algoritmo(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, ABloating agb, boolean bloating, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo)
 	{
 		_generacionTotales = generaciones;
 		_agc = agc;
 		_ags = ags;
 		_agm = agm;
+		_agb = agb;
 		_probabilidadCruce = cruceProbabilidad/100.0f;
 		_probabilidadMutacion = mutacionProbabilidad/100.0f;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
 		_profundidadMaxima = 4; //TODO cambiar esto a argumento
+		_bloating = bloating;
 		
 		_semilla = semilla;
 		//Generar poblacion usando la semilla de parametro
@@ -58,7 +63,7 @@ public class Algoritmo
 		for(int i = 0; i < tamanoPoblacion; i++)
 		{
 			//TODO hacer esto
-			_poblacion[i] = new Hormiga(_profundidadMaxima);
+			_poblacion[i] = new Hormiga(_profundidadMaxima, rand);
 		}
 		
 		_mejorIndividuo = _poblacion[0];
@@ -81,7 +86,7 @@ public class Algoritmo
 		for(int g = 0; g < _generacionTotales; g++)
 		{
 			//Evaluar
-			evaluar(mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
+			evaluar(aptitudes, mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
 			//Seleccionar
 			_ags.seleccionar(_poblacion, aptitudes, seleccionados);
 			//Cruzar
@@ -94,6 +99,16 @@ public class Algoritmo
 			
 			//Cambiar a la nueva poblacion
 			_poblacion = seleccionados;
+			
+			for(int i = 0; i < _poblacion.length; i++)
+			{
+				_poblacion[i].setAptitud(-1);
+			}
+			//Toda la nueva poblacion tiene aptitud -1 (por generar). Dar una aptitud de 0 a las que cumplan el bloating
+			if(_bloating)
+			{
+				_agb.controlBloating(_poblacion);
+			}
 		}
 		
 		return _mejorIndividuo;
@@ -104,7 +119,7 @@ public class Algoritmo
 		Random rand = new Random();
 		for(int i = 0; i < _poblacion.length; i++)
 		{
-			if(_probabilidadMutacion <= rand.nextFloat())
+			if(rand.nextFloat() <= _probabilidadMutacion)
 			{
 				_agm.mutar(seleccionados[i]);
 			}
@@ -122,8 +137,8 @@ public class Algoritmo
 				int indx2 = rand.nextInt(_poblacion.length);
 				indx2 = indx2 == i ? (i + 1) % _poblacion.length : indx2; //Si el padre 2 es el mismo que el padre 1, elegir el siguiente.
 				Hormiga p2 = seleccionados[indx2];
-				Hormiga hijo1 = new Hormiga(0);
-				Hormiga hijo2 = new Hormiga(0);
+				Hormiga hijo1 = new Hormiga(0, rand);
+				Hormiga hijo2 = new Hormiga(0, rand);
 				
 				_agc.cruzar(p1, p2, hijo1, hijo2);
 				
@@ -133,14 +148,16 @@ public class Algoritmo
 		}
 	}
 
-	private void evaluar(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, PriorityQueue<Hormiga> elite) 
+	private void evaluar(int[] aptitudes, double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, PriorityQueue<Hormiga> elite) 
 	{
 		float sumaApt = 0;
-		for(Hormiga h : _poblacion)
+		for(int i = 0; i < _poblacion.length; i++)
 		{
-			sumaApt += h.getAptitud();			
-			elite.add(h);
+			aptitudes[i] = _poblacion[i].getAptitud();
+			sumaApt += aptitudes[i];
+			elite.add(_poblacion[i]);
 		}
+
 		//Si el mejor de eta generacion es mejor que el maximo global, sustituir
 		if(elite.peek().getAptitud() > _mejorIndividuo.getAptitud())
 		{

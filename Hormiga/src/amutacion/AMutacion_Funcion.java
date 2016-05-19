@@ -15,15 +15,19 @@ public class AMutacion_Funcion implements AMutacion
 	{
 		CArbol raiz = individuo.getCromosoma();
 		Vector<CArbol> funciones = raiz.getAllFunctions();
-		//Elegir una funcion aleatoria y mutarla
-		//Dado que solo hay una funcion de 3 argumentos (progn3) esta no se mutara.
-		//TODO preguntar si se muta eliminando una rama
-		Random rand = new Random();
-		CArbol aMutar = funciones.get(rand.nextInt(funciones.size()));
 		
-		if(aMutar.getOperador() != EOperador.PROGN3)
+		if(!funciones.isEmpty())
 		{
-			aMutar.setOperador(CArbol.EOperador.fromInteger(rand.nextInt(2) + 3)); //Las funciones estan en las posiciones 3 y 4
+			//Elegir una funcion aleatoria y mutarla
+			//Dado que solo hay una funcion de 3 argumentos (progn3) esta no se mutara.
+			//TODO preguntar si se muta eliminando una rama
+			Random rand = new Random();
+			CArbol aMutar = funciones.get(rand.nextInt(funciones.size()));
+			
+			if(aMutar.getOperador() != EOperador.PROGN3)
+			{
+				aMutar.setOperador(CArbol.EOperador.fromInteger(rand.nextInt(2) + 3)); //Las funciones estan en las posiciones 3 y 4
+			}
 		}
 	}
 	

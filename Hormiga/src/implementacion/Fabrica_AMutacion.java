@@ -16,7 +16,6 @@ public class Fabrica_AMutacion {
 	 * @return el algoritmo inicializado.
 	 */
 	public static AMutacion generarAlgoritmoMutacion(String algoritmo){
-		// {"Insercion", "Intercambio", "Inversion", "Heuristica", "Propio"};
 		switch (algoritmo){
 		case "Terminal":
 			return new AMutacion_Terminal();

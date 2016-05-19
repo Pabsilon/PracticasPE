@@ -2,6 +2,7 @@ package implementacion;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 //Hormiga = Individuo
 public class Hormiga
@@ -9,9 +10,9 @@ public class Hormiga
 	private CArbol _cromosoma;
 	private int _aptitud;
 	
-	public Hormiga(int profundidadMaxima)
+	public Hormiga(int profundidadMaxima, Random rand)
 	{
-		_cromosoma = CArbol.generarArbolAleatorio(profundidadMaxima);
+		_cromosoma = CArbol.generarArbolAleatorio(profundidadMaxima, rand);
 		_aptitud = -1;
 	}
 
@@ -27,7 +28,7 @@ public class Hormiga
 	
 	public int getAptitud()
 	{
-		if(_aptitud == -1)
+		if(_aptitud <= -1)
 		{
 			calcularAptitud();
 		}
@@ -37,7 +38,7 @@ public class Hormiga
 	
 	private void calcularAptitud()
 	{
-		
+		_aptitud = _cromosoma.recorrerTablero();
 	}
 
 		//Crea una nueva cola de prioridad de maximos de Hormiga
@@ -63,7 +64,7 @@ public class Hormiga
 
 		public Hormiga crearCopia()
 		{
-			Hormiga toRet = new Hormiga(0);
+			Hormiga toRet = new Hormiga(0, new Random());
 			toRet._aptitud = _aptitud;
 			toRet._cromosoma = _cromosoma.crearCopia();
 			
@@ -72,5 +73,22 @@ public class Hormiga
 
 		public String getFenotipo() {
 			return _cromosoma.toString();
+		}
+		
+		@Override
+		public String toString()
+		{
+			return getFenotipo();
+		}
+
+		public Tablero getTableroRecorrido()
+		{
+			return _cromosoma.getTableroRecorrido();
+		}
+
+		public void setAptitud(int i)
+		{
+			_aptitud = i;
+			
 		}
 }

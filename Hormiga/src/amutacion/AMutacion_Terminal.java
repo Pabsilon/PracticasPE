@@ -14,10 +14,14 @@ public class AMutacion_Terminal implements AMutacion
 	{
 		CArbol raiz = individuo.getCromosoma();
 		Vector<CArbol> terminales = raiz.getAllTerminals();
-		//Elegir un terminal aleatoriamente y mutarlo
-		Random rand = new Random();
-		CArbol aMutar = terminales.get(rand.nextInt(terminales.size()));
 		
-		aMutar.setOperador(CArbol.EOperador.fromInteger(rand.nextInt(3)));
+		if(!terminales.isEmpty())
+		{
+			//Elegir un terminal aleatoriamente y mutarlo
+			Random rand = new Random();
+			CArbol aMutar = terminales.get(rand.nextInt(terminales.size()));
+			
+			aMutar.setOperador(CArbol.EOperador.fromInteger(rand.nextInt(3)));
+		}
 	}
 }

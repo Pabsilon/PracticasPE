@@ -81,6 +81,17 @@ public class CArbol
 		_numeroNodos = 1;
 	}
 	
+	//Genera un arbol de operador aleatorio
+	public CArbol(Random rand)
+	{
+		_operador = EOperador.fromInteger(rand.nextInt(EOperador.getSize()));
+		_tipoOperador = getTipoOperador(_operador);
+		_padre = null;
+		_hijos = new LinkedList<>();
+		_profundidad = 0;
+		_numeroNodos = 1;
+	}
+	
 	public CArbol(EOperador op)
 	{
 		_operador = op;
@@ -160,17 +171,24 @@ public class CArbol
 	}
 
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
-	public static CArbol generarArbolAleatorio(int profundidadMaxima)
+	public static CArbol generarArbolAleatorio(int profundidadMaxima, Random rand)
 	{
 		//TODO ramped and half etc
 		//Cola con los arboles aun sin terminar
 		Queue<CArbol> cola = new LinkedList<CArbol>();
 			
-		CArbol raiz = new CArbol();
+		CArbol raiz = new CArbol(rand);
 		if(raiz._tipoOperador == ETipoOperador.TERMINAL) //Si la raiz es un terminal, terminamos
 		{
 			return raiz;
 		}
+		else if(profundidadMaxima == 0) //Si la profundidad es 0 solo se generan terminales
+		{
+			raiz._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+			
+			return raiz;
+		}
+		
 		cola.add(raiz);
 		while(!cola.isEmpty()) //Generamos hasta profundiad - 1 como maximo
 		{
@@ -179,8 +197,8 @@ public class CArbol
 			if((arbolAux._operador == EOperador.SIC) || (arbolAux._operador == EOperador.PROGN2))
 			{
 				//Generamos dos hijos
-				CArbol hijo1 = new CArbol();
-				CArbol hijo2 = new CArbol();
+				CArbol hijo1 = new CArbol(rand);
+				CArbol hijo2 = new CArbol(rand);
 				
 				arbolAux.addHijo(hijo1);
 				arbolAux.addHijo(hijo2);
@@ -188,7 +206,6 @@ public class CArbol
 				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
 				if(raiz._profundidad >= profundidadMaxima - 1)
 				{
-					Random rand = new Random();
 					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
 					hijo2._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
 					
@@ -208,9 +225,9 @@ public class CArbol
 			else
 			{
 				//Generamos tres hijos
-				CArbol hijo1 = new CArbol();
-				CArbol hijo2 = new CArbol();
-				CArbol hijo3 = new CArbol();
+				CArbol hijo1 = new CArbol(rand);
+				CArbol hijo2 = new CArbol(rand);
+				CArbol hijo3 = new CArbol(rand);
 				
 				arbolAux.addHijo(hijo1);
 				arbolAux.addHijo(hijo2);
@@ -219,7 +236,6 @@ public class CArbol
 				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
 				if(raiz._profundidad >= profundidadMaxima - 1)
 				{
-					Random rand = new Random();
 					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
 					hijo2._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
 					hijo3._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
@@ -248,7 +264,6 @@ public class CArbol
 		{
 			CArbol arbolAux = cola.poll();
 			
-			Random rand = new Random();
 			arbolAux._operador = CArbol.EOperador.fromInteger(rand.nextInt(3)); //Operadores terminales van de 0 - 2
 		}
 		
@@ -292,7 +307,7 @@ public class CArbol
 		CArbol padreOld = old._padre;
 		
 		//Si no es el nodo raiz
-		if(!(padreOld == null))
+		if(padreOld != null)
 		{
 			padreOld.removerHijo(old);
 			padreOld.addHijo(nuevo);
@@ -379,6 +394,120 @@ public class CArbol
 		return cola.poll();
 	}
 	
+	public int recorrerTablero()
+	{
+		Tablero tab = new Tablero();
+		int pos[] = {0, 0}; //Posicion x,y
+		int orientacion[] = {1}; //0 arriba, 1 derecha, 2 abajo, 3 izquierda
+		int paso[] = {0};
+		return recorrerTablero_aux(pos, orientacion, tab, paso);
+	}
+	
+	public Tablero getTableroRecorrido()
+	{
+		Tablero tab = new Tablero();
+		int pos[] = {0, 0}; //Posicion x,y
+		int orientacion[] = {1}; //0 arriba, 1 derecha, 2 abajo, 3 izquierda
+		int paso[] = {0};
+		recorrerTablero_aux(pos, orientacion, tab, paso);
+		
+		return tab;
+	}
+	
+	private int recorrerTablero_aux(int[] pos, int orientacion[], Tablero tab, int paso[])
+	{
+		if(paso[0] == 400) return 0;
+		
+		int toRet = 0;
+		if(tab.getValue(pos[0], pos[1]).equals("Comida"))
+		{
+			toRet = 1;
+		}
+		tab.pasoHormiga(pos[0], pos[1]);
+		paso[0]++;
+		
+		if(_operador == EOperador.SIC)
+		{
+			boolean comida = false;
+			switch(orientacion[0])
+			{
+			case 0: //Arriba
+				comida = tab.getValue(pos[0] , pos[1] - 1).equals("Comida") ? true : false;
+				break;
+			case 1: //Derecha
+				comida = tab.getValue(pos[0] + 1, pos[1]).equals("Comida") ? true : false;
+				break;
+			case 2: //Abajo
+				comida = tab.getValue(pos[0] , pos[1] + 1).equals("Comida") ? true : false;
+				break;
+			case 3: //Izquierda
+				comida = tab.getValue(pos[0] - 1, pos[1]).equals("Comida") ? true : false;
+				break;
+			}
+			
+			//Si hay comida realizar la primera accion (hijo 1)
+			if(comida)
+			{
+				toRet += _hijos.get(0).recorrerTablero_aux(pos, orientacion, tab, paso);
+			}
+			else //Si no, hijo (2)
+			{
+				toRet += _hijos.get(1).recorrerTablero_aux(pos, orientacion, tab, paso);
+			}
+		}
+		else if(_operador == EOperador.AVANZA)
+		{
+			int nuevaPos[] = new int[2];
+			switch(orientacion[0])
+			{
+			case 0: //Arriba
+				nuevaPos[0] = pos[0];
+				nuevaPos[1] = pos[1] - 1;
+				break;
+			case 1: //Derecha
+				nuevaPos[0] = pos[0] + 1;
+				nuevaPos[1] = pos[1];
+				break;
+			case 2: //Abajo
+				nuevaPos[0] = pos[0];
+				nuevaPos[1] = pos[1] + 1;
+				break;
+			case 3: //Izquierda
+				nuevaPos[0] = pos[0] - 1;
+				nuevaPos[1] = pos[1];
+				break;
+			}
+			
+			pos[0] = nuevaPos[0];
+			pos[1] = nuevaPos[1];
+		}
+		else if(_operador == EOperador.GIRA_IZQUIERDA) //Giramos en el sentido de las agujas del reloj (por lo tanto, izquierda gira en sentido contrario a las agujas)
+		{
+			orientacion[0] = orientacion[0] - 1;
+			if(orientacion[0] < 0)
+			{
+				orientacion[0] = 3;
+			}
+		}
+		else if(_operador == EOperador.GIRA_IZQUIERDA)
+		{
+			orientacion[0] = orientacion[0] + 1;
+			if(orientacion[0] > 3)
+			{
+				orientacion[0] = 0;
+			}
+		}
+		else //Progn2 y progn3 ejecutan todos sus hijos
+		{
+			for(CArbol hijo : _hijos)
+			{
+				toRet += hijo.recorrerTablero_aux(pos, orientacion, tab, paso);
+			}
+		}
+		
+		return toRet;
+	}
+
 	@Override
 	public String toString()
 	{

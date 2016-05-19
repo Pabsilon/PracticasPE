@@ -1,6 +1,7 @@
 package gui;
 
 import implementacion.Hormiga;
+import implementacion.Tablero;
 
 import javax.swing.JFrame;
 
@@ -33,23 +34,11 @@ import javax.swing.JCheckBox;
 
 public class GUI extends JFrame{
 	
-	Plot2DPanel plot;
+	Plot2DPanel _plot;
 	JPanel[][] _mapa;
 	JLabel _generadoEn;
 	JTextField _semillaAnt;
 	final int _mapSize = 32;
-	
-	public void setComida(int x, int y){
-		_mapa[x][y].setBackground(Color.GREEN);
-	}
-	
-	public void setHormiga(int x, int y){
-		_mapa[x][y].setBackground(Color.BLACK);
-	}
-	
-	public void setComido(int x, int y){
-		_mapa[x][y].setBackground(Color.RED);
-	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GUI(Controller c) {
@@ -287,12 +276,15 @@ public class GUI extends JFrame{
 		
 		botonComenzar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				actualizaMapa(new Tablero());
 				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText(), checkBloating.isSelected(), (String) comboBloating.getSelectedItem());
 			}
 		});
 		
-		plot = new Plot2DPanel();
-		panelGrafica.add(plot);
+		_plot = new Plot2DPanel();
+		panelGrafica.add(_plot);
+		
+		actualizaMapa(new Tablero());
 		
 		//this.setPreferredSize(new Dimension(1200, 650));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -319,14 +311,58 @@ public class GUI extends JFrame{
 	private JTextField generaciones;
 	private JTextField semilla;
 
-	public void drawHormiga(Hormiga resultado)
-	{
-				
-	}
-
 	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int parseInt, String fenotipo)
 	{
-		// TODO Auto-generated method stub
+		_plot.removeAllPlots();
 		
+		//Posicion de la leyenda
+		_plot.addLegend("SOUTH");
+		
+		double[] x = new double[mediaGeneracion.length];
+		for(int i = 0; i < mediaGeneracion.length; i++)
+		{
+			x[i] = i + 1;
+		}
+		//A�adir las lineas
+		_plot.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
+		_plot.addLinePlot("Mejor Generacion", x, mejorGeneracion);
+		_plot.addLinePlot("Media Generacion", x, mediaGeneracion);
+		//_labelMejorResultado.setText(resultado);
+				
+		
+	}
+	
+	public void actualizaMapa(Tablero t){
+		for (int i=0; i<32; i++){
+			for (int j = 0; j<32; j++){
+				if (t.getValue(i, j).equalsIgnoreCase("Comida")){
+					setComida(i, j);
+				}else if (t.getValue(i, j).equalsIgnoreCase("Comido")){
+					setComido(i, j);
+				}else if (t.getValue(i, j).equalsIgnoreCase("Hormiga")){
+					setHormiga(i, j);
+				}
+				else
+				{
+					setVacio(i, j);
+				}
+			}
+		}
+	}
+	
+	private void setVacio(int x, int y) {
+		_mapa[x][y].setBackground(Color.lightGray);		
+	}
+
+	public void setComida(int x, int y){
+		_mapa[x][y].setBackground(Color.GREEN);
+	}
+	
+	public void setHormiga(int x, int y){
+		_mapa[x][y].setBackground(Color.BLACK);
+	}
+	
+	public void setComido(int x, int y){
+		_mapa[x][y].setBackground(Color.RED);
 	}
 }

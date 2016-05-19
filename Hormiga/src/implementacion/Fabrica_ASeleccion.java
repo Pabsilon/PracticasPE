@@ -20,7 +20,6 @@ public class Fabrica_ASeleccion
 	 */
 	public static ASeleccion generarAlgoritmoSeleccion(String algoritmo, int n)
 	{
-		//{"Ruleta", "Torneo", "Ranking", "Restos", "Truncamiento"};
 		switch(algoritmo)
 		{
 		case "Ruleta":
