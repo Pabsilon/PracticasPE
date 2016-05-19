@@ -28,7 +28,7 @@ public class Hormiga
 	
 	public int getAptitud()
 	{
-		if(_aptitud == -1)
+		if(_aptitud <= -1)
 		{
 			calcularAptitud();
 		}
@@ -79,5 +79,16 @@ public class Hormiga
 		public String toString()
 		{
 			return getFenotipo();
+		}
+
+		public Tablero getTableroRecorrido()
+		{
+			return _cromosoma.getTableroRecorrido();
+		}
+
+		public void setAptitud(int i)
+		{
+			_aptitud = i;
+			
 		}
 }

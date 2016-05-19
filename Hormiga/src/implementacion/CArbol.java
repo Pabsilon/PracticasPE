@@ -307,7 +307,7 @@ public class CArbol
 		CArbol padreOld = old._padre;
 		
 		//Si no es el nodo raiz
-		if(!(padreOld == null))
+		if(padreOld != null)
 		{
 			padreOld.removerHijo(old);
 			padreOld.addHijo(nuevo);
@@ -403,6 +403,17 @@ public class CArbol
 		return recorrerTablero_aux(pos, orientacion, tab, paso);
 	}
 	
+	public Tablero getTableroRecorrido()
+	{
+		Tablero tab = new Tablero();
+		int pos[] = {0, 0}; //Posicion x,y
+		int orientacion[] = {1}; //0 arriba, 1 derecha, 2 abajo, 3 izquierda
+		int paso[] = {0};
+		recorrerTablero_aux(pos, orientacion, tab, paso);
+		
+		return tab;
+	}
+	
 	private int recorrerTablero_aux(int[] pos, int orientacion[], Tablero tab, int paso[])
 	{
 		if(paso[0] == 400) return 0;
@@ -472,11 +483,19 @@ public class CArbol
 		}
 		else if(_operador == EOperador.GIRA_IZQUIERDA) //Giramos en el sentido de las agujas del reloj (por lo tanto, izquierda gira en sentido contrario a las agujas)
 		{
-			orientacion[0] = (orientacion[0] - 1) % 4;
+			orientacion[0] = orientacion[0] - 1;
+			if(orientacion[0] < 0)
+			{
+				orientacion[0] = 3;
+			}
 		}
 		else if(_operador == EOperador.GIRA_IZQUIERDA)
 		{
-			orientacion[0] = (orientacion[0] + 1) % 4;
+			orientacion[0] = orientacion[0] + 1;
+			if(orientacion[0] > 3)
+			{
+				orientacion[0] = 0;
+			}
 		}
 		else //Progn2 y progn3 ejecutan todos sus hijos
 		{

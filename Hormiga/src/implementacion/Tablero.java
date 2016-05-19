@@ -173,7 +173,7 @@ public class Tablero {
 		{
 			_mapa[x][y] = "Comido";
 		}
-		else
+		else if(_mapa[x][y].equals("Vacio"))
 		{
 			_mapa[x][y] = "Hormiga";
 		}
