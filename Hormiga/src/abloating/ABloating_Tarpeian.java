@@ -16,8 +16,7 @@ public class ABloating_Tarpeian implements ABloating {
 		}
 		media = Math.ceil(media / pob.length);
 		
-		//25% prob de que se elimine
-		final float N = 4;
+		final float N = 2;
 		Random rand = new Random();
 		for(int i = 0; i < pob.length; i++)
 		{
