@@ -38,7 +38,7 @@ package implementacion;
 
 public class Tablero {
 	
-	private final int _sizeT = 32;
+	public static final int _sizeT = 32;
 	
 	private final String[][] _mapa;
 	

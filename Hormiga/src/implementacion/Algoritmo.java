@@ -155,7 +155,7 @@ public class Algoritmo
 		{
 			aptitudes[i] = _poblacion[i].getAptitud();
 			sumaApt += aptitudes[i];
-			elite.add(_poblacion[i]);
+			elite.add(_poblacion[i].crearCopia());
 		}
 
 		//Si el mejor de eta generacion es mejor que el maximo global, sustituir

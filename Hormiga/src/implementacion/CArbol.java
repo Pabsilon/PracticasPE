@@ -363,6 +363,7 @@ public class CArbol
 				cola.add((CArbol) it.next());
 			}
 			
+			a._tipoOperador = getTipoOperador(a._operador);
 			if(a._tipoOperador == ETipoOperador.FUNCION)
 			{
 				toRet.add(a);
@@ -416,7 +417,7 @@ public class CArbol
 	
 	private int recorrerTablero_aux(int[] pos, int orientacion[], Tablero tab, int paso[])
 	{
-		if(paso[0] == 400) return 0;
+		if(paso[0] >= 400) return 0;
 		
 		int toRet = 0;
 		if(tab.getValue(pos[0], pos[1]).equals("Comida"))
@@ -448,11 +449,11 @@ public class CArbol
 			//Si hay comida realizar la primera accion (hijo 1)
 			if(comida)
 			{
-				toRet += _hijos.get(0).recorrerTablero_aux(pos, orientacion, tab, paso);
+				toRet += _hijos.getFirst().recorrerTablero_aux(pos, orientacion, tab, paso);
 			}
 			else //Si no, hijo (2)
 			{
-				toRet += _hijos.get(1).recorrerTablero_aux(pos, orientacion, tab, paso);
+				toRet += _hijos.getLast().recorrerTablero_aux(pos, orientacion, tab, paso);
 			}
 		}
 		else if(_operador == EOperador.AVANZA)
@@ -480,6 +481,11 @@ public class CArbol
 			
 			pos[0] = nuevaPos[0];
 			pos[1] = nuevaPos[1];
+			
+			if(pos[0] < 0 || pos[0] >= Tablero._sizeT || pos[1] < 0 || pos[1] >= Tablero._sizeT)
+			{
+				paso[0] = 400;
+			}
 		}
 		else if(_operador == EOperador.GIRA_IZQUIERDA) //Giramos en el sentido de las agujas del reloj (por lo tanto, izquierda gira en sentido contrario a las agujas)
 		{

@@ -14,9 +14,9 @@ public class AMutacion_Arbol implements AMutacion {
 
 		//Elegir un subarbol aleatoriamente y mutarlo
 		Random rand = new Random();
-		CArbol aMutar = raiz.getSubarbol(rand.nextInt(raiz.getNumeroNodos()));
+		CArbol aMutar = raiz.getSubarbol(rand.nextInt(raiz.getNumeroNodos()));		
 		
-		aMutar.copiarArbol(new CArbol()); //TODO generar un arbol completo, no solo un nodo
+		aMutar.copiarArbol(CArbol.generarArbolAleatorio(raiz.getProfundidad(), new Random()));
 	}
 
 }
