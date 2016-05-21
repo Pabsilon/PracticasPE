@@ -15,6 +15,7 @@ import javax.swing.JTabbedPane;
 import org.math.plot.Plot2DPanel;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,6 +32,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
+import javax.swing.JEditorPane;
 
 public class GUI extends JFrame{
 	
@@ -38,6 +40,7 @@ public class GUI extends JFrame{
 	JPanel[][] _mapa;
 	JLabel _generadoEn;
 	JTextField _semillaAnt;
+	JEditorPane _textoResultado;
 	final int _mapSize = 32;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -50,7 +53,7 @@ public class GUI extends JFrame{
 		
 		JPanel panelProblema = new JPanel();
 		tabPanel.addTab("Problema", null, panelProblema, null);
-		panelProblema.setLayout(new MigLayout("", "[200][grow]", "[grow]"));
+		panelProblema.setLayout(new MigLayout("", "[200][grow][grow]", "[]"));
 		
 		JPanel panelSetUp = new JPanel();
 		panelSetUp.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -260,6 +263,18 @@ public class GUI extends JFrame{
 		panelProblema.add(panelMapa, "cell 1 0,grow");
 		panelMapa.setLayout(new MigLayout("", "[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow]", "[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][grow]"));
 		
+		JPanel panelRespuesta = new JPanel();
+		panelRespuesta.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelProblema.add(panelRespuesta, "cell 2 0,grow");
+		panelRespuesta.setLayout(new MigLayout("", "[grow]", "[]"));
+		
+		_textoResultado = new JEditorPane();
+		_textoResultado.setPreferredSize(new Dimension(200,700));
+		_textoResultado.setEnabled(false);
+		_textoResultado.setEditable(false);
+		JScrollPane scroll = new JScrollPane(_textoResultado);
+		panelRespuesta.add(scroll, "cell 0 0,grow");
+		
 		_mapa = new JPanel[_mapSize][_mapSize];
 		for (int i = 0; i<_mapSize; i++){
 			for (int j = 0; j<_mapSize; j++){
@@ -286,7 +301,7 @@ public class GUI extends JFrame{
 		
 		actualizaMapa(new Tablero());
 		
-		//this.setPreferredSize(new Dimension(1200, 650));
+	//	this.setPreferredSize(new Dimension(1400, 900));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);	
@@ -348,6 +363,10 @@ public class GUI extends JFrame{
 				}
 			}
 		}
+	}
+	
+	public void setResultado(String resultado){
+		_textoResultado.setText(resultado);
 	}
 	
 	private void setVacio(int x, int y) {
