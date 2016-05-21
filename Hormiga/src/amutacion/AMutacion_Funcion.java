@@ -27,6 +27,8 @@ public class AMutacion_Funcion implements AMutacion
 			if(aMutar.getOperador() != EOperador.PROGN3)
 			{
 				aMutar.setOperador(CArbol.EOperador.fromInteger(rand.nextInt(2) + 3)); //Las funciones estan en las posiciones 3 y 4
+				
+				individuo.setAptitud(-1);
 			}
 		}
 	}

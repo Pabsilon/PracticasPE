@@ -22,6 +22,8 @@ public class AMutacion_Terminal implements AMutacion
 			CArbol aMutar = terminales.get(rand.nextInt(terminales.size()));
 			
 			aMutar.setOperador(CArbol.EOperador.fromInteger(rand.nextInt(3)));
+			
+			individuo.setAptitud(-1);
 		}
 	}
 }

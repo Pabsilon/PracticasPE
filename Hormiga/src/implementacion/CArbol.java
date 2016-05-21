@@ -495,7 +495,7 @@ public class CArbol
 				orientacion[0] = 3;
 			}
 		}
-		else if(_operador == EOperador.GIRA_IZQUIERDA)
+		else if(_operador == EOperador.GIRA_DERECHA)
 		{
 			orientacion[0] = orientacion[0] + 1;
 			if(orientacion[0] > 3)

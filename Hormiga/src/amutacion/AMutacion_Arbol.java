@@ -17,6 +17,8 @@ public class AMutacion_Arbol implements AMutacion {
 		CArbol aMutar = raiz.getSubarbol(rand.nextInt(raiz.getNumeroNodos()));		
 		
 		aMutar.copiarArbol(CArbol.generarArbolAleatorio(raiz.getProfundidad(), new Random()));
+		
+		individuo.setAptitud(-1);
 	}
 
 }

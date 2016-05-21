@@ -41,9 +41,8 @@ public class Controller {
 		Hormiga resultado;		
 		resultado = algoritmo.ejecutarAlgoritmo(mejorAbsoluto,mejorGeneracion,mediaGeneracion);
 
-		g.setResultado(resultado.getAptitud() + " " + resultado.getFenotipo());
 		//Rellenamos la grafica con los valores.
-		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, Integer.parseInt(generaciones), resultado.getFenotipo());
+		g.fillPlot(mejorAbsoluto, mejorGeneracion, mediaGeneracion, resultado.getAptitud() + " " + resultado.getFenotipo());
 		//Dibujar mapa
 		g.actualizaMapa(resultado.getTableroRecorrido());
 		//Mostramos la semilla utilizada.

@@ -24,6 +24,7 @@ public class Hormiga
 	public void setCromosoma(CArbol nuevoCrom)
 	{
 		_cromosoma = nuevoCrom.crearCopia();
+		_aptitud = -1;
 	}
 	
 	public int getAptitud()
@@ -32,6 +33,14 @@ public class Hormiga
 		{
 			calcularAptitud();
 		}
+		
+		return _aptitud;
+	}
+	
+	//Obliga a recalcular la aptitud
+	public int getAptitudForced()
+	{
+		calcularAptitud();
 		
 		return _aptitud;
 	}
