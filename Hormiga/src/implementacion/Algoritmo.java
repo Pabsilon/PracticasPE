@@ -103,12 +103,6 @@ public class Algoritmo
 			{
 				_poblacion[0] = seleccionados[0];
 			}
-
-			//Dar una aptitud de 0 a las que cumplan el bloating
-			if(_bloating)
-			{
-				_agb.controlBloating(_poblacion);
-			}
 			
 			//TODO elitismo aqui
 			if(_elitismo)
@@ -118,6 +112,12 @@ public class Algoritmo
 			
 			//Evaluar
 			evaluar(aptitudes, mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
+			
+			//Dar una aptitud de 0 a los que cumplan el bloating
+			if(_bloating)
+			{
+				_agb.controlBloating(_poblacion);
+			}
 		}
 		
 		return _mejorIndividuo;

@@ -24,6 +24,7 @@ public class Hormiga
 	public void setCromosoma(CArbol nuevoCrom)
 	{
 		_cromosoma = nuevoCrom.crearCopia();
+		_aptitud = -1;
 	}
 	
 	public int getAptitud()
