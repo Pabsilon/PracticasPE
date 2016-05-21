@@ -36,6 +36,14 @@ public class Hormiga
 		return _aptitud;
 	}
 	
+	//Obliga a recalcular la aptitud
+	public int getAptitudForced()
+	{
+		calcularAptitud();
+		
+		return _aptitud;
+	}
+	
 	private void calcularAptitud()
 	{
 		_aptitud = _cromosoma.recorrerTablero();

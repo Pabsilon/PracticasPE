@@ -1,5 +1,6 @@
 package implementacion;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ import abloating.ABloating;
 import acruce.ACruce;
 import amutacion.AMutacion;
 import aseleccion.ASeleccion;
+import javafx.util.Pair;
 
 public class Algoritmo
 {
@@ -83,10 +85,11 @@ public class Algoritmo
 		int aptitudes[] = new int[_poblacion.length];
 		Hormiga seleccionados[] = new Hormiga[_poblacion.length]; //No inicializamos los elementos porque el algoritmo de seleccion ya lo hace
 		
-		for(int g = 0; g < _generacionTotales; g++)
+		//Evaluar
+		evaluar(aptitudes, mejorAbsoluto, mejorGeneracion, mediaGeneracion, 0, elite);
+		
+		for(int g = 1; g < _generacionTotales; g++)
 		{
-			//Evaluar
-			evaluar(aptitudes, mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
 			//Seleccionar
 			_ags.seleccionar(_poblacion, aptitudes, seleccionados);
 			//Cruzar
@@ -95,23 +98,59 @@ public class Algoritmo
 			//TODO Preguntar si la mutacion se elige cual usar o es una probabildiad
 			mutar(seleccionados);
 			
-			//TODO elitismo aqui
-			
 			//Cambiar a la nueva poblacion
-			_poblacion = seleccionados;
-			
 			for(int i = 0; i < _poblacion.length; i++)
 			{
-				_poblacion[i].setAptitud(-1);
+				_poblacion[0] = seleccionados[0];
 			}
-			//Toda la nueva poblacion tiene aptitud -1 (por generar). Dar una aptitud de 0 a las que cumplan el bloating
+
+			//Dar una aptitud de 0 a las que cumplan el bloating
 			if(_bloating)
 			{
 				_agb.controlBloating(_poblacion);
 			}
+			
+			//TODO elitismo aqui
+			if(_elitismo)
+			{
+				introducirElites(elite);
+			}
+			
+			//Evaluar
+			evaluar(aptitudes, mejorAbsoluto, mejorGeneracion, mediaGeneracion, g, elite);
 		}
 		
 		return _mejorIndividuo;
+	}
+
+	private void introducirElites(PriorityQueue<Hormiga> elite)
+	{
+		Comparator<javafx.util.Pair<Integer, Integer>> comparador;
+		comparador = new Comparator<javafx.util.Pair<Integer, Integer>>()
+		{
+
+			@Override
+			public int compare(Pair<Integer, Integer> o1,
+					Pair<Integer, Integer> o2) {
+				if(o1.getKey() < o2.getKey()) return -1;
+				if(o1.getKey() == o2.getKey()) return 0;
+				if(o1.getKey() > o2.getKey()) return 1;
+				return 0;
+			}
+		};
+		
+		PriorityQueue<javafx.util.Pair<Integer, Integer>> monticuloMinimos = new PriorityQueue<javafx.util.Pair<Integer, Integer>>(comparador);
+		for(int i = 0; i < _poblacion.length; i++)
+		{
+			monticuloMinimos.add(new javafx.util.Pair<Integer, Integer>(_poblacion[i].getAptitud(), i));
+		}
+		
+		
+		//Cambiamos peores por la elite
+		for(int i = 0; i < _numeroElites; i++)
+		{
+			_poblacion[monticuloMinimos.poll().getValue()] = elite.poll();
+		}		
 	}
 
 	private void mutar(Hormiga[] seleccionados)
@@ -153,7 +192,7 @@ public class Algoritmo
 		float sumaApt = 0;
 		for(int i = 0; i < _poblacion.length; i++)
 		{
-			aptitudes[i] = _poblacion[i].getAptitud();
+			aptitudes[i] = _poblacion[i].getAptitudForced();
 			sumaApt += aptitudes[i];
 			elite.add(_poblacion[i].crearCopia());
 		}
