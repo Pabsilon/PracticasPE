@@ -40,7 +40,7 @@ public class Algoritmo
 	 * @param mutacionProbabilidad La probabilidad de Mutacion
 	 * @param elitismo Si hay elitismo
 	 */
-	public Algoritmo(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, ABloating agb, boolean bloating, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo)
+	public Algoritmo(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, ABloating agb, boolean bloating, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo, int profundidad)
 	{
 		_generacionTotales = generaciones;
 		_agc = agc;
@@ -51,7 +51,7 @@ public class Algoritmo
 		_probabilidadMutacion = mutacionProbabilidad/100.0f;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
-		_profundidadMaxima = 4; //TODO cambiar esto a argumento
+		_profundidadMaxima = profundidad; //TODO cambiar esto a argumento
 		_bloating = bloating;
 		
 		_semilla = semilla;
