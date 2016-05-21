@@ -19,7 +19,7 @@ public class Controller {
 		g = new GUI(this);
 	}
 	
-	public void comenzarSimulacion (String poblacion, String generaciones, String torneoParticipantes, String metodoCruce, String probCruece, String metodoMutacion, String probMutacion, String metodoSeleccion, boolean elitismo, String semilla, boolean bloating, String metodoBloating)
+	public void comenzarSimulacion (String poblacion, String generaciones, String torneoParticipantes, String metodoCruce, String probCruece, String metodoMutacion, String probMutacion, String metodoSeleccion, boolean elitismo, String semilla, boolean bloating, String metodoBloating, String profundidad)
 	{		
 		long timeAgo = System.currentTimeMillis();
 		//Parseo del algoritmo de selecci�n

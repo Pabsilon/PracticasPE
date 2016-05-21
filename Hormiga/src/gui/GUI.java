@@ -128,38 +128,26 @@ public class GUI extends JFrame{
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		GroupLayout gl_panelSetUp = new GroupLayout(panelSetUp);
 		gl_panelSetUp.setHorizontalGroup(
 			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelSetUp.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_panelSetUp.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelSetUp.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(PanelMutacion, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_panelSetUp.createSequentialGroup()
-							.addGroup(gl_panelSetUp.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-								.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
-							.addContainerGap())
-						.addGroup(gl_panelSetUp.createSequentialGroup()
-							.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-							.addContainerGap())))
+					.addGroup(gl_panelSetUp.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel_6, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(PanelMutacion, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_panelSetUp.setVerticalGroup(
 			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
@@ -169,8 +157,10 @@ public class GUI extends JFrame{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(PanelMutacion, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
@@ -180,10 +170,20 @@ public class GUI extends JFrame{
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
 					.addComponent(botonComenzar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		panel_7.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
+		JLabel lblProfundidad = new JLabel("Profundidad:");
+		panel_7.add(lblProfundidad, "cell 0 0,alignx trailing");
+		
+		profundidad = new JTextField();
+		profundidad.setHorizontalAlignment(SwingConstants.TRAILING);
+		profundidad.setText("10");
+		panel_7.add(profundidad, "cell 1 0,growx");
+		profundidad.setColumns(10);
 		panel_6.setLayout(new MigLayout("", "[grow]", "[][]"));
 		
 		JCheckBox checkBloating = new JCheckBox("Bloating");
@@ -292,7 +292,7 @@ public class GUI extends JFrame{
 		botonComenzar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				actualizaMapa(new Tablero());
-				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText(), checkBloating.isSelected(), (String) comboBloating.getSelectedItem());
+				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText(), checkBloating.isSelected(), (String) comboBloating.getSelectedItem(), profundidad.getText());
 			}
 		});
 		
@@ -325,6 +325,7 @@ public class GUI extends JFrame{
 	private JTextField poblacion;
 	private JTextField generaciones;
 	private JTextField semilla;
+	private JTextField profundidad;
 
 	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, String fenotipo)
 	{
