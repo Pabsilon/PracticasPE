@@ -326,7 +326,7 @@ public class GUI extends JFrame{
 	private JTextField generaciones;
 	private JTextField semilla;
 
-	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int parseInt, String fenotipo)
+	public void fillPlot(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, String fenotipo)
 	{
 		_plot.removeAllPlots();
 		
@@ -342,7 +342,8 @@ public class GUI extends JFrame{
 		_plot.addLinePlot("Mejor Absoluto", x, mejorAbsoluto);
 		_plot.addLinePlot("Mejor Generacion", x, mejorGeneracion);
 		_plot.addLinePlot("Media Generacion", x, mediaGeneracion);
-		//_labelMejorResultado.setText(resultado);
+		
+		_textoResultado.setText(fenotipo);
 				
 		
 	}
@@ -363,10 +364,6 @@ public class GUI extends JFrame{
 				}
 			}
 		}
-	}
-	
-	public void setResultado(String resultado){
-		_textoResultado.setText(resultado);
 	}
 	
 	private void setVacio(int x, int y) {
