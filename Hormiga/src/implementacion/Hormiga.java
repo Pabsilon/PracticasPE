@@ -28,7 +28,7 @@ public class Hormiga
 	
 	public void setCromosoma(CArbol nuevoCrom)
 	{
-		_cromosoma = nuevoCrom.crearCopia();
+		_cromosoma = nuevoCrom;
 		_aptitud = -1;
 	}
 	
@@ -55,54 +55,54 @@ public class Hormiga
 		_aptitud = _cromosoma.recorrerTablero();
 	}
 
-		//Crea una nueva cola de prioridad de maximos de Hormiga
-		public static PriorityQueue<Hormiga> crearColaPrioridadHormiga()
+	//Crea una nueva cola de prioridad de maximos de Hormiga
+	public static PriorityQueue<Hormiga> crearColaPrioridadHormiga()
+	{
+		Comparator<Hormiga> comparador;
+		comparador = new Comparator<Hormiga>()
 		{
-			Comparator<Hormiga> comparador;
-			comparador = new Comparator<Hormiga>()
+			@Override
+			public int compare(Hormiga o1, Hormiga o2)
 			{
-				@Override
-				public int compare(Hormiga o1, Hormiga o2)
-				{
-					if(o1.getAptitud() > o2.getAptitud()) return -1;
-					if(o1.getAptitud() == o2.getAptitud()) return 0;
-					if(o1.getAptitud() < o2.getAptitud()) return 1;
-					return 0;
-				}
-			};
-			
-			PriorityQueue<Hormiga> monticuloMinimos = new PriorityQueue<Hormiga>(comparador);
-			
-			return monticuloMinimos;
-		}
-
-		public Hormiga crearCopia()
-		{
-			Hormiga toRet = new Hormiga();
-			toRet._aptitud = _aptitud;
-			toRet._cromosoma = _cromosoma.crearCopia();
-			
-			return toRet;
-		}
-
-		public String getFenotipo() {
-			return _cromosoma.toString();
-		}
+				if(o1.getAptitud() > o2.getAptitud()) return -1;
+				if(o1.getAptitud() == o2.getAptitud()) return 0;
+				if(o1.getAptitud() < o2.getAptitud()) return 1;
+				return 0;
+			}
+		};
 		
-		@Override
-		public String toString()
-		{
-			return getFenotipo();
-		}
+		PriorityQueue<Hormiga> monticuloMinimos = new PriorityQueue<Hormiga>(comparador);
+		
+		return monticuloMinimos;
+	}
 
-		public Tablero getTableroRecorrido()
-		{
-			return _cromosoma.getTableroRecorrido();
-		}
+	public Hormiga crearCopia()
+	{
+		Hormiga toRet = new Hormiga();
+		toRet._aptitud = _aptitud;
+		toRet._cromosoma = _cromosoma.crearCopia();
+		
+		return toRet;
+	}
 
-		public void setAptitud(int i)
-		{
-			_aptitud = i;
-			
-		}
+	public String getFenotipo() {
+		return _cromosoma.toString();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getFenotipo();
+	}
+
+	public Tablero getTableroRecorrido()
+	{
+		return _cromosoma.getTableroRecorrido();
+	}
+
+	public void setAptitud(int i)
+	{
+		_aptitud = i;
+		
+	}
 }
