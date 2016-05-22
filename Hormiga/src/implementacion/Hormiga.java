@@ -10,9 +10,14 @@ public class Hormiga
 	private CArbol _cromosoma;
 	private int _aptitud;
 	
-	public Hormiga(int profundidadMaxima, Random rand)
+	public Hormiga(int profundidadMaxima, String tipoInicializacion, Random rand)
 	{
-		_cromosoma = CArbol.generarArbolAleatorio(profundidadMaxima, rand);
+		_cromosoma = CArbol.generarArbolAleatorio(profundidadMaxima, tipoInicializacion, rand);
+		_aptitud = -1;
+	}
+
+	public Hormiga() {
+		_cromosoma = null;
 		_aptitud = -1;
 	}
 
@@ -73,7 +78,7 @@ public class Hormiga
 
 		public Hormiga crearCopia()
 		{
-			Hormiga toRet = new Hormiga(0, new Random());
+			Hormiga toRet = new Hormiga();
 			toRet._aptitud = _aptitud;
 			toRet._cromosoma = _cromosoma.crearCopia();
 			

@@ -5,8 +5,12 @@ import java.util.Random;
 import implementacion.CArbol;
 import implementacion.Hormiga;
 
-public class AMutacion_Arbol implements AMutacion {
-
+public class AMutacion_Arbol implements AMutacion
+{
+	private int _profMax;
+	public AMutacion_Arbol(int profundidadMaxima) {
+		_profMax = profundidadMaxima;
+	}
 	@Override
 	public void mutar(Hormiga individuo)
 	{
@@ -16,7 +20,7 @@ public class AMutacion_Arbol implements AMutacion {
 		Random rand = new Random();
 		CArbol aMutar = raiz.getSubarbol(rand.nextInt(raiz.getNumeroNodos()));		
 		
-		aMutar.copiarArbol(CArbol.generarArbolAleatorio(raiz.getProfundidad(), new Random()));
+		aMutar.copiarArbol(CArbol.generarArbolAleatorio(_profMax, "Creciente", new Random()));
 		
 		individuo.setAptitud(-1);
 	}
