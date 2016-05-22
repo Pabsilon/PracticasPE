@@ -25,7 +25,7 @@ public class Controller {
 		//Parseo del algoritmo de selecci�n
 		ASeleccion ags = Fabrica_ASeleccion.generarAlgoritmoSeleccion(metodoSeleccion, Integer.parseInt(torneoParticipantes));
 		//Parseo del algoritmo de mutacion
-		AMutacion agm = Fabrica_AMutacion.generarAlgoritmoMutacion(metodoMutacion);
+		AMutacion agm = Fabrica_AMutacion.generarAlgoritmoMutacion(metodoMutacion, Integer.parseInt(profundidad));
 		
 		ABloating agb = Fabrica_ABloating.generarAlgoritmoBloating(metodoBloating);
 		

@@ -171,104 +171,89 @@ public class CArbol
 	}
 
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
-	public static CArbol generarArbolAleatorio(int profundidadMaxima, Random rand)
+	public static CArbol generarArbolAleatorio(int profundidadMaxima, String tipoGeneracion, Random rand)
 	{
-		//TODO ramped and half etc
-		//Cola con los arboles aun sin terminar
-		Queue<CArbol> cola = new LinkedList<CArbol>();
-			
-		CArbol raiz = new CArbol(rand);
-		if(raiz._tipoOperador == ETipoOperador.TERMINAL) //Si la raiz es un terminal, terminamos
+		CArbol raiz;
+		if(tipoGeneracion.equalsIgnoreCase("Completa"))
 		{
-			return raiz;
+			raiz = inicializacionCompleta(profundidadMaxima, 0, rand);
 		}
-		else if(profundidadMaxima == 0) //Si la profundidad es 0 solo se generan terminales
+		else if(tipoGeneracion.equalsIgnoreCase("Creciente")) 
 		{
-			raiz._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
-			
-			return raiz;
+			raiz = inicializacionCreciente(profundidadMaxima, 0, rand);
+		}
+		else
+		{
+			raiz = inicializacionRampedHalf(profundidadMaxima, 0, rand);
 		}
 		
-		cola.add(raiz);
-		while(!cola.isEmpty()) //Generamos hasta profundiad - 1 como maximo
+		return raiz;
+	}
+	
+	static CArbol inicializacionCompleta(int profundidadMaxima, int profundidadActual, Random rand)
+	{
+		CArbol raiz = new CArbol(rand);
+		if(profundidadActual < profundidadMaxima)
 		{
-			CArbol arbolAux = cola.poll();
-			//Generar dependiendo del tipo de operacion
-			if((arbolAux._operador == EOperador.SIC) || (arbolAux._operador == EOperador.PROGN2))
+			raiz._operador = CArbol.EOperador.fromInteger(rand.nextInt(3) + 3); //Las funciones estan en las posiciones 3, 4 y 5
+			raiz._tipoOperador = ETipoOperador.FUNCION;
+			
+			if((raiz._operador == EOperador.SIC) || (raiz._operador == EOperador.PROGN2))
 			{
-				//Generamos dos hijos
-				CArbol hijo1 = new CArbol(rand);
-				CArbol hijo2 = new CArbol(rand);
-				
-				arbolAux.addHijo(hijo1);
-				arbolAux.addHijo(hijo2);
-				
-				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
-				if(raiz._profundidad >= profundidadMaxima - 1)
+				for(int i = 0; i < 2; i++)
 				{
-					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
-					hijo2._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
-					
-					break;
-				}
-				
-				//Add a la cola solo si es de tipo funcion
-				if(hijo1._tipoOperador == ETipoOperador.FUNCION)
-				{
-					cola.add(hijo1);
-				}
-				if(hijo2._tipoOperador == ETipoOperador.FUNCION)
-				{
-					cola.add(hijo2);
+					raiz.addHijo(inicializacionCompleta(profundidadMaxima, profundidadActual + 1, rand));
 				}
 			}
 			else
 			{
-				//Generamos tres hijos
-				CArbol hijo1 = new CArbol(rand);
-				CArbol hijo2 = new CArbol(rand);
-				CArbol hijo3 = new CArbol(rand);
-				
-				arbolAux.addHijo(hijo1);
-				arbolAux.addHijo(hijo2);
-				arbolAux.addHijo(hijo3);
-				
-				//Estamos en el limite de profundidad, cambiar por nodos terminales y salir del bucle
-				if(raiz._profundidad >= profundidadMaxima - 1)
+				for(int i = 0; i < 3; i++)
 				{
-					hijo1._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
-					hijo2._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
-					hijo3._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
-					
-					break;
-				}
-				
-				//Add a la cola solo si es de tipo funcion
-				if(hijo1._tipoOperador == ETipoOperador.FUNCION)
-				{
-					cola.add(hijo1);
-				}
-				if(hijo2._tipoOperador == ETipoOperador.FUNCION)
-				{
-					cola.add(hijo2);
-				}
-				if(hijo3._tipoOperador == ETipoOperador.FUNCION)
-				{
-					cola.add(hijo3);
+					raiz.addHijo(inicializacionCompleta(profundidadMaxima, profundidadActual + 1, rand));
 				}
 			}
 		}
-		
-		//Estamos en la ultima profundidad, por lo que solo se deben generar funciones terminales
-		while(!cola.isEmpty())
+		else
 		{
-			CArbol arbolAux = cola.poll();
-			
-			arbolAux._operador = CArbol.EOperador.fromInteger(rand.nextInt(3)); //Operadores terminales van de 0 - 2
+			raiz._operador = CArbol.EOperador.fromInteger(rand.nextInt(3)); //Los terminales estan en las posiciones 0, 1, 2
+			raiz._tipoOperador = ETipoOperador.TERMINAL;
 		}
 		
+		return raiz;
+	}
+	
+	static CArbol inicializacionCreciente(int profundidadMaxima, int profundidadActual, Random rand)
+	{
+		CArbol raiz = new CArbol(rand);
+		if(profundidadActual < profundidadMaxima)
+		{			
+			if((raiz._operador == EOperador.SIC) || (raiz._operador == EOperador.PROGN2))
+			{
+				for(int i = 0; i < 2; i++)
+				{
+					raiz.addHijo(inicializacionCompleta(profundidadMaxima, profundidadActual + 1, rand));
+				}
+			}
+			else if(raiz._operador == EOperador.PROGN3)
+			{
+				for(int i = 0; i < 3; i++)
+				{
+					raiz.addHijo(inicializacionCompleta(profundidadMaxima, profundidadActual + 1, rand));
+				}
+			}
+		}
+		else
+		{
+			raiz._operador = CArbol.EOperador.fromInteger(rand.nextInt(3)); //Los terminales estan en las posiciones 0, 1, 2
+			raiz._tipoOperador = ETipoOperador.TERMINAL;
+		}
 		
 		return raiz;
+	}
+	
+	static CArbol inicializacionRampedHalf(int profundidadMaxima, int profundidadActual, Random rand)
+	{
+		return null;
 	}
 	
 	//Devuelve el tipo de un operador

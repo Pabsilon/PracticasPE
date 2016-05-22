@@ -15,14 +15,14 @@ public class Fabrica_AMutacion {
 	 * @param algoritmo El string del nombre del algoritmo
 	 * @return el algoritmo inicializado.
 	 */
-	public static AMutacion generarAlgoritmoMutacion(String algoritmo){
+	public static AMutacion generarAlgoritmoMutacion(String algoritmo, int profunididadMax){
 		switch (algoritmo){
 		case "Terminal":
 			return new AMutacion_Terminal();
 		case "Funcion":
 			return new AMutacion_Funcion();
 		case "Arbol":
-			return new AMutacion_Arbol();
+			return new AMutacion_Arbol(profunididadMax);
 		default: return null;
 		}
 	}
