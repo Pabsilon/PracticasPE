@@ -178,13 +178,9 @@ public class CArbol
 		{
 			raiz = inicializacionCompleta(profundidadMaxima, 0, rand);
 		}
-		else if(tipoGeneracion.equalsIgnoreCase("Creciente")) 
-		{
-			raiz = inicializacionCreciente(profundidadMaxima, 0, rand);
-		}
 		else
 		{
-			raiz = inicializacionRampedHalf(profundidadMaxima, 0, rand);
+			raiz = inicializacionCreciente(profundidadMaxima, 0, rand);
 		}
 		
 		return raiz;

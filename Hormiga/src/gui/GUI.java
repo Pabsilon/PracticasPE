@@ -185,7 +185,7 @@ public class GUI extends JFrame{
 		JLabel lblMetodoDeCreacion = new JLabel("Metodo de Creacion:");
 		panel_8.add(lblMetodoDeCreacion, "cell 0 0");
 		
-		String[] metodosCreacion = {"Completa","Creciente", "Ramped and Half"};
+		String[] metodosCreacion = {"Completa","Creciente", "RampedHalf"};
 		JComboBox comboCreacion = new JComboBox(metodosCreacion);
 		panel_8.add(comboCreacion, "cell 0 1,growx");
 		panel_7.setLayout(new MigLayout("", "[][grow]", "[]"));
@@ -195,7 +195,7 @@ public class GUI extends JFrame{
 		
 		profundidad = new JTextField();
 		profundidad.setHorizontalAlignment(SwingConstants.TRAILING);
-		profundidad.setText("10");
+		profundidad.setText("5");
 		panel_7.add(profundidad, "cell 1 0,growx");
 		profundidad.setColumns(10);
 		panel_6.setLayout(new MigLayout("", "[grow]", "[][]"));

@@ -32,7 +32,7 @@ public class Controller {
 		
 		//Creacion del algoritmo que vamos a ejecutar.
 		//Algoritmo ag = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(iteraciones), Long.parseLong(semilla), agc,agm,ags,Float.parseFloat(mutacion),elitismo);
-		Algoritmo algoritmo = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), new ACruce_Intercambio(), agm,ags,agb, bloating, Float.parseFloat(probCruece), Float.parseFloat(probMutacion),elitismo, Integer.parseInt(profundidad));
+		Algoritmo algoritmo = new Algoritmo(Integer.parseInt(poblacion), Integer.parseInt(generaciones), Long.parseLong(semilla), new ACruce_Intercambio(), agm,ags,agb, bloating, Float.parseFloat(probCruece), Float.parseFloat(probMutacion),elitismo, Integer.parseInt(profundidad), metodoCreacion);
 		
 		double[] mejorAbsoluto = new double[Integer.parseInt(generaciones)];
 		double[] mejorGeneracion = new double[Integer.parseInt(generaciones)];

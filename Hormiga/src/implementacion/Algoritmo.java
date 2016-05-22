@@ -39,8 +39,9 @@ public class Algoritmo
 	 * @param cruceProbabilidad La probabilidad de Cruce
 	 * @param mutacionProbabilidad La probabilidad de Mutacion
 	 * @param elitismo Si hay elitismo
+	 * @param metodoCreacion 
 	 */
-	public Algoritmo(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, ABloating agb, boolean bloating, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo, int profundidad)
+	public Algoritmo(int tamanoPoblacion, int generaciones, long semilla, ACruce agc, AMutacion agm, ASeleccion ags, ABloating agb, boolean bloating, float cruceProbabilidad, float mutacionProbabilidad, boolean elitismo, int profundidad, String metodoCreacion)
 	{
 		_generacionTotales = generaciones;
 		_agc = agc;
@@ -51,7 +52,7 @@ public class Algoritmo
 		_probabilidadMutacion = mutacionProbabilidad/100.0f;
 		_elitismo = elitismo;
 		_numeroElites = (int)(0.02f * tamanoPoblacion);
-		_profundidadMaxima = profundidad; //TODO cambiar esto a argumento
+		_profundidadMaxima = profundidad;
 		_bloating = bloating;
 		
 		_semilla = semilla;
@@ -62,13 +63,52 @@ public class Algoritmo
 		}
 		Random rand = new Random(_semilla);
 		_poblacion = new Hormiga[tamanoPoblacion];
-		for(int i = 0; i < tamanoPoblacion; i++)
-		{
-			//TODO hacer esto
-			_poblacion[i] = new Hormiga(_profundidadMaxima, "Creciente", rand);
-		}
+		
+		generarPoblacion(metodoCreacion, rand);
 		
 		_mejorIndividuo = _poblacion[0];
+	}
+
+	private void generarPoblacion(String metodoCreacion, Random rand) 
+	{
+		if(metodoCreacion.equals("RampedHalf"))
+		{
+			//Dividimos la poblacion en ProfundidmadMaxima-1 grupos
+			int individuosPorGrupo = _poblacion.length / _profundidadMaxima;
+			int k = 0;
+			for(int i = 0; i < _profundidadMaxima; i++)
+			{
+				for(int j = 0; j < individuosPorGrupo / 2; j++)
+				{
+					_poblacion[k] = new Hormiga(i, "Completo", rand);
+					k++;
+				}
+				for(int j = individuosPorGrupo / 2; j < individuosPorGrupo; j++)
+				{
+					_poblacion[k] = new Hormiga(i, "Creciente", rand);
+					k++;
+				}
+			}
+			//Si la division no es entera pueden quedar individuos sin crear
+			int quedan = _poblacion.length - k;
+			for(int i = 0; i < quedan / 2; i++)
+			{
+				_poblacion[k] = new Hormiga(i, "Completo", rand);
+				k++;
+			}
+			for(int i = quedan / 2; i < quedan; i++)
+			{
+				_poblacion[k] = new Hormiga(i, "Creciente", rand);
+				k++;
+			}
+		}
+		else
+		{
+			for(int i = 0; i < _poblacion.length; i++)
+			{
+				_poblacion[i] = new Hormiga(_profundidadMaxima, metodoCreacion, rand);
+			}
+		}
 	}
 
 	//Ejecuta las generaciones y devuelve el mejor elemento
@@ -81,7 +121,7 @@ public class Algoritmo
 	public Hormiga ejecutarAlgoritmo(double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion)
 	{
 		//Cola de maximos donde se guarda la poblacion. Los mejores son los primeros
-		PriorityQueue<Hormiga> elite = Hormiga.crearColaPrioridadHormiga();
+		Hormiga elite[] = new Hormiga[_numeroElites];
 		int aptitudes[] = new int[_poblacion.length];
 		Hormiga seleccionados[] = new Hormiga[_poblacion.length]; //No inicializamos los elementos porque el algoritmo de seleccion ya lo hace
 		
@@ -121,7 +161,7 @@ public class Algoritmo
 		return _mejorIndividuo;
 	}
 
-	private void introducirElites(PriorityQueue<Hormiga> elite)
+	private void introducirElites(Hormiga[] elite)
 	{
 		Comparator<javafx.util.Pair<Integer, Integer>> comparador;
 		comparador = new Comparator<javafx.util.Pair<Integer, Integer>>()
@@ -147,7 +187,7 @@ public class Algoritmo
 		//Cambiamos peores por la elite
 		for(int i = 0; i < _numeroElites; i++)
 		{
-			_poblacion[monticuloMinimos.poll().getValue()] = elite.poll();
+			_poblacion[monticuloMinimos.poll().getValue()] = elite[i];
 		}		
 	}
 
@@ -185,25 +225,31 @@ public class Algoritmo
 		}
 	}
 
-	private void evaluar(int[] aptitudes, double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, PriorityQueue<Hormiga> elite) 
+	private void evaluar(int[] aptitudes, double[] mejorAbsoluto, double[] mejorGeneracion, double[] mediaGeneracion, int generacion, Hormiga[] elite) 
 	{
+		PriorityQueue<Hormiga> mejores = Hormiga.crearColaPrioridadHormiga();
 		float sumaApt = 0;
 		for(int i = 0; i < _poblacion.length; i++)
 		{
-			aptitudes[i] = _poblacion[i].getAptitudForced();
+			aptitudes[i] = _poblacion[i].getAptitud();
 			sumaApt += aptitudes[i];
-			elite.add(_poblacion[i].crearCopia());
+			mejores.add(_poblacion[i]);
 		}
 
 		//Si el mejor de eta generacion es mejor que el maximo global, sustituir
-		if(elite.peek().getAptitud() > _mejorIndividuo.getAptitud())
+		if(mejores.peek().getAptitud() > _mejorIndividuo.getAptitud())
 		{
-			_mejorIndividuo = elite.peek().crearCopia();
+			_mejorIndividuo = mejores.peek().crearCopia();
 		}
 		
 		mejorAbsoluto[generacion] = _mejorIndividuo.getAptitud();
-		mejorGeneracion[generacion] = elite.peek().getAptitud();
+		mejorGeneracion[generacion] = mejores.peek().getAptitud();
 		mediaGeneracion[generacion] = sumaApt / _poblacion.length;
+		
+		for(int i = 0; i < _numeroElites; i++)
+		{
+			elite[i] = mejores.poll().crearCopia();
+		}
 	}
 
 	public long getSemilla() {
