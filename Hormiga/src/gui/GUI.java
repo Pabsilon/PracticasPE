@@ -131,22 +131,26 @@ public class GUI extends JFrame{
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 		GroupLayout gl_panelSetUp = new GroupLayout(panelSetUp);
 		gl_panelSetUp.setHorizontalGroup(
-			gl_panelSetUp.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panelSetUp.createSequentialGroup()
+			gl_panelSetUp.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelSetUp.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelSetUp.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel_5, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel_6, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(PanelMutacion, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+						.addComponent(panel_8, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(botonComenzar, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_6, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(PanelMutacion, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panelSetUp.setVerticalGroup(
@@ -159,6 +163,8 @@ public class GUI extends JFrame{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_8, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -170,10 +176,18 @@ public class GUI extends JFrame{
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+					.addGap(18)
 					.addComponent(botonComenzar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		panel_8.setLayout(new MigLayout("", "[grow]", "[][]"));
+		
+		JLabel lblMetodoDeCreacion = new JLabel("Metodo de Creacion:");
+		panel_8.add(lblMetodoDeCreacion, "cell 0 0");
+		
+		String[] metodosCreacion = {"Completa","Creciente", "Ramped and Half"};
+		JComboBox comboCreacion = new JComboBox(metodosCreacion);
+		panel_8.add(comboCreacion, "cell 0 1,growx");
 		panel_7.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
 		JLabel lblProfundidad = new JLabel("Profundidad:");
@@ -222,7 +236,7 @@ public class GUI extends JFrame{
 		
 		probMutacion = new JTextField("5");
 		probMutacion.setHorizontalAlignment(SwingConstants.TRAILING);
-		PanelMutacion.add(probMutacion, "cell 0 0");
+		PanelMutacion.add(probMutacion, "cell 0 0,growx");
 		probMutacion.setColumns(10);
 		
 		JCheckBox elitismo = new JCheckBox("Elitismo");
@@ -292,7 +306,7 @@ public class GUI extends JFrame{
 		botonComenzar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				actualizaMapa(new Tablero());
-				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText(), checkBloating.isSelected(), (String) comboBloating.getSelectedItem(), profundidad.getText());
+				c.comenzarSimulacion(poblacion.getText(), generaciones.getText(), textFieldParticipantes.getText(), (String) comboCruce.getSelectedItem(), probabilidadCruce.getText(), (String) comboMutacion.getSelectedItem(), probMutacion.getText(), (String) comboSeleccion.getSelectedItem(), elitismo.isSelected(), semilla.getText(), checkBloating.isSelected(), (String) comboBloating.getSelectedItem(), profundidad.getText(), (String) comboCreacion.getSelectedItem());
 			}
 		});
 		
