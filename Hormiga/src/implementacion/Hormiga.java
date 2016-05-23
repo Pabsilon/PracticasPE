@@ -105,4 +105,11 @@ public class Hormiga
 		_aptitud = i;
 		
 	}
+
+	//Corta los nodos del arbol cuya profundidad sea mayor que la maxima.
+	public void cortarArbol(int profundidadMaxima)
+	{
+		_cromosoma.cortarArbol(profundidadMaxima);
+		_aptitud = -1;
+	}
 }

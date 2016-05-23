@@ -11,7 +11,7 @@ public class ABoating_Penalizacion implements ABloating {
 		//C(t) = Cov(l,f)/Var(l)
 		//l = tam programa, f = fitness
 		
-		float cov = calcularCovarianza(pob);
+		/*float cov = calcularCovarianza(pob);
 		float var = calcularVarianza(pob);
 		float C = cov / var;
 		
@@ -19,6 +19,16 @@ public class ABoating_Penalizacion implements ABloating {
 		{
 			int f = pob[i].getAptitud();
 			pob[i].setAptitud(f + (int)(C * pob[i].getCromosoma().getNumeroNodos()));
+		}*/
+		
+		//Funciona muy mal, sustituimos por cortar el arbol
+		for(int i = 0; i < pob.length; i++)
+		{
+			//TODO sustituir 4 por la profundidad maxima
+			if(pob[i].getCromosoma().getProfundidad() > 4)
+			{
+				pob[i].cortarArbol(4);
+			}
 		}
 	}
 

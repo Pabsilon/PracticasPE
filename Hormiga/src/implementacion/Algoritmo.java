@@ -140,10 +140,6 @@ public class Algoritmo
 			mutar(seleccionados);
 			
 			//Cambiar por la nueva poblacion
-			/*for(int i = 0; i < _poblacion.length; i++)
-			{
-				_poblacion[0] = seleccionados[0];
-			}*/
 			_poblacion = Arrays.copyOf(seleccionados, seleccionados.length);
 			
 			if(_elitismo)

@@ -382,7 +382,13 @@ public class CArbol
 		int pos[] = {0, 0}; //Posicion x,y
 		int orientacion[] = {1}; //0 arriba, 1 derecha, 2 abajo, 3 izquierda
 		int paso[] = {0};
-		return recorrerTablero_aux(pos, orientacion, tab, paso);
+		int sum = 0;
+		while(paso[0] < 400)
+		{
+			sum += recorrerTablero_aux(pos, orientacion, tab, paso);
+		}
+		
+		return sum;
 	}
 	
 	public Tablero getTableroRecorrido()
@@ -391,15 +397,16 @@ public class CArbol
 		int pos[] = {0, 0}; //Posicion x,y
 		int orientacion[] = {1}; //0 arriba, 1 derecha, 2 abajo, 3 izquierda
 		int paso[] = {0};
-		recorrerTablero_aux(pos, orientacion, tab, paso);
+		while(paso[0] < 400)
+		{
+			recorrerTablero_aux(pos, orientacion, tab, paso);
+		}
 		
 		return tab;
 	}
 	
 	private int recorrerTablero_aux(int[] pos, int orientacion[], Tablero tab, int paso[])
-	{
-		if(paso[0] >= 400) return 0;
-		
+	{		
 		int toRet = 0;
 		if(tab.getValue(pos[0], pos[1]).equals("Comida"))
 		{
@@ -532,5 +539,35 @@ public class CArbol
 	public EOperador getOperador()
 	{
 		return _operador;
+	}
+
+	public void cortarArbol(int profundidadMaxima)
+	{
+		cortarArbolAux(this, 0, profundidadMaxima);
+	}
+	
+	private void cortarArbolAux(CArbol arbol, int profundidad, int profundidadMaxima)
+	{
+		if(profundidad < profundidadMaxima)
+		{
+			for(CArbol h : arbol._hijos)
+			{
+				cortarArbolAux(h, profundidad + 1, profundidadMaxima);
+			}
+		}
+		else
+		{
+			if(arbol._tipoOperador == ETipoOperador.FUNCION)
+			{
+				Random rand = new Random();
+				
+				//Borrar hijos y generar terminal
+				arbol._hijos.clear();
+				arbol._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
+				arbol._tipoOperador = ETipoOperador.TERMINAL;
+				
+				actualizarDatos(arbol);
+			}
+		}
 	}
 }
