@@ -159,13 +159,12 @@ public class CArbol
 		
 		//Actualiza la profundidad y numero de nodos recursivamente
 		arbol._profundidad = 0;
-		arbol._numeroNodos = 0;
+		arbol._numeroNodos = 1;
 		for(CArbol hijo : arbol._hijos)
 		{
 			arbol._profundidad = hijo._profundidad >= arbol._profundidad ? hijo._profundidad + 1 : arbol._profundidad;
 			arbol._numeroNodos += hijo._numeroNodos;
 		}
-		arbol._numeroNodos++; //Anadirse a si mismo
 		
 		actualizarDatosHaciaAtras(arbol._padre);
 	}
