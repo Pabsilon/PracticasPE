@@ -11,8 +11,8 @@ public class ACruce_Intercambio implements ACruce {
 	public void cruzar(Hormiga padre1, Hormiga padre2, Hormiga hijo1,
 			Hormiga hijo2)
 	{
-		CArbol Arbolh1 = padre1.getCromosoma().crearCopia();
-		CArbol Arbolh2 = padre2.getCromosoma().crearCopia();
+		CArbol Arbolh1 = padre1.getCromosoma();
+		CArbol Arbolh2 = padre2.getCromosoma();
 		
 		Random rand = new Random();		
 		//Generamos dos puntos de corte para cada padre

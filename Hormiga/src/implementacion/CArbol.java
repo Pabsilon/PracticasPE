@@ -406,7 +406,6 @@ public class CArbol
 			toRet = 1;
 		}
 		tab.pasoHormiga(pos[0], pos[1]);
-		paso[0]++;
 		
 		if(_operador == EOperador.SIC)
 		{
@@ -463,6 +462,8 @@ public class CArbol
 			pos[0] = nuevaPos[0];
 			pos[1] = nuevaPos[1];
 			
+			paso[0]++;
+			
 			if(pos[0] < 0 || pos[0] >= Tablero._sizeT || pos[1] < 0 || pos[1] >= Tablero._sizeT)
 			{
 				paso[0] = 400;
@@ -475,6 +476,8 @@ public class CArbol
 			{
 				orientacion[0] = 3;
 			}
+			
+			paso[0]++;
 		}
 		else if(_operador == EOperador.GIRA_DERECHA)
 		{
@@ -483,6 +486,8 @@ public class CArbol
 			{
 				orientacion[0] = 0;
 			}
+			
+			paso[0]++;
 		}
 		else //Progn2 y progn3 ejecutan todos sus hijos
 		{

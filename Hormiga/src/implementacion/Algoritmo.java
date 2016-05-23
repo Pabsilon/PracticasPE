@@ -1,5 +1,6 @@
 package implementacion;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -139,10 +140,11 @@ public class Algoritmo
 			mutar(seleccionados);
 			
 			//Cambiar por la nueva poblacion
-			for(int i = 0; i < _poblacion.length; i++)
+			/*for(int i = 0; i < _poblacion.length; i++)
 			{
 				_poblacion[0] = seleccionados[0];
-			}
+			}*/
+			_poblacion = Arrays.copyOf(seleccionados, seleccionados.length);
 			
 			if(_elitismo)
 			{

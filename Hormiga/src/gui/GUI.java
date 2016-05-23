@@ -286,7 +286,9 @@ public class GUI extends JFrame{
 		_textoResultado.setPreferredSize(new Dimension(200,700));
 		_textoResultado.setEnabled(false);
 		_textoResultado.setEditable(false);
+		JScrollPane solucionPantallaPequena = new JScrollPane(tabPanel);
 		JScrollPane scroll = new JScrollPane(_textoResultado);
+		getContentPane().add(solucionPantallaPequena);
 		panelRespuesta.add(scroll, "cell 0 0,grow");
 		
 		_mapa = new JPanel[_mapSize][_mapSize];
@@ -315,7 +317,7 @@ public class GUI extends JFrame{
 		
 		actualizaMapa(new Tablero());
 		
-	//	this.setPreferredSize(new Dimension(1400, 900));
+		//this.setPreferredSize(new Dimension(420, 320));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);	
