@@ -2,10 +2,15 @@ package abloating;
 
 import implementacion.Hormiga;
 
-public class ABoating_Penalizacion implements ABloating {
-
+public class ABoating_Penalizacion implements ABloating
+{
+	private int _profMax;
+	public ABoating_Penalizacion(int prof) {
+		_profMax = prof;
+	}
+	
 	@Override
-	public void controlBloating(Hormiga[] pob)
+	public void controlBloating(Hormiga[] pob, int aptitudes[])
 	{
 		//F'(x) = F(x) + C(t) * numNodos(x)
 		//C(t) = Cov(l,f)/Var(l)
@@ -25,9 +30,10 @@ public class ABoating_Penalizacion implements ABloating {
 		for(int i = 0; i < pob.length; i++)
 		{
 			//TODO sustituir 4 por la profundidad maxima
-			if(pob[i].getCromosoma().getProfundidad() > 4)
+			if(pob[i].getCromosoma().getProfundidad() > _profMax)
 			{
-				pob[i].cortarArbol(4);
+				pob[i].cortarArbol(_profMax);
+				aptitudes[i] = pob[i].getAptitud();
 			}
 		}
 	}

@@ -152,7 +152,7 @@ public class Algoritmo
 			
 			if(_bloating)
 			{
-				_agb.controlBloating(_poblacion);
+				_agb.controlBloating(_poblacion, aptitudes);
 			}
 		}
 		

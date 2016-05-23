@@ -4,6 +4,7 @@ import java.util.Random;
 
 import implementacion.CArbol;
 import implementacion.Hormiga;
+import jdk.nashorn.internal.objects.ArrayBufferView;
 
 public class ACruce_Intercambio implements ACruce {
 
@@ -12,7 +13,9 @@ public class ACruce_Intercambio implements ACruce {
 			Hormiga hijo2)
 	{
 		CArbol Arbolh1 = padre1.getCromosoma();
+		Arbolh1.actualizar();
 		CArbol Arbolh2 = padre2.getCromosoma();
+		Arbolh2.actualizar();
 		
 		Random rand = new Random();		
 		//Generamos dos puntos de corte para cada padre

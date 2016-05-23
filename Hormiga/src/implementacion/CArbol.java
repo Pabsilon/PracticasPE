@@ -141,7 +141,7 @@ public class CArbol
 		h._padre = this;
 		_hijos.add(h);
 		
-		actualizarDatos(this);
+		actualizarDatosHaciaAtras(this);
 	}
 
 	public void removerHijo(CArbol old)
@@ -150,10 +150,10 @@ public class CArbol
 		_hijos.remove(old);
 
 
-		actualizarDatos(this);
+		actualizarDatosHaciaAtras(this);
 	}
 
-	private static void actualizarDatos(CArbol arbol)
+	private static void actualizarDatosHaciaAtras(CArbol arbol)
 	{
 		if(arbol == null) return;
 		
@@ -167,7 +167,29 @@ public class CArbol
 		}
 		arbol._numeroNodos++; //Anadirse a si mismo
 		
-		actualizarDatos(arbol._padre);
+		actualizarDatosHaciaAtras(arbol._padre);
+	}
+
+	private void actualizarDatosHaciaDelante(CArbol arbol)
+	{
+		int numNodos = 1;
+		int profundidad = 0;
+		
+		for(CArbol h: arbol._hijos)
+		{
+			actualizarDatosHaciaDelante(h);
+			numNodos += h._numeroNodos;
+			profundidad = profundidad >= h._profundidad ? h._profundidad + 1 : h._profundidad;
+		}
+		
+		arbol._numeroNodos = numNodos;
+		arbol._profundidad = profundidad;
+		
+	}
+	
+	public void actualizar()
+	{
+		actualizarDatosHaciaDelante(this);
 	}
 
 	//Genera un Arbol con sus hijos, etc. de forma aleatoria
@@ -544,6 +566,7 @@ public class CArbol
 	public void cortarArbol(int profundidadMaxima)
 	{
 		cortarArbolAux(this, 0, profundidadMaxima);
+		actualizarDatosHaciaDelante(this);
 	}
 	
 	private void cortarArbolAux(CArbol arbol, int profundidad, int profundidadMaxima)
@@ -562,12 +585,19 @@ public class CArbol
 				Random rand = new Random();
 				
 				//Borrar hijos y generar terminal
-				arbol._hijos.clear();
 				arbol._operador = CArbol.EOperador.fromInteger(rand.nextInt(3));
 				arbol._tipoOperador = ETipoOperador.TERMINAL;
 				
-				actualizarDatos(arbol);
+				arbol.clear();
 			}
+			
 		}
+	}
+	
+	void clear()
+	{
+		_hijos.clear();
+		_profundidad = 0;
+		_numeroNodos = 1;
 	}
 }

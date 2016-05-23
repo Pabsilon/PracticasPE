@@ -27,7 +27,7 @@ public class Controller {
 		//Parseo del algoritmo de mutacion
 		AMutacion agm = Fabrica_AMutacion.generarAlgoritmoMutacion(metodoMutacion, Integer.parseInt(profundidad));
 		
-		ABloating agb = Fabrica_ABloating.generarAlgoritmoBloating(metodoBloating);
+		ABloating agb = Fabrica_ABloating.generarAlgoritmoBloating(metodoBloating, Integer.parseInt(profundidad));
 		
 		
 		//Creacion del algoritmo que vamos a ejecutar.

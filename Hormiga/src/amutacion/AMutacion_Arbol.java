@@ -15,6 +15,7 @@ public class AMutacion_Arbol implements AMutacion
 	public void mutar(Hormiga individuo)
 	{
 		CArbol raiz = individuo.getCromosoma();
+		raiz.actualizar();
 
 		//Elegir un subarbol aleatoriamente y mutarlo
 		Random rand = new Random();

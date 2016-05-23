@@ -10,12 +10,12 @@ import amutacion.AMutacion_Terminal;
 
 public class Fabrica_ABloating
 {
-	public static ABloating generarAlgoritmoBloating(String algoritmo){
+	public static ABloating generarAlgoritmoBloating(String algoritmo, int profMax){
 		switch (algoritmo){
 		case "Tarpeian":
 			return new ABloating_Tarpeian();
 		case "Penalizacion":
-			return new ABoating_Penalizacion();
+			return new ABoating_Penalizacion(profMax);
 		default: return null;
 		}
 	}
