@@ -4,7 +4,6 @@ import java.util.Random;
 
 import implementacion.CArbol;
 import implementacion.Hormiga;
-import jdk.nashorn.internal.objects.ArrayBufferView;
 
 public class ACruce_Intercambio implements ACruce {
 

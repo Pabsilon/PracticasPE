@@ -38,6 +38,7 @@ public class ABoating_Penalizacion implements ABloating
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private float calcularVarianza(Hormiga[] pob)
 	{
 		float media = 0;
@@ -56,6 +57,7 @@ public class ABoating_Penalizacion implements ABloating
 		return sumSquared - media;
 	}
 
+	@SuppressWarnings("unused")
 	private float calcularCovarianza(Hormiga[] pob)
 	{
 		float mediaL = 0;

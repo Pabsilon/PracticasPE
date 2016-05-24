@@ -3,10 +3,6 @@ package implementacion;
 import abloating.ABloating;
 import abloating.ABloating_Tarpeian;
 import abloating.ABoating_Penalizacion;
-import amutacion.AMutacion;
-import amutacion.AMutacion_Arbol;
-import amutacion.AMutacion_Funcion;
-import amutacion.AMutacion_Terminal;
 
 public class Fabrica_ABloating
 {

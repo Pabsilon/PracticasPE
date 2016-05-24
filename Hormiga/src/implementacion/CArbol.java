@@ -323,6 +323,7 @@ public class CArbol
 	}
 	
 	//Devuelve un array con todos los nodos del arbol que son terminales
+	@SuppressWarnings("rawtypes")
 	public Vector<CArbol> getAllTerminals()
 	{
 		Vector<CArbol> toRet = new Vector<>();
@@ -349,6 +350,7 @@ public class CArbol
 	}
 	
 	//Devuelve un array con todos los nodos del arbol que son funciones
+	@SuppressWarnings("rawtypes")
 	public Vector<CArbol> getAllFunctions()
 	{
 		Vector<CArbol> toRet = new Vector<>();
@@ -376,6 +378,7 @@ public class CArbol
 	}
 	
 	//Hace un recorrido en anchura y devuelve el arbol en la posicion indx
+	@SuppressWarnings("rawtypes")
 	private CArbol getSubArbol_index(int indx)
 	{
 		if(indx > _numeroNodos) assert(false);

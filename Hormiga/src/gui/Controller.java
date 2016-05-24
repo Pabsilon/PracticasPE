@@ -9,7 +9,6 @@ import implementacion.Fabrica_ABloating;
 import implementacion.Fabrica_AMutacion;
 import implementacion.Fabrica_ASeleccion;
 import implementacion.Hormiga;
-import implementacion.Tablero;
 
 public class Controller {
 	

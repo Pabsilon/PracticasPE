@@ -1,6 +1,5 @@
 package gui;
 
-import implementacion.Hormiga;
 import implementacion.Tablero;
 
 import javax.swing.JFrame;
